@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    博客文章列表
+}
+@section Header{
+
+}
+<div id="ManageBody">
+    <div id="ManageOperateTitle">
+        博客类别管理
+    </div>
+    <div id="ManageOperate">
+        <form id="form1"  action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        所属类别：
+                    </th>
+                    <td>
+                        <select name="TypePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
+                                data-options="required:true,url:'/Shop/AjaxGetPTypeData',value:-1"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类别名称：
+                    </th>
+                    <td>
+                        <input name="TypeName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类别排序：
+                    </th>
+                    <td>
+                        <input name="TypeSort" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var _id = '@Request["infoid"]';
+    $(function () {
+        //启用快捷键 83/ALT+s保存
+        $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        if (_id != "") {
+            $.ajax({
+                type: "get", dataType: "json",
+                url: "/mShop/AjaxGetTypeDetail",
+                async: true,
+                data: { infoid: _id },
+                success: function (data) {
+                    $("#form1").form("reset");
+                    $("#form1").form("load", data);
+                    $('#TypePID').combotree('setValue', data.TypePID.toLowerCase());
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    TopNotify(errorThrown, 'error');
+                }
+            });
+        }
+    });
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/mShop/AjaxSaveType?infoid=' + _id,
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        parent.TopNotify("保存成功", 'info');
+                        parent.windowClose();
+                    }
+                }
+            });
+        }
+    }
+</script>

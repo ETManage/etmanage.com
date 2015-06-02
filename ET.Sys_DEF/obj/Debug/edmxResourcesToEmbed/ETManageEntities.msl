@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ETManageModelStoreContainer" CdmEntityContainer="ETManageEntities">
+    <EntitySetMapping Name="dtproperties">
+      <EntityTypeMapping TypeName="ETManageModel.dtproperties">
+        <MappingFragment StoreEntitySet="dtproperties">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="objectid" ColumnName="objectid" />
+          <ScalarProperty Name="property" ColumnName="property" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+          <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+          <ScalarProperty Name="version" ColumnName="version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEW_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.NEW_INFO">
+        <MappingFragment StoreEntitySet="NEW_INFO">
+          <ScalarProperty Name="NEW_ID" ColumnName="NEW_ID" />
+          <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+          <ScalarProperty Name="TYPE_ID2" ColumnName="TYPE_ID2" />
+          <ScalarProperty Name="NEW_TITLE" ColumnName="NEW_TITLE" />
+          <ScalarProperty Name="NEW_BODY" ColumnName="NEW_BODY" />
+          <ScalarProperty Name="NEW_SEND_USERID" ColumnName="NEW_SEND_USERID" />
+          <ScalarProperty Name="NEW_SEND_DEP" ColumnName="NEW_SEND_DEP" />
+          <ScalarProperty Name="NEW_SEND_DATE" ColumnName="NEW_SEND_DATE" />
+          <ScalarProperty Name="NEW_ISUN_COMMEND" ColumnName="NEW_ISUN_COMMEND" />
+          <ScalarProperty Name="NEW_ISUN_HOT" ColumnName="NEW_ISUN_HOT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEW_TYPE_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.NEW_TYPE_INFO">
+        <MappingFragment StoreEntitySet="NEW_TYPE_INFO">
+          <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+          <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+          <ScalarProperty Name="TYPE_SORT" ColumnName="TYPE_SORT" />
+          <ScalarProperty Name="TYPE_PID" ColumnName="TYPE_PID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_ICON_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_ICON_INFO">
+        <MappingFragment StoreEntitySet="SYSTEM_ICON_INFO">
+          <ScalarProperty Name="ICON_ID" ColumnName="ICON_ID" />
+          <ScalarProperty Name="ICON_CLASS" ColumnName="ICON_CLASS" />
+          <ScalarProperty Name="ICON_MARK" ColumnName="ICON_MARK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_LIMIT_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_LIMIT_INFO">
+        <MappingFragment StoreEntitySet="SYSTEM_LIMIT_INFO">
+          <ScalarProperty Name="LIMIT_ID" ColumnName="LIMIT_ID" />
+          <ScalarProperty Name="MODULE_ID" ColumnName="MODULE_ID" />
+          <ScalarProperty Name="LIMIT_NAME" ColumnName="LIMIT_NAME" />
+          <ScalarProperty Name="LIMIT_KEY" ColumnName="LIMIT_KEY" />
+          <ScalarProperty Name="ISUN_VISIBLE" ColumnName="ISUN_VISIBLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_LINK_USER_ROLE">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_LINK_USER_ROLE">
+        <MappingFragment StoreEntitySet="SYSTEM_LINK_USER_ROLE">
+          <ScalarProperty Name="LINK_ID" ColumnName="LINK_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_MODULE_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_MODULE_INFO">
+        <MappingFragment StoreEntitySet="SYSTEM_MODULE_INFO">
+          <ScalarProperty Name="MODULE_ID" ColumnName="MODULE_ID" />
+          <ScalarProperty Name="ICON_ID" ColumnName="ICON_ID" />
+          <ScalarProperty Name="MODULE_NAME" ColumnName="MODULE_NAME" />
+          <ScalarProperty Name="MODULE_ICON" ColumnName="MODULE_ICON" />
+          <ScalarProperty Name="MODULE_SORT" ColumnName="MODULE_SORT" />
+          <ScalarProperty Name="MODULE_URL" ColumnName="MODULE_URL" />
+          <ScalarProperty Name="MODULE_TARGET" ColumnName="MODULE_TARGET" />
+          <ScalarProperty Name="MODULE_PID" ColumnName="MODULE_PID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_ROLE_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_ROLE_INFO">
+        <MappingFragment StoreEntitySet="SYSTEM_ROLE_INFO">
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
+          <ScalarProperty Name="MODULE_ID" ColumnName="MODULE_ID" />
+          <ScalarProperty Name="ROLE_HOME" ColumnName="ROLE_HOME" />
+          <ScalarProperty Name="ROLE_REGIST" ColumnName="ROLE_REGIST" />
+          <ScalarProperty Name="ROLE_INSERT" ColumnName="ROLE_INSERT" />
+          <ScalarProperty Name="ROLE_MARK" ColumnName="ROLE_MARK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYSTEM_ROLE_LIMIT">
+      <EntityTypeMapping TypeName="ETManageModel.SYSTEM_ROLE_LIMIT">
+        <MappingFragment StoreEntitySet="SYSTEM_ROLE_LIMIT">
+          <ScalarProperty Name="LINK_ID" ColumnName="LINK_ID" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="LIMIT_ID" ColumnName="LIMIT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_BASE_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.USER_BASE_INFO">
+        <MappingFragment StoreEntitySet="USER_BASE_INFO">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_PWD" ColumnName="USER_PWD" />
+          <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+          <ScalarProperty Name="USER_START_DATE" ColumnName="USER_START_DATE" />
+          <ScalarProperty Name="USER_END_DATE" ColumnName="USER_END_DATE" />
+          <ScalarProperty Name="USER_MODIFY_PEOPLE" ColumnName="USER_MODIFY_PEOPLE" />
+          <ScalarProperty Name="USER_MODIFY_DATE" ColumnName="USER_MODIFY_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_DEP_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.USER_DEP_INFO">
+        <MappingFragment StoreEntitySet="USER_DEP_INFO">
+          <ScalarProperty Name="DEP_ID" ColumnName="DEP_ID" />
+          <ScalarProperty Name="DEP_NAME" ColumnName="DEP_NAME" />
+          <ScalarProperty Name="DEP_SORT" ColumnName="DEP_SORT" />
+          <ScalarProperty Name="DEP_PID" ColumnName="DEP_PID" />
+          <ScalarProperty Name="DEP_LEVEL" ColumnName="DEP_LEVEL" />
+          <ScalarProperty Name="DEP_MARK" ColumnName="DEP_MARK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_POSITION_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.USER_POSITION_INFO">
+        <MappingFragment StoreEntitySet="USER_POSITION_INFO">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="P_SORT" ColumnName="P_SORT" />
+          <ScalarProperty Name="P_PID" ColumnName="P_PID" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_STU_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.USER_STU_INFO">
+        <MappingFragment StoreEntitySet="USER_STU_INFO">
+          <ScalarProperty Name="STU_ID" ColumnName="STU_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="STU_NICKNAME" ColumnName="STU_NICKNAME" />
+          <ScalarProperty Name="STU_CNNAME" ColumnName="STU_CNNAME" />
+          <ScalarProperty Name="STU_ENNAME" ColumnName="STU_ENNAME" />
+          <ScalarProperty Name="STU_EMAIL" ColumnName="STU_EMAIL" />
+          <ScalarProperty Name="DEP_ID" ColumnName="DEP_ID" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="STU_EDU" ColumnName="STU_EDU" />
+          <ScalarProperty Name="STU_SEX" ColumnName="STU_SEX" />
+          <ScalarProperty Name="STU_ADDRESS" ColumnName="STU_ADDRESS" />
+          <ScalarProperty Name="STU_POST" ColumnName="STU_POST" />
+          <ScalarProperty Name="STU_PHONE" ColumnName="STU_PHONE" />
+          <ScalarProperty Name="STU_MOBILE" ColumnName="STU_MOBILE" />
+          <ScalarProperty Name="STU_CONTACT" ColumnName="STU_CONTACT" />
+          <ScalarProperty Name="STU_REG_DATETIME" ColumnName="STU_REG_DATETIME" />
+          <ScalarProperty Name="STU_PIC" ColumnName="STU_PIC" />
+          <ScalarProperty Name="STU_ID_CARD" ColumnName="STU_ID_CARD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_ALL_USER_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.V_ALL_USER_INFO">
+        <MappingFragment StoreEntitySet="V_ALL_USER_INFO">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_PWD" ColumnName="USER_PWD" />
+          <ScalarProperty Name="STU_NICKNAME" ColumnName="STU_NICKNAME" />
+          <ScalarProperty Name="STU_CNNAME" ColumnName="STU_CNNAME" />
+          <ScalarProperty Name="STU_ENNAME" ColumnName="STU_ENNAME" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="DEP_ID" ColumnName="DEP_ID" />
+          <ScalarProperty Name="STU_SEX" ColumnName="STU_SEX" />
+          <ScalarProperty Name="STU_REG_DATETIME" ColumnName="STU_REG_DATETIME" />
+          <ScalarProperty Name="DEP_NAME" ColumnName="DEP_NAME" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
+          <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+          <ScalarProperty Name="USER_START_DATE" ColumnName="USER_START_DATE" />
+          <ScalarProperty Name="USER_END_DATE" ColumnName="USER_END_DATE" />
+          <ScalarProperty Name="USER_MODIFY_PEOPLE" ColumnName="USER_MODIFY_PEOPLE" />
+          <ScalarProperty Name="USER_MODIFY_DATE" ColumnName="USER_MODIFY_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_REPORT_DEP_USER">
+      <EntityTypeMapping TypeName="ETManageModel.V_REPORT_DEP_USER">
+        <MappingFragment StoreEntitySet="V_REPORT_DEP_USER">
+          <ScalarProperty Name="DEP_ID" ColumnName="DEP_ID" />
+          <ScalarProperty Name="DEP_NAME" ColumnName="DEP_NAME" />
+          <ScalarProperty Name="DEP_USER_COUNT" ColumnName="DEP_USER_COUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_REPORT_POSITION_USER">
+      <EntityTypeMapping TypeName="ETManageModel.V_REPORT_POSITION_USER">
+        <MappingFragment StoreEntitySet="V_REPORT_POSITION_USER">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="P_USER_COUNT" ColumnName="P_USER_COUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_SYSTEM_LIMIT_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.V_SYSTEM_LIMIT_INFO">
+        <MappingFragment StoreEntitySet="V_SYSTEM_LIMIT_INFO">
+          <ScalarProperty Name="MODULE_ID" ColumnName="MODULE_ID" />
+          <ScalarProperty Name="LIMIT_KEY" ColumnName="LIMIT_KEY" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_SYSTEM_MODULE_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.V_SYSTEM_MODULE_INFO">
+        <MappingFragment StoreEntitySet="V_SYSTEM_MODULE_INFO">
+          <ScalarProperty Name="MODULE_ID" ColumnName="MODULE_ID" />
+          <ScalarProperty Name="MODULE_NAME" ColumnName="MODULE_NAME" />
+          <ScalarProperty Name="MODULE_ICON" ColumnName="MODULE_ICON" />
+          <ScalarProperty Name="MODULE_SORT" ColumnName="MODULE_SORT" />
+          <ScalarProperty Name="MODULE_URL" ColumnName="MODULE_URL" />
+          <ScalarProperty Name="MODULE_TARGET" ColumnName="MODULE_TARGET" />
+          <ScalarProperty Name="MODULE_PID" ColumnName="MODULE_PID" />
+          <ScalarProperty Name="MODULE_PNAME" ColumnName="MODULE_PNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_USER_FULL_INFO">
+      <EntityTypeMapping TypeName="ETManageModel.V_USER_FULL_INFO">
+        <MappingFragment StoreEntitySet="V_USER_FULL_INFO">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_PWD" ColumnName="USER_PWD" />
+          <ScalarProperty Name="STU_NICKNAME" ColumnName="STU_NICKNAME" />
+          <ScalarProperty Name="STU_CNNAME" ColumnName="STU_CNNAME" />
+          <ScalarProperty Name="STU_ENNAME" ColumnName="STU_ENNAME" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="DEP_ID" ColumnName="DEP_ID" />
+          <ScalarProperty Name="STU_SEX" ColumnName="STU_SEX" />
+          <ScalarProperty Name="STU_REG_DATETIME" ColumnName="STU_REG_DATETIME" />
+          <ScalarProperty Name="DEP_NAME" ColumnName="DEP_NAME" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
+          <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+          <ScalarProperty Name="USER_START_DATE" ColumnName="USER_START_DATE" />
+          <ScalarProperty Name="USER_END_DATE" ColumnName="USER_END_DATE" />
+          <ScalarProperty Name="USER_MODIFY_PEOPLE" ColumnName="USER_MODIFY_PEOPLE" />
+          <ScalarProperty Name="USER_MODIFY_DATE" ColumnName="USER_MODIFY_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

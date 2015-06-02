@@ -1,0 +1,121 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    公司管理
+}
+@section Header{
+    
+}
+
+<div id="ManageBody">
+    <div id="ManageTitle"><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a></div>
+    <div>
+        <div style="float: left; width: 300px; ">
+            <ul id="iDepartmentInfo" style="width: 300px;height:100%;" class="easyui-tree" data-options="url: '/Organization/AjaxQueryDepartmentList',animate:true,onSelect:LoadInfo"></ul>&nbsp;
+        </div>
+        <div style="float: left; width: auto;">
+            <form id="form1" accept-charset="" action="/" method="post">
+                <table class="datatable">
+                    <tr>
+                        <th>
+                            部门名称：
+                        </th>
+                        <td>
+                            <input name="DepName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            部门排序：
+                        </th>
+                        <td>
+                            <input name="DepSort" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            部门描述：
+                        </th>
+                        <td>
+                            <input name="DepDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+
+                        </th>
+                        <td>
+                            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:80px" onclick="BtnSaveOrUpdate()">保存</a>
+                            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:80px" onclick="BtnSaveOrUpdate()">删除</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+
+        </div>
+    </div>
+ 
+ </div>
+<script type="text/javascript">
+    var infoid;
+    function LoadInfo(node) {
+
+        if (node) {
+            infoid = node.id;
+            alert(node.text)
+            $.ajax({
+                type: "get", dataType: "json",
+                url: "/Organization/AjaxGetDepartmentDetail?rad=" + new Date().toString(),
+                async: true,
+                data: { infoid: node.id },
+                success: function (data) {
+                    $("#form1").form("reset");
+                    $("#form1").form("load", data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    TopNotify(errorThrown, 'error');
+                }
+            });
+        }
+
+    }
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/Organization/AjaxSaveDepartment?infoid=' + infoid,
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        parent.TopNotify("保存成功", 'info');
+                        $("#iDepartmentInfo").combotree("reload");
+                    }
+                }
+            });
+        }
+
+    }
+    function fixDel() {
+        if (!confirm("确认删除吗？"))
+            return;
+        $.post('/System/AjaxDeleteDepartment', { infoid: infoid }, function (res) {
+            if (res == "true") {
+                $("#iDepartmentInfo").combotree('reload')
+                
+            }
+            else {
+                alert(res);
+            }
+        });
+    };
+</script>

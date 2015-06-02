@@ -1,0 +1,224 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+@section Title{
+    易特网IT资讯平台
+}
+@section Header{
+
+}
+<div class="content-wrap">
+    <div class="main-left" id="#container">
+        <div class="content">
+            <style type="text/css">
+                /* focus */
+                #focus { width: 830px; height: 280px; overflow: hidden; position: relative; margin-bottom: 10px; }
+                    #focus ul { height: 380px; position: absolute; }
+                        #focus ul li { float: left; width: 830px; height: 280px; overflow: hidden; position: relative; background: #000; }
+                            #focus ul li div { position: absolute; overflow: hidden; }
+                    #focus a:hover { text-decoration: underline; }
+                    #focus a { color: white; }
+                    #focus .btnBg { position: absolute; width: 815px; height: 50px; left: 0; bottom: 0; background: #000; color: white; font-size: 14px; line-height: 50px; padding-left: 15px; }
+                    #focus .btn { position: absolute; width: 810px; height: 10px; padding: 5px 10px; right: 0; bottom: 20px; text-align: right; }
+                        #focus .btn span { display: inline-block; _display: inline; _zoom: 1; width: 25px; height: 10px; _font-size: 0; margin-left: 5px; cursor: pointer; background: #fff; }
+                            #focus .btn span.on { background: #fff; }
+                    #focus .preNext { width: 45px; height: 100px; position: absolute; top: 90px; background: url(/Images/Blog/sprite.png) no-repeat 0 0; cursor: pointer; display: none; }
+                    #focus .pre { left: 0; }
+                    #focus .next { right: 0; background-position: right top; }
+            </style>
+            <script type="text/javascript">
+                $(function () {
+                    var sWidth = $("#focus").width(); //获取焦点图的宽度（显示面积）
+                    var len = $("#focus ul li").length; //获取焦点图个数
+                    var index = 0;
+                    var picTimer;
+
+                    //以下代码添加数字按钮和按钮后的半透明条，还有上一页、下一页两个按钮
+                    var btn = "<div class='btnBg'></div><div class='btn'>";
+                    for (var i = 0; i < len; i++) {
+                        btn += "<span></span>";
+                    }
+                    btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+                    $("#focus").append(btn);
+                    $("#focus .btnBg").css("opacity", 0.5);
+                    //为小按钮添加鼠标滑入事件，以显示相应的内容
+                    $("#focus .btn span").css("opacity", 0.4).mouseover(function () {
+                        index = $("#focus .btn span").index(this);
+                        showPics(index);
+                    }).eq(0).trigger("mouseover");
+                    //上一页、下一页按钮透明度处理
+                    $("#focus .preNext").css("opacity", 0.2).hover(function () {
+                        $(this).stop(true, false).animate({ "opacity": "0.5" }, 300);
+                    }, function () {
+                        $(this).stop(true, false).animate({ "opacity": "0.2" }, 300);
+                    });
+                    //上一页按钮
+                    $("#focus .pre").click(function () {
+                        index -= 1;
+                        if (index == -1) { index = len - 1; }
+                        showPics(index);
+                    });
+                    //下一页按钮
+                    $("#focus .next").click(function () {
+                        index += 1;
+                        if (index == len) { index = 0; }
+                        showPics(index);
+                    });
+                    //本例为左右滚动，即所有li元素都是在同一排向左浮动，所以这里需要计算出外围ul元素的宽度
+                    $("#focus ul").css("width", sWidth * (len));
+
+                    //鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+                    $("#focus").hover(function () {
+                        clearInterval(picTimer);
+                        $(".preNext").show();
+                    }, function () {
+                        $(".preNext").hide();
+                        picTimer = setInterval(function () {
+                            showPics(index);
+                            index++;
+                            if (index == len) { index = 0; }
+                        }, 4000); //此4000代表自动播放的间隔，单位：毫秒
+                    }).trigger("mouseleave");
+
+                    //显示图片函数，根据接收的index值显示相应的内容
+                    function showPics(index) { //普通切换
+                        var nowLeft = -index * sWidth; //根据index值计算ul元素的left值
+                        $("#focus ul").stop(true, false).animate({ "left": nowLeft }, 300); //通过animate()调整ul元素滚动到计算出的position
+                        $(".btnBg").html("<a target='_blank' href='" + $("#focus ul li a:eq(" + index + ")").attr("href") + "'>" + $("#focus ul li img:eq(" + index + ")").attr("alt") + "</a>")
+                        $("#focus .btn span").stop(true, false).animate({ "opacity": "0.4" }, 300).eq(index).stop(true, false).animate({ "opacity": "1" }, 300); //为当前的按钮切换到选中的效果
+                    }
+                });
+            </script>
+            <div id="focus">
+                <ul>
+                    @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listTopArticle)
+                    {
+                        <li><a href="@itemArticle.ArticleUrl" target="_blank"><img onerror="this.src = '/images/public/nopicture.jpg'" src="@itemArticle.ArticlePicture.Split(',')[1]" width="830" alt="@itemArticle.ArticleTitle" /></a></li> }
+                </ul>
+            </div><!--focus end-->
+            @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticle)
+            {
+                <article class="excerpt">
+                    <header>
+                        <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemArticle.ArticleLabel.Split(',')[0]/">@itemArticle.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
+                        <h2><a target="_blank" href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</a></h2>
+                    </header>
+                    <div class="focus">
+                        <a target="_blank" href="@itemArticle.ArticleUrl"><img class="thumb" src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle" width="200" height="125"></a>
+                    </div> <span class="note">
+                        @ET.ToolKit.Common.StringHelper.BindDataFromString(itemArticle.ArticleDescription, 300);
+                    </span><p class="auth-span">
+                        <span class="muted">
+                            <i class="fa fa-clock-o"></i>
+                            <span class="time timeago" title="@itemArticle.CreateTime">
+                            </span>
+
+                        </span> <span class="muted"><i class="fa fa-eye"></i> @itemArticle.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="@itemArticle.ArticleUrl#comments">@itemArticle.ArticleSource 评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="@itemArticle.ArticleID" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">@itemArticle.LoveCount</span>喜欢</a></span>
+                    </p>
+                </article>
+            }
+        </div>
+        <div class="pagination-loading hidden" id="Loadding"><i class="fa fa-spinner fa-spin"></i> 数据载入中...</div>
+
+        @*<div class="pagination" style="display:none;">
+                <ul>
+                    <li class="prev-page"></li>
+                    <li class="active"><span>1</span></li>
+                    <li><a href='@PublicHelper.GetHostAddress()/blog/page/2' onclick="Load(this)">2</a></li>
+                    <li><a href='@PublicHelper.GetHostAddress()/blog/page/3' onclick="Load(this)">3</a></li>
+                    <li class="next-page"><a href="@PublicHelper.GetHostAddress()/blog/page/2" onclick="Load(this)">下一页</a></li>
+                </ul>
+            </div>*@
+
+    </div>
+
+    <div class="main-right">
+        <div class="widget d_tag">
+            <div class="title"><h2>标签云</h2></div>
+            <div class="d_tags">
+                @foreach (ET.Sys_DEF.KeyAndValue itemLabel in ViewBag.listArticleLabel)
+                {
+                    <a title="" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemLabel.id" data-original-title="@itemLabel.text 个话题">@itemLabel.id (@itemLabel.text)</a>
+                }
+            </div>
+        </div>
+
+        <div class="widget d_postlist">
+            <div class="title"><h2>猜你喜欢</h2></div>
+            <ul>
+                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listLoveArticle)
+                {
+                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
+
+                }
+            </ul>
+        </div>
+        <div class="widget widget_links">
+            <div class="title"><h2>友情链接</h2></div>
+            <ul class="xoxo blogroll">
+                @foreach (ET.Sys_DEF.BlogRollInfo item in ViewBag.listRoll)
+                {
+                    <li><a href="@item.RollUrl" target="_blank">@item.RollName</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery("span.timeago").timeago();
+
+    });
+
+    //异步加载数据 Start
+    $.getData = function (opts) {
+        $.ajax({
+            url: opts.url,
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { "groupNumber": opts.groupNumber },
+            success: function (data, textStatus, xhr) {
+                if (data.total && !isNaN(data.total))
+                    totalGroups = Math.ceil(parseInt(data.total) / 10);
+                if (data.rows && data.rows.length > 0) {
+                    $.each(data.rows, function () {
+                        var vlabel = this.ArticleLabel;
+                        $(".content").append('<article class="excerpt"><header><a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/' + vlabel + '/">' + vlabel + '<i class="label-arrow"></i></a>                        <h2><a target="_blank" href="' + this.ArticleUrl + '" title="' + this.ArticleTitle + '">' + this.ArticleTitle + '</a></h2>                    </header>                    <div class="focus">                        <a target="_blank" href="' + this.ArticleUrl + '"><img class="thumb" src="' + this.ArticlePicture + '" alt="' + this.ArticleTitle + '" width="200" height="125"></a>                    </div> <span class="note">                       ' + this.ArticleDescription + '                            </span><p class="auth-span">                                <span class="muted">                                    <i class="fa fa-clock-o"></i>                                    <span class="time timeago" title="' + this.CreateTime + '">                                    </span>                                </span> <span class="muted"><i class="fa fa-eye"></i> ' + this.AccessCount + '℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="' + this.ArticleUrl + '#comments">' + (this.ArticleSource ? this.ArticleSource : 0).toString() + '评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="' + this.ArticleID + '" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">' + this.LoveCount + '</span>喜欢</a></span>                            </p>                        </article>');
+                    });
+                }
+                $('#Loadding').hide();
+                opts.groupNumber++;
+                opts.loading = false;
+
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                opts.loading = false;
+                console.log(errorThrown.toString());
+            }
+        });
+    }
+    var totalGroups = 2;
+    var trackLoad = {};
+    trackLoad.groupNumber = 2;
+    trackLoad.url = "@PublicHelper.GetHostAddress()/blog/ajaxgetarticlelist?scope=&id=";
+    trackLoad.loading = false;
+    $(window).scroll(function () {
+
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 80) {
+            if (trackLoad.groupNumber <= totalGroups && !trackLoad.loading) {
+                trackLoad.loading = true;
+                $('#Loadding').show().css("display", "block");
+                $.getData(trackLoad);
+            }
+        }
+    });
+    //异步加载数据 End
+</script>
+
+
+
+
+

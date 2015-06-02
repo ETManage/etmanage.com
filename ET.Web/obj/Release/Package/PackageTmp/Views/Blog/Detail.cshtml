@@ -1,0 +1,140 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+@section Title{
+   @ViewBag.ArticleInfo.ArticleTitle
+}
+@section Header{
+
+}
+<div class="content-wrap">
+    <div class="main-left">
+        <header class="article-header">
+            <h1 class="article-title"><a href="@PublicHelper.GetHostAddress()@ViewBag.ArticleInfo.ArticleUrl">@ViewBag.ArticleInfo.ArticleTitle</a></h1>
+            <div class="meta">
+                <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a href="/articlelist/@ViewBag.ArticleType.TypeID">@ViewBag.ArticleType.TypeName</a></span> <span class="muted"><i class="fa fa-user"></i> West</span> <time class="muted">
+                    <i class="fa fa-clock-o"></i><span class="time timeago" title="@ViewBag.ArticleInfo.CreateTime">
+                    </span>
+                </time> <span class="muted" style="display:none;"><i class="fa fa-eye"></i> @ViewBag.ArticleInfo.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a href="#comments">@ViewBag.listArticleComment.Count 评论</a></span>
+            </div>
+        </header>
+        <article class="article-content">
+            <div>@Html.Raw(@ViewBag.ArticleInfo.ArticleContent)</div>
+            <p>转载请注明：<a href="@PublicHelper.GetHostAddress()" data-original-title="" title="">易特网IT资讯平台</a> » <a href="@ViewBag.ArticleInfo.ArticleUrl" data-original-title="" title="">@ViewBag.ArticleInfo.ArticleTitle</a></p>
+            <div class="open-message"><i class="fa fa-bullhorn"></i> 如果你觉得这篇文章或者我分享的内容对你有帮助，请继续关注我 ！<a style="float:right;text-indent: 0;" href="javascript:AddFavorite();" title="" id="iAddFavorite" target="_blank" data-original-title="收藏本文" data-id="@ViewBag.ArticleInfo.ArticleID">收藏本文</a></div>
+            <div class="article-social">
+                <a href="javascript:;ViewBag.checkIsFavorite" data-action="ding" data-id="@ViewBag.ArticleInfo.ArticleID" id="Addlike" class="action" data-original-title="" title="">
+                    <i class="fa fa-heart-o"></i>喜欢 (<span class="count">@ViewBag.ArticleInfo.LoveCount</span>)
+                </a><span class="or">or</span><span class="action action-share " data-bd-bind="1429800186534">
+                    <i class="fa fa-share-alt"></i>分享 (<span class="bds_count" data-cmd="count" title="累计分享@ViewBag.ArticleInfo.ShareCount">@ViewBag.ArticleInfo.ShareCount</span>)<div class="action-popover">
+                        <div class="popover top in ">
+                            <div class="arrow"></div><div class="popover-content bdsharebuttonbox">
+                                <a href="#" class="sinaweibo fa fa-weibo" data-cmd="tsina" title="" data-original-title="分享到新浪微博"></a>
+                                <a href="#" class="bds_qzone fa fa-star" data-cmd="qzone" title="" data-original-title="分享到QQ空间"></a>
+                                <a href="#" class="tencentweibo fa fa-tencent-weibo" data-cmd="tqq" title="" data-original-title="分享到腾讯微博"></a>
+                                <a href="#" class="qq fa fa-qq" data-cmd="sqq" title="" data-original-title="分享到QQ好友"></a>
+                                <a href="#" class="bds_weixin fa fa-weixin" data-cmd="weixin" title="" data-original-title="分享到微信"></a>
+                                <a href="#" class="bds_more fa fa-ellipsis-h" data-cmd="more" data-original-title="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+        </article>
+        <footer class="article-footer"><div class="article-tags"><i class="fa fa-tags"></i><a href="@PublicHelper.GetHostAddress()/blog/articletag/@ViewBag.ArticleInfo.ArticleLabel" rel="tag" data-original-title="" title="">@ViewBag.ArticleInfo.ArticleLabel</a></div></footer>
+        <nav class="article-nav">
+            <span class="article-nav-prev">
+                <i class="fa fa-angle-double-left"></i> <a href="@ViewBag.listLastArticle[0].ArticleUrl" rel="prev">@ViewBag.listLastArticle[0].ArticleTitle</a>
+            </span> <span class="article-nav-next">
+                <a href="@ViewBag.listNextArticle[0].ArticleUrl" rel="next">@ViewBag.listNextArticle[0].ArticleTitle</a>
+                <i class="fa fa-angle-double-right"></i>
+            </span>
+        </nav>
+
+        <div class="related_top">
+            <div class="related_posts">
+                <ul class="related_img">
+                    @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listOtherArticle)
+                    {
+
+
+                        <li class="related_box"> <a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle" target="_blank"> <img src="@itemArticle.ArticlePicture" alt="@itemArticle.ArticleTitle" width="186" height="112" /> <br><span class="r_title">@itemArticle.ArticleTitle</span></a></li>
+                    }
+                </ul><div class="relates">
+                    <ul>
+                        @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listOtherArticle2)
+                        {
+                            <li><i class="fa fa-minus"></i><a href="@itemArticle.ArticleUrl">@itemArticle.ArticleTitle</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="respond" class="no_webshot">
+            <form action="#" method="post" id="commentform">
+                <div class="comt-title"><div class="comt-avatar fLeft"> <img alt="" src="/images/blog/default.png" class="avatar avatar-54 photo avatar-default" height="54" width="54"></div><div class="comt-author fLeft"> 发表我的评论</div> <a id="cancel-comment-reply-link" class="fRight" href="javascript:;">取消评论</a></div><div class="comt">
+                    <div class="comt-box">
+                        <textarea placeholder="写点什么..." class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                        <div class="comt-ctrl">
+                            <button class="btn btn-primary fRight" type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-check-square-o"></i> 提交评论</button><div class="comt-tips fRight"><input type="hidden" name="comment_post_ID" value="3677" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"><div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div><div class="comt-tip comt-error" style="display: none;">#</div></div> <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="fa fa-smile-o"></i> 表情</span> <span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
+                        </div>
+                    </div>
+                    <div class="comt-comterinfo" id="comment-author-info">
+                        <h4>Hi，您需要填写昵称和邮箱！</h4><ul>
+                            <input type="hidden" name="articleid" value="@ViewBag.ArticleInfo.ArticleID" />
+                            <li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="@ViewBag.LoginUserName" tabindex="2" placeholder="昵称"><span class="help-inline">昵称 (必填)</span></li>
+                            <li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="@ViewBag.LoginUserEMail" tabindex="3" placeholder="邮箱"><span class="help-inline">邮箱 (必填)</span></li>
+                            <li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="help-inline">网址</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="postcomments">
+            <div id="comments"> <i class="fa fa-comments-o"></i> <b> (@ViewBag.listArticleComment.Count)</b>个小伙伴有话说</div><ol class="commentlist">
+
+                @foreach (ET.Sys_DEF.BlogCommentInfo itemComment in ViewBag.listArticleComment)
+                {
+                    <li class="comment even thread-even depth-1" id="comment-@itemComment.CommentID"><div class="c-avatar"><img alt="" data-original="/avatar/471c551b724ce9a601ec4f87677551d1.png" class="avatar avatar-54 photo" height="54" width="54" src="/images/blog/default.png"><div class="c-main" id="div-comment-@itemComment.CommentID">@itemComment.CommentContent<div class="c-meta"><span class="c-author">@itemComment.Creator</span>@itemComment.CreateTime.Value.ToString("yyyy-MM-dd HH:mm")<a class="comment-reply-link" href="@ViewBag.ArticleInfo.ArticleUrl?replytocom=@itemComment.CommentID#respond" onclick="return addComment.moveForm('div-comment-@itemComment.CommentID', '@itemComment.CommentID', 'respond', '@ViewBag.ArticleInfo.ArticleID')">回复</a></div></div></div></li>
+
+                }
+                @*<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-5113"><div class="c-avatar"><img alt="" data-original="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" class="avatar avatar-54 photo" height="54" width="54" src="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" style="display: block;"><div class="c-main" id="div-comment-5113">用了一天，速度换回win7。<div class="c-meta"><span class="c-author">偏方秘方大全</span>2014-10-09 01:01 <a class="comment-reply-link" href="/3677.html?replytocom=5113#respond" onclick="return addComment.moveForm('div-comment-5113', '5113', 'respond', '3677')">回复</a></div></div></div></li>
+                    <li class="comment even thread-even depth-1" id="comment-5103"><div class="c-avatar"><img alt="" data-original="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" class="avatar avatar-54 photo" height="54" width="54" src="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" style="display: block;"><div class="c-main" id="div-comment-5103">不打算尝试<div class="c-meta"><span class="c-author"><a href="http://www.fddcn.cn" rel="external nofollow" class="url" target="_blank">码海导航</a></span>2014-10-08 19:40 <a class="comment-reply-link" href="/3677.html?replytocom=5103#respond" onclick="return addComment.moveForm('div-comment-5103', '5103', 'respond', '3677')">回复</a></div></div></div></li>*@
+            </ol><div class="commentnav"></div>
+        </div>
+
+    </div>
+    <div class="main-right">
+        <div class="widget d_tag">
+            <div class="title"><h2>标签云</h2></div>
+            <div class="d_tags">
+                @foreach (ET.Sys_DEF.KeyAndValue itemLabel in ViewBag.listArticleLabel)
+{
+    <a title="" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemLabel.id" data-original-title="@itemLabel.text 个话题">@itemLabel.id (@itemLabel.text)</a>
+}
+            </div>
+        </div>
+
+        <div class="widget d_postlist">
+            <div class="title"><h2>猜你喜欢</h2></div>
+            <ul>
+                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticle)
+                {
+                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
+
+                }
+            </ul>
+        </div>
+        <div class="widget widget_links">
+            <div class="title"><h2>友情链接</h2></div>
+            <ul class="xoxo blogroll"><li><a href="@PublicHelper.GetHostAddress()/">易特网</a></li></ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    @Html.Raw(ViewBag.scriptIsFavorite)
+</script>

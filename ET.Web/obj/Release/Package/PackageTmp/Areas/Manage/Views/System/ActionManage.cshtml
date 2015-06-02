@@ -1,0 +1,95 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    操作管理
+}
+@section Header{
+}
+<div id="ManageBody">
+    <div id="ManageOperateTitle">
+        操作管理
+    </div>
+    <div id="ManageOperate">
+        <form id="form1" action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        关联模块：
+                    </th>
+                    <td>
+                        <input name="ModuleID" id="sltModuleID" style="width: 280px" class="easyui-combotree" data-options=" url: '/System/AjaxGetActionModuleData',required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        操作名称：
+                    </th>
+                    <td>
+                        <input name="ActionName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        操作Key：
+                    </th>
+                    <td>
+                        <input name="ActionKey" type="text" class="easyui-textbox" style="width:300px" />
+                    </td>
+                </tr>
+
+
+
+            </table>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var _id = '@Request["infoid"]';
+    $(function () {
+        //启用快捷键 83/ALT+s保存
+        $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        if (_id != "") {
+            $.ajax({
+                type: "get", dataType: "json",
+                url: "/System/AjaxGetActionDetail?rad=" + new Date().toString(),
+                async: true,
+                data: { infoid: _id },
+                success: function (data) {
+                    $("#form1").form("reset");
+                    $("#form1").form("load", data);
+                    $('#sltModuleID').combotree('setValue', data.ModuleID.toLowerCase());
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                }
+            });
+        }
+        else {
+
+        }
+    });
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/System/AjaxSaveAction?infoid='+_id,
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        parent.TopNotify("保存成功", 'info');
+                        $("#form1").form("reset");
+                        $('#sltModuleID').combotree('setValue', "-1");
+                    }
+                }
+            });
+        }
+    }
+</script>

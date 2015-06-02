@@ -1,0 +1,16 @@
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Facade.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Facade.pdb
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\AutoDA2G.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\Interop.SQLDMO.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SysFW.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Business.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Common.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\dog_net_windows.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\Win86dll.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\AutoDA3G.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Business.pdb
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\bin\Debug\SYS_Common.pdb
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\obj\Debug\ResolveAssemblyReference.cache
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\obj\Debug\SYS_Facade.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\SYS_Facade\obj\Debug\SYS_Facade.pdb

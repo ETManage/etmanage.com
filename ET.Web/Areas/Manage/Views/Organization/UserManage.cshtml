@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    博客文章列表
+}
+@section Header{
+    <script src="~/Res/editor/editor.js"></script>
+}
+<div id="ManageBody">
+    <div id="ManageOperateTitle">
+        博客文章管理
+    </div>
+    <div id="ManageOperate">
+        <form id="form1"  action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        所属公司：
+                    </th>
+                    <td>
+                        <select name="CompanyID" id="sltCompany_id" style="width: 200px" class="easyui-combotree"
+                                data-options="required:true,url:'AjaxGetTypeCompanyData'"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        所属部门：
+                    </th>
+                    <td>
+                        <select name="DepartmentID" id="sltDepartment_id" style="width: 200px" class="easyui-combotree"
+                                data-options="required:true,url:'AjaxGetDepartmentSelectData'"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        所属岗位：
+                    </th>
+                    <td>
+                        <select name="PositionID" id="sltPosition_id" style="width: 200px" class="easyui-combotree"
+                                data-options="required:true,url:'AjaxGetTypePositionData'"></select>
+                    </td>
+                </tr>
+                @*<tr>
+                    <th>
+                        用户名：
+                    </th>
+                    <td>
+                        <input name="UserName" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+                    </td>
+                </tr><tr>
+    <th>
+        密码：
+    </th>
+    <td>
+        <input name="UserPwd" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+    </td>
+</tr>*@
+
+                <tr>
+                    <th>
+                        姓名：
+                    </th>
+                    <td>
+                        <input name="CNName" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    var _id = '@Request["infoid"]';
+    $(function () {
+        //启用快捷键 83/ALT+s保存
+        $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        if (_id != "") {
+            $.ajax({
+                type: "get", dataType: "json",
+                url: "/Organization/AjaxGetUserDetail?rad=" + new Date().toGMTString(),
+                async: true,
+                data: { infoid: _id },
+                success: function (data) {
+                    $("#form1").form("reset");
+                    $("#form1").form("load", data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                }
+            });
+        }
+
+    });
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/Organization/AjaxSaveUser?infoid='+_id,
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        parent.TopNotify("保存成功", 'info');
+                        parent.windowClose();
+                    }
+                }
+            });
+        }
+
+    }
+</script>

@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ETManageModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="ETManageEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="dtproperties" EntityType="ETManageModel.dtproperties" />
+    <EntitySet Name="NEW_INFO" EntityType="ETManageModel.NEW_INFO" />
+    <EntitySet Name="NEW_TYPE_INFO" EntityType="ETManageModel.NEW_TYPE_INFO" />
+    <EntitySet Name="SYSTEM_ICON_INFO" EntityType="ETManageModel.SYSTEM_ICON_INFO" />
+    <EntitySet Name="SYSTEM_LIMIT_INFO" EntityType="ETManageModel.SYSTEM_LIMIT_INFO" />
+    <EntitySet Name="SYSTEM_LINK_USER_ROLE" EntityType="ETManageModel.SYSTEM_LINK_USER_ROLE" />
+    <EntitySet Name="SYSTEM_MODULE_INFO" EntityType="ETManageModel.SYSTEM_MODULE_INFO" />
+    <EntitySet Name="SYSTEM_ROLE_INFO" EntityType="ETManageModel.SYSTEM_ROLE_INFO" />
+    <EntitySet Name="SYSTEM_ROLE_LIMIT" EntityType="ETManageModel.SYSTEM_ROLE_LIMIT" />
+    <EntitySet Name="USER_BASE_INFO" EntityType="ETManageModel.USER_BASE_INFO" />
+    <EntitySet Name="USER_DEP_INFO" EntityType="ETManageModel.USER_DEP_INFO" />
+    <EntitySet Name="USER_POSITION_INFO" EntityType="ETManageModel.USER_POSITION_INFO" />
+    <EntitySet Name="USER_STU_INFO" EntityType="ETManageModel.USER_STU_INFO" />
+    <EntitySet Name="V_ALL_USER_INFO" EntityType="ETManageModel.V_ALL_USER_INFO" />
+    <EntitySet Name="V_REPORT_DEP_USER" EntityType="ETManageModel.V_REPORT_DEP_USER" />
+    <EntitySet Name="V_REPORT_POSITION_USER" EntityType="ETManageModel.V_REPORT_POSITION_USER" />
+    <EntitySet Name="V_SYSTEM_LIMIT_INFO" EntityType="ETManageModel.V_SYSTEM_LIMIT_INFO" />
+    <EntitySet Name="V_SYSTEM_MODULE_INFO" EntityType="ETManageModel.V_SYSTEM_MODULE_INFO" />
+    <EntitySet Name="V_USER_FULL_INFO" EntityType="ETManageModel.V_USER_FULL_INFO" />
+    <AssociationSet Name="FK_NEW_INFO_REFERENCE_NEW_TYPE" Association="ETManageModel.FK_NEW_INFO_REFERENCE_NEW_TYPE">
+      <End Role="NEW_TYPE_INFO" EntitySet="NEW_TYPE_INFO" />
+      <End Role="NEW_INFO" EntitySet="NEW_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_M_REFERENCE_SYSTEM_I" Association="ETManageModel.FK_SYSTEM_M_REFERENCE_SYSTEM_I">
+      <End Role="SYSTEM_ICON_INFO" EntitySet="SYSTEM_ICON_INFO" />
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_6" Association="ETManageModel.Reference_6">
+      <End Role="SYSTEM_ICON_INFO" EntitySet="SYSTEM_ICON_INFO" />
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_SYSTEM_M" Association="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_M">
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_R_REFERENCE_SYSTEM_L" Association="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_L">
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_4" Association="ETManageModel.Reference_4">
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_5" Association="ETManageModel.Reference_5">
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_SYSTEM_R" Association="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_R">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_USER_INF" Association="ETManageModel.FK_SYSTEM_L_REFERENCE_USER_INF">
+      <End Role="USER_BASE_INFO" EntitySet="USER_BASE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_2" Association="ETManageModel.Reference_2">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_R_REFERENCE_SYSTEM_R" Association="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_R">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_3" Association="ETManageModel.Reference_3">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_32" Association="ETManageModel.Reference_32">
+      <End Role="USER_DEP_INFO" EntitySet="USER_DEP_INFO" />
+      <End Role="USER_STU_INFO" EntitySet="USER_STU_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_33" Association="ETManageModel.Reference_33">
+      <End Role="USER_POSITION_INFO" EntitySet="USER_POSITION_INFO" />
+      <End Role="USER_STU_INFO" EntitySet="USER_STU_INFO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="dtproperties">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="property" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="objectid" Type="Int32" />
+    <Property Name="property" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
+    <Property Name="value" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="uvalue" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="version" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEW_INFO">
+    <Key>
+      <PropertyRef Name="NEW_ID" />
+    </Key>
+    <Property Name="NEW_ID" Type="Int32" Nullable="false" />
+    <Property Name="TYPE_ID" Type="Int32" />
+    <Property Name="TYPE_ID2" Type="Int32" />
+    <Property Name="NEW_TITLE" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="NEW_BODY" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="NEW_SEND_USERID" Type="Int64" />
+    <Property Name="NEW_SEND_DEP" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="NEW_SEND_DATE" Type="DateTime" />
+    <Property Name="NEW_ISUN_COMMEND" Type="Boolean" />
+    <Property Name="NEW_ISUN_HOT" Type="Boolean" />
+    <NavigationProperty Name="NEW_TYPE_INFO" Relationship="ETManageModel.FK_NEW_INFO_REFERENCE_NEW_TYPE" FromRole="NEW_INFO" ToRole="NEW_TYPE_INFO" />
+  </EntityType>
+  <EntityType Name="NEW_TYPE_INFO">
+    <Key>
+      <PropertyRef Name="TYPE_ID" />
+    </Key>
+    <Property Name="TYPE_ID" Type="Int32" Nullable="false" />
+    <Property Name="TYPE_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="TYPE_SORT" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="TYPE_PID" Type="Int32" />
+    <NavigationProperty Name="NEW_INFO" Relationship="ETManageModel.FK_NEW_INFO_REFERENCE_NEW_TYPE" FromRole="NEW_TYPE_INFO" ToRole="NEW_INFO" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ICON_INFO">
+    <Key>
+      <PropertyRef Name="ICON_ID" />
+    </Key>
+    <Property Name="ICON_ID" Type="Int32" Nullable="false" />
+    <Property Name="ICON_CLASS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ICON_MARK" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="SYSTEM_MODULE_INFO" Relationship="ETManageModel.FK_SYSTEM_M_REFERENCE_SYSTEM_I" FromRole="SYSTEM_ICON_INFO" ToRole="SYSTEM_MODULE_INFO" />
+    <NavigationProperty Name="SYSTEM_MODULE_INFO1" Relationship="ETManageModel.Reference_6" FromRole="SYSTEM_ICON_INFO" ToRole="SYSTEM_MODULE_INFO" />
+  </EntityType>
+  <EntityType Name="SYSTEM_LIMIT_INFO">
+    <Key>
+      <PropertyRef Name="LIMIT_ID" />
+    </Key>
+    <Property Name="LIMIT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MODULE_ID" Type="Int32" />
+    <Property Name="LIMIT_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LIMIT_KEY" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ISUN_VISIBLE" Type="Boolean" />
+    <NavigationProperty Name="SYSTEM_MODULE_INFO" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_M" FromRole="SYSTEM_LIMIT_INFO" ToRole="SYSTEM_MODULE_INFO" />
+    <NavigationProperty Name="SYSTEM_ROLE_LIMIT" Relationship="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_L" FromRole="SYSTEM_LIMIT_INFO" ToRole="SYSTEM_ROLE_LIMIT" />
+    <NavigationProperty Name="SYSTEM_ROLE_LIMIT1" Relationship="ETManageModel.Reference_4" FromRole="SYSTEM_LIMIT_INFO" ToRole="SYSTEM_ROLE_LIMIT" />
+    <NavigationProperty Name="SYSTEM_MODULE_INFO1" Relationship="ETManageModel.Reference_5" FromRole="SYSTEM_LIMIT_INFO" ToRole="SYSTEM_MODULE_INFO" />
+  </EntityType>
+  <EntityType Name="SYSTEM_LINK_USER_ROLE">
+    <Key>
+      <PropertyRef Name="LINK_ID" />
+    </Key>
+    <Property Name="LINK_ID" Type="Int64" Nullable="false" />
+    <Property Name="USER_ID" Type="Int64" />
+    <Property Name="ROLE_ID" Type="Int32" />
+    <NavigationProperty Name="SYSTEM_ROLE_INFO" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_R" FromRole="SYSTEM_LINK_USER_ROLE" ToRole="SYSTEM_ROLE_INFO" />
+    <NavigationProperty Name="USER_BASE_INFO" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_USER_INF" FromRole="SYSTEM_LINK_USER_ROLE" ToRole="USER_BASE_INFO" />
+    <NavigationProperty Name="SYSTEM_ROLE_INFO1" Relationship="ETManageModel.Reference_2" FromRole="SYSTEM_LINK_USER_ROLE" ToRole="SYSTEM_ROLE_INFO" />
+  </EntityType>
+  <EntityType Name="SYSTEM_MODULE_INFO">
+    <Key>
+      <PropertyRef Name="MODULE_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="Int32" Nullable="false" />
+    <Property Name="ICON_ID" Type="Int32" />
+    <Property Name="MODULE_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_ICON" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_SORT" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_URL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_TARGET" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_PID" Type="Int32" />
+    <NavigationProperty Name="SYSTEM_ICON_INFO" Relationship="ETManageModel.FK_SYSTEM_M_REFERENCE_SYSTEM_I" FromRole="SYSTEM_MODULE_INFO" ToRole="SYSTEM_ICON_INFO" />
+    <NavigationProperty Name="SYSTEM_ICON_INFO1" Relationship="ETManageModel.Reference_6" FromRole="SYSTEM_MODULE_INFO" ToRole="SYSTEM_ICON_INFO" />
+    <NavigationProperty Name="SYSTEM_LIMIT_INFO" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_M" FromRole="SYSTEM_MODULE_INFO" ToRole="SYSTEM_LIMIT_INFO" />
+    <NavigationProperty Name="SYSTEM_LIMIT_INFO1" Relationship="ETManageModel.Reference_5" FromRole="SYSTEM_MODULE_INFO" ToRole="SYSTEM_LIMIT_INFO" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ROLE_INFO">
+    <Key>
+      <PropertyRef Name="ROLE_ID" />
+    </Key>
+    <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
+    <Property Name="ROLE_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_ID" Type="Int32" />
+    <Property Name="ROLE_HOME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ROLE_REGIST" Type="Boolean" />
+    <Property Name="ROLE_INSERT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ROLE_MARK" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="SYSTEM_LINK_USER_ROLE" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_SYSTEM_R" FromRole="SYSTEM_ROLE_INFO" ToRole="SYSTEM_LINK_USER_ROLE" />
+    <NavigationProperty Name="SYSTEM_LINK_USER_ROLE1" Relationship="ETManageModel.Reference_2" FromRole="SYSTEM_ROLE_INFO" ToRole="SYSTEM_LINK_USER_ROLE" />
+    <NavigationProperty Name="SYSTEM_ROLE_LIMIT" Relationship="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_R" FromRole="SYSTEM_ROLE_INFO" ToRole="SYSTEM_ROLE_LIMIT" />
+    <NavigationProperty Name="SYSTEM_ROLE_LIMIT1" Relationship="ETManageModel.Reference_3" FromRole="SYSTEM_ROLE_INFO" ToRole="SYSTEM_ROLE_LIMIT" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ROLE_LIMIT">
+    <Key>
+      <PropertyRef Name="LINK_ID" />
+    </Key>
+    <Property Name="LINK_ID" Type="Int64" Nullable="false" />
+    <Property Name="ROLE_ID" Type="Int32" />
+    <Property Name="LIMIT_ID" Type="Int32" />
+    <NavigationProperty Name="SYSTEM_LIMIT_INFO" Relationship="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_L" FromRole="SYSTEM_ROLE_LIMIT" ToRole="SYSTEM_LIMIT_INFO" />
+    <NavigationProperty Name="SYSTEM_LIMIT_INFO1" Relationship="ETManageModel.Reference_4" FromRole="SYSTEM_ROLE_LIMIT" ToRole="SYSTEM_LIMIT_INFO" />
+    <NavigationProperty Name="SYSTEM_ROLE_INFO" Relationship="ETManageModel.FK_SYSTEM_R_REFERENCE_SYSTEM_R" FromRole="SYSTEM_ROLE_LIMIT" ToRole="SYSTEM_ROLE_INFO" />
+    <NavigationProperty Name="SYSTEM_ROLE_INFO1" Relationship="ETManageModel.Reference_3" FromRole="SYSTEM_ROLE_LIMIT" ToRole="SYSTEM_ROLE_INFO" />
+  </EntityType>
+  <EntityType Name="USER_BASE_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int64" Nullable="false" />
+    <Property Name="USER_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_PWD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="User_Type" Type="Int32" />
+    <Property Name="USER_START_DATE" Type="DateTime" />
+    <Property Name="USER_END_DATE" Type="DateTime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="Int64" />
+    <Property Name="USER_MODIFY_DATE" Type="DateTime" />
+    <NavigationProperty Name="SYSTEM_LINK_USER_ROLE" Relationship="ETManageModel.FK_SYSTEM_L_REFERENCE_USER_INF" FromRole="USER_BASE_INFO" ToRole="SYSTEM_LINK_USER_ROLE" />
+  </EntityType>
+  <EntityType Name="USER_DEP_INFO">
+    <Key>
+      <PropertyRef Name="DEP_ID" />
+    </Key>
+    <Property Name="DEP_ID" Type="Int32" Nullable="false" />
+    <Property Name="DEP_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="DEP_SORT" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="DEP_PID" Type="Int32" />
+    <Property Name="DEP_LEVEL" Type="Int32" />
+    <Property Name="DEP_MARK" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="USER_STU_INFO" Relationship="ETManageModel.Reference_32" FromRole="USER_DEP_INFO" ToRole="USER_STU_INFO" />
+  </EntityType>
+  <EntityType Name="USER_POSITION_INFO">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" />
+    <Property Name="P_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="P_SORT" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="P_PID" Type="Int32" />
+    <Property Name="REMARK" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="USER_STU_INFO" Relationship="ETManageModel.Reference_33" FromRole="USER_POSITION_INFO" ToRole="USER_STU_INFO" />
+  </EntityType>
+  <EntityType Name="USER_STU_INFO">
+    <Key>
+      <PropertyRef Name="STU_ID" />
+    </Key>
+    <Property Name="STU_ID" Type="Int64" Nullable="false" />
+    <Property Name="USER_ID" Type="Int64" />
+    <Property Name="STU_NICKNAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_CNNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="STU_ENNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="STU_EMAIL" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DEP_ID" Type="Int32" />
+    <Property Name="P_ID" Type="Int32" />
+    <Property Name="STU_EDU" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="STU_SEX" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="STU_ADDRESS" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="STU_POST" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="STU_PHONE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_MOBILE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_CONTACT" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="STU_REG_DATETIME" Type="DateTime" />
+    <Property Name="STU_PIC" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_ID_CARD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="USER_DEP_INFO" Relationship="ETManageModel.Reference_32" FromRole="USER_STU_INFO" ToRole="USER_DEP_INFO" />
+    <NavigationProperty Name="USER_POSITION_INFO" Relationship="ETManageModel.Reference_33" FromRole="USER_STU_INFO" ToRole="USER_POSITION_INFO" />
+  </EntityType>
+  <EntityType Name="V_ALL_USER_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int64" Nullable="false" />
+    <Property Name="USER_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_PWD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_NICKNAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_CNNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="STU_ENNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="P_ID" Type="Int32" />
+    <Property Name="DEP_ID" Type="Int32" />
+    <Property Name="STU_SEX" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="STU_REG_DATETIME" Type="DateTime" />
+    <Property Name="DEP_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="P_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ROLE_NAME" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="User_Type" Type="Int32" />
+    <Property Name="USER_START_DATE" Type="DateTime" />
+    <Property Name="USER_END_DATE" Type="DateTime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="Int64" />
+    <Property Name="USER_MODIFY_DATE" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="V_REPORT_DEP_USER">
+    <Key>
+      <PropertyRef Name="DEP_ID" />
+    </Key>
+    <Property Name="DEP_ID" Type="Int32" Nullable="false" />
+    <Property Name="DEP_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="DEP_USER_COUNT" Type="Int32" />
+  </EntityType>
+  <EntityType Name="V_REPORT_POSITION_USER">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" />
+    <Property Name="P_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="P_USER_COUNT" Type="Int32" />
+  </EntityType>
+  <EntityType Name="V_SYSTEM_LIMIT_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="Int32" />
+    <Property Name="LIMIT_KEY" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_ID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="V_SYSTEM_MODULE_INFO">
+    <Key>
+      <PropertyRef Name="MODULE_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="Int32" Nullable="false" />
+    <Property Name="MODULE_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_ICON" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_SORT" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_URL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_TARGET" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="MODULE_PID" Type="Int32" />
+    <Property Name="MODULE_PNAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="V_USER_FULL_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int64" Nullable="false" />
+    <Property Name="USER_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_PWD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_NICKNAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="STU_CNNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="STU_ENNAME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="P_ID" Type="Int32" />
+    <Property Name="DEP_ID" Type="Int32" />
+    <Property Name="STU_SEX" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="STU_REG_DATETIME" Type="DateTime" />
+    <Property Name="DEP_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="P_NAME" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ROLE_NAME" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="User_Type" Type="Int32" />
+    <Property Name="USER_START_DATE" Type="DateTime" />
+    <Property Name="USER_END_DATE" Type="DateTime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="Int64" />
+    <Property Name="USER_MODIFY_DATE" Type="DateTime" />
+  </EntityType>
+  <Association Name="FK_NEW_INFO_REFERENCE_NEW_TYPE">
+    <End Role="NEW_TYPE_INFO" Type="ETManageModel.NEW_TYPE_INFO" Multiplicity="0..1" />
+    <End Role="NEW_INFO" Type="ETManageModel.NEW_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEW_TYPE_INFO">
+        <PropertyRef Name="TYPE_ID" />
+      </Principal>
+      <Dependent Role="NEW_INFO">
+        <PropertyRef Name="TYPE_ID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_M_REFERENCE_SYSTEM_I">
+    <End Role="SYSTEM_ICON_INFO" Type="ETManageModel.SYSTEM_ICON_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.SYSTEM_MODULE_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ICON_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_6">
+    <End Role="SYSTEM_ICON_INFO" Type="ETManageModel.SYSTEM_ICON_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.SYSTEM_MODULE_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ICON_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_SYSTEM_M">
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.SYSTEM_MODULE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.SYSTEM_LIMIT_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_R_REFERENCE_SYSTEM_L">
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.SYSTEM_LIMIT_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="LIMIT_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="LIMIT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_4">
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.SYSTEM_LIMIT_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="LIMIT_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="LIMIT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_5">
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.SYSTEM_MODULE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.SYSTEM_LIMIT_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_SYSTEM_R">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_USER_INF">
+    <End Role="USER_BASE_INFO" Type="ETManageModel.USER_BASE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_BASE_INFO">
+        <PropertyRef Name="USER_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_2">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_R_REFERENCE_SYSTEM_R">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_3">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_32">
+    <End Role="USER_DEP_INFO" Type="ETManageModel.USER_DEP_INFO" Multiplicity="0..1" />
+    <End Role="USER_STU_INFO" Type="ETManageModel.USER_STU_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_DEP_INFO">
+        <PropertyRef Name="DEP_ID" />
+      </Principal>
+      <Dependent Role="USER_STU_INFO">
+        <PropertyRef Name="DEP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_33">
+    <End Role="USER_POSITION_INFO" Type="ETManageModel.USER_POSITION_INFO" Multiplicity="0..1" />
+    <End Role="USER_STU_INFO" Type="ETManageModel.USER_STU_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_POSITION_INFO">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="USER_STU_INFO">
+        <PropertyRef Name="P_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

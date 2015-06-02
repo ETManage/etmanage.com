@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Condition>
+  <System>
+    <CompanyName>易特工作室</CompanyName>
+    <PageTitle>易特工作室信息管理平台</PageTitle>
+    <Url>http://www.etmanage.com</Url>
+    <CompanyLogo>/favicon.ico</CompanyLogo>
+    <TitleImg>/images/rlogo60x60.png</TitleImg>
+    <Ver>[ET-V1.0.0.0]</Ver>
+    <SinglePoint>0</SinglePoint>
+    <IsRegist>0</IsRegist>
+    <IsUpdate>1</IsUpdate>
+    <IsLoginLog>1</IsLoginLog>
+  </System>
+</Condition>

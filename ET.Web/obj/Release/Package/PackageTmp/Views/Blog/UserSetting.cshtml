@@ -1,0 +1,397 @@
+﻿@{
+    ViewBag.Title = "UserInfo";
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+@section Title{
+    个人资料设置
+}
+@section Header{
+
+}
+
+<link href="/Content/Blog/userinfo.css" rel="stylesheet" />
+<div class="content-wrap">
+    <div class="mod-setting clearfix">
+        <div class="setting-title yahei">个人设置</div> <div class="setting-content clearfix">
+            <div class="setting-menu">
+                <div class="menu-title menu-profile-current active"> <h3>个人资料</h3>  </div>
+                <ul class="menu-list">
+                    <li class="menu-item basic-link"><a href="/blog/usersetting?s=baseinfo">基本资料</a> </li>
+                    <li class="menu-split"> </li>
+                    <li class="menu-item details-link"><a href="/blog/usersetting?s=editpass">修改密码</a> </li>
+                    <li class="menu-split"> </li>
+                    @* <li class="menu-item portrait-link on"><a href="/blog/usersetting/portrait">头像设置</a> </li>*@
+                </ul>
+                @*<div class="menu-title menu-privacy" id="settingPrivacy"> <h3>隐私设置</h3> </div>
+                    <ul class="menu-list">
+                        <li class="menu-item tieba-link" id="settingPrivacyTieba"><a href="/blog/usersetting/article">我在文章</a> </li>
+                        <li class="menu-split"> </li>
+                        <li class="menu-item xiangce-link" id="settingPrivacyXiangce"><a href="/blog/usersetting/picture">我在图库</a> </li>
+                        <li class="menu-split"> </li>
+                    </ul>*@
+            </div>
+            <div class="setting-detail" id="stthld" style="display: block;">
+                <div class="detail-bg">
+                </div>
+                <div class="plzhld clearfix">
+                    <div class="mod-setting-profile" id="1000001" style="display: block;">
+                        <div class="setting-profile-title yahei">
+                            基本资料
+                        </div>
+                        <form id="form1" class="setting-profile-form" method="POST">
+                            <table class="setting-profile-table">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            性别:
+                                        </th>
+                                        <td class="line30">
+                                            <input name="sex" id="passport-sex-1" type="radio" value="男" checked="">
+                                            <span class="profile-gender" for="passport-sex-1">
+                                                男
+                                            </span>
+                                            <input name="sex" id="passport-sex-2" type="radio" value="女">
+                                            <span for="passport-sex-2" class="profile-gender">
+                                                女
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            生日:
+                                        </th>
+                                        <td>
+
+
+
+                                            <div class="mod-cus-sel" id="cussel1000000">
+
+                                                <input id="passport_birthday_year" name="birthdayyear" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    年
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn">
+                                                    <li class="cus-sel-opt" onclick="ComboxSelect(this)">
+                                                        <a class="cus-sel-opt-txt" data-value="0" href="javascript:;">
+                                                            年
+                                                        </a>
+                                                    </li>
+                                                    @for (int year = DateTime.Now.Year; year > 1915; year--)
+                                                    {
+                                                    <li class="cus-sel-opt" onclick="ComboxSelect(this)">
+                                                        <a class="cus-sel-opt-txt" data-value="@year" href="javascript:;">
+                                                            @year
+                                                        </a>
+                                                    </li>
+                                                    }
+
+                                                </ol>
+                                            </div>
+                                            <div class="mod-cus-sel " id="cussel1000001">
+                                                <input id="passport_birthday_month" name="birthdaymonth" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    月
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn">
+                                                    <li class="cus-sel-opt" onclick="ComboxSelect(this)">
+                                                        <a class="cus-sel-opt-txt" data-value="0" href="javascript:;">
+                                                            月
+                                                        </a>
+                                                    </li>
+                                                    @for (int month = 1; month <= 12; month++)
+                                                    {
+                                                    <li class="cus-sel-opt" onclick="ComboxSelect(this)">
+                                                        <a class="cus-sel-opt-txt" data-value="@month" href="javascript:;">
+                                                            @month
+                                                        </a>
+                                                    </li>
+                                                    }
+                                                </ol>
+                                            </div>
+
+                                            <div class="mod-cus-sel " id="cussel1000002">
+
+                                                <input id="passport_birthday_day" name="birthdayday" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    日
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn">
+                                                    <li class="cus-sel-opt" onclick="ComboxSelect(this)">
+                                                        <a class="cus-sel-opt-txt" data-value="0" href="javascript:;">
+                                                            日
+                                                        </a>
+                                                    </li>
+
+                                                </ol>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            居住地:
+                                        </th>
+                                        <td>
+
+                                            <div class="mod-cus-sel " id="cussel1000004">
+                                                <input id="passport_hometown_sheng" name="liveprovince" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    请选择
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn"></ol>
+                                            </div>
+
+                                            <div class="mod-cus-sel cus-city" id="cussel1000005">
+                                                <input id="passport_hometown_shi" name="livecity" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    请选择
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn"></ol>
+                                            </div>
+                                            <div class="mod-cus-sel " id="cussel1000006">
+                                                <input id="passport_hometown_qu" name="livearea" style="display: none;" />
+                                                <div class="cus-sel-opt-panel">
+                                                    请选择
+                                                </div>
+                                                <ol class="cus-sel-opt-ctn"></ol>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="personal-detail-th">
+                                            QQ:
+                                        </th>
+                                        <td class="personal-detail-td">
+                                            <input name="QQ" id="passport_userqq" class="mod-cus-input"></input>
+                                            <span class="mod-cus-input-tip"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="personal-detail-th">
+                                            个人简介:
+                                        </th>
+                                        <td class="personal-detail-td">
+                                            <textarea name="detail" id="passport_userdetail" class="mod-cus-input mod-cus-input-4"></textarea>
+                                            <span class="mod-cus-input-tip"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="button" id="btnSave" class="setting-submit-btn setting-submit-ml100" style=" width:68px; height:34px; line-height:0px;" value="保存" /><span class="save-ok" id="tiebaSaveOkMsg">
+                                你的设置保存成功！
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-detail" id="editpass" style="display: none;">
+                <div class="detail-bg">
+                </div>
+                <div class="plzhld clearfix">
+                    <div class="mod-setting-profile" id="1000001" style="display: block;">
+                        <div class="setting-profile-title yahei">
+                            修改密码
+                        </div>
+                        <form id="editpassform" class="setting-profile-form" method="POST">
+                            <table class="setting-profile-table">
+                                <tbody>
+
+                                    <tr>
+                                        <th class="personal-detail-th">
+                                            原始密码:
+                                        </th>
+                                        <td class="personal-detail-td">
+                                            <input name="oldpwd" id="editpass_oldpwd" type="password" class="mod-cus-input"></input>
+                                            <span class="mod-cus-input-tip"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="personal-detail-th">
+                                            新密码:
+                                        </th>
+                                        <td class="personal-detail-td">
+                                            <input name="newpwd" id="editpass_newpwd" type="password" class="mod-cus-input"></input>
+                                            <span class="mod-cus-input-tip"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="personal-detail-th">
+                                            重复密码:
+                                        </th>
+                                        <td class="personal-detail-td">
+                                            <input name="newpwd2" id="editpass_newpwd2" type="password" class="mod-cus-input"></input>
+                                            <span class="mod-cus-input-tip"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="button" id="btnpassSave" class="setting-submit-btn setting-submit-ml100" style=" width:68px; height:34px; line-height:0px;" value="保存" /><span class="save-ok" id="passSaveOkMsg">
+                                你的密码保存成功！
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/common/area3.js"></script>
+<script type="text/javascript">
+    $(function () {
+        if ('@Request.QueryString["s"]' == "editpass") {
+            $("#stthld").css("display", "none");
+            $("#editpass").css("display", "block");
+        }
+
+        $.ajax({
+            type: "post", dataType: "json",
+            url: "/blog/getuserbasesetting?rad=" + new Date().toGMTString(),
+            async: true,
+            success: function (data) {
+                //$("#form1").form("reset");
+                //$("#form1").form("load", data);
+                $("input[name=sex]").val(data.Sex);
+                $("input[name=detail]").val(data.Detail);
+                $("input[name=QQ]").val(data.QQ);
+                $("#cussel1000000 .cus-sel-opt-panel").text(data.BirthdayYear);
+                $("#cussel1000001 .cus-sel-opt-panel").text(data.BirthdayMonth);
+                $("#cussel1000002 .cus-sel-opt-panel").text(data.BirthdayDay);
+                $("#cussel1000004 .cus-sel-opt-panel").text(data.LiveProvince);
+                $("#cussel1000005 .cus-sel-opt-panel").text(data.LiveCity);
+                $("#cussel1000006 .cus-sel-opt-panel").text(data.LiveArea);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                TopNotify(errorThrown, 'error');
+            }
+        });
+        $("#btnSave").click(function () { BtnSaveOrUpdate(); });
+        $("#btnpassSave").click(function () {
+            if ($.trim($("#editpass_oldpwd").val()) == "") {
+                TopNotify("请输入原始密码", 'info');
+                return false;
+            }
+            if ($.trim($("#editpass_newpwd").val()) == "") {
+                TopNotify("请输入新密码", 'info');
+                return false;
+            }
+            if ($("#editpass_newpwd").val() != $("#editpass_newpwd2").val()) {
+                TopNotify("两次密码不匹配", 'info');
+                return false;
+            }
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/blog/ajaxsettingpass?s=editpass',
+                data: $('#editpassform').serialize().replaceAll("'", "''"),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        $("#passSaveOkMsg").css("display", "block");
+                    }
+                    else
+                        TopNotify(data, 'error');
+                }
+            });
+
+        });
+
+
+        $(".mod-cus-sel[id^=cussel100000]").mouseover(function () {
+            $(this).addClass("cus-sel-active");
+            $(this).find(".cus-sel-opt-ctn").css("display", "block");
+        }).mouseout(function () {
+            $(this).removeClass("cus-sel-active");
+            $(".cus-sel-opt-ctn").css("display", "none");
+        });
+        //$(".cus-sel-opt").click(function () { ComboxSelect() });
+        LoadAreaSheng();
+    })
+    function ComboxSelect(curr) {
+        $(curr).parent().prev().text($(curr).text())
+        $(curr).parent().prev().prev().val($.trim($(curr).text()))
+        $(curr).parent().parent().removeClass("cus-sel-active");
+        $(curr).parent().children().removeClass("cus-sel-opt-selected");;
+        $(curr).addClass("cus-sel-opt-selected");
+        $(".cus-sel-opt-ctn").css("display", "none");
+        LoadDateDay();
+    }
+
+    function ComboxSelectArea(curr) {
+        $(curr).parent().prev().text($(curr).text())
+        $(curr).parent().prev().prev().val($.trim($(curr).text()))
+        $(curr).parent().parent().removeClass("cus-sel-active");
+        $(curr).parent().children().removeClass("cus-sel-opt-selected");;
+        $(curr).addClass("cus-sel-opt-selected");
+        $(".cus-sel-opt-ctn").css("display", "none");
+        LoadAreaShi($.trim($(curr).text()))
+        LoadAreaQu($("#passport_hometown_sheng").val(), $("#passport_hometown_shi").val())
+    }
+    function LoadAreaSheng() {
+
+        for (var i = 0; i < areas.length; i++) {
+            $("#cussel1000004 .cus-sel-opt-ctn").append('<li class="cus-sel-opt"  onclick="ComboxSelectArea(this)"><a class="cus-sel-opt-txt" data-value="' + areas[i].name + '" href="javascript:;">' + areas[i].name + '</a> </li>');
+        }
+
+    }
+    function LoadAreaShi(sheng) {
+        $("#cussel1000005 .cus-sel-opt-ctn").children().remove();
+        for (var i = 0; i < areas.length; i++) {
+            if (areas[i].name == sheng) {
+                for (var j = 0; j < areas[i].sub.length; j++) {
+                    $("#cussel1000005 .cus-sel-opt-ctn").append('<li class="cus-sel-opt"  onclick="ComboxSelectArea(this)"><a class="cus-sel-opt-txt" data-value="' + areas[i].sub[j].name + '" href="javascript:;">' + areas[i].sub[j].name + '</a> </li>');
+                }
+
+            }
+        }
+    }
+    function LoadAreaQu(sheng, shi) {
+
+        var aa = [{ name: "建始县" }, { name: "来凤县" }];
+        $("#cussel1000006 .cus-sel-opt-ctn").children().remove();
+        for (var i = 0; i < areas.length; i++) {
+            if (areas[i].name == sheng) {
+                for (var j = 0; j < areas[i].sub.length; j++) {
+                    if (areas[i].sub[j].name == shi) {
+                        $.each(areas[i].sub[j].sub, function (n, value) {
+                            $("#cussel1000006 .cus-sel-opt-ctn").append('<li class="cus-sel-opt"  onclick="ComboxSelectArea(this)"><a class="cus-sel-opt-txt" data-value="' + value.name + '" href="javascript:;">' + value.name + '</a> </li>');
+                        });
+                    }
+
+                }
+            }
+        }
+    }
+
+
+
+    function LoadDateDay() {
+        var year = parseInt($("#passport_birthday_year").val());
+        var month = parseInt($("#passport_birthday_month").val(), 10);
+        for (var i = 1; i <= new Date(year, month, 0).getDate() ; i++) {
+            $("#cussel1000002 .cus-sel-opt-ctn").append('<li class="cus-sel-opt"  onclick="ComboxSelect(this)"><a class="cus-sel-opt-txt" data-value="' + i + '" href="javascript:;">' + i + '</a> </li>');
+        }
+    }
+
+    function BtnSaveOrUpdate() {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: '/blog/AjaxSettingInfo?s=baseinfo',
+            data: $('#form1').serialize().replaceAll("'", "''"),
+            async: false,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                TopNotify(errorThrown, 'error');
+            },
+            success: function (data) {
+                if (data == "true") {
+                    $("#tiebaSaveOkMsg").css("display", "block");
+                }
+                else
+                    TopNotify(data, 'error');
+            }
+        });
+    }
+</script>

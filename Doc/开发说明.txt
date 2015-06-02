@@ -1,0 +1,16 @@
+ET.AssemblyLibrary 	外部程序集放置类
+ET.ToolKit.DBLayer	数据库连接层
+ET.ToolKit		通用类库层
+ET.Constant		项目常量层
+ET.SecHandle		安全机制层
+ET.DALContract		数据访问层接口
+ET.Sys_DAL		数据访问层
+ET.Sys_DEF		数据模型层
+ET.Sys_BLL		业务逻辑层
+ET.Sys_Base		项目基础类
+ET.Web			网站目录
+
+
+
+m代表管理模块
+无标识则代表用户展示界面

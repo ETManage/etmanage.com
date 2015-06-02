@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Logout";
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+
+@section Title{
+    用户成功退出
+}
+@section Header{
+}
+<style type="text/css">
+    .cont { margin: 0 auto; width: 500px; line-height: 20px; }
+        .cont h2 { text-align: center; color: #000000; font-size: 18px; font-weight: bold; height: 55px; margin-top: 30px; }
+    .c2 { height: 35px; text-align: center; }
+        .c2 a { display: inline-block; margin: 0 4px; font-size: 14px; height: 23px; color: #626262; padding-top: 1px; text-decoration: none; text-align: left; }
+            .c2 a:hover { color: #626262; text-decoration: none; }
+            .c2 a.home { width: 66px; background: url("/images/pageerror/404/02.png"); padding-left: 30px; }
+                .c2 a.home:hover { background: url("/images/pageerror/404/02.png") 0 -24px; }
+                .c2 a.home:active { background: url("/images/pageerror/404/02.png") 0 -48px; }
+            .c2 a.re { width: 66px; background: url("/images/pageerror/404/03.png"); padding-left: 30px; }
+                .c2 a.re:hover { background: url("/images/pageerror/404/03.png") 0 -24px; }
+                .c2 a.re:active { background: url("/images/pageerror/404/03.png") 0 -48px; }
+            .c2 a.sr { width: 153px; background: url("/images/pageerror/404/04.png"); padding-left: 28px; }
+                .c2 a.sr:hover { background: url("/images/pageerror/404/04.png") 0 -24px; }
+                .c2 a.sr:active { background: url("/images/pageerror/404/04.png") 0 -48px; }
+</style>
+
+<script language="javascript" type="text/javascript">
+    var i = 2;
+    var intervalid;
+    intervalid = setInterval("fun()", 1000);
+    function fun() {
+        if (i == 0) {
+            window.location.href = "/blog/index";
+            clearInterval(intervalid);
+        }
+        document.getElementById("mes").innerHTML = i;
+        i--;
+    }
+    //清除登录缓存
+    CookieHelper.addCookie("qqloginstatus", 0);
+</script>
+</script>
+<div class="content-wrap">
+    <div class="content-container">
+        <div class="cont">
+            <h2><img src="/images/blog/icon-audited.png" class="img1" />用户已成功退出 ！！将在 <span id="mes">3</span> 秒钟后返回首页！</h2>
+            <div class="c2"><a href="@Request.QueryString["l"]" class="re">返回首页</a></div>
+
+        </div>
+
+    </div>
+</div>

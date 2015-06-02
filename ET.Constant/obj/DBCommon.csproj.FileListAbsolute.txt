@@ -1,0 +1,429 @@
+F:\MywwwRoot\Timber_Exam_New\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\DBCommon.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\DBCommon.pdb
+F:\MywwwRoot\Timber_Exam_New\DBCommon\obj\Debug\DBCommon.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\obj\Debug\DBCommon.pdb
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\AutoDA2G.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Facade.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Common.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\SysFW.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Business.dll
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Common.pdb
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\SysFW.pdb
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Business.pdb
+F:\MywwwRoot\Timber_Exam_New\DBCommon\bin\Debug\Facade.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\DBCommon.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\DBCommon.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\AutoDA2G.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Facade.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Common.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\SysFW.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Business.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Common.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\SysFW.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Business.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\bin\Debug\Facade.pdb
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\obj\Debug\DBCommon.dll
+F:\MywwwRoot\Timber_Exam_New_Update\DBCommon\obj\Debug\DBCommon.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\考试系统企业版\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\考试系统企业版\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\考试系统企业版\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\考试系统（企业版）\Timber_Exam\DBCommon\obj\Release\ResolveAssemblyReference.cache
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Common.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Business.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+D:\Project\考试系统（企业版）\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\G\E\Exam\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\G\E\Exam\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\G\E\Exam\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\旧\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20120914\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20120917_1\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Common.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Business.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+C:\Documents and Settings\zhang\桌面\测试\Timber_Exam20120920\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20120924\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Common.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Business.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam20121012\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121015\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\工作区域\系统源代码\Timber_Exam20121019\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Common.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Business.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+L:\Timber_Exam20121021\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121031\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121106\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【项目移交】\考试系统【企业版】\考试系统【标准企业版】\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+E:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam20121119\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Common.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Business.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\测试\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Common.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Business.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+D:\【产品中心】\考试系统_标准企业版\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Common.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Business.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+C:\Documents and Settings\Administrator\桌面\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Common.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Business.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\SysFW.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+C:\Users\Administrator\Desktop\考试系统\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Facade.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Common.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Business.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Common.pdb
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Business.pdb
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\bin\Debug\Facade.pdb
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+D:\【工作文件夹】\【项目】\考试系统企业版--未动版本\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\DBCommon.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\DBCommon.pdb
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\AutoDA2G.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\SysFW.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\dog_net_windows.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\AutoDA3G.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\bin\Debug\Win86dll.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\obj\Debug\ResolveAssemblyReference.cache
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\obj\Debug\DBCommon.dll
+D:\公司文件\【公司产品源码】\考试系统\Timber_Exam\DBCommon\obj\Debug\DBCommon.pdb

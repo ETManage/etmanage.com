@@ -1,0 +1,13 @@
+.bdsharebuttonbox a{border-bottom:0;margin-right:5px;width:28px;height:28px;line-height:28px;color: #fff;}
+.bdsharebuttonbox a:hover{background-color:#7fb4ab;color: #fff;border-bottom:0;}
+.bdsharebuttonbox .sinaweibo { background: #f78585; }
+.bdsharebuttonbox .tencentweibo { background: #27ccc0; }
+.bdsharebuttonbox .qq { background: #e74c3c; }
+.bdsharebuttonbox .bds_weixin { background: #e74c3c; }
+.bdsharebuttonbox .bds_qzone { background: #fac33f; }
+.bdsharebuttonbox .bds_renren{background:#94b3eb;}
+.bdsharebuttonbox .bds_more { background: #81c1f2; }
+.bdsharebuttonbox .bds_weixin { background: #7ad071; }
+.bdsharebuttonbox .weixin-popover { position: absolute; width: 256px; padding: 5px 0 2px; top: 45px; left: 50%; margin-left: -125px; display: none; height: 256px; }
+ .bdsharebuttonbox .weixin:hover .weixin-popover { display: block; }
+ .bdsharebuttonbox .weixin .popover { display: block; border-radius: 4px; color: #777; }

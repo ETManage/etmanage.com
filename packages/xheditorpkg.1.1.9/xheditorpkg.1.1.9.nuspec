@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>xheditorpkg</id>
+    <version>1.1.9</version>
+    <title>xheditor nuget package</title>
+    <authors>pingjiang</authors>
+    <owners>pingjiang</owners>
+    <licenseUrl>http://fsf.org/</licenseUrl>
+    <projectUrl>http://xheditor.com/</projectUrl>
+    <iconUrl>http://xheditor.com/img/xheditor-logo.gif</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>xheditor nuget package.</description>
+    <summary>xheditor nuget package</summary>
+    <copyright>lgpl</copyright>
+    <tags>editor jquery xheditor</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.4.2" />
+    </dependencies>
+  </metadata>
+</package>

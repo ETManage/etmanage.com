@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "UserCenter";
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+@section Title{
+    个人中心
+}
+@section Header{
+
+}
+<div class="content-wrap">
+    <section class="header-app ibx-container">
+        <ul class="ibx-header-app">
+            <li class="ibx-header-app-item"><a href="/blog/usercenter"><div class="ibx-hai-title ibx-hai-life">首页</div></a></li>
+
+            <li class="ibx-header-app-item"><div class="ibx-hai-space"></div></li>
+            <li class="ibx-header-app-item"><a href="#"><div class="ibx-hai-title ibx-hai-tool">收藏</div></a></li>
+            @*<li class="ibx-header-app-item clr">
+                    <span class="ibx-hai-link"><a target="_blank" href="@PublicHelper.GetHostAddress()/blog/favoriteart">文章</a></span>
+                    <span class="ibx-hai-link"><a href="@PublicHelper.GetHostAddress()/blog/favoritepic">图片</a></span>
+                </li>*@
+            @*<li class="ibx-header-app-item"><div class="ibx-hai-space"></div></li>
+                <li class="ibx-header-app-item"><div class="ibx-hai-title ibx-hai-sns">社区</div></li>
+                <li class="ibx-header-app-item">
+                    <span class="ibx-hai-link"><a target="_blank" href="@PublicHelper.GetHostAddress()">新闻</a></span>
+                    <span class="ibx-hai-link"><a target="_blank" href="@PublicHelper.GetHostAddress()">游戏</a></span>
+                </li>
+                <li class="ibx-header-app-item"><div class="ibx-hai-space"></div></li>
+                <li class="ibx-header-app-item"><div class="ibx-hai-title ibx-hai-v">诚信</div></li>
+                <li class="ibx-header-app-item">
+                    <span class="ibx-hai-link"><a target="_blank" href="#">交流</a></span>
+                    <span class="ibx-hai-link"><a target="_blank" href="#">加盟</a></span>
+                </li>*@
+
+        </ul>
+    </section>
+
+    <div class="row user-panel">
+        <div class="col span_5_1">
+            <div id="ibx-uc">
+                <div class="ibx-inner">
+                    <div class="ibx-uc-uimg">
+                        <div class="ibx-uc-uimg-mask"><a class="ibx-uc-ulink" target="_blank" href="/blog/usersetting/changepic">更换头像</a></div>
+                        <img class="ibx-uc-img" src="/images/Blog/nopicture.jpg">
+                    </div>
+                    <div class="ibx-uc-unick"><a target="_blank" href="/blog/usersetting/basic" class="ibx-uc-nick">liuweisime</a></div><div class="ibx-uc-utool">
+                        <span class="ibx-uc-utool-cover"></span>
+                        <span class="ibx-uc-utool-cover ibx-uc-utool-cover-mask"></span><div class="ibx-uc-utool-title" id="ibx-uc-ur-level">0级 :</div>
+                        <div class="ibx-uc-utool-content">
+                            <a target="_blank" href="#" class="ibx-uc-utool-rank">
+                                <div id="ibx-uc-ur-rate" class="rank-bg" style="width: 0%;"></div>
+                                <div id="ibx-uc-ur-rate-num" class="rank-num">0/100</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibx-uc-uop">
+                        <div class="ibx-uc-uop-item first">
+                            <a target="_blank" href="/blog/usersetting/notice" title="通知中心">通知中心</a>
+                        </div><div class="ibx-uc-uop-item"><a target="_blank" href="/blog/usersetting" title="帐户设置">帐户设置</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col span_5_4">
+            <div id="ibx-cal">
+                <div class="ibx-inner" id="ibx-cal-content">
+                    <div class="ibx-cal-box">
+                        <div class="fLeft">
+                            <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=13" width="650" height="251" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                        </div>
+                        <div class="fLeft">
+                            <iframe class="ad-big-box pointer" src="/blog/AdTest" width="300" height="241" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div data-scroll-reveal="" class="row card-panel" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+        <span class="rule-wrap"><a id="history" name="history" class="rule"></a></span>
+        <div class="col span_4_4">
+            <div class="ibx-even">
+                <div class="ibx-inner" id="ibx-mod-history">
+                    <div class="ibx-inner-title">
+                        <a href="/blog/history" class="ibx-inner-title-ctx">查看记录</a>
+                        <ul class="ibx-inner-title-tab">
+                            <li class="ibx-inner-title-tabitem ibx-newhis-list OP_LOG_TITLE current">查看记录</li>
+                        </ul>
+                    </div><div class="ibx-inner-content" id="ibx-mod-history-box">
+                        <div class="col span_4_3">
+                            <div class="ibx-his-title">
+                                <span class="ibx-his-title-item">
+                                    <a href="/my/history" class="ibx-his-title-link">查看搜索记录</a>
+                                </span>
+                                <span class="ibx-his-title-item ibx-his-title-rank">本周累计浏览<em class="ibx-his-title-em">116</em>次，高于全国<em class="ibx-his-title-em">96.20%</em>的网友！</span>
+                                <div class="ibx-his-title-tab">
+                                    @*<span class="ibx-his-title-tab-item" data-type="day">今日</span>*@
+                                    <span data-click="DrawLineByWeek" class="ibx-his-title-tab-item OP_LOG_TITLE current" data-type="week">本周</span>
+                                    <span data-click="DrawLineByMonth" class="ibx-his-title-tab-item exclude OP_LOG_TITLE" data-type="month">本月</span>
+                                </div>
+                            </div>
+                            <div id="ibx-charts-line" style="cursor: default; ">
+                            </div>
+                        </div>
+                        <div class="col span_4_1"><div class="ibx-his-title"><span class="ibx-his-title-item exclude">我的兴趣图谱：</span></div><div id="ibx-charts-radar" style="cursor: default;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/Res/echarts/echarts.js"></script>
+    <script src="/Res/echarts/echartsCommon.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-click]').click(function () {
+                var func = eval($(this).attr("data-click"));
+                new func();
+            });
+            DrawLineByWeek();
+            //绘制兴趣雷达图 Start
+            var arrPolarindicator = new Array();
+            arrPolarindicator.push({ text: '原创', max: 50 });
+            arrPolarindicator.push({ text: '收集', max: 50 });
+            arrPolarindicator.push({ text: '图库', max: 50 });
+            var arrSeriesdata2 = new Array();
+            arrSeriesdata2.push({ value: [10, 20, 50], name: 'West' });
+            DrawRadar('ibx-charts-radar', arrPolarindicator, arrSeriesdata2, '个人兴趣偏向');
+            //绘制兴趣雷达图 Start
+
+        })
+        function DrawLineByWeek() {
+            var arrWeek = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            var arrSeriesdata = [120, 132, 101, 134, 90, 230, 210]
+            DrawLine('ibx-charts-line', arrWeek, arrSeriesdata, '个人浏览次数');
+        }
+        function DrawLineByMonth() {
+            var arrDaylist = [];
+            var arrSeriesdata = [];
+            var nowdate = new Date();
+            var lastMonth = new Date();
+            lastMonth.setMonth(lastMonth.getMonth() - 1);//获取AddDayCount天后的日期
+            for (var currTest = lastMonth  ; currTest <= nowdate; currTest.setDate(currTest.getDate() + 2)) {
+                arrDaylist.push(DateHelper.DateTimeFormat(currTest, "MM-dd"));
+                arrSeriesdata.push(Math.round(Math.random() * 300));
+            }
+
+            DrawLine('ibx-charts-line', arrDaylist, arrSeriesdata, '个人浏览次数');
+        }
+
+    </script>
+</div>
+<div data-scroll-reveal="" class="row card-panel" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+    <span class="rule-wrap"><a id="tieba" name="tieba" class="rule"></a></span><div class="col span_4_4">
+        <div class="ibx-even">
+            <div class="ibx-inner" id="ibx-mod-tieba">
+                <div class="ibx-inner-title">
+                    <a target="_blank" href="http://tieba.baidu.com" class="ibx-inner-title-ctx">收藏中心</a>
+                    <ul class="ibx-inner-title-tab">
+                        <li class="ibx-inner-title-tabitem ibx-my-tieba OP_LOG_TITLE current">文章收藏</li>
+                        @*<li class="ibx-inner-title-tabitem ibx-my-frs OP_LOG_TITLE">图片收藏</li>
+                            <li class="ibx-inner-title-tabitem ibx-tieba-top OP_LOG_TITLE">我喜欢的</li>*@
+                    </ul>
+                </div><div class="ibx-inner-content" id="ibx-tieba">
+                    <div class="col my-tieba">
+                        <div class="ibx-tieba-left">
+                            @*<div class="ibx-inner-card-title">
+                                    <span class="ibx-inner-card-title-ctx">&nbsp;</span><span class="ibx-inner-card-title-border"></span>
+                                    <div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-next"></span></div>
+                                </div>*@
+                            <div class="ibx-tieba-center">
+                                <ul class="my-tieba-clist tieba-pager-ul">
+                                    @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listCollectArticle)
+                                    {
+                                        <li class="my-tieba-citem">
+                                            <a target="_blank" href="@itemArticle.ArticleUrl" class="my-tieba-citem-box">
+                                                <img class="my-tieba-bimg" src="@itemArticle.ArticlePicture.Split(',')[0]" width="100" height="100"><div class="my-tieba-detail"><h2 class="my-tieba-bname" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</h2><span class="fa fa-star" title="@itemArticle.ArticleSource 共同收藏"></span>@itemArticle.ArticleSource</div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                               
+                            </div>@Html.Raw(ViewBag.listPager)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+}
+@section Title{
+    易特网IT资讯平台
+}
+@section Header{
+
+}
+<div class="content-wrap">
+    <div class="main-left" id="#container">
+        <div class="content">
+            <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;搜索：@Request.QueryString["q"] </h1> </header>
+            @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticle)
+            {
+                <article class="excerpt">
+                    <header>
+                        <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemArticle.ArticleLabel.Split(',')[0]/">@itemArticle.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
+                        <h2><a target="_blank" href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</a></h2>
+                    </header>
+                    <span class="note">
+                        @ET.ToolKit.Common.StringHelper.BindDataFromString(itemArticle.ArticleDescription, 120);
+                    </span>
+                </article>
+            }
+        </div>
+        @Html.Raw(ViewBag.listPager)
+    </div>
+
+    <div class="main-right">
+
+
+        <div class="widget d_postlist">
+            <div class="title"><h2>猜你喜欢</h2></div>
+            <ul>
+                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listLoveArticle)
+                {
+                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
+
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>

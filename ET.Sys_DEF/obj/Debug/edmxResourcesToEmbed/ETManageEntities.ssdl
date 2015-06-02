@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ETManageModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ETManageModelStoreContainer">
+    <EntitySet Name="dtproperties" EntityType="ETManageModel.Store.dtproperties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NEW_INFO" EntityType="ETManageModel.Store.NEW_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NEW_TYPE_INFO" EntityType="ETManageModel.Store.NEW_TYPE_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_ICON_INFO" EntityType="ETManageModel.Store.SYSTEM_ICON_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_LIMIT_INFO" EntityType="ETManageModel.Store.SYSTEM_LIMIT_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_LINK_USER_ROLE" EntityType="ETManageModel.Store.SYSTEM_LINK_USER_ROLE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_MODULE_INFO" EntityType="ETManageModel.Store.SYSTEM_MODULE_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_ROLE_INFO" EntityType="ETManageModel.Store.SYSTEM_ROLE_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SYSTEM_ROLE_LIMIT" EntityType="ETManageModel.Store.SYSTEM_ROLE_LIMIT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USER_BASE_INFO" EntityType="ETManageModel.Store.USER_BASE_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USER_DEP_INFO" EntityType="ETManageModel.Store.USER_DEP_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USER_POSITION_INFO" EntityType="ETManageModel.Store.USER_POSITION_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USER_STU_INFO" EntityType="ETManageModel.Store.USER_STU_INFO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="V_ALL_USER_INFO" EntityType="ETManageModel.Store.V_ALL_USER_INFO" store:Type="Views" store:Schema="dbo" store:Name="V_ALL_USER_INFO">
+      <DefiningQuery>SELECT 
+      [V_ALL_USER_INFO].[USER_ID] AS [USER_ID], 
+      [V_ALL_USER_INFO].[USER_NAME] AS [USER_NAME], 
+      [V_ALL_USER_INFO].[USER_PWD] AS [USER_PWD], 
+      [V_ALL_USER_INFO].[STU_NICKNAME] AS [STU_NICKNAME], 
+      [V_ALL_USER_INFO].[STU_CNNAME] AS [STU_CNNAME], 
+      [V_ALL_USER_INFO].[STU_ENNAME] AS [STU_ENNAME], 
+      [V_ALL_USER_INFO].[P_ID] AS [P_ID], 
+      [V_ALL_USER_INFO].[DEP_ID] AS [DEP_ID], 
+      [V_ALL_USER_INFO].[STU_SEX] AS [STU_SEX], 
+      [V_ALL_USER_INFO].[STU_REG_DATETIME] AS [STU_REG_DATETIME], 
+      [V_ALL_USER_INFO].[DEP_NAME] AS [DEP_NAME], 
+      [V_ALL_USER_INFO].[P_NAME] AS [P_NAME], 
+      [V_ALL_USER_INFO].[ROLE_NAME] AS [ROLE_NAME], 
+      [V_ALL_USER_INFO].[User_Type] AS [User_Type], 
+      [V_ALL_USER_INFO].[USER_START_DATE] AS [USER_START_DATE], 
+      [V_ALL_USER_INFO].[USER_END_DATE] AS [USER_END_DATE], 
+      [V_ALL_USER_INFO].[USER_MODIFY_PEOPLE] AS [USER_MODIFY_PEOPLE], 
+      [V_ALL_USER_INFO].[USER_MODIFY_DATE] AS [USER_MODIFY_DATE]
+      FROM [dbo].[V_ALL_USER_INFO] AS [V_ALL_USER_INFO]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_REPORT_DEP_USER" EntityType="ETManageModel.Store.V_REPORT_DEP_USER" store:Type="Views" store:Schema="dbo" store:Name="V_REPORT_DEP_USER">
+      <DefiningQuery>SELECT 
+      [V_REPORT_DEP_USER].[DEP_ID] AS [DEP_ID], 
+      [V_REPORT_DEP_USER].[DEP_NAME] AS [DEP_NAME], 
+      [V_REPORT_DEP_USER].[DEP_USER_COUNT] AS [DEP_USER_COUNT]
+      FROM [dbo].[V_REPORT_DEP_USER] AS [V_REPORT_DEP_USER]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_REPORT_POSITION_USER" EntityType="ETManageModel.Store.V_REPORT_POSITION_USER" store:Type="Views" store:Schema="dbo" store:Name="V_REPORT_POSITION_USER">
+      <DefiningQuery>SELECT 
+      [V_REPORT_POSITION_USER].[P_ID] AS [P_ID], 
+      [V_REPORT_POSITION_USER].[P_NAME] AS [P_NAME], 
+      [V_REPORT_POSITION_USER].[P_USER_COUNT] AS [P_USER_COUNT]
+      FROM [dbo].[V_REPORT_POSITION_USER] AS [V_REPORT_POSITION_USER]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_SYSTEM_LIMIT_INFO" EntityType="ETManageModel.Store.V_SYSTEM_LIMIT_INFO" store:Type="Views" store:Schema="dbo" store:Name="V_SYSTEM_LIMIT_INFO">
+      <DefiningQuery>SELECT 
+      [V_SYSTEM_LIMIT_INFO].[MODULE_ID] AS [MODULE_ID], 
+      [V_SYSTEM_LIMIT_INFO].[LIMIT_KEY] AS [LIMIT_KEY], 
+      [V_SYSTEM_LIMIT_INFO].[USER_ID] AS [USER_ID]
+      FROM [dbo].[V_SYSTEM_LIMIT_INFO] AS [V_SYSTEM_LIMIT_INFO]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_SYSTEM_MODULE_INFO" EntityType="ETManageModel.Store.V_SYSTEM_MODULE_INFO" store:Type="Views" store:Schema="dbo" store:Name="V_SYSTEM_MODULE_INFO">
+      <DefiningQuery>SELECT 
+      [V_SYSTEM_MODULE_INFO].[MODULE_ID] AS [MODULE_ID], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_NAME] AS [MODULE_NAME], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_ICON] AS [MODULE_ICON], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_SORT] AS [MODULE_SORT], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_URL] AS [MODULE_URL], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_TARGET] AS [MODULE_TARGET], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_PID] AS [MODULE_PID], 
+      [V_SYSTEM_MODULE_INFO].[MODULE_PNAME] AS [MODULE_PNAME]
+      FROM [dbo].[V_SYSTEM_MODULE_INFO] AS [V_SYSTEM_MODULE_INFO]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_USER_FULL_INFO" EntityType="ETManageModel.Store.V_USER_FULL_INFO" store:Type="Views" store:Schema="dbo" store:Name="V_USER_FULL_INFO">
+      <DefiningQuery>SELECT 
+      [V_USER_FULL_INFO].[USER_ID] AS [USER_ID], 
+      [V_USER_FULL_INFO].[USER_NAME] AS [USER_NAME], 
+      [V_USER_FULL_INFO].[USER_PWD] AS [USER_PWD], 
+      [V_USER_FULL_INFO].[STU_NICKNAME] AS [STU_NICKNAME], 
+      [V_USER_FULL_INFO].[STU_CNNAME] AS [STU_CNNAME], 
+      [V_USER_FULL_INFO].[STU_ENNAME] AS [STU_ENNAME], 
+      [V_USER_FULL_INFO].[P_ID] AS [P_ID], 
+      [V_USER_FULL_INFO].[DEP_ID] AS [DEP_ID], 
+      [V_USER_FULL_INFO].[STU_SEX] AS [STU_SEX], 
+      [V_USER_FULL_INFO].[STU_REG_DATETIME] AS [STU_REG_DATETIME], 
+      [V_USER_FULL_INFO].[DEP_NAME] AS [DEP_NAME], 
+      [V_USER_FULL_INFO].[P_NAME] AS [P_NAME], 
+      [V_USER_FULL_INFO].[ROLE_NAME] AS [ROLE_NAME], 
+      [V_USER_FULL_INFO].[User_Type] AS [User_Type], 
+      [V_USER_FULL_INFO].[USER_START_DATE] AS [USER_START_DATE], 
+      [V_USER_FULL_INFO].[USER_END_DATE] AS [USER_END_DATE], 
+      [V_USER_FULL_INFO].[USER_MODIFY_PEOPLE] AS [USER_MODIFY_PEOPLE], 
+      [V_USER_FULL_INFO].[USER_MODIFY_DATE] AS [USER_MODIFY_DATE]
+      FROM [dbo].[V_USER_FULL_INFO] AS [V_USER_FULL_INFO]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_NEW_INFO_REFERENCE_NEW_TYPE" Association="ETManageModel.Store.FK_NEW_INFO_REFERENCE_NEW_TYPE">
+      <End Role="NEW_TYPE_INFO" EntitySet="NEW_TYPE_INFO" />
+      <End Role="NEW_INFO" EntitySet="NEW_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_SYSTEM_M" Association="ETManageModel.Store.FK_SYSTEM_L_REFERENCE_SYSTEM_M">
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_SYSTEM_R" Association="ETManageModel.Store.FK_SYSTEM_L_REFERENCE_SYSTEM_R">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_L_REFERENCE_USER_INF" Association="ETManageModel.Store.FK_SYSTEM_L_REFERENCE_USER_INF">
+      <End Role="USER_BASE_INFO" EntitySet="USER_BASE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_M_REFERENCE_SYSTEM_I" Association="ETManageModel.Store.FK_SYSTEM_M_REFERENCE_SYSTEM_I">
+      <End Role="SYSTEM_ICON_INFO" EntitySet="SYSTEM_ICON_INFO" />
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_R_REFERENCE_SYSTEM_L" Association="ETManageModel.Store.FK_SYSTEM_R_REFERENCE_SYSTEM_L">
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SYSTEM_R_REFERENCE_SYSTEM_R" Association="ETManageModel.Store.FK_SYSTEM_R_REFERENCE_SYSTEM_R">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_2" Association="ETManageModel.Store.Reference_2">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_LINK_USER_ROLE" EntitySet="SYSTEM_LINK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_3" Association="ETManageModel.Store.Reference_3">
+      <End Role="SYSTEM_ROLE_INFO" EntitySet="SYSTEM_ROLE_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_32" Association="ETManageModel.Store.Reference_32">
+      <End Role="USER_DEP_INFO" EntitySet="USER_DEP_INFO" />
+      <End Role="USER_STU_INFO" EntitySet="USER_STU_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_33" Association="ETManageModel.Store.Reference_33">
+      <End Role="USER_POSITION_INFO" EntitySet="USER_POSITION_INFO" />
+      <End Role="USER_STU_INFO" EntitySet="USER_STU_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_4" Association="ETManageModel.Store.Reference_4">
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+      <End Role="SYSTEM_ROLE_LIMIT" EntitySet="SYSTEM_ROLE_LIMIT" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_5" Association="ETManageModel.Store.Reference_5">
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+      <End Role="SYSTEM_LIMIT_INFO" EntitySet="SYSTEM_LIMIT_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="Reference_6" Association="ETManageModel.Store.Reference_6">
+      <End Role="SYSTEM_ICON_INFO" EntitySet="SYSTEM_ICON_INFO" />
+      <End Role="SYSTEM_MODULE_INFO" EntitySet="SYSTEM_MODULE_INFO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="dtproperties">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="property" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="objectid" Type="int" />
+    <Property Name="property" Type="varchar" Nullable="false" MaxLength="64" />
+    <Property Name="value" Type="varchar" MaxLength="255" />
+    <Property Name="uvalue" Type="nvarchar" MaxLength="255" />
+    <Property Name="lvalue" Type="image" />
+    <Property Name="version" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEW_INFO">
+    <Key>
+      <PropertyRef Name="NEW_ID" />
+    </Key>
+    <Property Name="NEW_ID" Type="int" Nullable="false" />
+    <Property Name="TYPE_ID" Type="int" />
+    <Property Name="TYPE_ID2" Type="int" />
+    <Property Name="NEW_TITLE" Type="varchar" MaxLength="200" />
+    <Property Name="NEW_BODY" Type="text" />
+    <Property Name="NEW_SEND_USERID" Type="bigint" />
+    <Property Name="NEW_SEND_DEP" Type="varchar" MaxLength="100" />
+    <Property Name="NEW_SEND_DATE" Type="datetime" />
+    <Property Name="NEW_ISUN_COMMEND" Type="bit" />
+    <Property Name="NEW_ISUN_HOT" Type="bit" />
+  </EntityType>
+  <EntityType Name="NEW_TYPE_INFO">
+    <Key>
+      <PropertyRef Name="TYPE_ID" />
+    </Key>
+    <Property Name="TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="TYPE_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="TYPE_SORT" Type="varchar" MaxLength="20" />
+    <Property Name="TYPE_PID" Type="int" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ICON_INFO">
+    <Key>
+      <PropertyRef Name="ICON_ID" />
+    </Key>
+    <Property Name="ICON_ID" Type="int" Nullable="false" />
+    <Property Name="ICON_CLASS" Type="varchar" MaxLength="50" />
+    <Property Name="ICON_MARK" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SYSTEM_LIMIT_INFO">
+    <Key>
+      <PropertyRef Name="LIMIT_ID" />
+    </Key>
+    <Property Name="LIMIT_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MODULE_ID" Type="int" />
+    <Property Name="LIMIT_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="LIMIT_KEY" Type="varchar" MaxLength="50" />
+    <Property Name="ISUN_VISIBLE" Type="bit" />
+  </EntityType>
+  <EntityType Name="SYSTEM_LINK_USER_ROLE">
+    <Key>
+      <PropertyRef Name="LINK_ID" />
+    </Key>
+    <Property Name="LINK_ID" Type="bigint" Nullable="false" />
+    <Property Name="USER_ID" Type="bigint" />
+    <Property Name="ROLE_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="SYSTEM_MODULE_INFO">
+    <Key>
+      <PropertyRef Name="MODULE_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="int" Nullable="false" />
+    <Property Name="ICON_ID" Type="int" />
+    <Property Name="MODULE_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="MODULE_ICON" Type="varchar" MaxLength="50" />
+    <Property Name="MODULE_SORT" Type="varchar" MaxLength="10" />
+    <Property Name="MODULE_URL" Type="varchar" MaxLength="200" />
+    <Property Name="MODULE_TARGET" Type="varchar" MaxLength="10" />
+    <Property Name="MODULE_PID" Type="int" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ROLE_INFO">
+    <Key>
+      <PropertyRef Name="ROLE_ID" />
+    </Key>
+    <Property Name="ROLE_ID" Type="int" Nullable="false" />
+    <Property Name="ROLE_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="MODULE_ID" Type="int" />
+    <Property Name="ROLE_HOME" Type="varchar" MaxLength="50" />
+    <Property Name="ROLE_REGIST" Type="bit" />
+    <Property Name="ROLE_INSERT" Type="varchar" MaxLength="50" />
+    <Property Name="ROLE_MARK" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="SYSTEM_ROLE_LIMIT">
+    <Key>
+      <PropertyRef Name="LINK_ID" />
+    </Key>
+    <Property Name="LINK_ID" Type="bigint" Nullable="false" />
+    <Property Name="ROLE_ID" Type="int" />
+    <Property Name="LIMIT_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="USER_BASE_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="bigint" Nullable="false" />
+    <Property Name="USER_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="USER_PWD" Type="varchar" MaxLength="50" />
+    <Property Name="User_Type" Type="int" />
+    <Property Name="USER_START_DATE" Type="datetime" />
+    <Property Name="USER_END_DATE" Type="datetime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="bigint" />
+    <Property Name="USER_MODIFY_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="USER_DEP_INFO">
+    <Key>
+      <PropertyRef Name="DEP_ID" />
+    </Key>
+    <Property Name="DEP_ID" Type="int" Nullable="false" />
+    <Property Name="DEP_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="DEP_SORT" Type="varchar" MaxLength="20" />
+    <Property Name="DEP_PID" Type="int" />
+    <Property Name="DEP_LEVEL" Type="int" />
+    <Property Name="DEP_MARK" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="USER_POSITION_INFO">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" Nullable="false" />
+    <Property Name="P_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="P_SORT" Type="varchar" MaxLength="20" />
+    <Property Name="P_PID" Type="int" />
+    <Property Name="REMARK" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="USER_STU_INFO">
+    <Key>
+      <PropertyRef Name="STU_ID" />
+    </Key>
+    <Property Name="STU_ID" Type="bigint" Nullable="false" />
+    <Property Name="USER_ID" Type="bigint" />
+    <Property Name="STU_NICKNAME" Type="varchar" MaxLength="50" />
+    <Property Name="STU_CNNAME" Type="varchar" MaxLength="20" />
+    <Property Name="STU_ENNAME" Type="varchar" MaxLength="20" />
+    <Property Name="STU_EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="DEP_ID" Type="int" />
+    <Property Name="P_ID" Type="int" />
+    <Property Name="STU_EDU" Type="varchar" MaxLength="20" />
+    <Property Name="STU_SEX" Type="varchar" MaxLength="2" />
+    <Property Name="STU_ADDRESS" Type="varchar" MaxLength="200" />
+    <Property Name="STU_POST" Type="varchar" MaxLength="6" />
+    <Property Name="STU_PHONE" Type="varchar" MaxLength="50" />
+    <Property Name="STU_MOBILE" Type="varchar" MaxLength="50" />
+    <Property Name="STU_CONTACT" Type="varchar" MaxLength="200" />
+    <Property Name="STU_REG_DATETIME" Type="datetime" />
+    <Property Name="STU_PIC" Type="varchar" MaxLength="50" />
+    <Property Name="STU_ID_CARD" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_ALL_USER_INFO”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_ALL_USER_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="bigint" Nullable="false" />
+    <Property Name="USER_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="USER_PWD" Type="varchar" MaxLength="50" />
+    <Property Name="STU_NICKNAME" Type="varchar" MaxLength="50" />
+    <Property Name="STU_CNNAME" Type="varchar" MaxLength="20" />
+    <Property Name="STU_ENNAME" Type="varchar" MaxLength="20" />
+    <Property Name="P_ID" Type="int" />
+    <Property Name="DEP_ID" Type="int" />
+    <Property Name="STU_SEX" Type="varchar" MaxLength="2" />
+    <Property Name="STU_REG_DATETIME" Type="datetime" />
+    <Property Name="DEP_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="P_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="ROLE_NAME" Type="varchar" MaxLength="1000" />
+    <Property Name="User_Type" Type="int" />
+    <Property Name="USER_START_DATE" Type="datetime" />
+    <Property Name="USER_END_DATE" Type="datetime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="bigint" />
+    <Property Name="USER_MODIFY_DATE" Type="datetime" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_REPORT_DEP_USER”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_REPORT_DEP_USER">
+    <Key>
+      <PropertyRef Name="DEP_ID" />
+    </Key>
+    <Property Name="DEP_ID" Type="int" Nullable="false" />
+    <Property Name="DEP_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="DEP_USER_COUNT" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_REPORT_POSITION_USER”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_REPORT_POSITION_USER">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" Nullable="false" />
+    <Property Name="P_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="P_USER_COUNT" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_SYSTEM_LIMIT_INFO”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_SYSTEM_LIMIT_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="int" />
+    <Property Name="LIMIT_KEY" Type="varchar" MaxLength="50" />
+    <Property Name="USER_ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_SYSTEM_MODULE_INFO”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_SYSTEM_MODULE_INFO">
+    <Key>
+      <PropertyRef Name="MODULE_ID" />
+    </Key>
+    <Property Name="MODULE_ID" Type="int" Nullable="false" />
+    <Property Name="MODULE_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="MODULE_ICON" Type="varchar" MaxLength="50" />
+    <Property Name="MODULE_SORT" Type="varchar" MaxLength="10" />
+    <Property Name="MODULE_URL" Type="varchar" MaxLength="200" />
+    <Property Name="MODULE_TARGET" Type="varchar" MaxLength="10" />
+    <Property Name="MODULE_PID" Type="int" />
+    <Property Name="MODULE_PNAME" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“ETManage.dbo.V_USER_FULL_INFO”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="V_USER_FULL_INFO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="bigint" Nullable="false" />
+    <Property Name="USER_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="USER_PWD" Type="varchar" MaxLength="50" />
+    <Property Name="STU_NICKNAME" Type="varchar" MaxLength="50" />
+    <Property Name="STU_CNNAME" Type="varchar" MaxLength="20" />
+    <Property Name="STU_ENNAME" Type="varchar" MaxLength="20" />
+    <Property Name="P_ID" Type="int" />
+    <Property Name="DEP_ID" Type="int" />
+    <Property Name="STU_SEX" Type="varchar" MaxLength="2" />
+    <Property Name="STU_REG_DATETIME" Type="datetime" />
+    <Property Name="DEP_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="P_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="ROLE_NAME" Type="varchar" MaxLength="1000" />
+    <Property Name="User_Type" Type="int" />
+    <Property Name="USER_START_DATE" Type="datetime" />
+    <Property Name="USER_END_DATE" Type="datetime" />
+    <Property Name="USER_MODIFY_PEOPLE" Type="bigint" />
+    <Property Name="USER_MODIFY_DATE" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_NEW_INFO_REFERENCE_NEW_TYPE">
+    <End Role="NEW_TYPE_INFO" Type="ETManageModel.Store.NEW_TYPE_INFO" Multiplicity="0..1" />
+    <End Role="NEW_INFO" Type="ETManageModel.Store.NEW_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEW_TYPE_INFO">
+        <PropertyRef Name="TYPE_ID" />
+      </Principal>
+      <Dependent Role="NEW_INFO">
+        <PropertyRef Name="TYPE_ID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_SYSTEM_M">
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.Store.SYSTEM_MODULE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.Store.SYSTEM_LIMIT_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_SYSTEM_R">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.Store.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.Store.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_L_REFERENCE_USER_INF">
+    <End Role="USER_BASE_INFO" Type="ETManageModel.Store.USER_BASE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.Store.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_BASE_INFO">
+        <PropertyRef Name="USER_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_M_REFERENCE_SYSTEM_I">
+    <End Role="SYSTEM_ICON_INFO" Type="ETManageModel.Store.SYSTEM_ICON_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.Store.SYSTEM_MODULE_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ICON_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_R_REFERENCE_SYSTEM_L">
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.Store.SYSTEM_LIMIT_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.Store.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="LIMIT_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="LIMIT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SYSTEM_R_REFERENCE_SYSTEM_R">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.Store.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.Store.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_2">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.Store.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LINK_USER_ROLE" Type="ETManageModel.Store.SYSTEM_LINK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LINK_USER_ROLE">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_3">
+    <End Role="SYSTEM_ROLE_INFO" Type="ETManageModel.Store.SYSTEM_ROLE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.Store.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ROLE_INFO">
+        <PropertyRef Name="ROLE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_32">
+    <End Role="USER_DEP_INFO" Type="ETManageModel.Store.USER_DEP_INFO" Multiplicity="0..1" />
+    <End Role="USER_STU_INFO" Type="ETManageModel.Store.USER_STU_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_DEP_INFO">
+        <PropertyRef Name="DEP_ID" />
+      </Principal>
+      <Dependent Role="USER_STU_INFO">
+        <PropertyRef Name="DEP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_33">
+    <End Role="USER_POSITION_INFO" Type="ETManageModel.Store.USER_POSITION_INFO" Multiplicity="0..1" />
+    <End Role="USER_STU_INFO" Type="ETManageModel.Store.USER_STU_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_POSITION_INFO">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="USER_STU_INFO">
+        <PropertyRef Name="P_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_4">
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.Store.SYSTEM_LIMIT_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_ROLE_LIMIT" Type="ETManageModel.Store.SYSTEM_ROLE_LIMIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="LIMIT_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_ROLE_LIMIT">
+        <PropertyRef Name="LIMIT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_5">
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.Store.SYSTEM_MODULE_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_LIMIT_INFO" Type="ETManageModel.Store.SYSTEM_LIMIT_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_LIMIT_INFO">
+        <PropertyRef Name="MODULE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reference_6">
+    <End Role="SYSTEM_ICON_INFO" Type="ETManageModel.Store.SYSTEM_ICON_INFO" Multiplicity="0..1" />
+    <End Role="SYSTEM_MODULE_INFO" Type="ETManageModel.Store.SYSTEM_MODULE_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSTEM_ICON_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Principal>
+      <Dependent Role="SYSTEM_MODULE_INFO">
+        <PropertyRef Name="ICON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--生成过程中发现错误:
+      警告 6013: 表/视图“ETManage.dbo.SYS_SEQUENCE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="SYS_SEQUENCE">
+        <Property Name="SEQUENCE_NAME" Type="varchar" MaxLength="50" />
+        <Property Name="SEQUENCE_VALUE" Type="numeric" />
+        <Property Name="REMARK" Type="nvarchar" MaxLength="50" />
+      </EntityType>
+      生成过程中发现错误:
+      警告 6013: 表/视图“ETManage.dbo.USER_ONLINE_INFO”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="USER_ONLINE_INFO">
+        <Property Name="USER_ID" Type="bigint" />
+      </EntityType>
+      生成过程中发现错误:
+      警告 6013: 表/视图“ETManage.dbo.V_USER_DEP_INFO”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="V_USER_DEP_INFO">
+        <Property Name="PLAN_ID" Type="int" />
+        <Property Name="DEP_ID" Type="int" />
+        <Property Name="DEP_NAME" Type="varchar" MaxLength="200" />
+      </EntityType>
+      生成过程中发现错误:
+      警告 6013: 表/视图“ETManage.dbo.V_USER_ROLE_URL”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="V_USER_ROLE_URL">
+        <Property Name="USER_ID" Type="bigint" />
+        <Property Name="ROLE_NAME" Type="varchar" MaxLength="50" />
+        <Property Name="MODULE_ID" Type="int" />
+        <Property Name="MODULE_URL" Type="varchar" MaxLength="200" />
+        <Property Name="MODULE_NAME" Type="varchar" MaxLength="50" />
+      </EntityType>-->
+</Schema>
