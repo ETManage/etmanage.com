@@ -47,7 +47,7 @@
                         文章封面：
                     </th>
                     <td>
-                        <input type="file" id="file_upload" style="width: 550px" />
+                        <input type="file" id="file_upload" style="width: 350px" /><span class="cRed">小图(200*100)为第一张,大图为第二张(830*300)</span>
                         <div class="uploadify-picbox"></div>
                     </td>
                 </tr>
@@ -61,10 +61,18 @@
                 </tr>
                 <tr>
                     <th>
+                        文章作者：
+                    </th>
+                    <td>
+                        <input name="ArticleAuthor" type="text" class="easyui-textbox" style="width: 550px" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         状态操作：
                     </th>
                     <td>
-                        是否启用<input name="Status" type="checkbox" id="ickStatus" />&nbsp;&nbsp;是否推荐<input name="Recommend" type="checkbox" id="ickRecommend" />
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />&nbsp;&nbsp;是否推荐<input name="Recommend" type="checkbox" id="ickRecommend" />&nbsp;&nbsp;是否图片滚动<input name="IsRoll" type="checkbox" id="ickIsRoll" />
                     </td>
                 </tr>
                 <tr>
@@ -72,9 +80,10 @@
                         文章标签：
                     </th>
                     <td>
-                        <input name="ArticleLabel" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+                        <input name="ArticleLabel" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" /><span class="cRed">使用英文符,隔开</span>
                     </td>
                 </tr>
+             
                 <tr>
                     <th>
                         文章描述：
@@ -108,6 +117,8 @@
     $(function () {
         //启用快捷键 83/ALT+s保存
         $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        //启用快捷键 83/ALT+c关闭
+        $(window).ApplyQuickKey(67, parent.windowClose);
         $('#ArticleContent').editor({ tools: 'full' });
         if (_id != "") {
             $.ajax({
@@ -122,6 +133,9 @@
                         $('#ickStatus').attr("checked", true);
                     if (data.Recommend == 1)
                         $('#ickRecommend').attr("checked", true);
+                    if (data.IsRoll == 1)
+                        $('#ickIsRoll').attr("checked", true);
+
                     $('#ArticleContent').html(data.ArticleContent);
                     if (data.ArticlePicture) {
                         var arrpics = data.ArticlePicture.split(',');
@@ -165,11 +179,19 @@
     function BtnSaveOrUpdate() {
         if ($("#form1").form("validate")) {
             $(".savepreimgs").remove();
+            var presrc = "";
             $(".uploadify-preimgs").each(function () {
-                var presrc = $(this).attr("src");
-                presrc = "<input type='hidden' name='ArticlePicture'  class='savepreimgs'  value=" + presrc + ">";
-                $("#form1").append(presrc);
+                presrc = $(this).attr("src");
+
+
             });
+            if (presrc == "") {
+                parent.TopNotify("请选择封面图片", 'error');
+                return;
+            }
+            presrc = "<input type='hidden' name='ArticlePicture'  class='savepreimgs'  value=" + presrc + ">";
+            $("#form1").append(presrc);
+
             $.ajax({
                 cache: true,
                 type: "POST",

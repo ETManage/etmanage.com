@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Search";
-    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
 @section Title{
     易特网IT资讯平台
@@ -16,7 +16,7 @@
             {
                 <article class="excerpt">
                     <header>
-                        <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemArticle.ArticleLabel.Split(',')/">@itemArticle.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
+                        <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemArticle.ArticleLabel.Split(',')[0]/">@itemArticle.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
                         <h2><a target="_blank" href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</a></h2>
                     </header>
                     <span class="note">
@@ -31,16 +31,7 @@
     <div class="main-right">
 
 
-        <div class="widget d_postlist">
-            <div class="title"><h2>猜你喜欢</h2></div>
-            <ul>
-                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listLoveArticle)
-                {
-                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
-
-                }
-            </ul>
-        </div>
+        @{Html.RenderAction("_GetPartialArticleLove");}
 
     </div>
 </div>

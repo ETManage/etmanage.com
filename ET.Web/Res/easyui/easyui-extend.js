@@ -354,7 +354,7 @@ function openWindow(title, href, options) {
     {
         width: 860,
         height: 520,
-        buttons: [{ text: '确定(Alt+S)', iconCls: 'icon-ok', handler: windowConfirm }, { text: '关闭', iconCls: 'icon-cancel', handler: windowClose }]
+        buttons: [{ text: '确定(Alt+S)', iconCls: 'icon-ok', handler: windowConfirm }, { text: '关闭(Alt+C)', iconCls: 'icon-cancel', handler: windowClose }]
     };
     $.extend(this.options, options);
     var mydialog = $("<div class='myopenwindow' style='height: 0px;'></div>");
@@ -378,7 +378,7 @@ function openSimpleWindow(title, href, options) {
     {
         width: 860,
         height: 520,
-        buttons: [{ text: '关闭', iconCls: 'icon-cancel', handler: windowClose}]
+        buttons: [{ text: '关闭(Alt+C)', iconCls: 'icon-cancel', handler: windowClose }]
     };
     $.extend(this.options, options);
     openWindow(title, href, this.options);

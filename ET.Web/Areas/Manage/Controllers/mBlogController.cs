@@ -27,8 +27,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', ARTICLETITLE)>0";
             long RecordTotalCount = 0;
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ARTICLEID,ARTICLETITLE,ArticleLabel,ArticleUrl,ArticleUrl,LoveCount,ShareCount,Status,CreateTime,ACCESSCOUNT,TYPEID,(SELECT TYPENAME FROM BlogTypeInfo WHERE TYPEID=BlogArticleInfo.TYPEID)ArticleSource", null, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ARTICLEID,ARTICLETITLE,ArticleLabel,ArticleUrl,ArticleUrl,LoveCount,ShareCount,Status,CreateTime,ACCESSCOUNT,TYPEID,(SELECT TYPENAME FROM BlogTypeInfo WHERE TYPEID=BlogArticleInfo.TYPEID)ArticleSource", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetTypeSelectData()
@@ -171,8 +174,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', TYPENAME)>0";
             long RecordTotalCount = 0;
-            List<BlogTypeInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogTypeInfo("TYPEID,TYPENAME,TYPESORT", null, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogTypeInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
          [HttpGet]
@@ -262,8 +268,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', RollNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogRollInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogRollInfo("RollID,RollNAME,RollSORT", null, "RollSORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogRollInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogRollInfo("RollID,RollNAME,RollSORT", Condition, "RollSORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
       

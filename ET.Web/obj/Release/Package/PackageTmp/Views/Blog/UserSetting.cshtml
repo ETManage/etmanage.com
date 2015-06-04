@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "UserInfo";
-    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
 @section Title{
     个人资料设置
@@ -348,8 +348,6 @@
         }
     }
     function LoadAreaQu(sheng, shi) {
-
-        var aa = [{ name: "建始县" }, { name: "来凤县" }];
         $("#cussel1000006 .cus-sel-opt-ctn").children().remove();
         for (var i = 0; i < areas.length; i++) {
             if (areas[i].name == sheng) {

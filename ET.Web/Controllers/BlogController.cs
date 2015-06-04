@@ -14,19 +14,21 @@ namespace ET.Web.Controllers
 {
     public class BlogController : WebControllerBase
     {
+
+        #region 分布视图
+        //母版页
         public BlogController()
         {
-            _BlogPartial();
+            _LayoutBlog();
         }
-        public void _BlogPartial()
+        public void _LayoutBlog()
         {
             List<KeyAndValue> listType = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("TYPEID id,TypeUrl reserve1,TypeLevel reserve2,TYPENAME text,TYPEPID pid", TableNames.BlogTypeInfo, " AND Status=1 ", "TYPESORT DESC");
             ViewBag.listBlogType = listType;
 
             List<NewInfo> listnewestNew = new ET.Sys_BLL.InfoBLL().List_NewInfo(" top 1 newid,newtitle", "AND NewStatus=1 AND TYPEID=(SELECT TOP 1 TYPEID FROM " + TableNames.NewTypeInfo + " WHERE TYPEKEY='notice')", " CreateTime desc");
             ViewBag.listNewestNew = listnewestNew;
-            List<BlogRollInfo> listRoll = new ET.Sys_BLL.BlogBLL().List_BlogRollInfo(" *", "AND Status=1 ", " RollSort desc");
-            ViewBag.listRoll = listRoll;
+
             if (this.IsLogin)
             {
                 UserPropertyInfo userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + this.UserID.ToString() + "'");
@@ -40,36 +42,56 @@ namespace ET.Web.Controllers
                 }
             }
         }
-
-
+        public ActionResult _GetPartialDemoDesign()
+        {
+            return PartialView("_PartialDemoDesign");
+        }
+        public ActionResult _GetPartialBlogroll()
+        {
+            List<BlogRollInfo> listRoll = new ET.Sys_BLL.BlogBLL().List_BlogRollInfo(" *", "AND Status=1 ", " RollSort desc");
+            ViewBag.listRoll = listRoll;
+            return PartialView("_PartialBlogroll");
+        }
+        public ActionResult _GetPartialArticleLove()
+        {
+            List<BlogArticleInfo> listLoveArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(5, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticlePicture,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", ET.Constant.DBConst.TableNames.BlogArticleInfo, "AND Status=1 ", "CreateTime DESC");
+            ViewBag.listLoveArticle = listLoveArticle;
+            return PartialView("_PartialArticleLove");
+        }
+        public ActionResult _GetPartialArticleLabel()
+        {
+            List<KeyAndValue> listArticleLabel = new ET.Sys_BLL.PublicBLL().GetListBySql<KeyAndValue>("select  TOP 20 id, count(text) text from ( SELECT  ltrim(rtrim(ArticleLabel)) id,ArticleID  text FROM " + TableNames.BlogArticleInfo + " where len(isnull(ArticleLabel,''))>0 AND Status=1  )A group by id");
+            ViewBag.listArticleLabel = listArticleLabel;
+            return PartialView("_PartialArticleLabel");
+        }
+        public void _GetPartialArticleList(string Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", string TableName = TableNames.BlogArticleInfo, string Condition = "", string Order = "CreateTime DESC", bool IsNoLock = true)
+        {
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
+            ViewBag.listArticle = listArticle;
+        }
+        #endregion
 
         /// <summary>
         /// 绑定"猜你喜欢“
         /// </summary>
         public void BindlistLoveArticle(string Condition)
         {
-            List<BlogArticleInfo> listLoveArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(5, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticlePicture,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 ", "CreateTime DESC");
-            ViewBag.listLoveArticle = listLoveArticle;
+
         }
+        public void BindlistArticleLabel(string Condition)
+        {
+
+        }
+
         /// <summary>
         /// 绑定"标签云“
         /// </summary>
-        public void BindlistArticleLabel(string Condition)
-        {
-            List<KeyAndValue> listArticleLabel = new ET.Sys_BLL.PublicBLL().GetListBySql<KeyAndValue>("select  TOP 20 id, count(text) text from ( SELECT  ltrim(rtrim(ArticleLabel)) id,ArticleID  text FROM " + TableNames.BlogArticleInfo + " where len(isnull(ArticleLabel,''))>0 AND Status=1  )A group by id");
-            ViewBag.listArticleLabel = listArticleLabel;
-        }
         // GET: /Blog/
         public ActionResult Index()
         {
-
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", TableNames.BlogArticleInfo, "AND Status=1 ", "CreateTime DESC");
+            _GetPartialArticleList();
             List<BlogArticleInfo> listTopArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(5, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,case when CHARINDEX(',',ArticlePicture)>0 then ArticlePicture else ',' end ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", TableNames.BlogArticleInfo, "AND Status=1 AND IsRoll=1 ", "CreateTime DESC");
-            ViewBag.listArticle = listArticle;
             ViewBag.listTopArticle = listTopArticle;
-
-            BindlistArticleLabel(null);
-            BindlistLoveArticle(null);
             return View();
         }
         public ActionResult Detail(string id)
@@ -136,35 +158,24 @@ namespace ET.Web.Controllers
         public ActionResult Collect(string id)
         {
             string strCondition = "";
+            string strTitle="资讯中心";
             if (!string.IsNullOrEmpty(id))
             {
                 strCondition = "AND TypeKey='" + id + "'";
-                BlogTypeInfo typeinfo = new ET.Sys_BLL.BlogBLL().Get_BlogTypeInfoByCondition(" AND TYPEKEY='"+id+"'");
+                BlogTypeInfo typeinfo = new ET.Sys_BLL.BlogBLL().Get_BlogTypeInfoByCondition(" AND TYPEKEY='" + id + "'");
                 if (typeinfo != null)
-                    ViewBag.InfoBlogTypeName = typeinfo.TypeName;
-                else
-                    ViewBag.InfoBlogTypeName = "资讯中心";
-
+                    strTitle = typeinfo.TypeName;
             }
             else
                 strCondition = "AND TypeKey='collect'";
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, "ArticleID,ArticleTitle,ArticleLabel,ArticleSource,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource",
-                string.Format("(SELECT A.* FROM  BlogArticleInfo A INNER JOIN BlogTypeInfo B ON A.TypeID=B.TypeID WHERE 1=1 {0})td", strCondition), "AND Status=1 ", "CreateTime DESC", false);
-            ViewBag.listArticle = listArticle;
-
-            BindlistArticleLabel(null);
-            BindlistLoveArticle(null);
+            ViewBag.InfoBlogTypeName = strTitle;
+            _GetPartialArticleList(null, string.Format("(SELECT A.* FROM  BlogArticleInfo A INNER JOIN BlogTypeInfo B ON A.TypeID=B.TypeID WHERE 1=1 {0})td", strCondition), null, null, false);
             return View();
         }
         public ActionResult HotCollect(string id)
         {
-            string strCondition  = "AND TypeKey='collect'";
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, "ArticleID,ArticleTitle,ArticleLabel,ArticleSource,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource",
-                string.Format(" (SELECT A.* FROM  BlogArticleInfo A INNER JOIN BlogTypeInfo B ON A.TypeID=B.TypeID WHERE 1=1 {0})td", strCondition), "AND Status=1 ", "Recommend desc,CreateTime desc", false);
-            ViewBag.listArticle = listArticle;
-
-            BindlistArticleLabel(null);
-            BindlistLoveArticle(null);
+            string strCondition = "AND TypeKey='collect'";
+            _GetPartialArticleList(null, string.Format("(SELECT A.* FROM  BlogArticleInfo A INNER JOIN BlogTypeInfo B ON A.TypeID=B.TypeID WHERE 1=1 {0})td", strCondition), null, "Recommend desc,CreateTime desc", false);
             return View();
         }
         public ActionResult ArticleList(string id)
@@ -633,13 +644,13 @@ namespace ET.Web.Controllers
                         strCondition = "AND TypeID=(SELECT TOP 1 TypeID FROM BlogTypeInfo WHERE TypeKey='original')";
                         break;
                     case "collect":
-                        if(!String.IsNullOrEmpty(id))
-                        strCondition = "AND TypeID='" + id + "')";
+                        if (!String.IsNullOrEmpty(id))
+                            strCondition = "AND TypeID='" + id + "')";
                         strCondition = "AND TypeID=(SELECT TOP 1 TypeID FROM BlogTypeInfo WHERE TypeKey='collect')";
                         break;
                     case "list":
                         if (!String.IsNullOrEmpty(id))
-                        strCondition = "AND TypeID='" + id + "')";
+                            strCondition = "AND TypeID='" + id + "')";
                         break;
                     case "tag":
                         strCondition = "AND ArticleLabel='" + id + "')";

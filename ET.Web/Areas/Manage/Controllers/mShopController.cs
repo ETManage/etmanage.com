@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Areas.Manage.Controllers
 {
-    public class ShopManageController : ManageControllerBase
+    public class mShopController : ManageControllerBase
     {
         //
         // GET: /Shop/
@@ -27,8 +27,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', GoodName)>0";
             long RecordTotalCount = 0;
-            List<ShopGoodInfo> list = new ET.Sys_BLL.ShopBLL().PageList_ShopGoodInfo("GoodID,GoodName,CreateTime,ACCESSCOUNT,TYPEID", null, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<ShopGoodInfo> list = new ET.Sys_BLL.ShopBLL().PageList_ShopGoodInfo("GoodID,GoodName,CreateTime,ACCESSCOUNT,TYPEID", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetTypeSelectData()
@@ -113,8 +116,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', TYPENAME)>0";
             long RecordTotalCount = 0;
-            List<ShopTypeInfo> list = new ET.Sys_BLL.ShopBLL().PageList_ShopTypeInfo("TYPEID,TYPENAME,TYPESORT", null, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<ShopTypeInfo> list = new ET.Sys_BLL.ShopBLL().PageList_ShopTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
          [HttpGet]

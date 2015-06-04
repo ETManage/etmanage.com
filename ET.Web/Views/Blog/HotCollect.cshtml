@@ -1,127 +1,73 @@
 ﻿@{
     Layout = null;
-    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
 @section Title{
     易特网IT资讯平台
 }
 @section Header{
-
+  
 }
 <div class="content-wrap">
     <div class="main-left" id="#container">
         <div class="content">
             <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;分类：热点 </h1> </header>
-            @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticle)
-            {
-                <article class="excerpt">
-                    <header>
-                        <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemArticle.ArticleLabel.Split(',')[0]/">@itemArticle.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
-                        <h2><a target="_blank" href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</a></h2>
-                    </header>
-                    <div class="focus">
-                        <a target="_blank" href="@itemArticle.ArticleUrl"><img class="thumb" src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle" width="200" height="125"></a>
-                    </div> <span class="note">
-                        @ET.ToolKit.Common.StringHelper.BindDataFromString(itemArticle.ArticleDescription, 300);
-                    </span><p class="auth-span">
-                        <span class="muted">
-                            <i class="fa fa-clock-o"></i>
-                            <span class="time timeago" title="@itemArticle.CreateTime">
-                                
-                            </span>
-                            (@itemArticle.CreateTime.Value.ToString("MM-dd"))
-                        </span> <span class="muted"><i class="fa fa-list"></i>《@itemArticle.ArticleSource》</span> <span class="muted"> <a href="javascript:;" data-action="ding" data-id="@itemArticle.ArticleID" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">@itemArticle.LoveCount</span>喜欢</a></span>
-                    </p>
-                </article>
-            }
+            @{Html.RenderPartial("_PartialArticleList");}
         </div>
-        <div class="pagination-loading hidden" id="Loadding"><i class="fa fa-spinner fa-spin"></i> 数据载入中...</div>
+        @{Html.RenderPartial("_PartialLoadMore");}
     </div>
 
     <div class="main-right">
-        <div class="widget d_tag">
-            <div class="title"><h2>标签云</h2></div>
-            <div class="d_tags">
-                @foreach (ET.Sys_DEF.KeyAndValue itemLabel in ViewBag.listArticleLabel)
-                {
-                    <a title="" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemLabel.id" data-original-title="@itemLabel.text 个话题">@itemLabel.id (@itemLabel.text)</a>
-                }
-            </div>
-        </div>
-
-        <div class="widget d_postlist">
-            <div class="title"><h2>猜你喜欢</h2></div>
-            <ul>
-                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listLoveArticle)
-                {
-                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
-
-                }
-            </ul>
-        </div>
-        <div class="widget widget_links">
-            <div class="title"><h2>友情链接</h2></div>
-            <ul class="xoxo blogroll">
-                @foreach (ET.Sys_DEF.BlogRollInfo item in ViewBag.listRoll)
-                {
-                    <li><a href="@item.RollUrl" target="_blank">@item.RollName</a></li>
-                }
-            </ul>
-        </div>
+        @{Html.RenderAction("_GetPartialArticleLabel");}
+        @{Html.RenderAction("_GetPartialArticleLove");}
+        @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
         jQuery("span.timeago").timeago();
+        $("#Loadding").click(LoadData);
     });
-    function queryClick() {
-        //查询方法
-    };
 
     //异步加载数据 Start
-    $.getData = function (opts) {
-        $.ajax({
-            url: opts.url,
-            type: "get",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: { "groupNumber": opts.groupNumber },
-            success: function (data, textStatus, xhr) {
-                if (data.total && !isNaN(data.total))
-                    totalGroups = Math.ceil(parseInt(data.total) / 10);
-                if (data.rows && data.rows.length > 0) {
-
-                    $.each(data.rows, function () {
-                        var vlabel = this.ArticleLabel;
-                        $(".content").append('<article class="excerpt"><header><a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/' + vlabel + '/">' + vlabel + '<i class="label-arrow"></i></a>                        <h2><a target="_blank" href="' + this.ArticleUrl + '" title="' + this.ArticleTitle + '">' + this.ArticleTitle + '</a></h2>                    </header>                    <div class="focus">                        <a target="_blank" href="' + this.ArticleUrl + '"><img class="thumb" src="' + this.ArticlePicture + '" alt="' + this.ArticleTitle + '" width="200" height="125"></a>                    </div> <span class="note">                       ' + this.ArticleDescription + '                            </span><p class="auth-span">                                <span class="muted">                                    <i class="fa fa-clock-o"></i>                                    <span class="time timeago" title="' + this.CreateTime + '">                                    </span>                                </span> <span class="muted"><i class="fa fa-eye"></i> ' + this.AccessCount + '℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="' + this.ArticleUrl + '#comments">' + (this.ArticleSource ? this.ArticleSource : 0).toString() + '评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="' + this.ArticleID + '" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">' + this.LoveCount + '</span>喜欢</a></span>                            </p>                        </article>');
-                    });
-                }
-                $('#Loadding').hide();
-                opts.groupNumber++;
-                opts.loading = false;
-
-            },
-            error: function (xmlHttpRequest, textStatus, errorThrown) {
-                opts.loading = false;
-                console.log(errorThrown.toString());
-            }
-        });
-    }
     var totalGroups = 2;
     var trackLoad = {};
     trackLoad.groupNumber = 2;
     trackLoad.url = "@PublicHelper.GetHostAddress()/blog/ajaxgetarticlelist?scope=hotcollect";
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 80) {
-            if (trackLoad.groupNumber <= totalGroups && !trackLoad.loading) {
-                if (!trackLoad.loading) {
-                    trackLoad.loading = true;
-                    $('#Loadding').show().css("display", "block");
-                    $.getData(trackLoad);
+    trackLoad.loading = false;
+    function LoadData() {
+        var Oldscroll = $(window).scrollTop();
+        if (trackLoad.groupNumber <= totalGroups && !trackLoad.loading) {
+            trackLoad.loading = true;
+            $('#Loadding').show().css("display", "block");
+            $.ajax({
+                url: trackLoad.url,
+                type: "get",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { "groupNumber": trackLoad.groupNumber },
+                success: function (data, textStatus, xhr) {
+                    if (data.total && !isNaN(data.total))
+                        totalGroups = Math.ceil(parseInt(data.total) / 10);
+                    if (data.rows && data.rows.length > 0) {
+                        $.each(data.rows, function () {
+                            var vlabel = this.ArticleLabel;
+                            $(".content").append('<article class="excerpt"><header><a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/' + vlabel + '/">' + vlabel + '<i class="label-arrow"></i></a>                        <h2><a target="_blank" href="' + this.ArticleUrl + '" title="' + this.ArticleTitle + '">' + this.ArticleTitle + '</a></h2>                    </header>                    <div class="focus">                        <a target="_blank" href="' + this.ArticleUrl + '"><img class="thumb" src="' + this.ArticlePicture + '" alt="' + this.ArticleTitle + '" width="200" height="125"></a>                    </div> <span class="note">                       ' + this.ArticleDescription + '                            </span><p class="auth-span">                                <span class="muted">                                    <i class="fa fa-clock-o"></i>                                    <span class="time timeago" title="' + this.CreateTime + '">                                    </span>                                </span> <span class="muted"><i class="fa fa-eye"></i> ' + this.AccessCount + '℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="' + this.ArticleUrl + '#comments">' + (this.ArticleSource ? this.ArticleSource : 0).toString() + '评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="' + this.ArticleID + '" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">' + this.LoveCount + '</span>喜欢</a></span>                            </p>                        </article>');
+                        });
+                    }
+                    $('#Loadding').hide();
+                    trackLoad.groupNumber++;
+                    trackLoad.loading = false;
+                    $(window).scrollTop() = Oldscroll;
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    trackLoad.loading = false;
+                    console.log(errorThrown.toString());
                 }
-            }
+            });
         }
-    });
+
+    }
     //异步加载数据 End
 </script>

@@ -191,6 +191,9 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', CNName)>0";
             long RecordTotalCount = 0;
             List<UserPropertyInfo> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserPropertyInfo("UserID,CNName,Sex,Age", null, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);

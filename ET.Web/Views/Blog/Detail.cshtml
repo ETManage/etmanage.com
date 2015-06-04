@@ -1,9 +1,9 @@
 ﻿@{
     Layout = null;
-    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
 @section Title{
-   @ViewBag.ArticleInfo.ArticleTitle
+    @ViewBag.ArticleInfo.ArticleTitle
 }
 @section Header{
 
@@ -102,42 +102,14 @@
                     <li class="comment even thread-even depth-1" id="comment-@itemComment.CommentID"><div class="c-avatar"><img alt="" data-original="/avatar/471c551b724ce9a601ec4f87677551d1.png" class="avatar avatar-54 photo" height="54" width="54" src="/images/blog/default.png"><div class="c-main" id="div-comment-@itemComment.CommentID">@itemComment.CommentContent<div class="c-meta"><span class="c-author">@itemComment.Creator</span>@itemComment.CreateTime.Value.ToString("yyyy-MM-dd HH:mm")<a class="comment-reply-link" href="@ViewBag.ArticleInfo.ArticleUrl?replytocom=@itemComment.CommentID#respond" onclick="return addComment.moveForm('div-comment-@itemComment.CommentID', '@itemComment.CommentID', 'respond', '@ViewBag.ArticleInfo.ArticleID')">回复</a></div></div></div></li>
 
                 }
-                @*<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-5113"><div class="c-avatar"><img alt="" data-original="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" class="avatar avatar-54 photo" height="54" width="54" src="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" style="display: block;"><div class="c-main" id="div-comment-5113">用了一天，速度换回win7。<div class="c-meta"><span class="c-author">偏方秘方大全</span>2014-10-09 01:01 <a class="comment-reply-link" href="/3677.html?replytocom=5113#respond" onclick="return addComment.moveForm('div-comment-5113', '5113', 'respond', '3677')">回复</a></div></div></div></li>
-                    <li class="comment even thread-even depth-1" id="comment-5103"><div class="c-avatar"><img alt="" data-original="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" class="avatar avatar-54 photo" height="54" width="54" src="@PublicHelper.GetHostAddress()/wp-content/themes/yusi/img/default.png" style="display: block;"><div class="c-main" id="div-comment-5103">不打算尝试<div class="c-meta"><span class="c-author"><a href="http://www.fddcn.cn" rel="external nofollow" class="url" target="_blank">码海导航</a></span>2014-10-08 19:40 <a class="comment-reply-link" href="/3677.html?replytocom=5103#respond" onclick="return addComment.moveForm('div-comment-5103', '5103', 'respond', '3677')">回复</a></div></div></div></li>*@
             </ol><div class="commentnav"></div>
         </div>
 
     </div>
     <div class="main-right">
-        <div class="widget d_tag">
-            <div class="title"><h2>标签云</h2></div>
-            <div class="d_tags">
-                @foreach (ET.Sys_DEF.KeyAndValue itemLabel in ViewBag.listArticleLabel)
-{
-    <a title="" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemLabel.id" data-original-title="@itemLabel.text 个话题">@itemLabel.id (@itemLabel.text)</a>
-}
-            </div>
-        </div>
-
-        <div class="widget d_postlist">
-            <div class="title"><h2>猜你喜欢</h2></div>
-            <ul>
-                @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticle)
-                {
-                    <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle"></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
-
-                }
-            </ul>
-        </div>
-        <div class="widget widget_links">
-            <div class="title"><h2>友情链接</h2></div>
-            <ul class="xoxo blogroll">
-                @foreach (ET.Sys_DEF.BlogRollInfo item in ViewBag.listRoll)
-                {
-                    <li><a href="@item.RollUrl" target="_blank">@item.RollName</a></li>
-                }
-            </ul>
-        </div>
+        @{Html.RenderAction("_GetPartialArticleLabel");}
+        @{Html.RenderAction("_GetPartialArticleLove");}
+        @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>
 <script type="text/javascript">

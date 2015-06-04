@@ -70,6 +70,7 @@
             pagination: true,
             rownumbers: true,
             pageSize: 10,
+            onDblClickRow: function (rowIndex, rowData) { fixView(); },
             columns: [[
                     { field: 'ArticleID', width: 10, title: 'ID', hidden: true },
                     { field: 'ArticleSource', width: 80, title: '所属类别', sortable: true },

@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "UserCenter";
-    Layout = "~/Views/Shared/_BlogPartial.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
 @section Title{
     个人中心
@@ -178,7 +178,7 @@
                                     {
                                         <li class="my-tieba-citem">
                                             <a target="_blank" href="@itemArticle.ArticleUrl" class="my-tieba-citem-box">
-                                                <img class="my-tieba-bimg" src="@itemArticle.ArticlePicture" width="100" height="100"><div class="my-tieba-detail"><h2 class="my-tieba-bname" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</h2><span class="fa fa-star" title="@itemArticle.ArticleSource 共同收藏"></span>@itemArticle.ArticleSource</div>
+                                                <img class="my-tieba-bimg" src="@itemArticle.ArticlePicture.Split(',')[0]" width="100" height="100"><div class="my-tieba-detail"><h2 class="my-tieba-bname" title="@itemArticle.ArticleTitle">@itemArticle.ArticleTitle</h2><span class="fa fa-star" title="@itemArticle.ArticleSource 共同收藏"></span>@itemArticle.ArticleSource</div>
                                             </a>
                                         </li>
                                     }

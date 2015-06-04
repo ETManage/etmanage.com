@@ -56,8 +56,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', MODULENAME)>0";
             long RecordTotalCount = 0;
-            List<SysModuleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysModuleInfo("MODULEID,MODULENAME,ModuleKey,ModuleSort,ModuleICON,MODULEURL", null, "MODULESORT DESC", pageIndex, pageSize, ref RecordTotalCount);
+            List<SysModuleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysModuleInfo("MODULEID,MODULENAME,ModuleKey,ModuleSort,ModuleICON,MODULEURL", Condition, "MODULESORT DESC", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -154,8 +157,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', ROLENAME)>0";
             long RecordTotalCount = 0;
-            List<SysRoleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysRoleInfo("ROLEID,ROLENAME,RoleDescription", null, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
+            List<SysRoleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysRoleInfo("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         //动态加载
@@ -261,8 +267,11 @@ namespace Web.Areas.Manage.Controllers
             //接收datagrid传来的参数 
             int pageIndex = int.Parse(Request["page"]);
             int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', ActionName)>0";
             long RecordTotalCount = 0;
-            List<SysActionInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysActionInfo("ActionID,ActionName,ActionKey", null, "ActionName", pageIndex, pageSize, ref RecordTotalCount);
+            List<SysActionInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysActionInfo("ActionID,ActionName,ActionKey", Condition, "ActionName", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 

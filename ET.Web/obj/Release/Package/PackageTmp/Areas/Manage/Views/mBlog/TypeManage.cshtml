@@ -21,7 +21,7 @@
                     </th>
                     <td>
                         <select name="TypePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
-                                data-options="required:true,url:'/Blog/AjaxGetPTypeData',value:-1"></select>
+                                data-options="required:true,method:'get',url:'/Blog/AjaxGetPTypeData',value:-1"></select>
                     </td>
                 </tr>
                 <tr>
@@ -34,10 +34,55 @@
                 </tr>
                 <tr>
                     <th>
+                        类别KEY：
+                    </th>
+                    <td>
+                        <input name="TypeKey" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">子集则为父级KEY</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类别URL：
+                    </th>
+                    <td>
+                        <input name="TypeUrl" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">一级栏目必填</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        状态操作：
+                    </th>
+                    <td>
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" />&nbsp;&nbsp;是否仅导航<input name="IsOnlyNav" type="checkbox" id="ickIsOnlyNav" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        导航小图：
+                    </th>
+                    <td>
+                        <select name="TypeLevel">
+                            <option value="">默认</option>
+                            <option value="hot">热门</option>
+                            <option value="new">新颖</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         类别排序：
                     </th>
                     <td>
                         <input name="TypeSort" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类别URL：
+                    </th>
+                    <td>
+                        <input name="TypeUrl" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">一级栏目必填</span>
                     </td>
                 </tr>
             </table>
@@ -59,6 +104,10 @@
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
+                    if (data.Status == 1)
+                        $('#ickStatus').attr("checked", true);
+                    if (data.IsOnlyNav == 1)
+                        $('#ickIsOnlyNav').attr("checked", true);
                     $('#TypePID').combotree('setValue', data.TypePID.toLowerCase());
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
