@@ -63,7 +63,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mShop/AjaxGetRollDetail",
+                url: "/mDesign/AjaxGetRollDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -83,7 +83,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mShop/AjaxSaveRoll?infoid=' + _id,
+                url: '/mDesign/AjaxSaveRoll?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

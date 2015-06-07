@@ -62,16 +62,16 @@ namespace ET.Sys_Base
         /// <param name="username"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        public string WebLoginSinglePoint(string username, string pwd)
+        public string WebLoginSinglePoint(string username, string pwd, bool IsRememberMe)
         {
             UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 string sKey = info.UserID.ToString();
                 string onlineUser = Convert.ToString(HttpContext.Current.Cache[sKey]);
-                if (onlineUser == null || onlineUser == String.Empty || username == "etmanage")
+                if (onlineUser == null || onlineUser == String.Empty || username == "etadmin")
                 {
-                    WebLoginRecord(info);
+                    WebLoginRecord(info, IsRememberMe);
                     return "true";
                 }
                 else
@@ -82,14 +82,14 @@ namespace ET.Sys_Base
             else
                 return "false";
         }
-        public string WebLoginUser(string username, string pwd)
+        public string WebLoginUser(string username, string pwd, bool IsRememberMe)
         {
             UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 try
                 {
-                    WebLoginRecord(info);
+                    WebLoginRecord(info, IsRememberMe);
                     return "true";
                 }
                 catch (Exception ex)
@@ -133,14 +133,21 @@ namespace ET.Sys_Base
                 return "false";
         }
 
+        public void GetCurrentUserInfo(string userID)
+        {
+            User_Full_Info info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
+
+            CurrentUserInfo userinfo = new CurrentUserInfo();
+            userinfo.UserID = info.userbaseinfo.UserID;
+            userinfo.UserName = info.userbaseinfo.UserName;
+            userinfo.UserCNName = info.userstuinfo.CNName;
+            var roleIDs = info.userrole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
+            userinfo.RoleIDS = roleIDs;
+            System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
+        }
 
         public void LoginRecord(UserBaseInfo info)
         {
-            string sKey = info.UserID.ToString();
-            string sKey2 = DateTime.Now.ToString("yyyyMMddffffff");
-            TimeSpan SessTimeOut = new TimeSpan(0, 0, System.Web.HttpContext.Current.Session.Timeout, 0, 0);
-            HttpContext.Current.Cache.Insert(sKey, sKey, null, DateTime.MaxValue, SessTimeOut, System.Web.Caching.CacheItemPriority.NotRemovable, null);
-            ET.ToolKit.Common.CookieHelper.SaveCookie(SystemConfigConst.ManageCookieUserID, info.UserID, 0);
             CurrentUserInfo userinfo = new CurrentUserInfo();
             userinfo.UserID = info.UserID;
             userinfo.UserName = info.UserName;
@@ -149,6 +156,7 @@ namespace ET.Sys_Base
             List<SysRoleInfo> sturole = new ET.Sys_BLL.SystemBLL().List_SysRoleInfo(info.UserID.ToString());
             var roleIDs = sturole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
             userinfo.RoleIDS = roleIDs;
+            FormAuthService.SignIn(info.UserID.ToString(), false, new string[] { "admin" });
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
 
             try
@@ -163,13 +171,8 @@ namespace ET.Sys_Base
         /// «∞∂À¥¶¿Ì
         /// </summary>
         /// <returns></returns>
-        public void WebLoginRecord(UserBaseInfo info)
+        public void WebLoginRecord(UserBaseInfo info, bool IsRememberMe)
         {
-            string sKey = info.UserID.ToString();
-            string sKey2 = DateTime.Now.ToString("yyyyMMddffffff");
-            TimeSpan SessTimeOut = new TimeSpan(0, 0, System.Web.HttpContext.Current.Session.Timeout, 0, 0);
-            HttpContext.Current.Cache.Insert(sKey, sKey, null, DateTime.MaxValue, SessTimeOut, System.Web.Caching.CacheItemPriority.NotRemovable, null);
-            ET.ToolKit.Common.CookieHelper.SaveCookie(SystemConfigConst.WebCookieUserID, info.UserID, 0);
             CurrentUserInfo userinfo = new CurrentUserInfo();
             userinfo.UserID = info.UserID;
             userinfo.UserName = info.UserName;
@@ -180,8 +183,10 @@ namespace ET.Sys_Base
             if (sturole.Count > 0)
             {
                 roleIDs = sturole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
-            } userinfo.RoleIDS = roleIDs;
+            }
 
+            userinfo.RoleIDS = roleIDs;
+            FormAuthService.SignIn(info.UserID.ToString(), IsRememberMe, new string[] { "user" });
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
 
             try
@@ -200,8 +205,9 @@ namespace ET.Sys_Base
             return System.Web.HttpContext.Current.Server.HtmlDecode(xmldoc.SelectSingleNode("Condition/System/SinglePoint").InnerXml);
         }
 
-        public string LoginOut()
+        public string Logout()
         {
+            ET.Sys_Base.FormAuthService.SignOut();
             CurrentUserInfo info = (CurrentUserInfo)System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo];
             if (info != null)
                 HttpContext.Current.Cache.Remove(Convert.ToString(HttpContext.Current.Cache[info.UserID.ToString()]));
@@ -209,7 +215,7 @@ namespace ET.Sys_Base
             System.Web.HttpContext.Current.Session.Abandon();
             return "true";
         }
-
+    
         public string CheckUserName(string username)
         {
             username = StringHelper.ClearSqlDangerous(username);
@@ -267,7 +273,7 @@ namespace ET.Sys_Base
                         DEPinfo.DepSort = "A000";
                         DEPinfo.DepDescription = "";
                         DEPinfo.DepPID = " -1";
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(DEPinfo,true);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(DEPinfo, true);
                     }
 
                     UserPositionInfo Pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND   PostName='" + domain + "'");

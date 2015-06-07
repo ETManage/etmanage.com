@@ -1,11 +1,12 @@
-﻿@*@ 作用：右侧"创意设计"栏目
+﻿@model IEnumerable<ET.Sys_DEF.KeyAndValue>
+@*@ 作用：右侧"创意设计"栏目
         作者：West
         时间2015-05-02
     @*@
 <div class="widget d_tag">
     <div class="title"><h2>标签云</h2></div>
     <div class="d_tags">
-        @foreach (ET.Sys_DEF.KeyAndValue itemLabel in ViewBag.listArticleLabel)
+        @foreach (ET.Sys_DEF.KeyAndValue itemLabel in Model)
         {
             <a title="" href="@PublicHelper.GetHostAddress()/blog/articletag/@itemLabel.id" data-original-title="@itemLabel.text 个话题">@itemLabel.id (@itemLabel.text)</a>
         }

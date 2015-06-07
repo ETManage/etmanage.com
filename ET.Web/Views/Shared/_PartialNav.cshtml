@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ET.Sys_DEF.KeyAndValue>
+<div class="nav-home">
+    <a href="@PublicHelper.GetHostAddress()/" class="n-c">首页</a>
+</div>
+
+@foreach (ET.Sys_DEF.KeyAndValue itemType in Model)
+{
+    if (itemType.children.Count > 0)
+    {
+        <div class="nav-lis">
+
+            <a href="@PublicHelper.GetHostAddress()@itemType.reserve1" class="n-c ">
+                @if (Request.Url.ToString().Contains(itemType.reserve1))
+                {
+                    <span class="selected"> @itemType.text</span>
+                }
+                else
+                {
+                   <span> @itemType.text</span>
+                }
+            </a>
+            <ul>
+                @foreach (ET.Sys_DEF.KeyAndValue itemTypeChild in @itemType.children)
+                {
+                    <li><a href="@PublicHelper.GetHostAddress()@itemType.reserve1">@itemTypeChild.text</a></li>
+
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="nav-home">
+
+            <a rel="nofollow" class="n-c" target="_blank" href="@PublicHelper.GetHostAddress()@itemType.reserve1">
+                @if (Request.Url.ToString().Contains(itemType.reserve1))
+                {
+                    <span class="selected"> @itemType.text</span>
+                }
+                else
+                {
+                    <span> @itemType.text</span>
+                }
+
+            </a>
+
+
+
+            @if (!string.IsNullOrEmpty(itemType.reserve2))
+            {
+                <i style="display: inline;" class="@itemType.reserve2-ico"></i>}
+        </div>
+    }
+
+}

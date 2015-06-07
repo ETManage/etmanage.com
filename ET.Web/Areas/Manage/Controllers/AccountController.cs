@@ -56,6 +56,8 @@ namespace Web.Areas.Manage.Controllers
         [HttpGet]
         public ActionResult AjaxLogout()
         {
+            ET.Sys_Base.Login_Ajax loginAjax = new ET.Sys_Base.Login_Ajax();
+            loginAjax.Logout();
             return RedirectToAction("Login");
         }
         [HttpGet]

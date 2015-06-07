@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ET.Sys_DEF.NewInfo>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NewID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Creator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewSource)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Recomment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Creator)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewSource)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recomment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -110,20 +110,54 @@ namespace System.Web.Mvc
         /// <summary>
         /// 当前用户ID
         /// </summary>
-        public Guid UserID
+        public string UserID
         {
             get
             {
-                object objLoginState = CookieHelper.GetCookie(SystemConfigConst.WebCookieUserID);
-                if (objLoginState == null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    return Guid.Empty;
+                    return User.Identity.Name;
                 }
                 else
-                    return Guid.Parse(objLoginState.ToString());
-
+                {
+                    ToLogin();
+                    return null;
+                }
             }
         }
+        /// <summary>
+        /// 当前用户信息
+        /// </summary>
+        public CurrentUserInfo CurrentUserInfo
+        {
+            get
+            {
+                CurrentUserInfo usertemp = Session[SystemConfigConst.SessionUserInfo] as CurrentUserInfo;
+                if (usertemp == null)
+                {
+                    string strUserID = this.UserID;
+                    if (strUserID != null)
+                    {
+                        if (System.Web.HttpContext.Current.Cache[strUserID] == null || System.Web.HttpContext.Current.Cache[strUserID].ToString() != "out")
+                        {
+                            new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
+                        }
+                        else
+                            ToLogin();
+                    }
+                    else
+                    {
+                        ToLogin();
+                    }
+                }
+                return usertemp;
+            }
+            set
+            {
+                Session[SystemConfigConst.SessionUserInfo] = value;
+            }
+        }
+
         /// <summary>
         /// 获取是否登录，登录返回 True，未登录返回 False
         /// </summary>
@@ -131,19 +165,19 @@ namespace System.Web.Mvc
         {
             get
             {
-                return !(this.UserID == Guid.Empty);
+                return User.Identity.IsAuthenticated;
             }
         }
         /// <summary>
-        /// 清除登录缓存
+        /// 需要登录
         /// </summary>
-        public void ClearLoginCache()
+        public void ToLogin()
         {
-
-            System.Web.HttpContext.Current.Cache.Remove(this.UserID.ToString());
-            CookieHelper.ClearCookie(SystemConfigConst.WebCookieUserID);
-            Session.RemoveAll();
-            Session.Abandon();
+            try
+            {
+                Response.Redirect("/Account/Login", true);
+            }
+            catch { }
         }
         #endregion
     }

@@ -57,8 +57,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ControllerBase\ManageControllerBase.cs" />
-    <Compile Include="Public\PublicHelper.cs" />
     <Compile Include="ControllerBase\WebControllerBase.cs" />
+    <Compile Include="Interfaces\IUserInfo.cs" />
+    <Compile Include="Public\FormAuthService.cs" />
+    <Compile Include="Public\PublicHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

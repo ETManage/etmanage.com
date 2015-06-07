@@ -21,14 +21,7 @@ namespace System.Web.Mvc
     /// </summary>
     public class ManageControllerBase : ControllerHelper
     {
-        public ManageControllerBase()
-        {
-            if (!this.IsLogin)
-            {
-                ToLogin();
-                return;
-            }
-        }
+
         public int GetOnlineUser()
         {
             return System.Web.HttpContext.Current.Cache.Count - 4;
@@ -39,6 +32,11 @@ namespace System.Web.Mvc
         /// <returns></returns>
         public void getSystemConfig()
         {
+            if (!this.IsLogin)
+            {
+                ToLogin();
+                return;
+            }
             string xmlpath = Server.MapPath(SystemConfigConst.WebSiteDir + SystemConfigConst.SystemConfigFile);
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.Load(xmlpath);
@@ -54,24 +52,25 @@ namespace System.Web.Mvc
             ViewBag.PageVer = xmldoc.SelectSingleNode("Condition/System/Ver").InnerText;
 
         }
-       
+
 
         #region 用户及登陆管理
         /// <summary>
         /// 当前用户ID
         /// </summary>
-        public Guid UserID
+        public string UserID
         {
             get
             {
-                object objLoginState = CookieHelper.GetCookie(SystemConfigConst.ManageCookieUserID);
-                if (objLoginState == null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    return Guid.Empty;
+                    return User.Identity.Name;
                 }
                 else
-                    return Guid.Parse(objLoginState.ToString());
-
+                {
+                    ToLogin();
+                    return null;
+                }
             }
         }
 
@@ -87,11 +86,13 @@ namespace System.Web.Mvc
                 CurrentUserInfo usertemp = Session[SystemConfigConst.SessionUserInfo] as CurrentUserInfo;
                 if (usertemp == null)
                 {
-                    if (this.UserID != Guid.Empty && System.Web.HttpContext.Current.Cache[this.UserID.ToString()] != null)
+
+                    if (this.UserID != null)
                     {
-                        if (System.Web.HttpContext.Current.Cache[this.UserID.ToString()].ToString() != "out")
+                        string strUserID = this.UserID;
+                        if (System.Web.HttpContext.Current.Cache[strUserID] == null || System.Web.HttpContext.Current.Cache[strUserID].ToString() != "out")
                         {
-                            new ET.Sys_Base.Login_Ajax().LoginUser(CookieHelper.GetCookie(SystemConfigConst.ManageCookieUserID).ToString(), null, true);
+                            new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
                         }
                         else
                             ToLogin();
@@ -100,11 +101,6 @@ namespace System.Web.Mvc
                     {
                         ToLogin();
                     }
-                }
-
-                if (System.Web.HttpContext.Current.Cache[this.UserID.ToString()] == null || (System.Web.HttpContext.Current.Cache[this.UserID.ToString()] != null && System.Web.HttpContext.Current.Cache[this.UserID.ToString()].ToString() == "out"))
-                {
-                    ToLogin();
                 }
                 return usertemp;
             }
@@ -118,19 +114,18 @@ namespace System.Web.Mvc
         /// <summary>
         /// 重新登录
         /// </summary>
-        protected ActionResult ReLogin()
+        protected void ReLogin()
         {
             ClearLoginCache();
-            return RedirectToAction("Login", "AccountController");
+            ToLogin();
         }
         /// <summary>
         /// 清除登录缓存
         /// </summary>
         public void ClearLoginCache()
         {
-            if (this.UserID != Guid.Empty)
-                System.Web.HttpContext.Current.Cache.Remove(this.UserID.ToString());
-            CookieHelper.ClearCookie(SystemConfigConst.ManageCookieUserID);
+            if (System.Web.HttpContext.Current.Cache[this.UserID] != null)
+                System.Web.HttpContext.Current.Cache.Remove(this.UserID);
             Session.RemoveAll();
             Session.Abandon();
         }
@@ -142,7 +137,7 @@ namespace System.Web.Mvc
         {
             get
             {
-                return !(this.UserID == Guid.Empty);
+                return User.Identity.IsAuthenticated;
             }
         }
         /// <summary>

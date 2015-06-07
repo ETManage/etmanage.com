@@ -6,20 +6,46 @@
     易特网IT资讯平台
 }
 @section Header{
-  
+    <style>
+    </style>
 }
 <div class="content-wrap">
     <div class="main-left" id="#container">
         <div class="content">
-            <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;分类：热点 </h1> </header>
-            @{Html.RenderPartial("_PartialArticleList");}
+            @*<header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;分类：热点 </h1> </header>*@
+
+
+
+            <div class="popularity_posts">
+                <div class="popularity_title"><h2>访问排行</h2></div>
+                <ul class="popularity_img">
+                    @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listOtherArticle)
+                    {
+                        <li class="popularity_box">
+                            <a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle" target="_blank">
+                                <img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle" width="186" height="112" /> <br>
+                                <span class="r_title">@itemArticle.ArticleTitle</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+
+
+            @foreach (ET.Sys_DEF.BlogArticleInfo item in ViewBag.listArticle)
+            {
+                Html.RenderPartial("_PartialArticleList", item);
+            }
         </div>
         @{Html.RenderPartial("_PartialLoadMore");}
     </div>
 
     <div class="main-right">
-        @{Html.RenderAction("_GetPartialArticleLabel");}
-        @{Html.RenderAction("_GetPartialArticleLove");}
+
+        @{Html.RenderAction("_PartialArticleComment", "Shared");}
+        @{Html.RenderAction("_PartialArticleLabel", "Shared");}
+        @{Html.RenderAction("_PartialArticleLove", "Shared");}
         @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>

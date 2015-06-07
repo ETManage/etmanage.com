@@ -23,5 +23,6 @@ namespace ET.Sys_DEF
          public String TypeLevel { get; set; }
          public Int32? Status { get; set; }
          public Boolean? IsOnlyNav { get; set; }
+         public String Target { get; set; }
     }
 }

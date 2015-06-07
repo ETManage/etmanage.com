@@ -247,5 +247,57 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogViewRecordInfo>().DeleteInstances(Condition) > 0;
         }
         #endregion
+
+
+        #region 留言板
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogMessageInfo(BlogMessageInfo info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogMessageInfo>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogMessageInfo>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogMessageInfo(string Condition)
+        {
+            return new TBaseDAL<BlogMessageInfo>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogMessageInfo Get_BlogMessageInfoByID(string infoid)
+        {
+            BlogMessageInfo info = null;
+            info = new TBaseDAL<BlogMessageInfo>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogMessageInfo Get_BlogMessageInfo(string Condition)
+        {
+            BlogMessageInfo info = null;
+            info = new TBaseDAL<BlogMessageInfo>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogMessageInfo> List_BlogMessageInfo(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogMessageInfo>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogMessageInfo> PageList_BlogMessageInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogMessageInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
+
     }
 }

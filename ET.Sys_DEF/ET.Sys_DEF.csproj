@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BlogMessageInfo.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
     <Compile Include="GTD\GTDRecycle.cs" />
     <Compile Include="GTD\GTDProject.cs" />

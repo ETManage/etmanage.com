@@ -17,7 +17,8 @@ namespace ET.Web
 
             routes.MapRoute("Login", "Login",
                             new { controller = "Blog", action = "Login" });
-
+            //routes.MapRoute("Detail", "Detail/{id}",
+            //    new { controller = "Design", action = "Detail", id = UrlParameter.Optional });
 
             //设置默认Area
             routes.MapRoute(
@@ -26,6 +27,7 @@ namespace ET.Web
                         new { controller = "Blog", action = "Index", id = UrlParameter.Optional }, // 参数默认值
                         new[] { "Ed.Web.Areas.Manage" } //默认控制器的命名空间
              ).DataTokens.Add("area", "Manage");//默认area 的控制器名称
+
            // routes.MapRoute(
            //     "Blog", // 路由名称
            //     "{action}/{id}", // 带有参数的 URL
@@ -37,5 +39,7 @@ namespace ET.Web
            //           new[] { "Ed.Web.Areas.Gtd" } //默认控制器的命名空间
            //).DataTokens.Add("area", "Gtd");//默认area 的控制器名称
         }
+
+
     }
 }

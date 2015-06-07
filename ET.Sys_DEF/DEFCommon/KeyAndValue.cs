@@ -19,6 +19,8 @@ namespace ET.Sys_DEF
         public String @checked { get; set; }
         public String reserve1 { get; set; }
         public String reserve2 { get; set; }
+         public String reserve3 { get; set; }
+         
         public List<KeyAndValue> children { get; set; }
 
         public String pid { get; set; }

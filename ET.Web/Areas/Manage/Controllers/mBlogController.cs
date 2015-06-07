@@ -60,12 +60,12 @@ namespace Web.Areas.Manage.Controllers
             info.ArticleAuthor = collection["ArticleAuthor"];
             if (string.IsNullOrEmpty(collection["ArticleUrl"]))
             {
-                info.ArticleUrl = "/blog/detail/" + info.ArticleID + "/";
+                info.ArticleUrl = "/blog/detail/" + info.ArticleID;
             }
             else
                 info.ArticleUrl = collection["ArticleUrl"];
-            if (!string.IsNullOrEmpty(collection["Status"])&&collection["Status"] == "on")
-                    info.Status = 1;
+            if (!string.IsNullOrEmpty(collection["Status"]) && collection["Status"] == "on")
+                info.Status = 1;
             else
                 info.Status = 0;
 
@@ -77,8 +77,7 @@ namespace Web.Areas.Manage.Controllers
                 info.IsRoll = true;
             else
                 info.IsRoll = false;
-            if (this.UserID!=Guid.Empty)
-            info.Creator = this.UserID.ToString();
+            info.Creator = this.UserID;
             info.ArticleLabel = collection["ArticleLabel"];
             info.ArticlePicture = collection["ArticlePicture"];
             info.ArticleContent = collection["ArticleContent"];
@@ -181,12 +180,12 @@ namespace Web.Areas.Manage.Controllers
             List<BlogTypeInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
-         [HttpGet]
+        [HttpGet]
         public JsonResult AjaxGetPTypeData(string infoid)
         {
             string condition = "";
             if (!string.IsNullOrEmpty(infoid))
-            condition = " AND CHARINDEX('" + infoid + "',TYPEID)=0";
+                condition = " AND CHARINDEX('" + infoid + "',TYPEID)=0";
             List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("TYPEID id,TYPENAME text,TYPEpID pid", ET.Constant.DBConst.TableNames.BlogTypeInfo, condition, "TYPESORT desc");
             list.Insert(0, new KeyAndValue() { id = "-1", text = "根目录" });
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -275,7 +274,7 @@ namespace Web.Areas.Manage.Controllers
             List<BlogRollInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogRollInfo("RollID,RollNAME,RollSORT", Condition, "RollSORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
-      
+
         [HttpPost]
         public ActionResult AjaxSaveRoll(FormCollection collection, string infoid)
         {
@@ -287,17 +286,17 @@ namespace Web.Areas.Manage.Controllers
                 IsInsert = true;
                 info = new BlogRollInfo();
             }
-         
+
             info.RollName = collection["RollName"];
             info.RollSort = collection["RollSort"];
-          
+
             info.RollUrl = collection["RollUrl"];
             if (!string.IsNullOrEmpty(collection["Status"]) && collection["Status"] == "on")
                 info.Status = 1;
             else
                 info.Status = 0;
 
-            
+
 
             if (new ET.Sys_BLL.BlogBLL().Operate_BlogRollInfo(info, IsInsert))
                 strResult = "true";
@@ -330,6 +329,81 @@ namespace Web.Areas.Manage.Controllers
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #endregion
+
+        #region 留言板
+        public ActionResult MessageQuery()
+        {
+            return View();
+        }
+            public ActionResult MessageManage()
+        {
+            return View();
+        }
+        public JsonResult AjaxQueryMessagePageList()
+        {
+            //接收datagrid传来的参数 
+            int pageIndex = int.Parse(Request["page"]);
+            int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', ARTICLETITLE)>0";
+            long RecordTotalCount = 0;
+            List<BlogMessageInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogMessageInfo("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult AjaxGetMessageDetail(string infoid)
+        {
+            if (string.IsNullOrEmpty(infoid))
+                return Json("", JsonRequestBehavior.AllowGet);
+            BlogMessageInfo info = new ET.Sys_BLL.BlogBLL().Get_BlogMessageInfoByID(infoid);
+            if (info == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
+            return Json(info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AjaxSaveMessage(FormCollection collection, string infoid)
+        {
+            bool IsInsert = false;
+            string strResult = "false";
+            BlogMessageInfo info = new ET.Sys_BLL.BlogBLL().Get_BlogMessageInfoByID(infoid);
+            if (info == null)
+            {
+                return Content(strResult);
+               
+            }
+            info.ReplyTime = DateTime.Now;
+            info.ReplyContent = collection["ReplyContent"];
+           
+            if (!string.IsNullOrEmpty(collection["Status"]) && collection["Status"] == "on")
+                info.Status = 1;
+            else
+                info.Status = 0;
+
+            if (new ET.Sys_BLL.BlogBLL().Operate_BlogMessageInfo(info, false))
+                strResult = "true";
+            return Content(strResult);
+        }
+        public ActionResult AjaxAuditNoPass(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.PublicBLL().ExecuteSql("update BlogMessageInfo set status=-1 where MsgID in (" + infoid + ")")>0)
+                return Content("true");
+            else
+                return Content("false");
+
+           
+        }
+        public ActionResult AjaxAuditPass(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.PublicBLL().ExecuteSql("update BlogMessageInfo set status=1 where MsgID in (" + infoid + ")") > 0)
+                return Content("true");
+            else
+                return Content("false");
+
+
+        }
         #endregion
     }
 }

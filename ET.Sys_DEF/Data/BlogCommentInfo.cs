@@ -22,7 +22,8 @@ namespace ET.Sys_DEF
          public String Creator { get; set; }
          public String CreatorEmail { get; set; }
          public String CreatorUrl { get; set; }
-         
 
+         public String CommentPID { get; set; }
+         public Int32? Status { get; set; }
     }
 }

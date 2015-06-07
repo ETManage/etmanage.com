@@ -8,8 +8,8 @@ using System.Data;
 namespace ET.Sys_DEF
 {
      [Serializable]
-     [Table(TableName = "ShopGoodInfo", PrimaryKey = "GoodID", PrimaryKeyType = typeof(Guid))]
-    public class ShopGoodInfo
+     [Table(TableName = "DesignGoodInfo", PrimaryKey = "GoodID", PrimaryKeyType = typeof(Guid))]
+    public class DesignGoodInfo
     {
         [PrimaryKey(true)]
          public Guid GoodID { get; set; }
@@ -28,5 +28,7 @@ namespace ET.Sys_DEF
          public String GoodPicture { get; set; }
 
          public Int32? Status { get; set; }
+
+         public Int64? LoveCount { get; set; }
     }
 }

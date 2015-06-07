@@ -304,14 +304,10 @@ namespace ET.Sys_BLL
         public User_Full_Info Get_User_Info(string userid)
         {
             User_Full_Info info = new User_Full_Info();
-            string Condition = " AND UserID=" + userid;
+            string Condition = " AND UserID='" + userid+"'";
             info.userbaseinfo = new TBaseDAL<UserBaseInfo>().GetInstanceByCondition(Condition);
             info.userstuinfo = new TBaseDAL<UserPropertyInfo>().GetInstanceByCondition(Condition);
-            List<UserRoleLink> roles = new TBaseDAL<UserRoleLink>().GetInstancesByCondition(Condition);
-            foreach (UserRoleLink role in roles)
-            {
-                info.userrole.Add(role);
-            }
+            info.userrole = new TBaseDAL<UserRoleLink>().GetInstancesByCondition(Condition);
             return info;
         }
 

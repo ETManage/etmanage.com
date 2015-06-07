@@ -103,20 +103,22 @@ namespace ET.Constant.DBConst
         /// 博客文章收集信息表
         /// </summary>
         public const string BlogArticleFavoriteInfo = "BlogArticleFavoriteInfo";
-        
+        public const string BlogCommentInfo = "BlogCommentInfo";
+        public const string BlogRollInfo = "BlogRollInfo";
+        public const string BlogViewRecordInfo = "BlogViewRecordInfo";
         #endregion
 
 
-        #region  购物平台
+        #region  创意设计
         
                     /// <summary>
         /// 商品类别表
         /// </summary>
-        public const string ShopTypeInfo = "ShopTypeInfo";
+        public const string DesignTypeInfo = "DesignTypeInfo";
         /// <summary>
         /// 商品信息表
         /// </summary>
-        public const string ShopGoodInfo = "ShopGoodInfo";
+        public const string DesignGoodInfo = "DesignGoodInfo";
         #endregion
 
         #region GTD平台

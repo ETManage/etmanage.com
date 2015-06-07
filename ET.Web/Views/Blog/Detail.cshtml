@@ -16,7 +16,7 @@
                 <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a href="/articlelist/@ViewBag.ArticleType.TypeID">@ViewBag.ArticleType.TypeName</a></span> <span class="muted"><i class="fa fa-user"></i> West</span> <time class="muted">
                     <i class="fa fa-clock-o"></i><span class="time timeago" title="@ViewBag.ArticleInfo.CreateTime">
                     </span>
-                </time> <span class="muted" style="display:none;"><i class="fa fa-eye"></i> @ViewBag.ArticleInfo.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a href="#comments">@ViewBag.listArticleComment.Count 评论</a></span>
+                </time> <span class="muted" style="display:none;"><i class="fa fa-eye"></i> @ViewBag.ArticleInfo.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a href="#comments">@ViewBag.listArticleCommentCount 评论</a></span>
             </div>
         </header>
         <article class="article-content">
@@ -75,16 +75,18 @@
 
         <div id="respond" class="no_webshot">
             <form action="#" method="post" id="commentform">
-                <div class="comt-title"><div class="comt-avatar fLeft"> <img alt="" src="/images/blog/default.png" class="avatar avatar-54 photo avatar-default" height="54" width="54"></div><div class="comt-author fLeft"> 发表我的评论</div> <a id="cancel-comment-reply-link" class="fRight" href="javascript:;">取消评论</a></div><div class="comt">
+                <div class="comt-title"><div class="comt-avatar fLeft"> <img alt="" src="/images/blog/default.png" class="avatar avatar-54 photo avatar-default" height="54" width="54"></div><div class="comt-author fLeft"> 发表我的评论</div> <a id="cancel-comment-reply-link" class="fRight" href="javascript:;">取消评论</a></div>
+                <div class="comt">
                     <div class="comt-box">
                         <textarea placeholder="写点什么..." class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
                         <div class="comt-ctrl">
-                            <button class="btn btn-primary fRight" type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-check-square-o"></i> 提交评论</button><div class="comt-tips fRight"><input type="hidden" name="comment_post_ID" value="3677" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"><div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div><div class="comt-tip comt-error" style="display: none;">#</div></div> <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="fa fa-smile-o"></i> 表情</span> <span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
+                            <button class="btn btn-primary fRight" type="button" name="submit" id="submit" tabindex="5"><i class="fa fa-check-square-o"></i> 提交评论</button><div class="comt-tips fRight"><input type="hidden" name="comment_post_ID" value="3677" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="-1"><div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div><div class="comt-tip comt-error" style="display: none;">#</div></div> <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="fa fa-smile-o"></i> 表情</span> <span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
                         </div>
                     </div>
                     <div class="comt-comterinfo" id="comment-author-info">
                         <h4>Hi，您需要填写昵称和邮箱！</h4><ul>
                             <input type="hidden" name="articleid" value="@ViewBag.ArticleInfo.ArticleID" />
+                            <input type="hidden" name="CommentPID" value="@ViewBag.ArticleInfo.ArticleID" />
                             <li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="@ViewBag.LoginUserName" tabindex="2" placeholder="昵称"><span class="help-inline">昵称 (必填)</span></li>
                             <li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="@ViewBag.LoginUserEMail" tabindex="3" placeholder="邮箱"><span class="help-inline">邮箱 (必填)</span></li>
                             <li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="help-inline">网址</span></li>
@@ -95,23 +97,20 @@
         </div>
 
         <div id="postcomments">
-            <div id="comments"> <i class="fa fa-comments-o"></i> <b> (@ViewBag.listArticleComment.Count)</b>个小伙伴有话说</div><ol class="commentlist">
+            <div id="comments"> <i class="fa fa-comments-o"></i> <b> (@ViewBag.listArticleCommentCount)</b>个小伙伴有话说</div>
 
-                @foreach (ET.Sys_DEF.BlogCommentInfo itemComment in ViewBag.listArticleComment)
-                {
-                    <li class="comment even thread-even depth-1" id="comment-@itemComment.CommentID"><div class="c-avatar"><img alt="" data-original="/avatar/471c551b724ce9a601ec4f87677551d1.png" class="avatar avatar-54 photo" height="54" width="54" src="/images/blog/default.png"><div class="c-main" id="div-comment-@itemComment.CommentID">@itemComment.CommentContent<div class="c-meta"><span class="c-author">@itemComment.Creator</span>@itemComment.CreateTime.Value.ToString("yyyy-MM-dd HH:mm")<a class="comment-reply-link" href="@ViewBag.ArticleInfo.ArticleUrl?replytocom=@itemComment.CommentID#respond" onclick="return addComment.moveForm('div-comment-@itemComment.CommentID', '@itemComment.CommentID', 'respond', '@ViewBag.ArticleInfo.ArticleID')">回复</a></div></div></div></li>
-
-                }
-            </ol><div class="commentnav"></div>
+            @Html.Raw(ViewBag.listArticleComment);
+            <div class="commentnav"></div>
         </div>
 
     </div>
     <div class="main-right">
-        @{Html.RenderAction("_GetPartialArticleLabel");}
-        @{Html.RenderAction("_GetPartialArticleLove");}
+        @{Html.RenderAction("_PartialArticleLabel", "Shared");}
+        @{Html.RenderAction("_PartialArticleLove", "Shared");}
         @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>
 <script type="text/javascript">
     @Html.Raw(ViewBag.scriptIsFavorite)
+
 </script>

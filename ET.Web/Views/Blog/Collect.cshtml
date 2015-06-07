@@ -12,14 +12,17 @@
     <div class="main-left" id="#container">
         <div class="content">
             <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;分类：@ViewBag.InfoBlogTypeName </h1> </header>
-            @{Html.RenderPartial("_PartialArticleList");}
+            @foreach (ET.Sys_DEF.BlogArticleInfo item in ViewBag.listArticle)
+            {
+                Html.RenderPartial("_PartialArticleList", item);
+            }
         </div>
         @{Html.RenderPartial("_PartialLoadMore");}
     </div>
 
     <div class="main-right">
-        @{Html.RenderAction("_GetPartialArticleLabel");}
-        @{Html.RenderAction("_GetPartialArticleLove");}
+        @{Html.RenderAction("_PartialArticleLabel", "Shared");}
+        @{Html.RenderAction("_PartialArticleLove", "Shared");}
         @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>

@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UserAuthorize.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Controllers\AccountController.cs" />
@@ -148,10 +149,13 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
     <Compile Include="Areas\Manage\Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OneGTDController.cs" />
     <Compile Include="Controllers\PageErrorController.cs" />
-    <Compile Include="Areas\Manage\Controllers\mShopController.cs" />
+    <Compile Include="Areas\Manage\Controllers\mDesignController.cs" />
     <Compile Include="Controllers\WeiXinController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1232,6 +1236,21 @@
     <Content Include="Res\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="Res\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="Res\My97DatePicker\WdatePicker.js" />
+    <Content Include="Res\pictureView\artZoom.js" />
+    <Content Include="Res\pictureView\bg_shadow.gif" />
+    <Content Include="Res\pictureView\bg_thickbox.gif" />
+    <Content Include="Res\pictureView\foward.ico" />
+    <Content Include="Res\pictureView\icoin.png" />
+    <Content Include="Res\pictureView\JqPicView.js" />
+    <Content Include="Res\pictureView\JQPivView.css" />
+    <Content Include="Res\pictureView\loading.gif" />
+    <Content Include="Res\pictureView\lrtk.css" />
+    <Content Include="Res\pictureView\next.ico" />
+    <Content Include="Res\pictureView\none_347.gif" />
+    <Content Include="Res\pictureView\photoTool.gif" />
+    <Content Include="Res\pictureView\winForm.js" />
+    <Content Include="Res\pictureView\zoomin.cur" />
+    <Content Include="Res\pictureView\zoomout.cur" />
     <Content Include="Res\uploadify\jquery.uploadify-3.1.js" />
     <Content Include="Res\uploadify\jquery.uploadify-3.1.min.js" />
     <Content Include="Res\uploadify\uploadify-cancel.png" />
@@ -1262,7 +1281,7 @@
     <Content Include="Scripts\JS Minifier javascript在线压缩.html" />
     <Content Include="Scripts\Manage\Default.js" />
     <Content Include="Scripts\OneGtd\EntryComm.js" />
-    <Content Include="Scripts\Shop\editor.js" />
+    <Content Include="Scripts\Design\editor.js" />
     <Content Include="UpLoad\Blog\Image\temp1.jpg" />
     <Content Include="UpLoad\Blog\Image\temp2.jpeg" />
     <Content Include="UpLoad\ErrorTxt\说明.txt" />
@@ -1273,6 +1292,9 @@
     </Content>
     <Content Include="UpLoad\SystemImage\picture\20130812161814515625.ico" />
     <Content Include="Content\OneGtd\docs.min.css" />
+    <Content Include="Views\Shared\_LayoutBlog.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1293,6 +1315,8 @@
     <Folder Include="Res\easyui\demo\" />
     <Folder Include="Res\editor\upload\EditorFiles\" />
     <Folder Include="UpLoad\Blog\EditorFiles\" />
+    <Folder Include="UpLoad\Design\EditorFiles\" />
+    <Folder Include="UpLoad\Design\Image\" />
     <Folder Include="UpLoad\EditorFiles\" />
     <Folder Include="UpLoad\LoginLog\" />
     <Folder Include="UpLoad\Log\blog\" />
@@ -1300,9 +1324,8 @@
     <Folder Include="UpLoad\Log\system\" />
     <Folder Include="UpLoad\Log\weblogin\" />
     <Folder Include="UpLoad\Log\weixin\" />
-    <Folder Include="UpLoad\Shop\EditorFiles\" />
-    <Folder Include="UpLoad\Shop\Image\" />
     <Folder Include="UpLoad\Temp\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1376,6 +1399,8 @@
     <Content Include="Home\img\clients\.DS_Store" />
     <Content Include="Home\img\works\.DS_Store" />
     <Content Include="Home\js\.DS_Store" />
+    <Content Include="Areas\Manage\Views\mBlog\MessageQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\MessageManage.cshtml" />
     <None Include="Properties\PublishProfiles\ETBlog.pubxml" />
     <Content Include="Res\bootstrap\bootstrap-3.3.4.zip" />
     <Content Include="Res\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -1401,34 +1426,30 @@
     <Content Include="Areas\Manage\Views\Organization\PositionManage.cshtml" />
     <Content Include="Areas\Manage\Views\Organization\UserManage.cshtml" />
     <Content Include="Areas\Manage\Views\Organization\UserQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mShop\GoodManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mShop\GoodQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mShop\TypeManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mShop\TypeQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\GoodManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\GoodQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\TypeManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\TypeQuery.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutBlog.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\Blog\Search.cshtml" />
     <Content Include="Views\Blog\Original.cshtml" />
     <Content Include="Views\Blog\Collect.cshtml" />
-    <Content Include="Views\Blog\Picture.cshtml" />
+    <Content Include="Views\Design\Index.cshtml" />
     <Content Include="Views\Blog\PageOk.cshtml" />
     <Content Include="Views\Blog\Login.cshtml" />
     <Content Include="Views\Blog\Logout.cshtml" />
     <Content Include="Views\Blog\UserCenter.cshtml" />
-    <Content Include="Views\Blog\ArticleList.cshtml" />
     <Content Include="Views\Blog\ArticleTag.cshtml" />
-    <Content Include="Views\Blog\PictureDetail.cshtml" />
+    <Content Include="Views\Design\Detail.cshtml" />
     <Content Include="Views\PageError\Error404.cshtml" />
-    <Content Include="Views\Blog\FavoritePic.cshtml" />
-    <Content Include="Views\Blog\FavoriteArt.cshtml" />
     <Content Include="Views\Blog\UserSetting.cshtml" />
     <Content Include="Views\Blog\AdTest.cshtml" />
     <Content Include="Views\Blog\QQLoginCallBack.cshtml" />
     <Content Include="Scripts\Blog\upload.ashx" />
     <Content Include="Scripts\Blog\saveremoteimg.ashx" />
-    <Content Include="Scripts\Shop\upload.ashx" />
-    <Content Include="Scripts\Shop\saveremoteimg.ashx" />
+    <Content Include="Scripts\Design\upload.ashx" />
+    <Content Include="Scripts\Design\saveremoteimg.ashx" />
     <Content Include="Views\Blog\HotCollect.cshtml" />
     <Content Include="Views\Shared\_PartialArticleLabel.cshtml" />
     <None Include="Views\Blog\QQRegister.cshtml" />
@@ -1438,7 +1459,7 @@
     <Content Include="Views\Shared\_PartialBlogroll.cshtml" />
     <Content Include="Views\Shared\_PartialLoadMore.cshtml" />
     <Content Include="Views\Shared\_PartialArticleList.cshtml" />
-    <Content Include="Views\Shared\_PartialWxCode.cshtml" />
+    <Content Include="Views\Shared\_PartialToolbar.cshtml" />
     <Content Include="Views\Shared\_OneGTDPartial.cshtml" />
     <Content Include="Views\OneGTD\Finish.cshtml" />
     <Content Include="Views\OneGTD\InBox.cshtml" />
@@ -1450,6 +1471,14 @@
     <Content Include="Views\OneGTD\TaskEdit.cshtml" />
     <Content Include="Views\OneGTD\ToDay.cshtml" />
     <Content Include="Views\OneGTD\Tomorrow.cshtml" />
+    <Content Include="Views\Shared\_PartialLoginStatus.cshtml" />
+    <Content Include="Views\Shared\_PartialArticleComment.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialNav.cshtml" />
+    <Content Include="Views\Shared\_PartialNotice.cshtml" />
+    <Content Include="Views\Shared\Partial1.cshtml" />
+    <Content Include="Views\Shared\_PartialBlogFooter.cshtml" />
+    <Content Include="Views\Shared\_PartialWxCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ET.Constant\ET.Constant.csproj">
