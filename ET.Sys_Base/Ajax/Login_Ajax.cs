@@ -22,9 +22,8 @@ namespace ET.Sys_Base
             UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
-                string sKey = info.UserID.ToString();
-                string onlineUser = Convert.ToString(HttpContext.Current.Cache[sKey]);
-                if (onlineUser == null || onlineUser == String.Empty || username == "etmanage")
+                ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
+                if (recorder.GetUserList().Where(i => i.UserName == info.UserID.ToString()).Count() == 0 || username == "etadmin")
                 {
                     LoginRecord(info);
                     return "true";
@@ -67,9 +66,8 @@ namespace ET.Sys_Base
             UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
-                string sKey = info.UserID.ToString();
-                string onlineUser = Convert.ToString(HttpContext.Current.Cache[sKey]);
-                if (onlineUser == null || onlineUser == String.Empty || username == "etadmin")
+                ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
+                if (recorder.GetUserList().Where(i => i.UserName == info.UserID.ToString()).Count() == 0 || username == "etadmin")
                 {
                     WebLoginRecord(info, IsRememberMe);
                     return "true";
@@ -133,17 +131,25 @@ namespace ET.Sys_Base
                 return "false";
         }
 
-        public void GetCurrentUserInfo(string userID)
+        public CurrentUserInfo GetCurrentUserInfo(string userID)
         {
-            User_Full_Info info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
-
             CurrentUserInfo userinfo = new CurrentUserInfo();
-            userinfo.UserID = info.userbaseinfo.UserID;
-            userinfo.UserName = info.userbaseinfo.UserName;
-            userinfo.UserCNName = info.userstuinfo.CNName;
-            var roleIDs = info.userrole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
-            userinfo.RoleIDS = roleIDs;
-            System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
+            User_Full_Info info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
+            if (info != null)
+            {
+                
+                userinfo.UserID = info.userbaseinfo.UserID;
+                userinfo.UserName = info.userbaseinfo.UserName;
+                userinfo.UserCNName = info.userstuinfo.CNName;
+                var roleIDs = info.userrole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
+                userinfo.RoleIDS = roleIDs;
+                System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
+            }
+            else
+            {
+                Logout();
+            }
+            return userinfo;
         }
 
         public void LoginRecord(UserBaseInfo info)
@@ -158,7 +164,7 @@ namespace ET.Sys_Base
             userinfo.RoleIDS = roleIDs;
             FormAuthService.SignIn(info.UserID.ToString(), false, new string[] { "admin" });
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
-
+            ET.Sys_Base.OnlineUser.OnlineHttpModule.ProcessRequest();
             try
             {
                 ET.ToolKit.Common.TxtHelper txtHelper = new ET.ToolKit.Common.TxtHelper();
@@ -188,7 +194,7 @@ namespace ET.Sys_Base
             userinfo.RoleIDS = roleIDs;
             FormAuthService.SignIn(info.UserID.ToString(), IsRememberMe, new string[] { "user" });
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
-
+            ET.Sys_Base.OnlineUser.OnlineHttpModule.ProcessRequest();
             try
             {
                 ET.ToolKit.Common.TxtHelper txtHelper = new ET.ToolKit.Common.TxtHelper();
@@ -215,7 +221,7 @@ namespace ET.Sys_Base
             System.Web.HttpContext.Current.Session.Abandon();
             return "true";
         }
-    
+
         public string CheckUserName(string username)
         {
             username = StringHelper.ClearSqlDangerous(username);

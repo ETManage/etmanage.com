@@ -22,7 +22,7 @@ public class saveremoteimg : IHttpHandler
 
 
     private string upExt = ",jpg,jpeg,gif,png,bmp,";  //上传扩展名
-    private string attachDir = "UpLoad/Shop/EditorFiles/";        //上传文件保存路径，开头不要带/
+    private string attachDir = "UpLoad/Design/EditorFiles/";        //上传文件保存路径，开头不要带/
     private int dirType = 1;                    // 1:按天存入目录 2:按月存入目录 3:按扩展名存目录  建议使用按天存
     private int maxAttachSize = 20971520;        // 最大上传大小，默认是20M
     public void ProcessRequest (HttpContext context) {

@@ -55,7 +55,7 @@ h6, .h6 { margin-top: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-s
 .bottombar { width: 1200px; margin: 0 auto 25px; }
 .bottombar-inner { border-top: 1px solid #f3f6f9; padding-top: 10px; }
 
-    .bottombar-inner h4 { font-weight: normal; width: 214px; height: 43px; line-height: 43px; overflow: hidden;font: 16px/1.5 'Microsoft Yahei',Arial,Helvetica,sans-serif;  color: #333; }
+    .bottombar-inner h4 { font-weight: normal; width: 214px; height: 43px; line-height: 43px; overflow: hidden; font: 16px/1.5 'Microsoft Yahei',Arial,Helvetica,sans-serif; color: #333; }
 .bot-left { float: left; width: 350px; }
 .bot-center { float: left; width: 500px; }
 .bot-right { float: right; width: 325px; }
@@ -99,7 +99,7 @@ h6, .h6 { margin-top: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-s
     .nav-mo .nav-lis, .nav-mo .nav-home { float: left; position: relative; z-index: 20; margin: 0 5px; *margin: 0 2px; height: 24px; }
 
         .nav-mo .nav-home a.n-c:hover { color: #f60; text-decoration: none; }
-
+        .nav-mo  .selected { color: #f60; text-decoration: none; }
     .nav-mo .nav-w-lis { margin: 0 0 0 5px; }
 
     .nav-mo .nav-x-lis { width: 80px; margin: 0 10px 0 0; }
@@ -304,7 +304,7 @@ h6, .h6 { margin-top: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-s
     .scbar_btn_td .pn { box-shadow: 0 1px 0 #f5f5f5; }
 
 
-.archive-header { background-color: #fbfbfb; padding: 5px 20px; margin-bottom: 1px; }
+.archive-header { background-color: #fbfbfb; padding: 5px 20px; margin-bottom: 10px; }
 
     .archive-header h1 { font-size: 22px; color: #7a6f6f; font-weight: normal; }
 
@@ -360,8 +360,9 @@ h6, .h6 { margin-top: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-s
 
     .speedbar .btn-group { float: right; margin-left: 6px; }
 
+/*west控制图片自由缩放
 img { max-width: 100%; width: auto\9; height: auto; vertical-align: middle; border: 0; -ms-interpolation-mode: bicubic; }
-
+*/
 code { padding: 2px 4px; color: #d14; background-color: #fbfbfb; border: 1px solid #e1e1e8; white-space: nowrap; font-size: 14px; }
 
 code, pre { padding: 0 3px 2px; font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace !important; color: #444; border-radius: 3px; }
@@ -1092,7 +1093,20 @@ button.btn, input[type="submit"].btn { *padding-top: 3px; *padding-bottom: 3px; 
 
 .alert-info { background-color: #d9edf7; border-color: #bce8f1; color: #3a87ad; }
 
+/*热点 Start*/
+.popularity_posts { overflow: hidden; background-color: #fff; padding: 0px 10px 0 10px; margin-bottom: 10px; }
 
+    .popularity_posts a:hover { color: #d9534f; }
+
+.popularity_title { position: relative; height: 45px; border-bottom: 1px solid #90bba8; margin: 0px 10px; }
+
+    .popularity_title h2 { font-family: 'Microsoft Yahei'; font-size: 16px; font-weight: normal; line-height: 45px; color: #1abc9c; }
+.popularity_img { width: 100%; overflow: hidden; text-align: center; padding-top: 10px; }
+
+.popularity_box { float: left; overflow: hidden; width: 25%; padding-bottom: 15px; height: 180px; }
+
+    .popularity_box .r_title { line-height: 25px; height: 50px; font-size: 14px; overflow: hidden; float: left; padding: 10px 10px 0 10px; text-align: left; }
+/*热点 End*/
 
 /*广告位 Start*/
 .ad-big-box { margin-left: 2px; }

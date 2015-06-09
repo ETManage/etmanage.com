@@ -6,8 +6,8 @@
     博客类别列表
 }
 @section Header{
-    @Styles.Render("~/Res/autocompleteStyle")
-    @Scripts.Render("~/Res/autocompleteJs")
+<link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
 }
 
 <div id="ManageBody">
@@ -67,7 +67,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mShop/AjaxQueryTypePageList", method: 'get',
+            url: "/mDesign/AjaxQueryTypePageList", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -83,7 +83,7 @@
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/mShop/AjaxSearchType' };
+        var options = { serviceUrl: '/mDesign/AjaxSearchType' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
 
@@ -100,7 +100,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return a.TypeID; }).toString();
-                $.post('/Shop/AjaxDeleteModule', { infoid: ls }, function (res) {
+                $.post('/Design/AjaxDeleteModule', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
 

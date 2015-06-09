@@ -18,18 +18,12 @@ namespace Web.Areas.Manage.Controllers
         {
             getSystemConfig();
             //左侧模块权限
-
-            if (ApplicationConfig.dirApplicationRoleConfig == null)
-            {
-                ApplicationConfig.dirApplicationRoleConfig = new Dictionary<string, List<string>>();
-            }
             if (ApplicationConfig.dirApplicationRoleConfig.Keys.Count==0|| !ApplicationConfig.dirApplicationRoleConfig.Keys.Contains(this.CurrentUserInfo.RoleIDS))
             {
                 ApplicationConfig.dirApplicationRoleConfig.Add(this.CurrentUserInfo.RoleIDS, new ET.Sys_BLL.SystemBLL().GetUserALLAction(this.UserID.ToString()));
             }
             ViewBag.STU_CNNAME = this.CurrentUserInfo.UserCNName;
-            int i = GetOnlineUser();
-            ViewBag.ONLINE_USER_COUNT = i;
+            ViewBag.ONLINE_USER_COUNT = GetOnlineUser();
             return View();
         }
 

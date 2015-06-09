@@ -140,7 +140,7 @@ namespace System.Web.Mvc
                     {
                         if (System.Web.HttpContext.Current.Cache[strUserID] == null || System.Web.HttpContext.Current.Cache[strUserID].ToString() != "out")
                         {
-                            new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
+                            return new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
                         }
                         else
                             ToLogin();

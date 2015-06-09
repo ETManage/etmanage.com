@@ -1,20 +1,23 @@
-﻿@foreach (ET.Sys_DEF.BlogArticleInfo item in ViewBag.listArticle)
-{
+﻿@model ET.Sys_DEF.BlogArticleInfo
+
     <article class="excerpt">
         <header>
-            <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/.ArticleLabel.Split(',')[0]/">@item.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
-            <h2><a target="_blank" href="@{}" title="@item.ArticleTitle">@item.ArticleTitle</a></h2>
+            <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/.ArticleLabel.Split(',')[0]/">@Model.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
+            <h2><a target="_blank" href="@Model.ArticleUrl" title="@Model.ArticleTitle">@Model.ArticleTitle</a></h2>
         </header>
-        <div class="focus">
-            <a target="_blank" href="@item.ArticleUrl"><img class="thumb" src="@item.ArticlePicture.Split(',')[0]" alt="@item.ArticleTitle" width="200" height="125"></a>
-        </div> <span class="note">
-            @ET.ToolKit.Common.StringHelper.BindDataFromString(item.ArticleDescription, 300);
+        @if (!string.IsNullOrEmpty(Model.ArticlePicture))
+        {
+            <div class="focus">
+                <a target="_blank" href="@Model.ArticleUrl"><img class="thumb" src="@Model.ArticlePicture.Split(',')[0]" alt="@Model.ArticleTitle" width="200" height="125" onerror="this.src = '/images/public/nopicture.jpg'"/></a>
+            </div>
+        }
+        <span class="note">
+            @ET.ToolKit.Common.StringHelper.BindDataFromString(Model.ArticleDescription, 300);
         </span><p class="auth-span">
             <span class="muted">
                 <i class="fa fa-clock-o"></i>
-                <span class="time timeago" title="@item.CreateTime"></span>(@item.CreateTime.Value.ToString("MM-dd"))
+                <span class="time timeago" title="@Model.CreateTime"></span>(@Model.CreateTime.Value.ToString("MM-dd"))
             </span>
-            <span class="muted"><i class="fa fa-eye"></i> @item.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="@item.ArticleUrl#comments">@item.ArticleSource 评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="@item.ArticleID" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">@item.LoveCount</span>喜欢</a></span>
+            <span class="muted"><i class="fa fa-eye"></i> @Model.AccessCount℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank" href="@Model.ArticleUrl#comments">@Model.ArticleSource 评论</a></span><span class="muted"> <a href="javascript:;" data-action="ding" data-id="@Model.ArticleID" id="Addlike" class="action"><i class="fa fa-heart-o"></i><span class="count">@Model.LoveCount</span>喜欢</a></span>
         </p>
-    </article> 
-}
+    </article>

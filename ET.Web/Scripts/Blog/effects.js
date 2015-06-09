@@ -130,7 +130,7 @@ function AddFavorite() {
         { TopNotify("抱歉！文章收藏失败！请刷新后重新尝试!", "error"); }
         else if (data == "nologin") {
             alert("抱歉！您还未登录无法收藏!");
-            location.href = "/blog/login?l=" + window.location;
+            location.href = "/account/login?l=" + window.location;
         }
     });
 

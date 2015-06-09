@@ -32,28 +32,25 @@
                 <ul>
                     @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listTopArticle)
                     {
-                        <li><a href="@itemArticle.ArticleUrl" target="_blank"><img onerror="this.src = '/images/public/nopicture.jpg'" src="@itemArticle.ArticlePicture.Split(',')[1]" width="830" alt="@itemArticle.ArticleTitle" /></a></li>
+                        <li><a href="@itemArticle.ArticleUrl" target="_blank"><img src="@itemArticle.ArticlePicture.Split(',')[1]" width="830" alt="@itemArticle.ArticleTitle" onerror="this.src = '/images/public/nopicture.jpg'" /></a></li>
                     }
                 </ul>
             </div>
-
-            @{Html.RenderPartial("_PartialArticleList");}
+            @foreach (ET.Sys_DEF.BlogArticleInfo item in ViewBag.listArticle)
+            {
+                Html.RenderPartial("_PartialArticleList", item);
+            }
 
         </div>
         @{Html.RenderPartial("_PartialLoadMore");}
     </div>
 
     <div class="main-right">
-        @{Html.RenderAction("_GetPartialArticleLabel");}
-        @{Html.RenderAction("_GetPartialArticleLove");}
-        @{Html.RenderAction("_GetPartialDemoDesign");}
-        @{Html.RenderAction("_GetPartialBlogroll");}
+        
+        @{Html.RenderAction("_PartialArticleLove", "Shared");}
+        @{Html.RenderAction("_PartialArticleLabel", "Shared");}
+        @{Html.RenderAction("_PartialDemoDesign", "Shared");}
+        @{Html.RenderAction("_PartialBlogroll", "Shared");}
         @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>
-
-
-
-
-
-

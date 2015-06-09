@@ -6,7 +6,7 @@
 <div class="widget d_postlist">
     <div class="title"><h2>点评榜</h2></div>
     <ul>
-        @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in ViewBag.listArticleComment)
+        @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in Model)
         {
             <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle" onerror="this.src = '/images/public/nopicture.jpg'" /></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.ArticleSource 点评</span></a></li>
 

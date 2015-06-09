@@ -4,22 +4,22 @@
 }
 
 @section Title{
-    @ViewBag.ShopGoodInfo.GoodName
+    @ViewBag.DesignGoodInfo.GoodName
 }
 @section Header{
 
 }<div class="content-wrap" style="background-color:#fff">
     <div id="#container">
         <script src="~/Scripts/jquery-min1.8.js"></script>
-        <h3 style="text-align:center;height:40px;line-height:40px;font-weight:bold;font-size:18px;">@ViewBag.ShopGoodInfo.GoodName</h3>
-        <script type="text/javascript" src="/Res/shop/PictureView/artZoom.js"></script>
+        <h3 style="text-align:center;height:40px;line-height:40px;font-weight:bold;font-size:18px;">@ViewBag.DesignGoodInfo.GoodName</h3>
+        <script type="text/javascript" src="/res/pictureview/artZoom.js"></script>
         <script type="text/javascript">    jQuery('a.artZoom').artZoom();</script>
-        <link href="/Res/shop/PictureView/JQPivView.css" rel="stylesheet" type="text/css" />
+        <link href="/res/PictureView/JQPivView.css" rel="stylesheet" type="text/css" />
         <div class="YXJpreview">
             <div id="preview">
                 <div id="spec-n1">
                     <div class="o-img">
-                        <a class="miniImg artZoom" id="OneBinPicA" href="@ViewBag.ShopGoodInfo.GoodPicture.Split(',')[0]" rel="@ViewBag.ShopGoodInfo.GoodPicture.Split(',')[0]"><img id="OneBinPic" alt="" src="@ViewBag.ShopGoodInfo.GoodPicture.Split(',')[0]" onerror="this.src = '/Res/shop/PictureView/none_347.gif'" /></a>
+                        <a class="miniImg artZoom" id="OneBinPicA" href="@ViewBag.DesignGoodInfo.GoodPicture.Split(',')[0]" rel="@ViewBag.DesignGoodInfo.GoodPicture.Split(',')[0]"><img id="OneBinPic" alt="" src="@ViewBag.DesignGoodInfo.GoodPicture.Split(',')[0]" onerror="this.src = '/Res/shop/PictureView/none_347.gif'" /></a>
                     </div>
                     <div class="switch">
                         <a id="foward">&nbsp;</a> <a id="next">&nbsp;</a>
@@ -32,9 +32,9 @@
                     </div>
                     <div id="spec-list">
                         <ul id="spec-list-imgs">
-                            @foreach (string item in ViewBag.ShopGoodInfo.GoodPicture.Split(','))
+                            @foreach (string item in ViewBag.DesignGoodInfo.GoodPicture.Split(','))
                             {
-                                <li class="curr"><img width="128" height="96" name="@item" alt="@ViewBag.ShopGoodInfo.GoodName" title="@ViewBag.ShopGoodInfo.GoodName" src="@item" /></li>
+                                <li class="curr"><img width="128" height="96" name="@item" alt="@ViewBag.DesignGoodInfo.GoodName" title="@ViewBag.DesignGoodInfo.GoodName" src="@item" /></li>
 
                             }
                         </ul>
@@ -42,13 +42,13 @@
                 </div>
                 <!--spec-n5 end-->
                 <div id="intro">
-                    @ViewBag.ShopGoodInfo.GoodName
+                    @ViewBag.DesignGoodInfo.GoodName
                 </div>
             </div>
             <div style="width: 1000px; border: 1px solid #C4C4C4; ">
                 <h3 style="background-color: #C4C4C4; height: 40px; line-height:40px;font-size:16px;padding-left:20px;">详细说明</h3>
                 <div style="line-height: 1.5; width: 980px; border: 1px solid #C4C4C4; padding: 10px; ">
-                    @ViewBag.ShopGoodInfo.GoodContent
+                    @ViewBag.DesignGoodInfo.GoodContent
                 </div>
             </div>
             <!--preview end-->
@@ -64,7 +64,7 @@
             </div>
             <a class="thickclose" href="#">×</a>
         </div>
-        <script src="/Res/shop/PictureView/JqPicView.js" type="text/javascript"></script>
+        <script src="/res/pictureview/JqPicView.js" type="text/javascript"></script>
         <script>InitPicView();</script>
 
     </div>

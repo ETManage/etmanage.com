@@ -40,7 +40,7 @@ namespace Web.Controllers
         public ActionResult _PartialLoginStatus()
         {
             string strHtml = @"<div class='user-ed' id='nologin'>
-                <a href='" + PublicHelper.GetHostAddress() + "/blog/login?t=0&l=" + Request.Url.ToString() + "' rel=\"nofollow\">免费注册</a><span class=\"ml10 mr10\">|</span><a href='" + PublicHelper.GetHostAddress() + "/blog/login?l=" + Request.Url.ToString() + "' rel=\"nofollow\">登录</a><br>                <span id=\"ibtnQQLogin\"></span></div>";
+                <a href='" + PublicHelper.GetHostAddress() + "/account/login?t=0&l=" + Request.Url.ToString() + "' rel=\"nofollow\">免费注册</a><span class=\"ml10 mr10\">|</span><a href='" + PublicHelper.GetHostAddress() + "/account/login?l=" + Request.Url.ToString() + "' rel=\"nofollow\">登录</a><br>                <span id=\"ibtnQQLogin\"></span></div>";
             if (this.IsLogin)
             {
                 UserPropertyInfo userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + this.UserID.ToString() + "'");
@@ -50,7 +50,7 @@ namespace Web.Controllers
                     bool IsQQLogin = false;
                     ViewBag.LoginUserName = userinfo.CNName;
                     ViewBag.LoginUserEMail = userinfo.EMail;
-                    strHtml = "<div class='user-ed' id='islogin'><div class='lot'><div class='fLeft cBlack'>" + userinfo.CNName + "</div><div class='fLeft'><a href='/blog/usercenter/' class='tit key' title='账号'><img src='/images/blog/noavatar_small.gif' onerror='this.onerror = null; this.src = '/images/blog/noavatar_small.gif''></a></div><ul><li class='um-reply'><strong class='vwmy " + (IsQQLogin ? "qq" : "") + "'><a href='/blog/usercenter/' class='user-name'>" + userinfo.CNName + "</a></strong></li><li><a href='javascript:alert(\'申请已发送\')'>申请转正</a></li><li><a href='/blog/usersetting/'>个人设置</a></li><li><a href='/blog/usercenter?s=myacticle' _style='background-image:url(/images/blog/thread_b.png) !important'>我的博文</a></li><li><a href='/blog/usercenter?s=myfavorite' _style='background-image:url(/images/blog/favorite_b.png) !important'>我的收藏</a></li><li class='last border-top1'><a href='/blog/logout'>退出</a></li></ul></div></div>";
+                    strHtml = "<div class='user-ed' id='islogin'><div class='lot'><div class='fLeft cBlack'>" + userinfo.CNName + "</div><div class='fLeft'><a href='/blog/usercenter/' class='tit key' title='账号'><img src='/images/blog/noavatar_small.gif' onerror='this.onerror = null; this.src = '/images/blog/noavatar_small.gif''></a></div><ul><li class='um-reply'><strong class='vwmy " + (IsQQLogin ? "qq" : "") + "'><a href='/blog/usercenter/' class='user-name'>" + userinfo.CNName + "</a></strong></li><li><a href='javascript:alert(\'申请已发送\')'>申请转正</a></li><li><a href='/blog/usersetting/'>个人设置</a></li><li><a href='/blog/usercenter?s=myacticle' _style='background-image:url(/images/blog/thread_b.png) !important'>我的博文</a></li><li><a href='/blog/usercenter?s=myfavorite' _style='background-image:url(/images/blog/favorite_b.png) !important'>我的收藏</a></li><li class='last border-top1'><a href='/account/logout'>退出</a></li></ul></div></div>";
                 }
             }
 
@@ -89,7 +89,13 @@ namespace Web.Controllers
         {
             return PartialView(GetArticleList(5, null, null, "ArticleSource desc,CreateTime DESC"));
         }
+        public ActionResult _PartialToolbar()
+        {
+            return PartialView(this.CurrentUserInfo);
 
+          }
+
+        
         /// <summary>
         /// 分页查询，返回ViewBag.listPager
         /// </summary>

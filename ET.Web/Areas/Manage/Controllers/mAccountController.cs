@@ -7,7 +7,7 @@ using ET.Sys_DEF;
 
 namespace Web.Areas.Manage.Controllers
 {
-    public class AccountController : WebControllerBase
+    public class mAccountController : WebControllerBase
     {
         //
         // GET: /Account/

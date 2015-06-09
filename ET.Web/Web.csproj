@@ -144,8 +144,9 @@
     <Compile Include="App_Start\UserAuthorize.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
-    <Compile Include="Areas\Manage\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Manage\Controllers\mAccountController.cs" />
     <Compile Include="Areas\Manage\Controllers\mBlogController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
     <Compile Include="Areas\Manage\Controllers\OrganizationController.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Account\Login.css" />
+    <Content Include="Content\Manage\Login.css" />
     <Content Include="Content\base.css" />
     <Content Include="Content\Blog\blog.css" />
     <Content Include="Content\Blog\login.css" />
@@ -442,6 +443,7 @@
     <Content Include="Images\Blog\set-vip.gif" />
     <Content Include="Images\Blog\thread_b.png" />
     <Content Include="Images\logo64x64.png" />
+    <Content Include="Images\Manage\logo.png" />
     <Content Include="Images\Manage\tiaotiao.png" />
     <Content Include="Images\OneGtd\loader.gif" />
     <Content Include="Images\OneGtd\more_down.jpg" />
@@ -1202,16 +1204,16 @@
     <Content Include="Res\editor\使用说明.txt" />
     <Content Include="Content\Manage\Default.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Account\buttonbg.png" />
-    <Content Include="Images\Account\cloud.png" />
-    <Content Include="Images\Account\light.png" />
-    <Content Include="Images\Account\loginbg1.png" />
-    <Content Include="Images\Account\loginbg2.png" />
-    <Content Include="Images\Account\loginbg3.png" />
-    <Content Include="Images\Account\loginbj.png" />
-    <Content Include="Images\Account\loginpassword.png" />
-    <Content Include="Images\Account\loginsj.png" />
-    <Content Include="Images\Account\loginuser.png" />
+    <Content Include="Images\Manage\mAccount\buttonbg.png" />
+    <Content Include="Images\Manage\mAccount\cloud.png" />
+    <Content Include="Images\Manage\mAccount\light.png" />
+    <Content Include="Images\Manage\mAccount\loginbg1.png" />
+    <Content Include="Images\Manage\mAccount\loginbg2.png" />
+    <Content Include="Images\Manage\mAccount\loginbg3.png" />
+    <Content Include="Images\Manage\mAccount\loginbj.png" />
+    <Content Include="Images\Manage\mAccount\loginpassword.png" />
+    <Content Include="Images\Manage\mAccount\loginsj.png" />
+    <Content Include="Images\Manage\mAccount\loginuser.png" />
     <Content Include="Images\Manage\blocks.gif" />
     <Content Include="Images\Manage\CategorizeMenu.png" />
     <Content Include="Images\Manage\directory.png" />
@@ -1257,7 +1259,7 @@
     <Content Include="Res\uploadify\uploadify.css" />
     <Content Include="Res\uploadify\uploadify.swf" />
     <Content Include="Res\uploadify\说明.txt" />
-    <Content Include="Scripts\Account\login.js" />
+    <Content Include="Scripts\Manage\login.js" />
     <Content Include="Res\autocomplete\autocomplete.css" />
     <Content Include="Scripts\Blog\editor.js" />
     <Content Include="Scripts\Blog\header.js" />
@@ -1312,8 +1314,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Content\Account\" />
     <Folder Include="Res\easyui\demo\" />
     <Folder Include="Res\editor\upload\EditorFiles\" />
+    <Folder Include="Scripts\Account\" />
     <Folder Include="UpLoad\Blog\EditorFiles\" />
     <Folder Include="UpLoad\Design\EditorFiles\" />
     <Folder Include="UpLoad\Design\Image\" />
@@ -1325,7 +1329,6 @@
     <Folder Include="UpLoad\Log\weblogin\" />
     <Folder Include="UpLoad\Log\weixin\" />
     <Folder Include="UpLoad\Temp\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1407,11 +1410,11 @@
     <Content Include="Res\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Res\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Res\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Areas\Manage\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Manage\Views\mAccount\Login.cshtml" />
     <Content Include="Areas\Manage\Views\System\Default.cshtml" />
     <Content Include="Res\autocomplete\jquery.autocomplete.js" />
     <Content Include="Scripts\common\jquery.comboarea.js" />
-    <Content Include="Areas\Manage\Views\Account\GoLogin.cshtml" />
+    <Content Include="Areas\Manage\Views\mAccount\GoLogin.cshtml" />
     <Content Include="Areas\Manage\Views\System\ModuleQuery.cshtml" />
     <Content Include="Areas\Manage\Views\System\ModuleManage.cshtml" />
     <Content Include="Areas\Manage\Views\mBlog\ArticleQuery.cshtml" />
@@ -1437,8 +1440,8 @@
     <Content Include="Views\Blog\Collect.cshtml" />
     <Content Include="Views\Design\Index.cshtml" />
     <Content Include="Views\Blog\PageOk.cshtml" />
-    <Content Include="Views\Blog\Login.cshtml" />
-    <Content Include="Views\Blog\Logout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Blog\UserCenter.cshtml" />
     <Content Include="Views\Blog\ArticleTag.cshtml" />
     <Content Include="Views\Design\Detail.cshtml" />
@@ -1452,8 +1455,7 @@
     <Content Include="Scripts\Design\saveremoteimg.ashx" />
     <Content Include="Views\Blog\HotCollect.cshtml" />
     <Content Include="Views\Shared\_PartialArticleLabel.cshtml" />
-    <None Include="Views\Blog\QQRegister.cshtml" />
-    <Content Include="Views\Blog\ValidateCode.cshtml" />
+    <Content Include="Views\Account\ValidateCode.cshtml" />
     <Content Include="Views\Shared\_PartialArticleLove.cshtml" />
     <Content Include="Views\Shared\_PartialDemoDesign.cshtml" />
     <Content Include="Views\Shared\_PartialBlogroll.cshtml" />
@@ -1476,7 +1478,6 @@
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Shared\_PartialNav.cshtml" />
     <Content Include="Views\Shared\_PartialNotice.cshtml" />
-    <Content Include="Views\Shared\Partial1.cshtml" />
     <Content Include="Views\Shared\_PartialBlogFooter.cshtml" />
     <Content Include="Views\Shared\_PartialWxCode.cshtml" />
   </ItemGroup>

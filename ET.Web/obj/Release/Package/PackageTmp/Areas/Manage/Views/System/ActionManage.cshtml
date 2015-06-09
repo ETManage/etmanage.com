@@ -51,6 +51,8 @@
     $(function () {
         //启用快捷键 83/ALT+s保存
         $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        //启用快捷键 83/ALT+c关闭
+        $(window).ApplyQuickKey(67, parent.windowClose);
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",

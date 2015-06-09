@@ -44,6 +44,10 @@
       <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ET.AssemblyLibrary\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -58,7 +62,16 @@
     </Compile>
     <Compile Include="ControllerBase\ManageControllerBase.cs" />
     <Compile Include="ControllerBase\WebControllerBase.cs" />
-    <Compile Include="Interfaces\IUserInfo.cs" />
+    <Compile Include="OnlineUser\Cmd\OnlineUserCmdBase.cs" />
+    <Compile Include="OnlineUser\Cmd\OnlineUserDeleteCmd.cs" />
+    <Compile Include="OnlineUser\Cmd\OnlineUserInsertCmd.cs" />
+    <Compile Include="OnlineUser\OnlineHttpModule.cs" />
+    <Compile Include="OnlineUser\OnlineUser.cs" />
+    <Compile Include="OnlineUser\OnlineUserDB.cs" />
+    <Compile Include="OnlineUser\OnlineUserRecorder.cs" />
+    <Compile Include="OnlineUser\OnlineUserRecorderFactory.cs" />
+    <Compile Include="OnlineUser\SupportFilterAttribute.cs" />
+    <Compile Include="Public\DateTimeExtention.cs" />
     <Compile Include="Public\FormAuthService.cs" />
     <Compile Include="Public\PublicHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

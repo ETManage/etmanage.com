@@ -21,7 +21,7 @@
                     </th>
                     <td>
                         <select name="TypePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
-                                data-options="required:true,method:'get',url:'/Blog/AjaxGetPTypeData',value:-1"></select>
+                                data-options="required:true,method:'get',url:'/mBlog/AjaxGetPTypeData',value:-1"></select>
                     </td>
                 </tr>
                 <tr>
@@ -77,14 +77,7 @@
                         <input name="TypeSort" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
                     </td>
                 </tr>
-                <tr>
-                    <th>
-                        类别URL：
-                    </th>
-                    <td>
-                        <input name="TypeUrl" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">一级栏目必填</span>
-                    </td>
-                </tr>
+               
             </table>
         </form>
     </div>
@@ -95,6 +88,8 @@
     $(function () {
         //启用快捷键 83/ALT+s保存
         $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        //启用快捷键 83/ALT+c关闭
+        $(window).ApplyQuickKey(67, parent.windowClose);
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",

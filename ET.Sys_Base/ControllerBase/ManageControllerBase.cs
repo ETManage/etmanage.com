@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Xml;
 using ET.Sys_DEF;
 using ET.ToolKit.Common;
-
+using System.Linq;
 
 namespace System.Web.Mvc
 {
@@ -24,7 +24,9 @@ namespace System.Web.Mvc
 
         public int GetOnlineUser()
         {
-            return System.Web.HttpContext.Current.Cache.Count - 4;
+            ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
+                return recorder!=null?recorder.GetUserCount():0;
+            
         }
         /// <summary>
         /// 读取系统配置,其中ViewBag.PageTitle：标题，ViewBag.PageLogo：Logo图片，ViewBag.PageCopyright：版权-
@@ -87,12 +89,12 @@ namespace System.Web.Mvc
                 if (usertemp == null)
                 {
 
-                    if (this.UserID != null)
+                    string strUserID = this.UserID;
+                    if (strUserID != null)
                     {
-                        string strUserID = this.UserID;
                         if (System.Web.HttpContext.Current.Cache[strUserID] == null || System.Web.HttpContext.Current.Cache[strUserID].ToString() != "out")
                         {
-                            new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
+                            return new ET.Sys_Base.Login_Ajax().GetCurrentUserInfo(strUserID);
                         }
                         else
                             ToLogin();
@@ -147,7 +149,7 @@ namespace System.Web.Mvc
         {
             try
             {
-                Response.Redirect("/Account/Login", true);
+                Response.Redirect("/mAccount/Login", true);
             }
             catch { }
         }

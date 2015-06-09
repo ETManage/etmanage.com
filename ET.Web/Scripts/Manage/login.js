@@ -28,7 +28,7 @@ function CheckForm() {
 function login(Cuser, Cpwd) {
 
     $.post(
-        "/account/ajaxlogin",
+        "/maccount/ajaxlogin",
         { Action: "post", strUserName: Cuser, strUserPass: Cpwd,strRememberMe:'1' },
         function (data, textStatus) {
             if (data == 'true') {

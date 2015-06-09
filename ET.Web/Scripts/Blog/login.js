@@ -225,7 +225,7 @@ function userlogout()
             if (result)
                 location.href = result;
             else
-                location.href = "/blog/logout";
+                location.href = "/account/logout";
 
         }
     });

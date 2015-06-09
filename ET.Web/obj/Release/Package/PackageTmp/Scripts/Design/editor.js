@@ -12,10 +12,10 @@ $.fn.extend({
         $(this).xheditor({
             tools: "full",
             clickCancelDialog:false,
-            upLinkUrl: "/Scripts/Shop/upload.ashx", upLinkExt: "zip,rar,txt",
-            upImgUrl: "/Scripts/Shop/upload.ashx", upImgExt: "jpg,jpeg,gif,png",
-            upFlashUrl: "/Scripts/Shop/upload.ashx", upFlashExt: "swf",
-            upMediaUrl: "/Scripts/Shop/upload.ashx", upMediaExt: "flv,mp4,mp3",
+            upLinkUrl: "/Scripts/Design/upload.ashx", upLinkExt: "zip,rar,txt",
+            upImgUrl: "/Scripts/Design/upload.ashx", upImgExt: "jpg,jpeg,gif,png",
+            upFlashUrl: "/Scripts/Design/upload.ashx", upFlashExt: "swf",
+            upMediaUrl: "/Scripts/Design/upload.ashx", upMediaExt: "flv,mp4,mp3",
             localUrlTest: /^https?:\/\/[^\/]*?(etmanage\.com)\//i,
             remoteImgSaveUrl: '/Scripts/Blog/saveremoteimg.ashx'
         });

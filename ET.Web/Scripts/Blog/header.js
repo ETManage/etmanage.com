@@ -107,7 +107,7 @@ function QQLoginTrue() {
             //用JS SDK调用OpenAPI
             QC.api("get_user_info", paras).success(function (s) {//指定接口访问成功的接收函数，s为成功返回Response对象
                 //成功回调，通过s.data获取OpenAPI的返回数据
-                alert("获取用户信息成功！当前用户昵称为：" + s.data.nickname + "当前用户头像地址：" + s.data.figureurl + "性别：" + s.data.gender + "");
+               // alert("获取用户信息成功！当前用户昵称为：" + s.data.nickname + "当前用户头像地址：" + s.data.figureurl + "性别：" + s.data.gender + "");
             }).error(function (f) {//指定接口访问失败的接收函数，f为失败返回Response对象
                 //失败回调
                 TopNotify("获取用户信息失败", "error");
@@ -120,7 +120,7 @@ function QQLoginTrue() {
                 qqpic = c.data.figureurl;
                 $.ajax({
                     type: "POST",
-                    url: "/blog/ajaxqqlogin",
+                    url: "/account/ajaxqqlogin",
                     data: { "u": openid, "p": accesstoken, "name": qqnickname, "sex": qqsex, "pic": escape(qqpic) },
                     error: function (data) { alert("" + data + "") },
                     success: function (data) {

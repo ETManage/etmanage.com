@@ -107,7 +107,7 @@
                                 <label for="validatecode" class="input-tips2">验证码：</label>
                                 <div class="inputOuter2">
                                     <input type="text" id="ivalidatecode" name="validatecode" maxlength="4" class="inputstyle3" />
-                                    <img id="GL_StandardCode" style="cursor: pointer;float:right;" src="/blog/validatecode?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                                    <img id="GL_StandardCode" style="cursor: pointer;float:right;" src="/account/validatecode?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
                                 </div>
 
                             </li>
@@ -135,7 +135,7 @@
 <script type="text/javascript">
 
     $("#GL_StandardCode").click(function () {
-        var newSrc = "/blog/validatecode?t=" + (new Date()).getTime();
+        var newSrc = "/account/validatecode?t=" + (new Date()).getTime();
         this.src = newSrc;
         return false;
     });

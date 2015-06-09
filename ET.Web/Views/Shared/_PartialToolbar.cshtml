@@ -1,18 +1,18 @@
-﻿@*@ 作用：右侧
-        作者：West
-        时间2015-05-02
+﻿@model ET.Sys_DEF.CurrentUserInfo
+@*@ 作用：右侧"用户快捷"栏目
+            作者：West
+            时间2015-05-02
     @*@
-
-<div class="toolbar" style="display:none;">
+<div class="toolbar">
     <ul class="icon_lists ">
         <div class="tool-lis">
             <i class="icon iconfont"><a href="@PublicHelper.GetHostAddress()/blog/usercenter/"><img src="@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif" onerror="this.onerror = null; this.src = '@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif'"></a></i>
-            <div class="name"><a href="@PublicHelper.GetHostAddress()/blog/usercenter">未激活用户</a></div>
+            <div class="name"><a href="@PublicHelper.GetHostAddress()/blog/usercenter" title="@Model.UserCNName">@Model.UserCNName</a></div>
             <ul>
-                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress()/usercenter/" class="user-name">liuweisime</a></strong> <a href="@PublicHelper.GetHostAddress()/blog/logout" class="y">退出</a></li>
+                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress()/usercenter/" class="user-name">@Model.UserCNName</a></strong> <a href="@PublicHelper.GetHostAddress()/account/logout" class="y">退出</a></li>
                 <li>
                     <a href="@PublicHelper.GetHostAddress()/blog/usersetting">设置中心</a>
-                    <a href="/plugin.php?id=vip:vip" class="y" style="color:#f60">开通VIP</a>
+                    @*<a href="/plugin.php?id=vip:vip" class="y" style="color:#f60">开通VIP</a>*@
                 </li>
             </ul>
         </div>

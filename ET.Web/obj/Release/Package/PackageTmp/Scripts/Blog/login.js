@@ -215,4 +215,19 @@ function checkUserName(Isasync) {
     });
 }
 
+function userlogout()
+{
+    $.ajax({
+        type: reMethod,
+        url: "/blog/ajaxuserlogout",
+        async: false,
+        success: function (result) {
+            if (result)
+                location.href = result;
+            else
+                location.href = "/account/logout";
+
+        }
+    });
+}
 

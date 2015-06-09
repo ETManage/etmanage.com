@@ -62,7 +62,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mShop/AjaxQueryGoodPageList", method: 'get',
+            url: "/mDesign/AjaxQueryGoodPageList", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -81,7 +81,7 @@
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/mShop/AjaxSearchGood' };
+        var options = { serviceUrl: '/mDesign/AjaxSearchGood' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
 
@@ -98,7 +98,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'"+a.GoodID+"'"; }).toString();
-                $.post('/mShop/AjaxDeleteGood', { infoid: ls }, function (res) {
+                $.post('/mDesign/AjaxDeleteGood', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
 

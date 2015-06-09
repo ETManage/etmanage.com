@@ -50,7 +50,7 @@
             </div>
             @*@Html.Raw(ViewBag.htmlLoginOk)
                 <div class="user-ed" id="nologin">
-                    <a href="@PublicHelper.GetHostAddress()/blog/login?t=0&l=@Request.Url.ToString()" rel="nofollow">免费注册</a><span class="ml10 mr10">|</span><a href="@PublicHelper.GetHostAddress()/blog/login?l=@Request.Url.ToString()" rel="nofollow">登录</a><br>
+                    <a href="@PublicHelper.GetHostAddress()/account/login?t=0&l=@Request.Url.ToString()" rel="nofollow">免费注册</a><span class="ml10 mr10">|</span><a href="@PublicHelper.GetHostAddress()/account/login?l=@Request.Url.ToString()" rel="nofollow">登录</a><br>
                     <span id="ibtnQQLogin"></span>
                     <a id="ibtnSINALogin" href="javascript:;" rel="nofollow">新浪登录</a>
                 </div>*@
@@ -71,6 +71,10 @@
     @RenderSection("BodyExtend", required: false)
 
     @{Html.RenderAction("_PartialBlogFooter", "Shared");}
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        Html.RenderAction("_PartialToolbar", "Shared");
+    }
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101213317" charset="utf-8" data-redirecturi="http://etmanage.com/blog/qqlogincallback"></script>
 
     <script src="@Url.Content("~/scripts/blog/header.js")" type="text/javascript"></script>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ET.Sys_DEF.BlogArticleInfo>
+@*@ 作用：右侧"猜你喜欢"栏目
+        作者：West
+        时间2015-05-02
+    @*@
+<div class="widget d_postlist">
+    <div class="title"><h2>猜你喜欢</h2></div>
+    <ul>
+        @foreach (ET.Sys_DEF.BlogArticleInfo itemArticle in Model)
+        {
+            <li><a href="@itemArticle.ArticleUrl" title="@itemArticle.ArticleTitle"><span class="thumbnail"><img src="@itemArticle.ArticlePicture.Split(',')[0]" alt="@itemArticle.ArticleTitle" onerror="this.src = '/images/public/nopicture.jpg'" /></span><span class="text">@itemArticle.ArticleTitle</span><span class="muted">@itemArticle.CreateTime.Value.ToString("yyyy-MM-dd")</span><span class="muted">&nbsp;&nbsp;@itemArticle.LoveCount 喜欢</span></a></li>
+
+        }
+    </ul>
+</div>

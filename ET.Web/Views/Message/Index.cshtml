@@ -13,7 +13,45 @@
 
 <div class="content-wrap">
     <div class="content-container">
-        <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;留言板 </h1> </header>
+        <div data-scroll-reveal="" class="row card-panel" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+            <span class="rule-wrap"><a id="tieba" name="tieba" class="rule"></a></span><div class="col span_4_4">
+                <div class="ibx-even">
+                    <div class="ibx-inner" id="ibx-mod-tieba">
+                        <div class="ibx-inner-title">
+                            <a target="_blank" href="http://tieba.baidu.com" class="ibx-inner-title-ctx">留言中心</a>
+                            <ul class="ibx-inner-title-tab">
+                                <li class="ibx-inner-title-tabitem ibx-my-tieba OP_LOG_TITLE current">所有留言</li>
+                                @*<li class="ibx-inner-title-tabitem ibx-my-frs OP_LOG_TITLE">图片收藏</li>
+                                    <li class="ibx-inner-title-tabitem ibx-tieba-top OP_LOG_TITLE">我喜欢的</li>*@
+                            </ul>
+                        </div><div class="ibx-inner-content" id="ibx-tieba">
+                            <div class="col my-tieba">
+                                <div class="ibx-tieba-left">
+                                    <div class="ibx-tieba-center">
+                                        <ul class="my-tieba-clist tieba-pager-ul">
+                                            @foreach (ET.Sys_DEF.BlogMessageInfo item in ViewBag.listMessage)
+                                            {
+                                                <li class="my-tieba-citem">
+                                                    <div class="my-tieba-citem-box unfolddetail">
+                                                        <div class=""><h2 title="@item.MsgTitle">@item.MsgTitle</h2><b>@item.Creator</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.CreateTime.Value.ToString("MM-dd HH:mm")</div>
+                                                    </div>
+                                                    <div class="hidden" style="margin-right: 15px; background-color: #f2f5f9; height: 50px; padding: 4px; border: 1px solid #e8ecf1;">
+                                                        @item.MsgContent
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+
+                                    </div>@Html.Raw(ViewBag.listPager)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;我要留言 </h1> </header>
 
         <form name="form2" id="iAddmsgForm">
             <center>
@@ -27,31 +65,26 @@
                         <th>验证码：</th>
                         <td colspan="3">
                             <input type="text" id="ivalidatecode" name="validatecode" maxlength="4" class="inputstyle3" />
-                            <img id="GL_StandardCode" style="cursor: pointer;" src="/blog/validatecode?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                            <img id="GL_StandardCode" style="cursor: pointer;" src="/account/validatecode?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
                         </td>
                     </tr>
                     <tr><td></td><td colspan="3"><input id="btnSend" type="button" value="发　送" style="width:150px;" class="button_blue" /></td></tr>
                 </table>
             </center>
         </form>
-        <header class="archive-header"><h1><i class="fa fa-list"></i> &nbsp;用户留言 </h1> </header>
-        <div style="padding:10px;">
-            <ul>
-                @foreach (ET.Sys_DEF.BlogMessageInfo item in ViewBag.listMessage)
-                {
-                    <li>[<span class="cBlue">@item.Creator</span>]在[@item.CreateTime.Value.ToString("yy-MM-dd HH:mm")]留言：@item.MsgTitle</li>
-                }
-
-            </ul>
-
-            @Html.Raw(ViewBag.listPager)
-        </div>
 
     </div>
 </div>
 <script type="text/javascript">
 
     $(function () {
+        $(".unfolddetail").click(function () {
+            if ($(this).next().css('display') == "none")
+                $(this).next().css('display', 'block');
+            else
+                $(this).next().css('display', 'none');
+        });
+
         $('#btnSend').click(function () {
 
             if ($('#iCreator').val() == "") {
