@@ -18,120 +18,22 @@ namespace Web.Areas.Manage.Controllers
         {
             getSystemConfig();
             //左侧模块权限
-            if (ApplicationConfig.dirApplicationRoleConfig.Keys.Count==0|| !ApplicationConfig.dirApplicationRoleConfig.Keys.Contains(this.CurrentUserInfo.RoleIDS))
+            if (!ApplicationConfig.dirApplicationUserLimit.Keys.Contains(this.UserID))
             {
-                ApplicationConfig.dirApplicationRoleConfig.Add(this.CurrentUserInfo.RoleIDS, new ET.Sys_BLL.SystemBLL().GetUserALLAction(this.UserID.ToString()));
+                ApplicationConfig.dirApplicationUserLimit.Add(this.UserID, new ET.Sys_BLL.SystemBLL().GetUserALLFunc(this.UserID.ToString()));
             }
             ViewBag.STU_CNNAME = this.CurrentUserInfo.UserCNName;
             ViewBag.ONLINE_USER_COUNT = GetOnlineUser();
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult AjaxQueryMenusList()
         {
-            return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_ModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
+            return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_BlogModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Default
-
-        #region 模块管理文件夹
-
-
-        public ActionResult ModuleQuery()
-        {
-            return View();
-        }
-        public ActionResult ModuleManage()
-        {
-            return View();
-        }
-
-
-        #region Ajax模块操作方法
-        [HttpGet]
-        public JsonResult AjaxQueryModulePageList()
-        {
-            //接收datagrid传来的参数 
-            int pageIndex = int.Parse(Request["page"]);
-            int pageSize = int.Parse(Request["rows"]);
-            string Condition = "";
-            if (!string.IsNullOrEmpty(Request["name"]))
-                Condition = " AND CHARINDEX('" + Request["name"] + "', MODULENAME)>0";
-            long RecordTotalCount = 0;
-            List<SysModuleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysModuleInfo("MODULEID,MODULENAME,ModuleKey,ModuleSort,ModuleICON,MODULEURL", Condition, "MODULESORT DESC", pageIndex, pageSize, ref RecordTotalCount);
-            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
-        }
-        [HttpGet]
-        public JsonResult AjaxGetPModuleData(string infoid)
-        {
-            string condition = "";
-            if (!string.IsNullOrEmpty(infoid))
-                condition = " AND CHARINDEX('" + infoid + "',MODULEID)=0";
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("MODULEID id,MODULENAME text", ET.Constant.DBConst.TableNames.SysModuleInfo, " AND MODULEPID='-1'" + condition, "MODULESORT");
-            list.Insert(0, new KeyAndValue() { id = "-1", text = "根目录" });
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public ActionResult AjaxSaveModule(FormCollection collection, string infoid)
-        {
-            bool IsInsert = false;
-            string strResult = "false";
-            SysModuleInfo info = new ET.Sys_BLL.SystemBLL().Get_SysModuleInfo(" AND MODULEID='" + infoid + "'");
-            if (info == null)
-            {
-                info = new SysModuleInfo();
-                IsInsert = true;
-            }
-            info.ModulePID = collection["ModulePID"];
-            info.ModuleName = collection["ModuleName"];
-            info.ModuleUrl = collection["ModuleUrl"];
-            info.ModuleSort = collection["ModuleSort"];
-
-            info.ModuleKey = collection["ModuleKey"];
-            if (new ET.Sys_BLL.SystemBLL().Operate_SysModuleInfo(info, IsInsert))
-            {
-                if (IsInsert)
-                {
-                    SysActionInfo ainfo = new SysActionInfo();
-                    ainfo.ModuleID = info.ModuleID.ToString();
-                    ainfo.ActionStatus = 1;
-                    ainfo.ActionKey = info.ModuleKey + "_View";
-                    ainfo.ActionName = info.ModuleName + "查看";
-                    new ET.Sys_BLL.SystemBLL().Operate_SysActionInfo(ainfo, true);
-                }
-                strResult = "true";
-            }
-            return Content(strResult);
-        }
-        [HttpGet]
-        public JsonResult AjaxGetModuleDetail(string infoid)
-        {
-            if (string.IsNullOrEmpty(infoid))
-                return Json("error", JsonRequestBehavior.AllowGet);
-            SysModuleInfo info = new ET.Sys_BLL.SystemBLL().Get_SysModuleInfo(" AND MODULEID='" + infoid + "'");
-            if (info == null)
-                return Json("error", JsonRequestBehavior.AllowGet);
-            return Json(info, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public ActionResult AjaxDeleteModule(string infoid)
-        {
-            if (string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysModuleInfo(" AND MODULEID='" + infoid + "'"))
-                return Content("true");
-            else
-                return Content("false");
-        }
-        [HttpGet]
-        public JsonResult AjaxSearchModule(string query)
-        {
-            List<SysModuleInfo> list = new ET.Sys_BLL.SystemBLL().List_SysModuleInfo(" top 10 MODULENAME", " AND CHARINDEX('" + query + "', MODULENAME)>0", "MODULESORT DESC");
-            var arrData = list.Select(c => c.ModuleName);
-            return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
-
-        }
-        #endregion
-        #endregion
 
         #region 角色管理文件夹
 
@@ -144,10 +46,7 @@ namespace Web.Areas.Manage.Controllers
         {
             return View();
         }
-        public ActionResult ActionManage()
-        {
-            return View();
-        }
+ 
 
         #region Ajax模块操作方法
         [HttpGet]
@@ -162,14 +61,6 @@ namespace Web.Areas.Manage.Controllers
             long RecordTotalCount = 0;
             List<SysRoleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysRoleInfo("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
-        }
-        //动态加载
-        [HttpPost]
-        public JsonResult AjaxGetRoleActoionData(string infoid, string id)
-        {
-            List<ModuleLimitInfo> infos = new ET.Sys_BLL.SystemBLL().ListGroup_RoleActons(infoid, id);
-            return Json(infos, JsonRequestBehavior.AllowGet);
-
         }
 
         [HttpPost]
@@ -209,7 +100,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteRole(string infoid)
         {
-            if (string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysRoleInfo(" AND ROLEID=" + infoid))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysRoleInfo(" AND ROLEID='" + infoid + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -222,66 +113,19 @@ namespace Web.Areas.Manage.Controllers
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
 
         }
-        #endregion
-
-        #region 动作管理
-        [HttpGet]
-        public JsonResult AjaxGetActionDetail(string infoid)
+       [HttpPost]
+        public JsonResult AjaxGetAllFunctionData(string id,string rid)
         {
-            if (string.IsNullOrEmpty(infoid))
-                return Json("error", JsonRequestBehavior.AllowGet);
-            SysActionInfo info = new ET.Sys_BLL.SystemBLL().Get_SysActionInfo(" AND ACTIONID='" + infoid + "'");
-            if (info == null)
-                return Json("error", JsonRequestBehavior.AllowGet);
-            return Json(info, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult AjaxSaveAction(FormCollection collection, string infoid)
-        {
-            bool IsInsert = false;
-            string strResult = "false";
-            SysActionInfo info = new ET.Sys_BLL.SystemBLL().Get_SysActionInfo(" AND ACTIONID='" + infoid + "'");
-            if (info == null)
-            {
-                info = new SysActionInfo();
-                IsInsert = true;
-            }
-            info.ModuleID = collection["ModuleID"];
-            info.ActionKey = collection["ActionKey"];
-            info.ActionStatus = 1;
-            info.ActionName = collection["ActionName"];
-            if (new ET.Sys_BLL.SystemBLL().Operate_SysActionInfo(info, IsInsert))
-                strResult = "true";
-            return Content(strResult);
-        }
-
-        public JsonResult AjaxGetActionModuleData()
-        {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("MOduleID id,MOduleNAME text,MOdulepID pid", ET.Constant.DBConst.TableNames.SysModuleInfo, null, "MOduleSORT DESC");
-            list.Insert(0, new KeyAndValue() { id = "-1", text = "根目录" });
+            string ischecked = "";
+            if (!string.IsNullOrEmpty(rid))
+                ischecked = ",case when exists(select 1 from V_ALLROLELIMIT A where  ROLEID='" + rid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+            string condition = " AND  FuncPID='-1' ";
+            if (!string.IsNullOrEmpty(id))
+                condition = " AND  FuncPID='" + id + "' ";
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, condition, "FuncSORT");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        [HttpGet]
-        public JsonResult AjaxQueryActionPageList()
-        {
-            //接收datagrid传来的参数 
-            int pageIndex = int.Parse(Request["page"]);
-            int pageSize = int.Parse(Request["rows"]);
-            string Condition = "";
-            if (!string.IsNullOrEmpty(Request["name"]))
-                Condition = " AND CHARINDEX('" + Request["name"] + "', ActionName)>0";
-            long RecordTotalCount = 0;
-            List<SysActionInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysActionInfo("ActionID,ActionName,ActionKey", Condition, "ActionName", pageIndex, pageSize, ref RecordTotalCount);
-            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult AjaxDeleteAction(string infoid)
-        {
-            if (string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysActionInfo(" AND ActionID=" + infoid))
-                return Content("true");
-            else
-                return Content("false");
-        }
+      
         #endregion
         #endregion
 
@@ -308,6 +152,210 @@ namespace Web.Areas.Manage.Controllers
 
                 return Content("原始密码不匹配");
         }
+        #endregion
+
+        #region 权限管理
+
+        public ActionResult LimitManage()
+        {
+            return View();
+        }
+        public ActionResult LimitOrgManag()
+        {
+            return View();
+        }
+        public ActionResult LimitOrgContact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult AjaxGetLimitData(string id)
+        {
+            string condition = " AND  FuncPID='-1' ";
+            if (!string.IsNullOrEmpty(id))
+                condition = " AND  FuncPID='" + id + "' ";
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state", ET.Constant.DBConst.TableNames.SysFunction, condition, "FuncSORT");
+            if (string.IsNullOrEmpty(id))
+                list.Insert(0, new TreeModuleInfo() { id = "-1", text = "所有资源", state = "open", iconCls = "icon-root" });
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AjaxSaveFunction(FormCollection collection, string id)
+        {
+            bool IsInsert = false;
+            string strResult = "false";
+            SysFunction info = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncID='" + id + "'");
+            if (info == null)
+            {
+                info = new SysFunction();
+                info.CreateTime = DateTime.Now;
+                IsInsert = true;
+            }
+
+            info.UpdateTime = DateTime.Now;
+            info.FuncPID = collection["FuncPID"];
+            SysFunction keyinfo = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncKey='" + collection["FuncKey"] + "'");
+            if (keyinfo != null)
+                info.FuncKey = collection["FuncKey"] + "_" + DateTime.Now.ToString("yyMMddHHmm");
+            else
+                info.FuncKey = collection["FuncKey"];
+            info.FuncName = collection["FuncName"];
+            info.FuncType = collection["FuncType"];
+            info.ShowStyle = collection["ShowStyle"];
+            info.FuncSort = collection["FuncSort"];
+            info.Source = collection["Source"];
+            info.Remark = collection["Remark"];
+            if (!string.IsNullOrEmpty(collection["IconPath"]))
+                info.IconPath = collection["IconPath"];
+            else
+                info.IconPath = "icon-group";
+            if (!string.IsNullOrEmpty(collection["StartTime"]))
+                info.StartTime = Convert.ToDateTime(collection["StartTime"]);
+            if (!string.IsNullOrEmpty(collection["EndTime"]))
+                info.EndTime = Convert.ToDateTime(collection["EndTime"]);
+            info.Status = Convert.ToInt32(collection["Status"]);
+
+            info.PublicLevel = Convert.ToInt32(collection["PublicLevel"]);
+            if (new ET.Sys_BLL.SystemBLL().Operate_SysFunction(info, IsInsert))
+            {
+                strResult = "true";
+            }
+            return Json(new { result = strResult, id = info.FuncID }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult AjaxGetFunctionDetail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return Json("error", JsonRequestBehavior.AllowGet);
+            SysFunction info = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncID='" + id + "'");
+            if (info != null)
+            {
+                SysFunction pinfo = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncID='" + info.FuncPID + "'");
+                if (pinfo != null)
+                {
+                    info.Reserve1 = pinfo.FuncName;
+                }
+                else
+                {
+                    info.Reserve1 = "根节点";
+                }
+                return Json(info, JsonRequestBehavior.AllowGet);
+            }
+            return Json("error", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult AjaxGetBelongLimitData(string type, string fid)
+        {
+            List<StringArray> list = new List<StringArray>();
+
+            string table = ET.Constant.DBConst.TableNames.UserDeptFuncLink;
+            string field = "depid value";
+            switch (type)
+            {
+                case "dept":
+                    table = ET.Constant.DBConst.TableNames.UserDeptFuncLink;
+                    field = "depid value";
+                    break;
+                case "post":
+                    table = ET.Constant.DBConst.TableNames.UserPostFuncLink;
+                    field = "postid value";
+                    break;
+                case "person":
+                    table = ET.Constant.DBConst.TableNames.UserFuncLink;
+                    field = "userid value";
+                    break;
+
+            }
+
+            list = new ET.Sys_BLL.PublicBLL().GetListByCondition<StringArray>(field, table, " AND cast(FUNCID as varchar(36))='" + fid + "'", null);
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AjaxDeleteFunction(string id)
+        {
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.SystemBLL().Delete_SysFunction(" AND FuncID='" + id + "'"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+        [HttpPost]
+        public ActionResult AjaxFunctionParentChange(string ids)
+        {
+
+            List<KeyAndValue> ChangeIDS = null;
+            if (!string.IsNullOrEmpty(ids))
+            {
+                ChangeIDS = JsonSerializeHelper.DeserializeFromJson<List<KeyAndValue>>(ids);
+            }
+            foreach (KeyAndValue item in ChangeIDS)
+            {
+                SysFunction info = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncID='" + item.id + "'");
+                if (info != null)
+                {
+                    info.FuncPID = item.pid;
+                    new ET.Sys_BLL.SystemBLL().Operate_SysFunction(info, false);
+                }
+            }
+            return Content("true");
+        }
+        [HttpPost]
+        public ActionResult AjaxSaveFuncLimit(string fid, string ids, string type)
+        {
+
+            switch (type)
+            {
+                case "dept":
+
+                    new ET.Sys_BLL.OrganizationBLL().Delete_UserDeptFuncLink(string.Format("AND FUNCID='{0}'", fid));
+                    foreach (string item in ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+
+                        UserDeptFuncLink info = new UserDeptFuncLink();
+                        info.FuncID = Guid.Parse(fid);
+                        info.DepID = Guid.Parse(item);
+                        info.CreateTime = DateTime.Now;
+                        //info.CreatorID = Guid.Parse(this.UserID);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDeptFuncLink(info, true);
+
+                    }
+
+
+                    break;
+                case "post":
+                    new ET.Sys_BLL.OrganizationBLL().Delete_UserDeptFuncLink(string.Format("AND FUNCID='{0}'", fid));
+                    foreach (string item in ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+
+                        UserPostFuncLink info = new UserPostFuncLink();
+                        info.FuncID = Guid.Parse(fid);
+                        info.PostID = Guid.Parse(item);
+                        info.CreateTime = DateTime.Now;
+                        //info.CreatorID = Guid.Parse(this.UserID);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserPostFuncLink(info, true);
+
+                    }
+                    break;
+                case "person":
+                    new ET.Sys_BLL.OrganizationBLL().Delete_UserFuncLink(string.Format("AND FUNCID='{0}'", fid));
+                    foreach (string item in ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+
+                        UserFuncLink info = new UserFuncLink();
+                        info.FuncID = Guid.Parse(fid);
+                        info.UserID = Guid.Parse(item);
+                        info.CreateTime = DateTime.Now;
+                        //info.CreatorID = Guid.Parse(this.UserID);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(info, true);
+                    }
+
+                    break;
+
+            }
+            return Content("true");
+        }
+
         #endregion
     }
 

@@ -22,7 +22,9 @@ namespace ET.Sys_DEF
 
         public String PostDescription { get; set; }
 
-
-	
+        public String DepID { get; set; }
+        public String CompanyID { get; set; }
+        public String CreatorID { get; set; }
+        public DateTime? CreateTime { get; set; }
 	}
 }

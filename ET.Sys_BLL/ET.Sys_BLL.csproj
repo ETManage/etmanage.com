@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OneGTDBLL.cs" />
-    <Compile Include="ShopBLL.cs" />
+    <Compile Include="DesignBLL.cs" />
     <Compile Include="BlogBLL.cs" />
     <Compile Include="OrganizationBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

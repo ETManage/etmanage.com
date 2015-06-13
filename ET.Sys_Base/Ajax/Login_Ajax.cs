@@ -144,6 +144,7 @@ namespace ET.Sys_Base
                 var roleIDs = info.userrole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
                 userinfo.RoleIDS = roleIDs;
                 System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
+                ET.Sys_Base.OnlineUser.OnlineHttpModule.ProcessRequest();
             }
             else
             {

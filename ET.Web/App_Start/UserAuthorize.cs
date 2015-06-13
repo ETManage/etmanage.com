@@ -43,7 +43,7 @@ namespace ET.Extensions
             //return base.AuthorizeCore(httpContext);//系统授权验证
             foreach (string s in AllowUser.Split(','))
             {
-                if (ApplicationConfig.dirApplicationRoleConfig[httpContext.User.Identity.Name].Contains(s))
+                if (ApplicationConfig.dirApplicationUserLimit[httpContext.User.Identity.Name].Contains(s))
                 {
                     return true;
                 }

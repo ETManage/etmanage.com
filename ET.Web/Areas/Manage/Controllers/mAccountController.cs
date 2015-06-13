@@ -63,7 +63,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpGet]
         public JsonResult Test()
         {
-            return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_ModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
+            return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_BlogModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

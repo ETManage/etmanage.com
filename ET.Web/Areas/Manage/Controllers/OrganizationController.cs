@@ -22,45 +22,50 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public JsonResult AjaxQueryCompanyList(string id)
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("CompanyID id,CompanyName text,CompanyPID pid",ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("CompanyID id,CompanyName text,CompanyPID pid", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxSaveCompany(FormCollection collection, string infoid)
+        public JsonResult AjaxSaveCompany(FormCollection collection, string id)
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + infoid + "'");
+            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
             if (info == null)
             {
                 info = new UserCompanyInfo();
-            IsInsert=true;
+                info.CreateTime = DateTime.Now;
+                info.CreatorID = this.UserID;
+                IsInsert = true;
             }
-            if (!string.IsNullOrEmpty( collection["CompanyPID"]))
-            info.CompanyPID = collection["CompanyPID"];
+            if (!string.IsNullOrEmpty(collection["CompanyPID"]))
+                info.CompanyPID = collection["CompanyPID"];
             else
-            info.CompanyPID="-1";
+                info.CompanyPID = "-1";
             info.CompanyName = collection["CompanyName"];
             info.CompanySort = collection["CompanySort"];
             info.CompanyDescription = collection["CompanyDescription"];
             if (new ET.Sys_BLL.OrganizationBLL().Operate_UserCompanyInfo(info, IsInsert))
+            {
+                id = info.CompanyID.ToString();
                 strResult = "true";
-            return Content(strResult);
+            }
+            return Json(new { result = strResult, id = id }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult AjaxGetCompanyDetail(string infoid)
+        public JsonResult AjaxGetCompanyDetail(string id)
         {
-            if (string.IsNullOrEmpty(infoid))
+            if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + infoid + "'");
+            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxDeleteCompany(string infoid)
+        public ActionResult AjaxDeleteCompany(string id)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND CompanyID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND CompanyID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -82,41 +87,45 @@ namespace Web.Areas.Manage.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxSaveDepartment(FormCollection collection, string infoid)
+        public JsonResult AjaxSaveDepartment(FormCollection collection, string id, string cid, string pid)
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + infoid + "'");
+            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
             if (info == null)
             {
                 info = new UserDepartmentInfo();
+                info.CreateTime = DateTime.Now;
+                info.CreatorID = this.UserID;
                 IsInsert = true;
             }
-            if (!string.IsNullOrEmpty(collection["DepPID"]))
-                info.DepPID = collection["DepPID"];
-            else
-                info.DepPID = "-1";
+
+            info.DepPID = pid;
+            info.CompanyID = cid;
             info.DepName = collection["DepName"];
             info.DepSort = collection["DepSort"];
             info.DepDescription = collection["DepDescription"];
             if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(info, IsInsert))
+            {
+                id = info.DepID.ToString();
                 strResult = "true";
-            return Content(strResult);
+            }
+            return Json(new { result = strResult, id = id }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult AjaxGetDepartmentDetail(string infoid)
+        public JsonResult AjaxGetDepartmentDetail(string id)
         {
-            if (string.IsNullOrEmpty(infoid))
+            if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + infoid + "'");
+            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxDeleteDepartment(string infoid)
+        public ActionResult AjaxDeleteDepartment(string id)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND DepID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND DepID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -138,42 +147,295 @@ namespace Web.Areas.Manage.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxSavePosition(FormCollection collection, string infoid)
+        public ActionResult AjaxSavePosition(FormCollection collection, string id, string cid, string did)
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + infoid + "'");
+            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
             if (info == null)
             {
                 info = new UserPositionInfo();
+                info.CreateTime = DateTime.Now;
+                info.CreatorID = this.UserID;
                 IsInsert = true;
             }
+            info.CompanyID = cid;
+            info.DepID = did;
             info.PostName = collection["PostName"];
             info.PostSort = collection["PostSort"];
             info.PostDescription = collection["PostDescription"];
             if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPositionInfo(info, IsInsert))
+            {
+                id = info.PostID.ToString();
                 strResult = "true";
-            return Content(strResult);
+            }
+            return Json(new { result = strResult, id = id }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult AjaxGetPositionDetail(string infoid)
+        public JsonResult AjaxGetPositionDetail(string id)
         {
-            if (string.IsNullOrEmpty(infoid))
+            if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + infoid + "'");
+            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxDeletePosition(string infoid)
+        public ActionResult AjaxDeletePosition(string id)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.OrganizationBLL().Delete_UserPositionInfo(" AND PostID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserPositionInfo(" AND PostID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
         }
 
+        #endregion
+
+        public ActionResult OrgQuery()
+        {
+            return View();
+        }
+        public ActionResult OrgManage()
+        {
+            return View();
+        }
+        public JsonResult AjaxGetOrgDetail(string id, string type)
+        {
+            switch (type)
+            {
+                case "company":
+                    UserCompanyInfo cinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
+                    if (cinfo != null)
+                        return Json(new { InfoType = 1, InfoPid = cinfo.CompanyPID, CompanyID = -1, DepID = -1, InfoName = cinfo.CompanyName, InfoSort = cinfo.CompanySort, infoDescription = cinfo.CompanyDescription }, JsonRequestBehavior.AllowGet);
+                    break;
+                case "dept":
+                    UserDepartmentInfo dinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
+                    if (dinfo != null)
+                        return Json(new { InfoType = 0, InfoPid = dinfo.DepPID, CompanyID = dinfo.CompanyID, DepID = -1, InfoName = dinfo.DepName, InfoSort = dinfo.DepSort, infoDescription = dinfo.DepDescription }, JsonRequestBehavior.AllowGet);
+                    break;
+                case "post":
+                    UserPositionInfo pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
+                    if (pinfo != null)
+                        return Json(new { InfoType = -1, InfoPid = -1, CompanyID = pinfo.CompanyID, DepID = pinfo.DepID, InfoName = pinfo.PostName, InfoSort = pinfo.PostSort, infoDescription = pinfo.PostDescription }, JsonRequestBehavior.AllowGet);
+                    break;
+
+            }
+            return Json("error", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AjaxSaveOrg(FormCollection collection, string id, string type, string cid, string did)
+        {
+            bool IsInsert = false;
+            string strResult = "false";
+            string infoid = "";
+            switch (collection["InfoType"])
+            {
+                case "1":
+                    UserCompanyInfo cinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
+                    if (cinfo == null)
+                    {
+                        cinfo = new UserCompanyInfo();
+                        IsInsert = true;
+                    }
+
+                    if (!string.IsNullOrEmpty(cid))
+                        cinfo.CompanyPID = cid;
+                    else
+                        cinfo.CompanyPID = "-1";
+                    cinfo.CompanyName = collection["InfoName"];
+                    cinfo.CompanySort = collection["InfoSort"];
+                    cinfo.CompanyDescription = collection["InfoDescription"];
+                    if (new ET.Sys_BLL.OrganizationBLL().Operate_UserCompanyInfo(cinfo, IsInsert))
+                    {
+                        strResult = "true";
+                        infoid = cinfo.CompanyID.ToString();
+                    }
+                    break;
+                case "0":
+                    UserDepartmentInfo dinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
+                    if (dinfo == null)
+                    {
+                        dinfo = new UserDepartmentInfo();
+                        IsInsert = true;
+                    }
+                    if (!string.IsNullOrEmpty(did))
+                        dinfo.DepPID = did;
+                    else
+                        dinfo.DepPID = "-1";
+                    dinfo.CompanyID = cid;
+                    dinfo.DepName = collection["InfoName"];
+                    dinfo.DepSort = collection["InfoSort"];
+                    dinfo.DepDescription = collection["InfoDescription"];
+                    if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(dinfo, IsInsert))
+                    {
+                        strResult = "true";
+                        infoid = dinfo.DepID.ToString();
+                    }
+                    break;
+                case "-1":
+                    UserPositionInfo pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
+                    if (pinfo == null)
+                    {
+                        pinfo = new UserPositionInfo();
+                        IsInsert = true;
+                    }
+                    pinfo.CompanyID = cid;
+                    pinfo.DepID = did;
+                    pinfo.PostName = collection["InfoName"];
+                    pinfo.PostSort = collection["InfoSort"];
+                    pinfo.PostDescription = collection["InfoDescription"];
+                    if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPositionInfo(pinfo, IsInsert))
+                    {
+                        strResult = "true";
+                        infoid = pinfo.PostID.ToString();
+                    }
+                    break;
+
+            }
+            return Json(new { result = strResult, id = infoid }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AjaxDeleteOrgDetail(string id, string type)
+        {
+
+            string strResult = "false";
+            if (!string.IsNullOrEmpty(id))
+                return Content(strResult);
+            switch (type)
+            {
+                case "company":
+                    if (new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND CompanyID='" + id + "'"))
+                        strResult = "true";
+                    break;
+                case "dept":
+                    if (new ET.Sys_BLL.OrganizationBLL().Delete_UserDepartmentInfo(" AND CompanyID='" + id + "'"))
+                        strResult = "true";
+                    break;
+                case "post":
+                    if (new ET.Sys_BLL.OrganizationBLL().Delete_UserPositionInfo(" AND CompanyID='" + id + "'"))
+                        strResult = "true";
+                    break;
+
+            }
+            return Content(strResult);
+        }
+        [HttpPost]
+        public JsonResult AjaxQueryOrgList()
+        {
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,'closed' state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            for (int i = 0; i < listc.Count; i++)
+            {
+                string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
+                List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSort DESC");
+                NestOrgRecursion(list, "-1", Outlist);
+                listc[i].children = list;
+            }
+            return Json(listc, JsonRequestBehavior.AllowGet);
+
+        }
+
+        void NestOrgRecursion(List<TreeModuleInfo> Alllist, string PID, List<TreeModuleInfo> Outlist)
+        {
+            foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
+            {
+                string condition = " AND  DepID='" + item.id + "' ";
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", ET.Constant.DBConst.TableNames.UserPositionInfo, condition, "PostSort DESC");
+
+                TreeModuleInfo info = item;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+                children.AddRange(list);
+                NestOrgRecursion(Alllist, item.id, children);
+
+                info.children = children;
+                Outlist.Add(info);
+            }
+
+        }
+
+        #region 组织架构
+        public JsonResult AjaxQueryAllCompanyList(string id)
+        {
+            string condition = " AND  CompanyPID='-1' ";
+            if (!string.IsNullOrEmpty(id))
+                condition = " AND  CompanyPID='" + id + "' ";
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,'closed' state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult AjaxQueryAllDeptList()
+        {
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,'icon-company' iconCls,'closed' state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            for (int i = 0; i < listc.Count; i++)
+            {
+                string condition = "  AND CompanyID='" + listc[i].id + "' ";
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSort DESC");
+                listc[i].children = list;
+            }
+
+            return Json(listc, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AjaxQueryAllPostList()
+        {
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,'closed' state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            for (int i = 0; i < listc.Count; i++)
+            {
+                string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
+                List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSort DESC");
+                NestPostRecursion(list, "-1", Outlist);
+                listc[i].children = list;
+            }
+            return Json(listc, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult AjaxQueryAllUserList()
+        {
+
+
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,'closed' state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            for (int i = 0; i < listc.Count; i++)
+            {
+                string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
+                List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSort DESC");
+                NestUserRecursion(list, "-1", Outlist);
+                listc[i].children = list;
+            }
+            return Json(listc, JsonRequestBehavior.AllowGet);
+        }
+        void NestUserRecursion(List<TreeModuleInfo> Alllist, string PID, List<TreeModuleInfo> Outlist)
+        {
+            foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
+            {
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListBySql<TreeModuleInfo>("SELECT A.UserID id,A.CNName text,'icon-person' iconCls,'open'  state FROM UserPropertyInfo A INNER JOIN UserOrgLink B ON A.USERID=B.USERID WHERE B.TYPE='dept' order by A.createtime");
+                TreeModuleInfo info = item;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+                children.AddRange(list);
+                NestUserRecursion(Alllist, item.id, children);
+
+                info.children = children;
+                Outlist.Add(info);
+            }
+
+        }
+        void NestPostRecursion(List<TreeModuleInfo> Alllist, string PID, List<TreeModuleInfo> Outlist)
+        {
+            foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
+            {
+                string condition = " AND  DepID='" + item.id + "' ";
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", ET.Constant.DBConst.TableNames.UserPositionInfo, condition, "PostSort DESC");
+
+                TreeModuleInfo info = item;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+                children.AddRange(list);
+                NestPostRecursion(Alllist, item.id, children);
+
+                info.children = children;
+                Outlist.Add(info);
+            }
+
+        }
         #endregion
 
         #region 用户管理
@@ -253,7 +515,7 @@ namespace Web.Areas.Manage.Controllers
         public ActionResult AjaxSearchUser(string query)
         {
             List<UserPropertyInfo> list = new ET.Sys_BLL.OrganizationBLL().List_UserPropertyInfo("CNName,Nickname", " AND ( CHARINDEX('" + query + "', CNName)>0 or CHARINDEX('" + query + "', Nickname)>0)", "CreateTime desc");
-            var arrData = list.Select(c => c.CNName+"("+c.Nickname+")");
+            var arrData = list.Select(c => c.CNName + "(" + c.Nickname + ")");
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
         }
         #endregion

@@ -46,6 +46,14 @@
   <ItemGroup>
     <Compile Include="Data\BlogMessageInfo.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
+    <Compile Include="Data\SysFunction.cs" />
+    <Compile Include="Data\UserFuncLink.cs" />
+    <Compile Include="Data\UserPostFuncLink.cs" />
+    <Compile Include="Data\UserDeptFuncLink.cs" />
+    <Compile Include="Data\UserPositionOrgLink.cs" />
+    <Compile Include="Data\UserOrgLink.cs" />
+    <Compile Include="DEFCommon\TreeAttributeInfo.cs" />
+    <Compile Include="DEFCommon\TreeModuleInfo.cs" />
     <Compile Include="GTD\GTDRecycle.cs" />
     <Compile Include="GTD\GTDProject.cs" />
     <Compile Include="GTD\GTDScene.cs" />
@@ -69,11 +77,8 @@
     <Compile Include="Data\UserDepartmentLink.cs" />
     <Compile Include="Data\SysActionInfo.cs" />
     <Compile Include="Data\UserRoleLink.cs" />
-    <Compile Include="Data\SysModuleInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Data\SysRoleInfo.cs" />
-    <Compile Include="Data\SysRoleActionLink.cs" />
+    <Compile Include="Data\SysRoleFuncLink.cs" />
     <Compile Include="Data\UserBaseInfo.cs" />
     <Compile Include="Data\UserDepartmentInfo.cs" />
     <Compile Include="Data\UserPositionInfo.cs" />

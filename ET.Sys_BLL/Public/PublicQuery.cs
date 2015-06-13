@@ -118,27 +118,28 @@ namespace ET.Sys_BLL
         /// <summary>
         /// 根据条件得到一个实体组
         /// </summary>
-        public List<T> GetListByCondition<T>(string Fields, string TableName, string Condition, string strOrder) where T : class, new()
+        public List<T> GetListByCondition<T>(string Fields, string TableName, string Condition, string strOrder) where T : class
         {
             return new BaseDAL().GetListByCondition<T>(Fields, TableName, Condition, strOrder);
         }
-        public List<T> GetListByCondition<T>(int TopCount,string Fields, string TableName, string Condition, string strOrder) where T : class, new()
+
+        public List<T> GetListByCondition<T>(int TopCount, string Fields, string TableName, string Condition, string strOrder) where T : class
         {
             return new BaseDAL().GetListByCondition<T>(TopCount, Fields, TableName, Condition, strOrder);
         }
-        public List<T> GetListByCondition<T>(int TopCount, string Fields, string TableName, string Condition, string strOrder,bool IsNoLock) where T : class, new()
+        public List<T> GetListByCondition<T>(int TopCount, string Fields, string TableName, string Condition, string strOrder, bool IsNoLock) where T : class
         {
             return new BaseDAL().GetListByCondition<T>(TopCount, Fields, TableName, Condition, strOrder, IsNoLock);
         }
         /// <summary>
         /// 根据条件得到一个实体组
         /// </summary>
-        public List<T> GetListBySql<T>(string Sql) where T : class, new()
+        public List<T> GetListBySql<T>(string Sql) where T : class
         {
             return new BaseDAL().GetListBySql<T>(Sql);
         }
 
-        public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder) 
+        public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder)
         {
             List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder);
 
@@ -146,23 +147,45 @@ namespace ET.Sys_BLL
             NestRecursion(Alllist, "-1", Outlist);
             return Outlist;
         }
-        void NestRecursion(List<KeyAndValue> Alllist,string PID,List<KeyAndValue> Outlist)
+        void NestRecursion(List<KeyAndValue> Alllist, string PID, List<KeyAndValue> Outlist)
         {
             foreach (KeyAndValue item in Alllist.Where(info => info.pid == PID))
             {
-                KeyAndValue info= item;
+                KeyAndValue info = item;
                 List<KeyAndValue> children = new List<KeyAndValue>();
                 NestRecursion(Alllist, item.id, children);
                 info.children = children;
                 Outlist.Add(info);
             }
-        
-        }
 
+        }
+        public List<TreeModuleInfo> GetNestTreeByCondition(string Fields, string TableName, string Condition, string strOrder)
+        {
+            List<TreeModuleInfo> Alllist = new BaseDAL().GetListByCondition<TreeModuleInfo>(Fields, TableName, Condition, strOrder);
+
+            List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
+            NestTreeRecursion(Alllist, "-1", Outlist);
+            return Outlist;
+        }
+        void NestTreeRecursion(List<TreeModuleInfo> Alllist, string PID, List<TreeModuleInfo> Outlist)
+        {
+            foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
+            {
+                TreeModuleInfo info = item;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+
+                NestTreeRecursion(Alllist, item.id, children);
+
+
+                info.children = children;
+                Outlist.Add(info);
+            }
+
+        }
         /// <summary>
         /// 根据条件得到一个分页的实体组
         /// </summary>
-        public List<T> GetListByConditionPager<T>(string Fields, string TableName, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount,bool IsNolock) where T : class, new()
+        public List<T> GetListByConditionPager<T>(string Fields, string TableName, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount, bool IsNolock) where T : class, new()
         {
             return new BaseDAL().GetListByPager<T>(Fields, TableName, Condition, Orderby, Offset, Count, ref  RecordTotalCount, IsNolock);
         }

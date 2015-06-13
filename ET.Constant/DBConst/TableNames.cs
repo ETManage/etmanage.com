@@ -21,11 +21,29 @@ namespace ET.Constant.DBConst
         /// 用户角色信息
         /// </summary>
         public const string UserRoleLink = "UserRoleLink";
-
         /// <summary>
         /// 系统模块
         /// </summary>
-        public const string SysModuleInfo = "SysModuleInfo";
+        public const string SysFunction = "SysFunction";
+        /// <summary>
+        /// 用户组织架构，利用type区分，公司company,dept,post
+        /// </summary>
+        public const string UserOrgLink = "UserOrgLink";
+        /// <summary>
+        /// 岗位权限表
+        /// </summary>
+        public const string UserPostFuncLink = "UserPostFuncLink";
+        /// <summary>
+        /// 部门权限表
+        /// </summary>
+        public const string UserDeptFuncLink = "UserDeptFuncLink";
+        /// <summary>
+        /// 用户权限表
+        /// </summary>
+        public const string UserFuncLink = "UserFuncLink";
+
+
+        
 
         /// <summary>
         /// 角色
@@ -35,12 +53,8 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 角色权限关系
         /// </summary>
-        public const string SysRoleActionLink = "SysRoleActionLink";
+        public const string SysRoleFuncLink = "SysRoleFuncLink";
 
-        /// <summary>
-        /// 权限
-        /// </summary>
-        public const string SysActionInfo = "SysActionInfo";
 
         /// <summary>
         /// 部门信息表
@@ -51,22 +65,6 @@ namespace ET.Constant.DBConst
         /// 岗位信息表
         /// </summary>
         public const string UserPositionInfo = "UserPositionInfo";
-
-
-        /// <summary>
-        /// 用户部门关联表
-        /// </summary>
-        public const string UserDepartmentLink = "UserDepartmentLink";
-
-        /// <summary>
-        /// 用户岗位关联表
-        /// </summary>
-        public const string UserPositionLink = "UserPositionLink";
-
-        /// <summary>
-        /// 用户公司关联表
-        /// </summary>
-        public const string UserCompanyLink = "UserCompanyLink";
 
         /// <summary>
         /// 公司信息表

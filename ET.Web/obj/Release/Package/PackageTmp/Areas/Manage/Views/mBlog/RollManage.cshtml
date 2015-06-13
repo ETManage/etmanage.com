@@ -3,44 +3,51 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    操作管理
+    博客友情链接
 }
 @section Header{
+
 }
 <div id="ManageBody">
     <div id="ManageOperateTitle">
-        操作管理
+       友情链接管理
     </div>
     <div id="ManageOperate">
-        <form id="form1" action="/" method="post">
+        <form id="form1"  action="/" method="post">
             <table class="datatable">
+               
                 <tr>
                     <th>
-                        关联模块：
+                        链接名称：
                     </th>
                     <td>
-                        <input name="ModuleID" id="sltModuleID" style="width: 280px" class="easyui-combotree" data-options=" url: '/System/AjaxGetActionModuleData',required:true" />
+                        <input name="RollName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        操作名称：
+                        链接地址：
                     </th>
                     <td>
-                        <input name="ActionName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                        <input name="RollUrl" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">需要http://</span>
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        操作Key：
+                        类别排序：
                     </th>
                     <td>
-                        <input name="ActionKey" type="text" class="easyui-textbox" style="width:300px" />
+                        <input name="RollSort" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
                     </td>
                 </tr>
-
-
-
+                <tr>
+                    <th>
+                        状态操作：
+                    </th>
+                    <td>
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" />
+                    </td>
+                </tr>
             </table>
         </form>
     </div>
@@ -56,21 +63,19 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/System/AjaxGetActionDetail?rad=" + new Date().toString(),
+                url: "/mDesign/AjaxGetRollDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
-                    $('#sltModuleID').combotree('setValue', data.ModuleID.toLowerCase());
+                    if (data.Status == 1)
+                        $('#ickStatus').attr("checked", true);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    parent.TopNotify(errorThrown, 'error');
+                    TopNotify(errorThrown, 'error');
                 }
             });
-        }
-        else {
-
         }
     });
     function BtnSaveOrUpdate() {
@@ -78,7 +83,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/System/AjaxSaveAction?infoid='+_id,
+                url: '/mDesign/AjaxSaveRoll?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -87,8 +92,7 @@
                 success: function (data) {
                     if (data == "true") {
                         parent.TopNotify("保存成功", 'info');
-                        $("#form1").form("reset");
-                        $('#sltModuleID').combotree('setValue', "-1");
+                        parent.windowClose();
                     }
                 }
             });

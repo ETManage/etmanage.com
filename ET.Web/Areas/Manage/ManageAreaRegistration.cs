@@ -25,7 +25,7 @@ namespace Web.Areas.Manage
                 "Manage_default",
                 "{controller}/{action}/{id}",
                 new[] { "Ed.Web.Areas.Manage" }, //默认控制器的命名空间 (这里一定要加，非常重要)
-                new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+                new { controller = "mAccount", action = "Login", id = UrlParameter.Optional }
                 );
 
         }

@@ -23,7 +23,8 @@ namespace ET.Sys_DEF
 
 
         public String CompanyDescription { get; set; }
-
+        public String CreatorID { get; set; }
+        public DateTime? CreateTime { get; set; }
 
     }
 }
