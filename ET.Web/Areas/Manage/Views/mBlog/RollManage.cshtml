@@ -45,7 +45,7 @@
                         状态操作：
                     </th>
                     <td>
-                        是否启用<input name="Status" type="checkbox" id="ickStatus" />
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />
                     </td>
                 </tr>
             </table>
@@ -63,7 +63,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mDesign/AjaxGetRollDetail",
+                url: "/mBlog/AjaxGetRollDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -83,7 +83,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mDesign/AjaxSaveRoll?infoid=' + _id,
+                url: '/mBlog/AjaxSaveRoll?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

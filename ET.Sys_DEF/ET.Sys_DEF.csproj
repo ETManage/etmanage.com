@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BlogPublish.cs" />
     <Compile Include="Data\BlogMessageInfo.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
     <Compile Include="Data\SysFunction.cs" />
@@ -65,17 +66,13 @@
     <Compile Include="Data\BlogViewRecordInfo.cs" />
     <Compile Include="Data\BlogArticleFavoriteInfo.cs" />
     <Compile Include="Data\BlogCommentInfo.cs" />
-    <Compile Include="Data\ShopGoodInfo.cs" />
+    <Compile Include="Data\DesignGoodInfo.cs" />
     <Compile Include="Data\BlogArticleInfo.cs" />
-    <Compile Include="Data\ShopTypeInfo.cs" />
+    <Compile Include="Data\DesignTypeInfo.cs" />
     <Compile Include="Data\NewTypeInfo.cs" />
     <Compile Include="Data\BlogTypeInfo.cs" />
     <Compile Include="Data\NewInfo.cs" />
     <Compile Include="Data\UserCompanyInfo.cs" />
-    <Compile Include="Data\UserCompanyLink.cs" />
-    <Compile Include="Data\UserPositionLink.cs" />
-    <Compile Include="Data\UserDepartmentLink.cs" />
-    <Compile Include="Data\SysActionInfo.cs" />
     <Compile Include="Data\UserRoleLink.cs" />
     <Compile Include="Data\SysRoleInfo.cs" />
     <Compile Include="Data\SysRoleFuncLink.cs" />

@@ -18,7 +18,7 @@
                 <div class="ibx-even">
                     <div class="ibx-inner" id="ibx-mod-tieba">
                         <div class="ibx-inner-title">
-                            <a target="_blank" href="http://tieba.baidu.com" class="ibx-inner-title-ctx">留言中心</a>
+                            <a target="_blank" href="javascript:;" class="ibx-inner-title-ctx">留言中心</a>
                             <ul class="ibx-inner-title-tab">
                                 <li class="ibx-inner-title-tabitem ibx-my-tieba OP_LOG_TITLE current">所有留言</li>
                                 @*<li class="ibx-inner-title-tabitem ibx-my-frs OP_LOG_TITLE">图片收藏</li>
@@ -78,6 +78,12 @@
 <script type="text/javascript">
 
     $(function () {
+        $("#GL_StandardCode").click(function () {
+            var newSrc = "/account/validatecode?t=" + (new Date()).getTime();
+            this.src = newSrc;
+            return false;
+        });
+
         $(".unfolddetail").click(function () {
             if ($(this).next().css('display') == "none")
                 $(this).next().css('display', 'block');
@@ -147,7 +153,7 @@
             });
             $.ajax({
                 type: "get",
-                url: "/blog/ajaxcheckvalidatecode",
+                url: "/account/ajaxcheckvalidatecode",
                 data: "code=" + $("#ivalidatecode").val() + '&t=' + new Date(),
                 dataType: 'html',
                 async: false,
@@ -168,7 +174,7 @@
                         $.ajax({
                             cache: true,
                             type: "POST",
-                            url: '/blog/ajaxaddmessage',
+                            url: '/message/ajaxaddmessage',
                             data: $('#iAddmsgForm').serialize().replaceAll("'", "''"),
                             async: false,
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -179,9 +185,6 @@
                                     $("#iAddmsgForm").form("reset");
                                     TopNotify("信息已提交！请等待管理员审核..！", 'info');
 
-                                }
-                                else if (data == "false") {
-                                    TopNotify("用户名或密码错误！", 'error');
                                 }
                                 else
                                     TopNotify(data, 'error');

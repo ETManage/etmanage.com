@@ -101,9 +101,23 @@ namespace ET.Constant.DBConst
         /// 博客文章收集信息表
         /// </summary>
         public const string BlogArticleFavoriteInfo = "BlogArticleFavoriteInfo";
+        /// <summary>
+        /// 平评论表
+        /// </summary>
         public const string BlogCommentInfo = "BlogCommentInfo";
+        /// <summary>
+        /// 友情链接
+        /// </summary>
         public const string BlogRollInfo = "BlogRollInfo";
+        /// <summary>
+        /// 预览记录
+        /// </summary>
         public const string BlogViewRecordInfo = "BlogViewRecordInfo";
+        /// <summary>
+        /// 用户投稿
+        /// </summary>
+        public const string BlogPublish = "BlogPublish";
+        
         #endregion
 
 

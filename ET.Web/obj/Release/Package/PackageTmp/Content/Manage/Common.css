@@ -25,7 +25,9 @@
     font-weight: normal;
     padding: 1px;
     padding-left:5px;
+    min-width:40px;
 }
+    .datatable input { width:auto;}
 .input
 {
     border: 1px solid #97b1c5;
@@ -111,15 +113,15 @@ div .validatebox-invalid{background-image:none;}
 #ManageBody {margin:5px;
 }
 
-#ManageOperateTitle{background-image: url('/images/Manage/tiaotiao.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 25px; width: auto; line-height: 30px; height: 30px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #0092DC; font-weight: bold; font-size: 14px;}
-#ManageListTitle{height:20px;width:100%;}
-#ManageSearch
+.ManageOperateTitle{background-image: url('/images/Manage/tiaotiao.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 25px; width: auto; line-height: 30px; height: 30px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #0092DC; font-weight: bold; font-size: 14px;}
+.ManageListTitle{height:20px;width:100%;}
+.ManageSearch
 {
 	border: 1px dashed #0092DC;
 	padding:5px;
 }
-#ManageSearch legend{font-size: 14px;
+.ManageSearch legend{font-size: 14px;
 	color: #0092DC;}
-#ManageList{margin-top:10px;overflow:hidden;}
-#ManageOperate{padding-top: 15px;}
-#ManageTitle{height:30px;width:100%;}
+.ManageList{margin-top:10px;overflow:hidden;}
+.ManageOperate{padding-top: 15px;}
+.ManageTitle{height:30px;width:100%;}

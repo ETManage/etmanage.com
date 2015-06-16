@@ -133,18 +133,20 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(function () {
+        $("#GL_StandardCode").click(function () {
+            var newSrc = "/account/validatecode?t=" + (new Date()).getTime();
+            this.src = newSrc;
+            return false;
+        });
+    })
 
-    $("#GL_StandardCode").click(function () {
-        var newSrc = "/account/validatecode?t=" + (new Date()).getTime();
-        this.src = newSrc;
-        return false;
-    });
 
     function BtnSaveOrUpdate() {
         $.ajax({
             cache: true,
             type: "POST",
-            url: '/blog/ajaxlogin?l=@Request.QueryString["l"]',
+            url: '/account/ajaxlogin?l=@Request.QueryString["l"]',
             data: $('#login_form').serialize().replaceAll("'", "''"),
             async: false,
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -155,7 +157,7 @@
                     if ('@Request.QueryString["l"]' != "") 
                         location.href = '@Request.QueryString["l"]';
                     else
-                        location.href = '/blog/index';
+                        location.href = '/';
                 }
                 else if (data == "false")
                 {

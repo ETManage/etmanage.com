@@ -12,11 +12,11 @@
 }
 
 
-<div id="ManageBody">
-    <div id="ManageOperateTitle">
+<div class="ManageBody">
+    <div class="ManageOperateTitle">
         商品管理
     </div>
-    <div id="ManageOperate">
+    <div class="ManageOperate">
         <form id="form1" action="/" method="post">
             <table class="datatable">
                 <tr>
@@ -121,7 +121,7 @@
                         $('#ickStatus').attr("checked", true);
                     if (data.Recommend == 1)
                         $('#ickRecommend').attr("checked", true);
-                    if (data.ArticlePicture) {
+                    if (data.ArticleCover) {
                         var arrpics = data.GoodPicture.split(',');
                         for (var i = 0; i < arrpics.length; i++) {
                             var html = "<li><div class='relative'> <img src=" + arrpics[i] + "  width='100px' height='80px' class='uploadify-preimgs'/><span class='uploadify-itemdel' >删除</span></div></li>";
@@ -176,7 +176,7 @@
                 parent.TopNotify("请选择封面图片", 'error');
                 return;
             }
-            presrc = "<input type='hidden' name='ArticlePicture'  class='savepreimgs'  value=" + presrc + ">";
+            presrc = "<input type='hidden' name='GoodPicture'  class='savepreimgs'  value=" + presrc + ">";
             $.ajax({
                 cache: true,
                 type: "POST",

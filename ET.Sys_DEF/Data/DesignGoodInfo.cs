@@ -30,5 +30,8 @@ namespace ET.Sys_DEF
          public Int32? Status { get; set; }
 
          public Int64? LoveCount { get; set; }
+
+         public String Reserve1 { get; set; }
+         public String Reserve2 { get; set; }
     }
 }

@@ -413,3 +413,13 @@ $.fn.extend({
 /*JQ扩展方法声明|West|2015-05-05 End */
 
 
+//扩展状态图片
+function formatterState(val, row, index) {
+    if (val == "1")
+        return '<img src="/Images/Public/icon-ok.png" title="已启用" />'
+    else if (val == "0")
+        return '<img src="/Images/Public/icon-filter.png" title="等待审核" />'
+    else
+        return '<img src="/Images/Public/icon-no.png" title="未启用" />'
+
+}

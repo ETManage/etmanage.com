@@ -10,7 +10,7 @@
 }
 
 <div class="ManageBody">
-    <div class="Page-toolbar" style="width: 238px;margin-bottom:10px;">
+    <div class="Page-toolbar" style="margin-bottom:10px;">
         <a href="javascript:  BtnSaveOrUpdate()" style="float: left;" class="l-btn l-btn-plain">
             <span class="l-btn-text icon-save" style="padding-left: 20px;" id="ibtnsave">保存</span>
         </a>
@@ -78,7 +78,7 @@
     var _cid = '@Request.QueryString["cid"]';
     var _pid = '@Request.QueryString["pid"]';
     function AddDept() {
-        location.href = '/Organization/DepartmentManage?cid=' + _cid + '&cid=' + _pid;
+        location.href = '/Organization/DepartmentManage?cid=' + _cid + '&pid=' + _pid;
     }
     function AddPost() {
         location.href = '/Organization/PositionManage?cid=' + _cid + '&did==' + _id;
@@ -120,7 +120,10 @@
                     if (data.result == "true") {
                         _id = data.id;
                         TopNotify("保存成功", 'info');
-                        parent.SycnNode(_id, _did, $("#iDepName").val());
+                        if (_pid != '' && _pid != '-1')
+                            parent.SycnNode(_id, _pid, $("#iDepName").val());
+                        else
+                            parent.SycnNode(_id, _cid, $("#iDepName").val());
                     }
                 }
             });

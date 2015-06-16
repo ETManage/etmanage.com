@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UserAuthorize.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Controllers\mAccountController.cs" />
     <Compile Include="Areas\Manage\Controllers\mBlogController.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Controllers\OneGTDController.cs" />
     <Compile Include="Controllers\PageErrorController.cs" />
     <Compile Include="Areas\Manage\Controllers\mDesignController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WeiXinController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1360,6 +1362,7 @@
     <Folder Include="Res\editor\upload\EditorFiles\" />
     <Folder Include="Scripts\Account\" />
     <Folder Include="UpLoad\Blog\EditorFiles\" />
+    <Folder Include="UpLoad\Blog\WebEditorFiles\" />
     <Folder Include="UpLoad\Design\EditorFiles\" />
     <Folder Include="UpLoad\Design\Image\" />
     <Folder Include="UpLoad\EditorFiles\" />
@@ -1479,11 +1482,9 @@
     <Content Include="Views\Blog\PageOk.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
-    <Content Include="Views\Blog\UserCenter.cshtml" />
     <Content Include="Views\Blog\ArticleTag.cshtml" />
     <Content Include="Views\Design\Detail.cshtml" />
     <Content Include="Views\PageError\Error404.cshtml" />
-    <Content Include="Views\Blog\UserSetting.cshtml" />
     <Content Include="Views\Blog\AdTest.cshtml" />
     <Content Include="Views\Blog\QQLoginCallBack.cshtml" />
     <Content Include="Scripts\Blog\upload.ashx" />
@@ -1545,8 +1546,16 @@
     <Content Include="Areas\Manage\Views\System\LimitOrgContact.cshtml" />
     <Content Include="Areas\Manage\Views\System\LimitOrgManag.cshtml" />
     <Content Include="Areas\Manage\Views\Organization\OrgQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\OrgManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\PublishQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\PublishManage.cshtml" />
+    <Content Include="Areas\Manage\Views\News\NewsQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\News\NewsManage.cshtml" />
     <None Include="Properties\PublishProfiles\etmanage.pubxml" />
+    <Content Include="Views\Message\Publish.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\UserSetting.cshtml" />
+    <Content Include="Views\User\MyPublish.cshtml" />
+    <Content Include="Views\User\MyFavorites.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

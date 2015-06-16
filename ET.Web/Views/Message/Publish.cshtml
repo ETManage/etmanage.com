@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBlog.cshtml";
+}
+@section Title{
+    易特网IT资讯投稿
+}
+@section Header{
+    <link href="/Content/Blog/login.css" rel="stylesheet" />
+    <script src="/Scripts/common/jquery.webtopbar.js"></script>
+    <script src="/Scripts/Blog/editor.js"></script>
+}
+
+
+<div class="content-wrap">
+    <div class="content-container">
+        <div data-scroll-reveal="" class="row card-panel" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+            <span class="rule-wrap"><a id="tieba" name="tieba" class="rule"></a></span><div class="col span_4_4">
+                <div class="ibx-even">
+                    <div class="ibx-inner" id="ibx-mod-tieba">
+                        <div class="ibx-inner-title">
+                            <a target="_blank" href="javascript:;" class="ibx-inner-title-ctx">留言中心</a>
+                            <ul class="ibx-inner-title-tab">
+                                <li class="ibx-inner-title-tabitem ibx-my-tieba OP_LOG_TITLE current">所有留言</li>
+                                @*<li class="ibx-inner-title-tabitem ibx-my-frs OP_LOG_TITLE">图片收藏</li>
+                                    <li class="ibx-inner-title-tabitem ibx-tieba-top OP_LOG_TITLE">我喜欢的</li>*@
+                            </ul>
+                        </div><div class="ibx-inner-content" id="ibx-tieba">
+                            <div class="col my-tieba">
+                                <form name="form2" id="iAddmsgForm">
+                                    <center>
+                                        <table>
+                                            <tr><th>标题：</th><td><input type="text" id="iTitle" name="Title" class="inputstyle" maxlength="50" /></td></tr>
+                                            <tr><th>类型：</th><td><select name="PublishType"><option value="博文引用">博文引用</option><option value="原创文章">原创文章</option><option value="其他">其他</option></select></td></tr>
+                                            <tr>
+                                                <th>类别：</th>
+                                                <td>
+                                                    <select name="TypeID">
+                                                        @foreach (ET.Sys_DEF.KeyAndValue item in @ViewBag.listArticleType)
+                                                        {
+                                                            <option value="@item.id">@item.text</option>
+                                                        }
+
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr><th>概述：</th><td><input type="text" id="iDescription" name="Description" class="inputstyle" maxlength="50" /></td></tr>
+                                            <tr><th>内容：</th><td><textarea id="iPublishContent" name="PublishContent" class="inputstyle" style="width:500px;"></textarea></td></tr>
+                                            <tr><th>来源：</th><td><input type="text" id="iPublishSource" name="PublishSource" class="inputstyle" maxlength="50" /></td></tr>
+                                            <tr><th>封面：</th><td><input type="file" id="iCover" name="Cover" class="inputstyle" maxlength="50" /></td></tr>
+                                            <tr><th>标签：</th><td><input type="text" id="iLabel" name="Label" class="inputstyle" maxlength="50" /><br /><span>英文,符号隔开</span></td></tr>
+                                            <tr>
+                                                <th>验证码：</th>
+                                                <td colspan="3">
+                                                    <input type="text" id="ivalidatecode" name="validatecode" maxlength="4" class="inputstyle3" />
+                                                    <img id="GL_StandardCode" style="cursor: pointer;" src="/account/validatecode?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                                                </td>
+                                            </tr>
+                                            <tr><td></td><td colspan="3"><input id="btnSend" type="button" value="投　稿" style="width:150px;" class="button_blue" /></td></tr>
+                                        </table>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<script type="text/javascript">
+     @if (!Request.IsAuthenticated)
+     {
+         @:alert('您还未登录！无权操作此页面！');        location.href='/' ;
+     }
+    $(function () {
+        $('#iPublishContent').editor({ tools: 'full' });
+        $("#GL_StandardCode").click(function () {
+            var newSrc = "/account/validatecode?t=" + (new Date()).getTime();
+            this.src = newSrc;
+            return false;
+        });
+
+
+        $('#btnSend').click(function () {
+
+            if ($('#iTitle').val() == "") {
+                $('#iTitle').focus().css({
+                    border: "1px solid red",
+                    boxShadow: "0 0 2px red"
+                });
+                TopNotify("标题不能为空", "info");
+                return false;
+            }
+            if ($('#iPublishContent').val() == "") {
+                $('#iPublishContent').focus().css({
+                    border: "1px solid red",
+                    boxShadow: "0 0 2px red"
+                });
+                TopNotify("内容不能为空", "info");
+                return false;
+            }
+
+
+            if ($('#ivalidatecode').val() == "") {
+                $('#ivalidatecode').focus().css({
+                    border: "1px solid red",
+                    boxShadow: "0 0 2px red"
+                });
+                TopNotify("验证码不能为空", "info");
+                return false;
+            }
+
+
+            $('#iTitle').css({
+                border: "1px solid #D7D7D7",
+                boxShadow: "none"
+            });
+            $.ajax({
+                type: "get",
+                url: "/account/ajaxcheckvalidatecode",
+                data: "code=" + $("#ivalidatecode").val() + '&t=' + new Date(),
+                dataType: 'html',
+                async: false,
+                success: function (result) {
+                    if (result != "true") {
+                        $('#ivalidatecode').focus().css({
+                            border: "1px solid red",
+                            boxShadow: "0 0 2px red"
+                        });
+                        TopNotify(result, "info");
+                        return false;
+                    } else {
+                        $('#ivalidatecode').css({
+                            border: "1px solid #D7D7D7",
+                            boxShadow: "none"
+                        });
+
+                        $.ajax({
+                            cache: true,
+                            type: "POST",
+                            url: '/message/ajaxaddpublish',
+                            data: $('#iAddmsgForm').serialize().replaceAll("'", "''"),
+                            async: false,
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                TopNotify(errorThrown, 'error');
+                            },
+                            success: function (data) {
+                                if (data == "true") {
+                                    $("#iAddmsgForm").form("reset");
+                                    TopNotify("信息已提交！请等待管理员审核..！", 'info');
+
+                                }
+                                else
+                                    TopNotify(data, 'error');
+                            }
+                        });
+                    }
+
+                }
+            });
+
+        });
+
+    })
+</script>

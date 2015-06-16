@@ -1,5 +1,5 @@
 ﻿
-var _menus ;
+var _menus;
 $(function () {
     $('#loginOut').click(function () {
         $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function (r) {
@@ -12,13 +12,19 @@ $(function () {
         });
     })
 
-    $.get("/System/AjaxQueryMenusList", {}, function (data, textStatus) {
+    $.post("/System/AjaxQueryMenusList", {}, function (data, textStatus) {
         _menus = JSON.parse(data);
+        // 导航菜单绑定初始化
+        $("#wnav").accordion({
+            animate: false
+        });
+        addNav(_menus.menus); //首次加载basic 左侧菜单
         InitLeftMenu();
         tabClose();
         tabCloseEven();
+
     }, 'html');
- 
+
 });
 
 
@@ -98,39 +104,89 @@ function startFloatBG() {
 作用：页面的左侧栏目和选项卡进行操作
 */
 $(function () {
-//    InitLeftMenu();
-//    tabClose();
-//    tabCloseEven();
+    //    InitLeftMenu();
+    //    tabClose();
+    //    tabCloseEven();
 })
 
-//初始化左侧
-function InitLeftMenu() {
-    $("#nav").accordion({ animate: false }); //为id为nav的div增加手风琴效果，并去除动态滑动效果
-    $.each(_menus.menus, function (i, n) {//$.each 遍历_menu中的元素
-        var menulist = '';
-        menulist += '<ul style="padding:3px;">';
-        $.each(n.menus, function (j, o) {
-            menulist += '<li><div><a ref="' + o.menuid + '" href="#" rel="' + o.url + '" ><span class="icon ' + o.icon + '" >&nbsp;</span><span class="nav">' + o.menuname + '</span></a></div></li> ';
+
+
+function Clearnav() {
+    var pp = $('#wnav').accordion('panels');
+
+    $.each(pp, function (i, n) {
+        if (n) {
+            var t = n.panel('options').title;
+            $('#wnav').accordion('remove', t);
+        }
+    });
+
+    pp = $('#wnav').accordion('getSelected');
+    if (pp) {
+        var title = pp.panel('options').title;
+        $('#wnav').accordion('remove', title);
+    }
+}
+
+function GetMenuList(data, menulist) {
+    if (data.menus == null)
+        return menulist;
+    else {
+        menulist += '<ul>';
+        $.each(data.menus, function (i, sm) {
+            if (sm.menus.length==0&&sm.url != null && sm.url != "") {
+                menulist += '<li ><a ref="' + sm.menuid + '" href="#" rel="'
+					+ sm.url + '" ><span class="nav">' + sm.menuname
+					+ '</span></a>'
+            }
+            else {
+                menulist += '<li state="closed"><span class="nav">' + sm.menuname + '</span>'
+            }
+            menulist = GetMenuList(sm, menulist);
         })
         menulist += '</ul>';
+    }
+    return menulist;
+}
 
-        $('#nav').accordion('add', {
-            title: n.menuname,
-            content: menulist,
-            iconCls: 'icon ' + n.icon
+function SelectTextExpand(obj, node) {
+    if (node.state == 'closed') $(obj).tree("expand", node.target); else $(obj).tree("collapse", node.target);
+}
+//左侧导航加载
+function addNav(data) {
+
+    $.each(data, function (i, sm) {
+        var menulist1 = "";
+        //sm 常用菜单  邮件 列表
+        menulist1 = GetMenuList(sm, menulist1);
+        menulist1 = "<ul  class='easyui-tree' animate='false' dnd='false' data-options='onSelect:function(node){  SelectTextExpand(this,node)  }'>" + menulist1.substring(4);
+        $('#wnav').accordion('add', {
+            title: sm.menuname,
+            content: menulist1,
+            iconCls: 'icon ' + sm.icon
         });
 
     });
 
-    $('.easyui-accordion li a').click(function () {//当单击菜单某个选项时，在右边出现对用的内容
-        var tabTitle = $(this).children('.nav').text(); //获取超链里span中的内容作为新打开tab的标题
+    var pp = $('#wnav').accordion('panels');
+    var t = pp[0].panel('options').title;
+    $('#wnav').accordion('select', t);
 
+}
+
+// 初始化左侧
+function InitLeftMenu() {
+
+    hoverMenuItem();
+
+    $('#wnav li a').click(function () {//当单击菜单某个选项时，在右边出现对用的内容
+        var tabTitle = $(this).children('.nav').text(); //获取超链里span中的内容作为新打开tab的标题
         var url = $(this).attr("rel");
         var menuid = $(this).attr("ref"); //获取超链接属性中ref中的内容
         var icon = getIcon(menuid, icon);
 
         addTab(tabTitle, url, icon); //增加tab
-        $('.easyui-accordion li div').removeClass("selected");
+        $('#wnav li div').removeClass("selected");
         $(this).parent().addClass("selected");
     }).hover(function () {
         $(this).parent().addClass("hover");
@@ -138,10 +194,19 @@ function InitLeftMenu() {
         $(this).parent().removeClass("hover");
     });
 
-    //选中第一个
-    var panels = $('#nav').accordion('panels');
-    var t = panels[0].panel('options').title;
-    $('#nav').accordion('select', t);
+
+
+}
+
+/**
+* 菜单项鼠标Hover
+*/
+function hoverMenuItem() {
+    $(".easyui-accordion").find('a').hover(function () {
+        $(this).parent().addClass("hover");
+    }, function () {
+        $(this).parent().removeClass("hover");
+    });
 }
 //获取左侧导航的图标
 function getIcon(menuid) {

@@ -3,57 +3,72 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    模块列表
+    博客友情链接
 }
 @section Header{
-}
 
-<div id="ManageBody">
-    <div id="ManageOperateTitle">
-        模块管理
+}
+<div class="ManageBody">
+    <div class="ManageOperateTitle">
+       留言信息管理
     </div>
-    <div id="ManageOperate">
-        <form id="form1" action="/" method="post">
+    <div class="ManageOperate">
+        <form id="form1"  action="/" method="post">
             <table class="datatable">
                 <tr>
                     <th>
-                        所属模块：
+                        创建者：
                     </th>
                     <td>
-                        <select name="ModulePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
-                                data-options="required:true,method:'get',url:'/System/AjaxGetPModuleData?infoid=@Request.QueryString["infoid"]',value:-1"></select>
+                        <input name="Creator" type="text" class="easyui-textbox" style="width: 200px" />
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        模块名称：
+                        电话：
                     </th>
                     <td>
-                        <input name="ModuleName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <input name="CreatorTel" type="text" class="easyui-textbox" style="width: 200px" />
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        模块KEY：
+                        邮箱：
                     </th>
                     <td>
-                        <input name="ModuleKey" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <input name="CreatorEMail" type="text" class="easyui-textbox" style="width: 200px" />
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        模块链接：
+                        留言标题名称：
                     </th>
                     <td>
-                        <input name="ModuleUrl" type="text" class="easyui-textbox" style="width: 200px" />
+                        <input name="MsgTitle" type="text" class="easyui-textbox" style="width: 200px" />
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        模块排序：
+                        内容：
                     </th>
                     <td>
-                        <input name="ModuleSort" type="text" class="easyui-textbox" style="width: 200px" />
+                        <input name="MsgContent" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">需要http://</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        回复内容：
+                    </th>
+                    <td>
+                        <input name="ReplyContent" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        状态操作：
+                    </th>
+                    <td>
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" />
                     </td>
                 </tr>
             </table>
@@ -66,18 +81,19 @@
     $(function () {
         //启用快捷键 83/ALT+s保存
         $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
-        //启用快捷键 67/ALT+c关闭
+        //启用快捷键 83/ALT+c关闭
         $(window).ApplyQuickKey(67, parent.windowClose);
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/System/AjaxGetModuleDetail",
+                url: "/mDesign/AjaxGetMessageDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
-
+                    if (data.Status == 1)
+                        $('#ickStatus').attr("checked", true);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     TopNotify(errorThrown, 'error');
@@ -90,7 +106,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/System/AjaxSaveModule?infoid=' + _id,
+                url: '/mDesign/AjaxSaveMessage?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

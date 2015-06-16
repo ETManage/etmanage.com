@@ -14,46 +14,6 @@ namespace ET.Sys_BLL
     /// </summary>
     public class SystemBLL
     {
-  
-
-        #region 动作管理
-        public bool Operate_SysActionInfo(SysActionInfo info, bool IsInsert)
-        {
-            if (info.ActionID == Guid.Empty)
-                return new TBaseDAL<SysActionInfo>().InsertInstance(info) > 0;
-            else
-                return new TBaseDAL<SysActionInfo>().UpdateInstance(info) > 0;
-        }
-
-
-        /// <summary>
-        /// 删除角色权限关系
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_SysActionInfo(string Condition)
-        {
-            return new TBaseDAL<SysActionInfo>().DeleteInstances(Condition) > 0;
-        }
-        public SysActionInfo Get_SysActionInfo(string Condition)
-        {
-            SysActionInfo info = new TBaseDAL<SysActionInfo>().GetInstanceByCondition(Condition);
-            return info;
-        }
-
-        public List<SysActionInfo> PageList_SysActionInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
-        {
-            return new TBaseDAL<SysActionInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
-        }
-        /// <summary>
-        /// 获取全部权限点
-        /// </summary>
-        public List<SysActionInfo> List_SysActionInfo(string Fields, string Condition, string strOrder)
-        {
-            return new TBaseDAL<SysActionInfo>().GetListByCondition(Fields, Condition, strOrder);
-        }
-
-        #endregion
-
         #region 角色管理
 
         /// <summary>

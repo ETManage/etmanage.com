@@ -36,8 +36,8 @@
             </form>
 
         </div>
-        <div id="divQuery" region="center" style="height: auto; overflow-x: hidden;">
-            <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限</div>
+        <div id="divQuery" region="center" style="height: auto; overflow: auto;">
+            <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限<input title="" type="checkbox" onclick="treeChecked(this, 'ilimitmodule')" />全选/反选</div>
             <ul id="ilimitmodule"></ul>
         </div>
 
@@ -83,6 +83,14 @@
             }
         });
     });
+    function treeChecked(selected, treeMenu) {
+        var roots = $('#' + treeMenu).tree('getRoots');//返回tree的所有根节点数组
+        if (selected.checked) {
+            $('#' + treeMenu + " .tree-checkbox").addClass("tree-checkbox1");
+        } else {
+            $('#' + treeMenu + " .tree-checkbox").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+        }
+    }
     function BtnSaveOrUpdate() {
         var actionids = new Array();
         var nodes = $('#ilimitmodule').tree('getChecked');

@@ -10,14 +10,14 @@
     <script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
 }
 
-<div id="ManageBody">
-    <div id="ManageListTitle"></div>
-    <fieldset id="ManageSearch" style="">
+<div class="ManageBody">
+    <div class="ManageListTitle"></div>
+    <fieldset class="ManageSearch" style="">
         <legend>信息查询</legend>
         <table class="datatable">
             <tr>
                 <th style="width:80px;">
-                    类别名称：
+                    链接名称：
                 </th>
                 <td>
                     <input id="txtSearch" style="width: 175px" type="text" data-options="prompt:'请输入查询内容'"
@@ -30,7 +30,7 @@
             </tr>
         </table>
     </fieldset>
-    <div id="ManageList">
+    <div class="ManageList">
         <table id="InfoGridData"></table>
     </div>
 </div>
@@ -77,8 +77,9 @@
             pageSize: 10,
             columns: [[
                     { field: 'RollID', width: 10, title: 'ID', sortable: true, hidden: true },
-                    { field: 'RollName', width: 220, title: '类别名称', sortable: true },
-                    { field: 'RollSort', width: 220, title: '类别排序', sortable: true }
+                    { field: 'RollName', width: 220, title: '链接名称', sortable: true, formatter: formatterUrl },
+   
+                    { field: 'RollSort', width: 220, title: '链接排序', sortable: true }
             ]],
             toolbar: toolbarnode
 
@@ -86,7 +87,9 @@
         var options = { serviceUrl: '/mblog/ajaxsearchroll' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
-
+    function formatterUrl(val, row, index) {
+        return '<a href="' + row.ArticleUrl + '" target="_blank" >' + row.RollName + '</a>'
+    }
     function fixAdd() {
         openWindow('新增', "RollManage", { width: 600, height: 450 })
     };
@@ -103,10 +106,10 @@
                 $.post('/mblog/AjaxDeleteRoll', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
-
+                        TopNotify("数据已删除", 'info');
                     }
                     else {
-                        alert(res);
+                        TopNotify(res, 'error');
                     }
                 });
             }

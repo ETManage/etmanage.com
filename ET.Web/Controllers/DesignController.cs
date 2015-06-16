@@ -18,7 +18,7 @@ namespace Web.Controllers
             List<KeyAndValue> listType = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("TYPEID id,TypeUrl reserve1,TypeKey reserve3,TypeLevel reserve2,TYPENAME text,TYPEPID pid", TableNames.BlogTypeInfo, " AND Status=1 ", "TYPESORT DESC");
             ViewBag.listBlogType = listType;
 
-            List<NewInfo> listnewestNew = new ET.Sys_BLL.InfoBLL().List_NewInfo(" top 1 newid,newtitle", "AND NewStatus=1 AND TYPEID=(SELECT TOP 1 TYPEID FROM " + TableNames.NewTypeInfo + " WHERE TYPEKEY='notice')", " CreateTime desc");
+            List<NewInfo> listnewestNew = new ET.Sys_BLL.NewsBLL().List_NewInfo(" top 1 newid,newtitle", "AND Status=1 AND TYPEID=(SELECT TOP 1 TYPEID FROM " + TableNames.NewTypeInfo + " WHERE TYPEKEY='notice')", " CreateTime desc");
             ViewBag.listNewestNew = listnewestNew;
 
         }

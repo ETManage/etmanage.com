@@ -9,7 +9,7 @@
     {
         <div class="nav-lis">
 
-            <a href="@PublicHelper.GetHostAddress()@itemType.reserve1" class="n-c ">
+            <a href="@itemType.reserve1" class="n-c ">
                 @if (Request.Url.ToString().Contains(itemType.reserve1))
                 {
                     <span class="selected"> @itemType.text</span>
@@ -22,7 +22,7 @@
             <ul>
                 @foreach (ET.Sys_DEF.KeyAndValue itemTypeChild in @itemType.children)
                 {
-                    <li><a href="@PublicHelper.GetHostAddress()@itemTypeChild.reserve1">@itemTypeChild.text</a></li>
+                    <li><a href="@itemTypeChild.reserve1">@itemTypeChild.text</a></li>
 
                 }
             </ul>
@@ -32,7 +32,7 @@
     {
         <div class="nav-home">
 
-            <a rel="nofollow" class="n-c" target="_blank" href="@PublicHelper.GetHostAddress()@itemType.reserve1">
+            <a rel="nofollow" class="n-c" target="_blank" href="@itemType.reserve1">
                 @if (Request.Url.ToString().Contains(itemType.reserve1))
                 {
                     <span class="selected"> @itemType.text</span>

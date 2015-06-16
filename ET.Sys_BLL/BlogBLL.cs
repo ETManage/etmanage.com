@@ -299,5 +299,55 @@ namespace ET.Sys_BLL
         }
         #endregion
 
+
+        #region 博客文章投稿
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogPublish(BlogPublish info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogPublish>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogPublish>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogPublish(string Condition)
+        {
+            return new TBaseDAL<BlogPublish>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogPublish Get_BlogPublishByID(string infoid)
+        {
+            BlogPublish info = null;
+            info = new TBaseDAL<BlogPublish>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogPublish Get_BlogPublish(string Condition)
+        {
+            BlogPublish info = null;
+            info = new TBaseDAL<BlogPublish>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogPublish> List_BlogPublish(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogPublish>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogPublish> PageList_BlogPublish(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogPublish>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
     }
 }

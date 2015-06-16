@@ -131,7 +131,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type: reMethod,
-            url: "/blog/ajaxcheckuser",
+            url: "/account/ajaxcheckuser",
             data: "uid=" + $("#user").val() + '&temp=' + new Date(),
             dataType: 'html',
             async: false,
@@ -151,7 +151,7 @@ $(document).ready(function () {
                     });
                     $.ajax({
                         type: reMethod,
-                        url: "/blog/ajaxcheckvalidatecode",
+                        url: "/account/ajaxcheckvalidatecode",
                         data: "code=" + $("#ivalidatecode").val() + '&t=' + new Date(),
                         dataType: 'html',
                         async: false,
@@ -190,7 +190,7 @@ $(document).ready(function () {
 function checkUserName(Isasync) {
     $.ajax({
         type: reMethod,
-        url: "/blog/ajaxcheckuser",
+        url: "/account/ajaxcheckuser",
         data: "uid=" + $("#user").val() + '&temp=' + new Date(),
         dataType: 'html',
         async: Isasync,
@@ -219,7 +219,7 @@ function userlogout()
 {
     $.ajax({
         type: reMethod,
-        url: "/blog/ajaxuserlogout",
+        url: "/account/ajaxuserlogout",
         async: false,
         success: function (result) {
             if (result)

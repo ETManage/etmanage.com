@@ -6,76 +6,81 @@
     公司管理
 }
 @section Header{
-    
+
 }
+<div class="ManageBody">
 
-<div id="ManageBody">
-    <div id="ManageTitle"><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a></div>
-    <div>
-        <div style="float: left; width: 300px; ">
-            <ul id="iPositionInfo" style="width: 300px;height:100%;" class="easyui-tree" data-options="url: '/Organization/AjaxQueryPositionList',animate:true,onSelect:LoadInfo"></ul>&nbsp;
-        </div>
-        <div style="float: left; width: auto;">
-            <form id="form1" accept-charset="" action="/" method="post">
-                <table class="datatable">
-                    <tr>
-                        <th>
-                            部门名称：
-                        </th>
-                        <td>
-                            <input name="PostName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            部门排序：
-                        </th>
-                        <td>
-                            <input name="PostSort" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            部门描述：
-                        </th>
-                        <td>
-                            <input name="PostDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-
-                        </th>
-                        <td>
-                            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:80px" onclick="BtnSaveOrUpdate()">保存</a>
-                            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:80px" onclick="BtnSaveOrUpdate()">删除</a>
-                        </td>
-                    </tr>
-
-                </table>
-            </form>
-
-
-        </div>
+    <div class="Page-toolbar" style="margin-bottom:10px;">
+        <a href="javascript:  BtnSaveOrUpdate()" style="float: left;" class="l-btn l-btn-plain">
+            <span class="l-btn-text icon-save" style="padding-left: 20px;" id="ibtnsave">保存</span>
+        </a><a href="javascript:  fixDel()" style="float: left;" class="l-btn l-btn-plain">
+    <span class="l-btn-text icon-cancel" style="padding-left: 20px;" id="ibtnsave">删除</span>
+</a>
+        <a href="javascript:  AddPost()" style="float: left;" class="l-btn l-btn-plain">
+            <span class="l-btn-text icon-add" style="padding-left: 20px;" id="ibtnsave">岗位添加</span>
+        </a>
+      
     </div>
- 
- </div>
-<script type="text/javascript">
-    var infoid;
-    function LoadInfo(node) {
 
-        if (node) {
-            infoid = node.id;
-            alert(node.text)
+    <div>
+        <form id="form1" accept-charset="" action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        职务名称：
+                    </th>
+                    <td>
+                        <input name="PostName" id="iPostName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        职务排序：
+                    </th>
+                    <td>
+                        <input name="PostSort" type="text" class="easyui-textbox" style="width:300px;height:50px" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        职务描述：
+                    </th>
+                    <td>
+                        <input name="PostDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
+                    </td>
+                </tr>
+
+
+
+            </table>
+        </form>
+
+
+
+
+    </div>
+</div>
+<script type="text/javascript">
+    var _id = '@Request.QueryString["id"]';
+    var _cid = '@Request.QueryString["cid"]';
+    var _did = '@Request.QueryString["did"]';
+    function AddPost() {
+        location.href = '/Organization/PositionManage?cid=' + _cid + '&did=' + _did;
+    }
+
+    $(function () {
+        if(_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
                 url: "/Organization/AjaxGetPositionDetail?rad=" + new Date().toString(),
                 async: true,
-                data: { infoid: node.id },
+                data: { id: _id },
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
+          
+                    _cid = data.CompanyID;
+                    _did = data.DepID;
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     TopNotify(errorThrown, 'error');
@@ -83,22 +88,24 @@
             });
         }
 
-    }
+
+    })
     function BtnSaveOrUpdate() {
         if ($("#form1").form("validate")) {
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSavePosition?infoid=' + infoid,
+                url: '/Organization/AjaxSavePosition?cid=' + _cid + '&did=' + _did + '&id=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     parent.TopNotify(errorThrown, 'error');
                 },
                 success: function (data) {
-                    if (data == "true") {
-                        parent.TopNotify("保存成功", 'info');
-                        $("#iPositionInfo").combotree("reload");
+                    if (data.result == "true") {
+                        _id = data.id;
+                        TopNotify("保存成功", 'info');
+                        parent.SycnNode(_id, _did, $("#iPostName").val());
                     }
                 }
             });
@@ -106,15 +113,19 @@
 
     }
     function fixDel() {
-        if (!confirm("确认删除吗？"))
-            return;
-        $.post('/System/AjaxDeletePosition', { infoid: infoid }, function (res) {
-            if (res == "true") {
-                $("#iPositionInfo").combotree('reload')
-                
-            }
-            else {
-                alert(res);
+        $.messager.confirm("确认提示框", "确认删除这条吗？", function (r) {
+            if (r) {
+                $.post('/System/AjaxDeletePosition', { id: _id }, function (res) {
+                    if (res == "true") {
+                        parent.AsynRemoveNode(_id);
+                        $("#form1").form("reset");
+                        _id = "";
+                        TopNotify("数据已删除", 'info');
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
             }
         });
     };

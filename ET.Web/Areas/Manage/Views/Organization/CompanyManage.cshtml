@@ -11,7 +11,7 @@
 
 <div class="ManageBody">
 
-    <div class="Page-toolbar" style="width: 238px;margin-bottom:10px;">
+    <div class="Page-toolbar" style="margin-bottom:10px;">
         <a href="javascript:  BtnSaveOrUpdate()" style="float: left;" class="l-btn l-btn-plain">
             <span class="l-btn-text icon-save" style="padding-left: 20px;" id="ibtnsave">保存</span>
         </a>
@@ -37,7 +37,7 @@
                         公司名称：
                     </th>
                     <td>
-                        <input name="CompanyName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                        <input name="CompanyName" id="iCompanyName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
                     </td>
                 </tr>
                 <tr>
@@ -112,7 +112,7 @@
                     if (data.result == "true") {
                         _id = data.id;
                         TopNotify("保存成功", 'info');
-                        parent.SycnNode(_id);
+                        parent.SycnNode(_id, "-1", $("#iCompanyName").val());
                     }
                 }
             });

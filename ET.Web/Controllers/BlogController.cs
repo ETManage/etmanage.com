@@ -30,7 +30,7 @@ namespace ET.Web.Controllers
         public void _GetPartialArticleList(string Field, string Condition, string Order, string TableName = TableNames.BlogArticleInfo, bool IsNoLock = true)
         {
             if (string.IsNullOrEmpty(Field))
-                Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource";
+                Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource";
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
             List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
@@ -38,48 +38,6 @@ namespace ET.Web.Controllers
 
             ViewBag.listArticle = GetArticleList(10, Field, Condition, Order, TableName, IsNoLock);
         }
-
-
-        /// <summary>
-        /// 分页查询，返回ViewBag.listPager
-        /// </summary>
-        public void _GetListPager(int pageIndex, int pageSize, long RecordTotalCount)
-        {
-
-            string strPagerText = "<div class=' pagination'><ul>";
-
-            string strCurrUrl = Request.Path.ToString() + "?";
-
-            if (pageIndex == 1)
-            {
-                strPagerText += "<li class='prev-page'></li>";
-            }
-            else
-                strPagerText += "<li class='prev-page'><a href='" + strCurrUrl + "page=" + (pageIndex - 1) + "' >上一页</a></li>";
-
-            for (int i = ((pageIndex - 3) > 0 ? (pageIndex - 3) : 1); i < pageIndex; i++)
-            {
-                strPagerText += "<li><a href='" + strCurrUrl + "page=" + i + "' >" + i + "</a></li>";
-            }
-            strPagerText += "<li class='active'><span>" + pageIndex + "</span></li>";
-
-
-            for (int i = pageIndex + 1; i <= Math.Ceiling((decimal)RecordTotalCount / pageSize); i++)
-            {
-                strPagerText += "<li><a href='" + strCurrUrl + "page=" + i + "' >" + i + "</a></li>";
-            }
-            if (pageIndex == Math.Ceiling((decimal)RecordTotalCount / pageSize))
-            {
-                strPagerText += "<li class='next-page'></li>";
-            }
-            else
-                strPagerText += "<li class='next-page'><a href='" + strCurrUrl + "page=" + (pageIndex + 1) + "' >下一页</a></li>";
-
-            strPagerText += "</ul>        </div>";
-            ViewBag.listPager = strPagerText;
-        }
-
-
 
         #endregion
 
@@ -96,7 +54,7 @@ namespace ET.Web.Controllers
         public List<BlogArticleInfo> GetArticleList(int TopCount, string Field, string Condition, string Order, string TableName = TableNames.BlogArticleInfo, bool IsNoLock = true)
         {
             if (string.IsNullOrEmpty(Field))
-                Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource";
+                Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource";
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
 
@@ -106,10 +64,11 @@ namespace ET.Web.Controllers
 
 
         #endregion
+
         #region 页面控制器
         public ActionResult Index()
         {
-            ViewBag.listTopArticle = GetArticleList(5, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,case when CHARINDEX(',',ArticlePicture)>0 then ArticlePicture else ',' end ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", " AND IsRoll=1 ", "CreateTime DESC"); ;
+            ViewBag.listTopArticle = GetArticleList(5, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,case when CHARINDEX(',',ArticleCover)>0 then ArticleCover else ',' end ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", " AND IsRoll=1 ", "CreateTime DESC"); ;
             _GetPartialArticleList(null, null, null);
             return View();
         }
@@ -140,11 +99,11 @@ namespace ET.Web.Controllers
                     listNextArticle.Add(new BlogArticleInfo { ArticleUrl = "javascript:;", ArticleTitle = "最后一条了！" });
                 ViewBag.listNextArticle = listNextArticle;
 
-                List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(4, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticlePicture,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 ", "CreateTime DESC");
+                List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(4, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticleCover,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 ", "CreateTime DESC");
                 ViewBag.listArticle = listArticle;
 
 
-                List<BlogArticleInfo> listOtherArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(8, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticlePicture,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 AND  charindex('" + info.ArticleLabel + "',ArticleLabel)>0", "CreateTime DESC");
+                List<BlogArticleInfo> listOtherArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(8, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticleCover,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 AND  charindex('" + info.ArticleLabel + "',ArticleLabel)>0", "CreateTime DESC");
                 ViewBag.listOtherArticle = listOtherArticle.Take(4);
                 ViewBag.listOtherArticle2 = listOtherArticle.Skip(4);
 
@@ -206,7 +165,7 @@ namespace ET.Web.Controllers
         }
         public ActionResult HotCollect()
         {
-            List<BlogArticleInfo> listOtherArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(8, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticlePicture,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 ", "ACCESSCOUNT DESC,CreateTime DESC");
+            List<BlogArticleInfo> listOtherArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(8, "ARTICLEID,ARTICLETITLE,ArticleDescription,ArticleCover,CreateTime,ACCESSCOUNT,LoveCount,ShareCount,ARTICLEUrl,TYPEID", TableNames.BlogArticleInfo, "AND Status=1 ", "ACCESSCOUNT DESC,CreateTime DESC");
             ViewBag.listOtherArticle = listOtherArticle;
 
             _GetPartialArticleList(null, null, "ACCESSCOUNT DESC,CreateTime DESC");
@@ -224,52 +183,8 @@ namespace ET.Web.Controllers
         {
             return View();
         }
-        public ActionResult UserCenter(string page)
-        {
-            int pageIndex = 1;
-            if (this.CheckInfoInt(page))
-                pageIndex = int.Parse(page);
-            int pageSize = 10;
-            long RecordTotalCount = 0;
-            //收藏中心-文章收藏 Start
-            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavoriteInfo b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + TableNames.BlogArticleFavoriteInfo + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
-            ViewBag.listCollectArticle = listCollectArticle;
 
-            //收藏中心-文章收藏 End
-            //查看记录 Start
-            //List<KeyAndValue> listBlogViewRecord = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("")
 
-            _GetListPager(pageIndex, pageSize, RecordTotalCount);
-
-            return View();
-        }
-        public ActionResult UserSetting()
-        {
-            if (this.IsLogin)
-            {
-                this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
-            }
-            UserPropertyInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfoByID(this.UserID.ToString());
-            if (uinfo != null)
-            {
-                ViewBag.UserInfo = uinfo;
-            }
-            return View();
-        }
-        [HttpPost]
-        public ActionResult GetUserBaseSetting()
-        {
-            if (this.IsLogin)
-            {
-                this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
-            }
-            UserPropertyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND USERID='" + this.UserID.ToString() + "'");
-            if (info != null)
-            {
-                return Json(info, JsonRequestBehavior.AllowGet);
-            }
-            return Json("error", JsonRequestBehavior.AllowGet);
-        }
      
         public ActionResult Search(string q, string page)
         {
@@ -281,7 +196,7 @@ namespace ET.Web.Controllers
                 pageIndex = int.Parse(page);
             int pageSize = 10;
             long RecordTotalCount = 0;
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             ViewBag.listArticle = listArticle;
 
 
@@ -300,7 +215,7 @@ namespace ET.Web.Controllers
         #endregion
 
         #region Ajax处理方法
-     
+       
 
         //异步加载数据
         [HttpGet]
@@ -339,7 +254,7 @@ namespace ET.Web.Controllers
             }
 
 
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", strCondition, _order, int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", strCondition, _order, int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -446,79 +361,9 @@ namespace ET.Web.Controllers
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult AjaxSettingInfo(FormCollection collection, string s)
-        {
-            //switch (s)
-            //{
-            //    case "baseinfo":
-            if (!this.IsLogin)
-            {
-                return Content("用户还未登录！或已经登录超时！请重新登录");
-            }
-            UserPropertyInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND USERID='" + this.UserID.ToString() + "'");
-            if (uinfo != null)
-            {
-                uinfo.Sex = collection["Sex"];
-                uinfo.BirthdayYear = collection["birthdayyear"];
-                uinfo.BirthdayMonth = collection["birthdaymonth"];
-                uinfo.BirthdayDay = collection["birthdayday"];
-                uinfo.LiveProvince = collection["liveprovince"];
-                uinfo.LiveCity = collection["livecity"];
-                uinfo.LiveArea = collection["livearea"];
-                uinfo.QQ = collection["QQ"];
-                uinfo.Detail = collection["detail"];
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPropertyInfo(uinfo))
-                {
-                    return Content("true");
-                }
-            }
-            //        break;
-            //}
-            return Content("paramerror");
-        }
-
-        [HttpPost]
-        public ActionResult AjaxSettingPass(FormCollection collection, string s)
-        {
-            if (!this.IsLogin)
-            {
-                return Content("用户还未登录！或已经登录超时！请重新登录");
-            }
-            UserBaseInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["oldUserPwd"])) + "'");
-            if (uinfo != null)
-            {
-                uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBaseInfo(uinfo))
-                {
-                    return Content("true");
-                }
-                else
-                    return Content("error");
-            }
-            else
-
-                return Content("原始密码不匹配");
-        }
 
 
-        [HttpPost]
-        public ActionResult AjaxAddMessage(FormCollection collection)
-        {
-            BlogMessageInfo info = new BlogMessageInfo();
-            info.Creator = collection["Creator"];
-            info.MsgType = collection["MsgType"];
-            info.CreatorTel = collection["CreatorTel"];
-            info.CreatorEmail = collection["CreatorEmail"];
-            info.MsgTitle = collection["MsgTitle"];
-            info.MsgContent = collection["MsgContent"];
-            info.CreateTime = DateTime.Now;
-            if (new Sys_BLL.BlogBLL().Operate_BlogMessageInfo(info, true))
-                return Content("true");
-            else
-                return Content("error");
 
-        }
         #endregion
     }
 }

@@ -350,6 +350,8 @@ function showWindowBtn(index) {
     var myopenwindow = $('div.myopenwindow').last().find("a").eq(index).show();
 };
 function openWindow(title, href, options, CloseFunc) {
+    if (!CloseFunc)
+        CloseFunc=windowClose
     this.options =
     {
         width: 860,

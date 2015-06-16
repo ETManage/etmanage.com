@@ -2550,7 +2550,7 @@
 
 
 /*2015-06-11 West*/
-    .Page-toolbar { height: 28px; font-size: 12px; width: 100%; background: #efefef; padding: 1px; border: 1px solid #ccc; }
+    .Page-toolbar { height: 28px; font-size: 12px; width: 100%; background: #efefef;  border-top: 1px solid #ccc;border-bottom: 1px solid #ccc; }
 
 /*a.l-btn {
   background-position: right 0;

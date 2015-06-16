@@ -5,10 +5,10 @@
             <a class="label label-important" href="@PublicHelper.GetHostAddress()/blog/articletag/.ArticleLabel.Split(',')[0]/">@Model.ArticleLabel.Split(',')[0]<i class="label-arrow"></i></a>
             <h2><a target="_blank" href="@Model.ArticleUrl" title="@Model.ArticleTitle">@Model.ArticleTitle</a></h2>
         </header>
-        @if (!string.IsNullOrEmpty(Model.ArticlePicture))
+        @if (!string.IsNullOrEmpty(Model.ArticleCover))
         {
             <div class="focus">
-                <a target="_blank" href="@Model.ArticleUrl"><img class="thumb" src="@Model.ArticlePicture.Split(',')[0]" alt="@Model.ArticleTitle" width="200" height="125" onerror="this.src = '/images/public/nopicture.jpg'"/></a>
+                <a target="_blank" href="@Model.ArticleUrl"><img class="thumb" src="@Model.ArticleCover.Split(',')[0]" alt="@Model.ArticleTitle" width="200" height="125" onerror="this.src = '/images/public/nopicture.jpg'"/></a>
             </div>
         }
         <span class="note">

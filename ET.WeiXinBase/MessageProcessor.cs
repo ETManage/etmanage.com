@@ -219,10 +219,10 @@ namespace ET.WeiXinBase
                 case "关于我们":
                     items.Add(new NewsReplyMessageItem()
                     {
-                        Description = "专业IT文章分享基地，您的访问是易特网改进的动力",
+                        Description = "专业IT文章分享基地，您的访问是易特改进的动力",
                         Url = "http://etmanage.com/",
                         PicUrl = "http://etmanage.com/Images/Public/nopicture.jpg",
-                        Title = "您的访问是易特网改进的动力！"
+                        Title = "您的访问是易特改进的动力！"
                     });
 
                     break;
@@ -230,14 +230,14 @@ namespace ET.WeiXinBase
                     string strCondition = "";
                     if (!string.IsNullOrEmpty(msg.Content))
                         strCondition = " AND charindex('" + msg.Content + "', ArticleTitle)>0";
-                    List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(3, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticlePicture,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", TableNames.BlogArticleInfo, "AND Status=1 " + strCondition, "CreateTime DESC");
+                    List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(3, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", TableNames.BlogArticleInfo, "AND Status=1 " + strCondition, "CreateTime DESC");
                     foreach (BlogArticleInfo info in listArticle)
                     {
                         NewsReplyMessageItem infoitm = new NewsReplyMessageItem()
                         {
                             Description = info.ArticleDescription,
                             Url = info.ArticleUrl,
-                            PicUrl = PublicHelper.GetHostAddress() + info.ArticlePicture,
+                            PicUrl = PublicHelper.GetHostAddress() + info.ArticleCover,
                             Title = info.ArticleTitle
                         };
                         items.Add(infoitm);
@@ -245,32 +245,6 @@ namespace ET.WeiXinBase
                     }
                     break;
             }
-            //NewsReplyMessageItem itm = new NewsReplyMessageItem()
-            //{
-            //    Description = "产品经理如何应对：这个功能别人都有了1",
-            //    Url = "http://www.yixieshi.com/it/21231.html",
-            //    PicUrl = "http://img.yixieshi.com/105Z35N9-0.jpg!680",
-            //    Title = "产品经理如何应对：这个功能别人都有了1"
-            //};
-            //items.Add(itm);
-
-            //itm = new NewsReplyMessageItem()
-            //{
-            //    Description = "产品经理如何应对：这个功能别人都有了2",
-            //    Url = "http://www.yixieshi.com/it/21231.html",
-            //    PicUrl = "http://img.yixieshi.com/105Z35N9-0.jpg!680",
-            //    Title = "产品经理如何应对：这个功能别人都有了1"
-            //};
-            //items.Add(itm);
-
-            //itm = new NewsReplyMessageItem()
-            //{
-            //    Description = "产品经理如何应对：这个功能别人都有了3",
-            //    Url = "http://www.yixieshi.com/it/21231.html",
-            //    PicUrl = "http://img.yixieshi.com/105Z35N9-0.jpg!680",
-            //    Title = "产品经理如何应对：这个功能别人都有了1"
-            //};
-            //items.Add(itm);
 
             NewsReplyMessage replyMsg = new NewsReplyMessage()
             {
@@ -401,7 +375,25 @@ namespace ET.WeiXinBase
         public string ProcessSubscribeEvent(SubscribeEventMessage msg, params object[] args)
         {
             //这里回应1条文本消息，当然您也可以回应其他消息
-            return MessageHandler.GetXmlTextReplyMessage(msg.ToUserName, msg.FromUserName, "您触发了关注事件，欢迎关注我们的公众号");
+            //return MessageHandler.GetXmlTextReplyMessage(msg.ToUserName, msg.FromUserName, "您触发了关注事件，欢迎关注我们的公众号");
+            List<NewsReplyMessageItem> items = new List<NewsReplyMessageItem>();
+
+            items.Add(new NewsReplyMessageItem()
+            {
+                Description = "专业IT文章分享基地，您的访问是易特改进的动力",
+                Url = "http://etmanage.com/",
+                PicUrl = "http://etmanage.com/Images/Public/nopicture.jpg",
+                Title = "您的访问是易特改进的动力！"
+            });
+
+            NewsReplyMessage replyMsg = new NewsReplyMessage()
+            {
+                CreateTime = Tools.ConvertDateTimeInt(DateTime.Now),
+                FromUserName = msg.ToUserName,
+                ToUserName = msg.FromUserName,
+                Articles = items
+            };
+            return MessageHandler.GetXmlReplyMessage(replyMsg);
 
         }
 
@@ -498,12 +490,12 @@ namespace ET.WeiXinBase
 
         private void WriteProcessLog(string msg)
         {
-            //try
-            //{
-            //    ET.ToolKit.Common.TxtHelper txtHelper = new ET.ToolKit.Common.TxtHelper();
-            //    txtHelper.WriteToFile(System.Web.HttpContext.Current.Request.PhysicalApplicationPath + SystemConfigConst.ManageLoginLogDir + DateTime.Now.ToString("yyyy-MM-dd") + ".log", "用户：" + info.UserName + "(" + stuinfo.CNName + ")" + "登陆");
-            //}
-            //catch { }
+            try
+            {
+                ET.ToolKit.Common.TxtHelper txtHelper = new ET.ToolKit.Common.TxtHelper();
+                txtHelper.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + SystemConfigConst.WeiXinLogDir + DateTime.Now.ToString("yyyy-MM-dd") + ".log", "[" + DateTime.Now.ToString("HH:mm:ss") + "]" + msg);
+            }
+            catch { }
         }
     } // class end
 }

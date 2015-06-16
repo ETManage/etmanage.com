@@ -73,7 +73,7 @@
             onDblClickRow: function (rowIndex, rowData) { fixView(); },
             columns: [[
                     { field: 'ArticleID', width: 10, title: 'ID', hidden: true },
-                    { field: 'ArticleSource', width: 80, title: '所属类别', sortable: true },
+                    { field: 'Reserve1', width: 80, title: '所属类别', sortable: true },
                     { field: 'ArticleTitle', width: 320, title: '文章标题', sortable: true },
                     { field: 'ArticleLabel', width: 100, title: '文章标签', sortable: true },
                     { field: 'ArticleUrl', width: 60, title: '文章链接', align: 'center', sortable: true, formatter: formatterUrl },
@@ -98,15 +98,16 @@
     }
     function formatterState(val, row, index) {
         if (val == "1")
-            return '<img src="/Images/Public/icon-ok.png" />'
+            return '<img src="/images/public/icon-ok.png" />'
         else if (val == "0")
-            return '<img src="/Images/Public/icon-filter.png" />'
+            return '<img src="/images/public/icon-filter.png" />'
         else
-            return '<img src="/Images/Public/icon-no.png" />'
+            return '<img src="/images/public/icon-no.png" />'
 
     }
     function fixAdd() {
-        openWindow('新增', "ArticleManage", { width: $(document).width, height: $(document).height-50 })
+
+        openWindow('新增', "/mblog/articlemanage", { width: $(document).width(), height: $(document).height() - 50 })
     };
 
     function fixDel() {
@@ -139,7 +140,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openWindow('修改', "ArticleManage?infoid=" + selected.ArticleID, { width: 1000, height: 550 })
+        openWindow('修改', "/mblog/articlemanage?infoid=" + selected.ArticleID, { width: 1000, height: 550 })
     };
 
     function fixView() {
@@ -148,7 +149,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "ArticleManage?infoid=" + selected.ArticleID, { width: 1000, height: 550 })
+        openSimpleWindow('查看', "/mblog/articlemanage?infoid=" + selected.ArticleID, { width: 1000, height: 550 })
     };
 
     function queryClick() {

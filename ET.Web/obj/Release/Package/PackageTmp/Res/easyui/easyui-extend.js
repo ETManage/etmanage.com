@@ -349,12 +349,14 @@ function hideWindowBtn(index) {
 function showWindowBtn(index) {
     var myopenwindow = $('div.myopenwindow').last().find("a").eq(index).show();
 };
-function openWindow(title, href, options) {
+function openWindow(title, href, options, CloseFunc) {
+    if (!CloseFunc)
+        CloseFunc=windowClose
     this.options =
     {
         width: 860,
         height: 520,
-        buttons: [{ text: '确定(Alt+S)', iconCls: 'icon-ok', handler: windowConfirm }, { text: '关闭(Alt+C)', iconCls: 'icon-cancel', handler: windowClose }]
+        buttons: [{ text: '确定(Alt+S)', iconCls: 'icon-ok', handler: windowConfirm }, { text: '关闭(Alt+C)', iconCls: 'icon-cancel', handler: CloseFunc }]
     };
     $.extend(this.options, options);
     var mydialog = $("<div class='myopenwindow' style='height: 0px;'></div>");
@@ -367,7 +369,12 @@ function openWindow(title, href, options) {
         height: this.options.height,
         modal: true,
         shadow: false,
-        onClose: function () { windowClose(); },
+        onClose: function () {
+            if (typeof (CloseFunc) == 'function') {
+                var func=eval(CloseFunc)
+                func();
+            } 
+        },
         buttons: this.options.buttons
     });
     $(oFrm).attr("src", href);
@@ -606,3 +613,17 @@ $(function () {
         };
     };
 });
+//2015-06-11 West
+//改变表格宽高
+function startdatagridauto() {
+    if ($('#InfoGridData')) {
+        window.onresize = function () {
+            setTimeout(function () {
+                $('#InfoGridData').datagrid('resize', {
+                    width: $(document).width() - 10
+                });
+            }, 300);
+        };
+    }
+}
+startdatagridauto();

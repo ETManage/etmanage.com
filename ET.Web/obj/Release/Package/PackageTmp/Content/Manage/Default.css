@@ -1,6 +1,6 @@
 ﻿/*通用样式*/
 * { font-size: 9pt; border: 0; margin: 0; padding: 0; }
-body { font-family: '微软雅黑'; background-color: #1c77ac; background-image: url(/images/Account/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden; min-width:980px;}
+body { font-family: '微软雅黑'; background-color: #1c77ac; background-image: url(/images/manage/maccount/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden; min-width:980px;}
 ul { display: block; margin: 0; padding: 0; list-style: none; }
 li { display: block; margin: 0; padding: 0; list-style: none; }
 img { border: 0; }
@@ -17,10 +17,30 @@ a:hover { text-decoration: underline; }
 .txt { border: #878787 1px solid; padding: 4px 3px; font: Verdana, Geneva, sans-serif,宋体; line-height: 14px; background-color: #fff; height: auto; font-size: 14px; }
 
 
+.tree-file {
+  background: url(/images/Manage/tabicons.png) no-repeat;
+  width: 18px;
+  line-height: 18px;
+  display: inline-block;
+  background-position: 0 -58px;
+}
+.tree-folder {
+  background: url(/images/Manage/tabicons.png) no-repeat;
+  width: 18px;
+  line-height: 18px;
+  display: inline-block;
+  background-position: -80px -58px;}
+.tree-folder-open {
+  background: url(/images/Manage/tabicons.png) no-repeat;
+  width: 18px;
+  line-height: 18px;
+  display: inline-block;
+    background-position: -100px -60px;
+}
 
-.easyui-accordion ul { list-style-type: none; margin: 0px; padding: 10px; }
-.easyui-accordion ul li { padding: 0px; }
-.easyui-accordion ul li a { line-height: 24px; }
+.easyui-tree ul { list-style-type: none; margin: 0px; padding: 5px; }
+.easyui-tree ul li { padding: 0px; }
+.easyui-tree ul li a { line-height: 18px;}
 .easyui-accordion ul li div { margin: 2px 0px; padding-left: 10px; padding-top: 2px; }
 .easyui-accordion ul li div.hover { border: 1px dashed #99BBE8; background: #E0ECFF; cursor: pointer; }
 .easyui-accordion ul li div.hover a { color: #416AA3; }
@@ -48,21 +68,21 @@ a:hover { text-decoration: underline; }
 /*基本样式*/
 .JsTip { position: absolute; z-index: 100000; height: 2046px; top: 0px; left: 0px; width: 100%; background: white; text-align: center; }
 .PageTop { overflow: hidden; height: 80px; font-family: Verdana, 微软雅黑,黑体;  }
-.PageFooter { height: 30px; text-align: center; color: #15428B; margin: 0px; padding: 0px;   }
+.PageFooter { height: 20px; text-align: center; color: #15428B; margin: 0px; padding: 0px;   }
 .PageMainLeft { width: 180px; }
 .PageMainCenter { background: #eee; overflow-y: hidden; }
 .PageMainRight { width: 190px; background-color: #ffffff; overflow: hidden; }
 #TabMenuStrip { width: 150px; }
 .tabsMain { margin: 20px; overflow: hidden; }
-.logintop { height: 50px; position: absolute; top: 0; background: url(/images/Account/loginbg1.png) repeat-x; z-index: 100; width: 100%; }
+.logintop { height: 50px; position: absolute; top: 0; background: url(/images/manage/maccount/loginbg1.png) repeat-x; z-index: 100; width: 100%; }
 .logintop span {  line-height: 50px; text-indent: 24px;font-size: 24px; font-family: 华文新魏; color: #fff; float: left; }
 .logintop ul { float: right; padding-right: 30px; }
 .logintop ul li { float: left; margin-left: 20px; line-height: 47px; }
 .logintop ul li a { color: #afc5d2; }
 .logintop ul li a:hover { color: #fff; }
-.loginbm { height: 30px; line-height: 30px; text-align: center; background: url(/images/Account/loginbg2.png) repeat-x; position: absolute; bottom: 0; width: 100%; color: #0b3a58; }
+.loginbm { height: 30px; line-height: 30px; text-align: center; background: url(/images/manage/maccount/loginbg2.png) repeat-x; position: absolute; bottom: 0; width: 100%; color: #0b3a58; }
 .loginbm a { font-weight: bold; color: #afc5d2; }
 .loginbm a:hover { color: #fff; }
 #mainBody {width:100%;height:100%;position:absolute;z-index:-1;}
-.cloud {position:absolute;top:0px;left:0px;width:100%;height:100%;background:url(/images/Account/cloud.png) no-repeat;z-index:1;opacity:0.5;}
+.cloud {position:absolute;top:0px;left:0px;width:100%;height:100%;background:url(/images/manage/maccount/cloud.png) no-repeat;z-index:1;opacity:0.5;}
 #cloud2 {z-index:2;}

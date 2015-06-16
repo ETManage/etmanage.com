@@ -8,7 +8,7 @@ using System.Data;
 namespace ET.Sys_DEF
 {
      [Serializable]
-     [Table(TableName = "BlogRollInfo", PrimaryKey = "LinkID", PrimaryKeyType = typeof(Guid))]
+     [Table(TableName = "BlogRollInfo", PrimaryKey = "RollID", PrimaryKeyType = typeof(Guid))]
     public class BlogRollInfo
     {
          [PrimaryKey(true)]

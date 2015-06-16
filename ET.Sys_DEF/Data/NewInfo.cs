@@ -19,6 +19,8 @@ namespace ET.Sys_DEF
          public String NewSource { get; set; }
          public DateTime CreateTime { get; set; }
          public Int32? Recomment { get; set; }
-         public Int32? NewStatus { get; set; }
+         public Int32? Status { get; set; }
+         public String Reserve1 { get; set; }
+         public String Reserve2 { get; set; }
     }
 }

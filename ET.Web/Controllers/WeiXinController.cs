@@ -34,8 +34,6 @@ namespace Web.Controllers
                 {
                     return Content("1"); ;
                 }
-
-
                 return Content(msgProcessor.ProcessMessage(recMsg));
             }
             else

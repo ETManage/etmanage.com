@@ -6,31 +6,31 @@
 <div class="toolbar">
     <ul class="icon_lists ">
         <div class="tool-lis">
-            <i class="icon iconfont"><a href="@PublicHelper.GetHostAddress()/blog/usercenter/"><img src="@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif" onerror="this.onerror = null; this.src = '@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif'"></a></i>
-            <div class="name"><a href="@PublicHelper.GetHostAddress()/blog/usercenter" title="@Model.UserCNName">@Model.UserCNName</a></div>
+            <i class="icon iconfont"><a href="@PublicHelper.GetHostAddress() /user/"><img src="@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif" onerror="this.onerror = null; this.src = '@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif'"></a></i>
+            <div class="name"><a href="@PublicHelper.GetHostAddress() /user/" title="@Model.UserCNName">@Model.UserCNName</a></div>
             <ul>
-                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress()/usercenter/" class="user-name">@Model.UserCNName</a></strong> <a href="@PublicHelper.GetHostAddress()/account/logout" class="y">退出</a></li>
+                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress() /user/" class="user-name">@Model.UserCNName</a></strong> <a href="@PublicHelper.GetHostAddress()/account/logout" class="y">退出</a></li>
                 <li>
-                    <a href="@PublicHelper.GetHostAddress()/blog/usersetting">设置中心</a>
+                    <a href="@PublicHelper.GetHostAddress()/user/usersetting">设置中心</a>
                     @*<a href="/plugin.php?id=vip:vip" class="y" style="color:#f60">开通VIP</a>*@
                 </li>
             </ul>
         </div>
 
-        @*<div class="tool-lis">
-                <a href="/forum.php?mod=guide&amp;view=my">
-                    <i class="icon iconfont"></i>
-                    <div class="name">贴子</div>
-                </a>
-            </div>*@
+      
 
         <div class="tool-lis">
-            <a href="@PublicHelper.GetHostAddress()/blog/usercenter?mod=collect">
+            <a href="@PublicHelper.GetHostAddress()/user/?mod=collect">
                 <i class="icon iconfont"></i>
                 <div class="name">收藏</div>
             </a>
         </div>
-
+        <div class="tool-lis">
+            <a href="@PublicHelper.GetHostAddress()/message/publish">
+                <i class="icon iconfont"></i>
+                <div class="name">投稿</div>
+            </a>
+        </div>
         @*<div class="tool-lis">
                 <a href="/home.php?mod=space&amp;do=notice">
                     <i class="icon iconfont"></i>

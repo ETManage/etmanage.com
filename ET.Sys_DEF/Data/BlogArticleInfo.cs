@@ -20,17 +20,19 @@ namespace ET.Sys_DEF
          public String ArticleDescription { get; set; }
          public String ArticleContent { get; set; }
          public Int32? Recommend { get; set; }
-         public Boolean? ArticleIsLink { get; set; }
+         public Boolean? IsOutLink { get; set; }
          public DateTime? CreateTime { get; set; }
          public Int64? AccessCount { get; set; }
          public String ArticleUrl { get; set; }
          public String ArticleSource { get; set; }
-         public String ArticlePicture { get; set; }
+         public String ArticleCover { get; set; }
          public String ArticleAuthor { get; set; }
          public Int32? Status { get; set; }
          public Int64? LoveCount { get; set; }
          public Int64? ShareCount { get; set; }
          public Boolean? IsRoll { get; set; }
+         public String Reserve1 { get; set; }
+         public String Reserve2 { get; set; }
          
     }
 }

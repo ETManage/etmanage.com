@@ -61,6 +61,54 @@ namespace Web.Controllers
             _GetListPager(pageIndex, pageSize, RecordTotalCount);
             return View();
         }
+        public ActionResult Publish(string page)
+        {
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("TYPEID id,TYPENAME text", ET.Constant.DBConst.TableNames.BlogTypeInfo, " AND ISNULL(IsOnlyNav,0)=0 AND STATUS=1", "TYPESORT");
+            ViewBag.listArticleType = list;
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult AjaxAddMessage(FormCollection collection)
+        {
+            BlogMessageInfo info = new BlogMessageInfo();
+            info.Creator = collection["Creator"];
+            info.MsgType = collection["MsgType"];
+            info.CreatorTel = collection["CreatorTel"];
+            info.CreatorEmail = collection["CreatorEmail"];
+            info.MsgTitle = collection["MsgTitle"];
+            info.MsgContent = collection["MsgContent"];
+            info.CreateTime = DateTime.Now;
+            if (new ET.Sys_BLL.BlogBLL().Operate_BlogMessageInfo(info, true))
+                return Content("true");
+            else
+                return Content("error");
+
+        }
+        [HttpPost]
+        public ActionResult AjaxAddPublish(FormCollection collection)
+        {
+            BlogPublish info = new BlogPublish();
+            info.Creator = this.UserID;
+            info.PublishType = collection["PublishType"];
+            info.Title = collection["Title"];
+            info.PublishContent = collection["PublishContent"];
+            info.Description = collection["Description"];
+            info.PublishSource = collection["PublishSource"];
+            info.Label = collection["Label"];
+            if (!string.IsNullOrEmpty(collection["Cover"]))
+                info.Cover = collection["Cover"];
+            else
+                info.Cover = "";
+            info.CreateTime = DateTime.Now;
+            info.Status = 0;
+            if (new ET.Sys_BLL.BlogBLL().Operate_BlogPublish(info, true))
+                return Content("true");
+            else
+                return Content("error");
+
+        }
 
     }
 }

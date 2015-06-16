@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    投稿管理
+}
+@section Header{
+<script src="/Scripts/Blog/editor.js"></script>
+}
+<div class="ManageBody">
+    <div class="ManageOperateTitle">
+        投稿管理
+    </div>
+    <div class="ManageOperate">
+        <form id="form1" action="/" method="post">
+            <table class="datatable">
+
+                <tr><th width="150px">标题：</th><td><input type="text" id="iTitle" name="Title" class="inputstyle" maxlength="50" /></td></tr>
+                <tr><th>类型：</th><td><select name="MsgType"><option value="博文引用">博文引用</option><option value="原创文章">原创文章</option><option value="其他">其他</option></select></td></tr>
+                <tr><th>概述：</th><td><input type="text" id="iDescription" name="Description" class="inputstyle" maxlength="50" /></td></tr>
+                <tr><th>内容：</th><td><textarea id="iPublishContent" name="PublishContent" class="inputstyle" style="width:500px;"></textarea></td></tr>
+                <tr><th>来源：</th><td><input type="text" id="iPublishSource" name="PublishSource" class="inputstyle" maxlength="50" /></td></tr>
+                <tr><th>封面：</th><td><input type="file" id="iCover" name="Cover" class="inputstyle" maxlength="50" /></td></tr>
+                <tr><th>标签：</th><td><input type="text" id="iLabel" name="Label" class="inputstyle" maxlength="50" /><br /><span>英文,符号隔开</span></td></tr>
+                <tr>
+                    <th>
+                        状态操作：
+                    </th>
+                    <td>
+                        通过<input name="Status" type="checkbox" id="ickStatus" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var _id = '@Request["infoid"]';
+    $(function () {
+        //启用快捷键 83/ALT+s保存
+        $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
+        //启用快捷键 83/ALT+c关闭
+        $(window).ApplyQuickKey(67, parent.windowClose);
+        $('#iPublishContent').editor({ tools: 'full' });
+        if (_id != "") {
+            $.ajax({
+                type: "get", dataType: "json",
+                url: "/mDesign/AjaxGetPublishDetail",
+                async: true,
+                data: { infoid: _id },
+                success: function (data) {
+                    $("#form1").form("reset");
+                    $("#form1").form("load", data);
+                    if (data.Status == 1)
+                        $('#ickStatus').attr("checked", true);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    TopNotify(errorThrown, 'error');
+                }
+            });
+        }
+    });
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/mDesign/AjaxSavePublish?infoid=' + _id,
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    parent.TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        parent.TopNotify("保存成功", 'info');
+                        parent.windowClose();
+                    }
+                }
+            });
+        }
+    }
+</script>

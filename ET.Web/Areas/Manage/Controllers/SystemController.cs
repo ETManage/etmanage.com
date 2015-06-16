@@ -119,10 +119,11 @@ namespace Web.Areas.Manage.Controllers
             string ischecked = "";
             if (!string.IsNullOrEmpty(rid))
                 ischecked = ",case when exists(select 1 from V_ALLROLELIMIT A where  ROLEID='" + rid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
-            string condition = " AND  FuncPID='-1' ";
-            if (!string.IsNullOrEmpty(id))
-                condition = " AND  FuncPID='" + id + "' ";
-            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, condition, "FuncSORT");
+            //string condition = " AND  FuncPID='-1' ";
+            //if (!string.IsNullOrEmpty(id))
+            //    condition = " AND  FuncPID='" + id + "' ";
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, null, "FuncSORT");
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
       
@@ -180,7 +181,7 @@ namespace Web.Areas.Manage.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxSaveFunction(FormCollection collection, string id)
+        public ActionResult AjaxSaveFunction(FormCollection collection, string id,string pid)
         {
             bool IsInsert = false;
             string strResult = "false";
@@ -188,12 +189,13 @@ namespace Web.Areas.Manage.Controllers
             if (info == null)
             {
                 info = new SysFunction();
+                info.CreatorID = Guid.Parse(this.UserID);
                 info.CreateTime = DateTime.Now;
                 IsInsert = true;
             }
 
             info.UpdateTime = DateTime.Now;
-            info.FuncPID = collection["FuncPID"];
+            info.FuncPID = pid;
             SysFunction keyinfo = new ET.Sys_BLL.SystemBLL().Get_SysFunction(" AND FuncKey='" + collection["FuncKey"] + "'");
             if (keyinfo != null)
                 info.FuncKey = collection["FuncKey"] + "_" + DateTime.Now.ToString("yyMMddHHmm");
@@ -316,7 +318,7 @@ namespace Web.Areas.Manage.Controllers
                         info.FuncID = Guid.Parse(fid);
                         info.DepID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
-                        //info.CreatorID = Guid.Parse(this.UserID);
+                        info.CreatorID = Guid.Parse(this.UserID);
                         new ET.Sys_BLL.OrganizationBLL().Operate_UserDeptFuncLink(info, true);
 
                     }
@@ -332,7 +334,7 @@ namespace Web.Areas.Manage.Controllers
                         info.FuncID = Guid.Parse(fid);
                         info.PostID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
-                        //info.CreatorID = Guid.Parse(this.UserID);
+                        info.CreatorID = Guid.Parse(this.UserID);
                         new ET.Sys_BLL.OrganizationBLL().Operate_UserPostFuncLink(info, true);
 
                     }
@@ -346,7 +348,7 @@ namespace Web.Areas.Manage.Controllers
                         info.FuncID = Guid.Parse(fid);
                         info.UserID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
-                        //info.CreatorID = Guid.Parse(this.UserID);
+                        info.CreatorID = Guid.Parse(this.UserID);
                         new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(info, true);
                     }
 

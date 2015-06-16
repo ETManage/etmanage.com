@@ -105,15 +105,27 @@
         }
         else {
             var pnode = $('#ilimitmodule').tree('find', pid);
-            $('#ilimitmodule').tree('append', {
-                parent: pnode.target,
-                data: [{
-                    id: id,
-                    pid: pid,
-                    text: text,
-                    iconCls: 'icon-add'
-                }]
-            });
+            if (snode) {
+                $('#ilimitmodule').tree('append', {
+                    parent: pnode.target,
+                    data: [{
+                        id: id,
+                        pid: pid,
+                        text: text,
+                        iconCls: 'icon-add'
+                    }]
+                });
+            }
+            else {
+                $('#ilimitmodule').tree('append', {
+                    data: [{
+                        id: id,
+                        pid: pid,
+                        text: text,
+                        iconCls: 'icon-add'
+                    }]
+                });
+            }
         }
     }
 

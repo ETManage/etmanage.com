@@ -7,41 +7,44 @@
 }
 @section Header{
 }
-<div id="ManageBody">
-    <div id="ManageOperateTitle">
-        角色管理
+
+
+
+
+
+    <div style="width: 100%; height: 99%" class="easyui-layout" fit="true">
+        <div region="west" icon="icon-reload" title="角色属性" split="true" style="width: 280px;overflow:auto">
+            <form id="form1" action="/" method="post">
+                <table class="datatable">
+                    <tr>
+                        <th>
+                            角色名称：
+                        </th>
+                        <td>
+                            <input name="RoleName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            角色描述：
+                        </th>
+                        <td>
+                            <input name="RoleDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:200px;height:200px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+        <div id="divQuery" region="center" style="height: auto; overflow: auto;">
+            <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限<input title="" type="checkbox" onclick="treeChecked(this, 'ilimitmodule')" />全选/反选</div>
+            <ul id="ilimitmodule"></ul>
+        </div>
+
+
+
     </div>
-    <div id="ManageOperate">
-        <form id="form1" action="/" method="post">
-            <table class="datatable">
-                <tr>
-                    <th>
-                        角色名称：
-                    </th>
-                    <td>
-                        <input name="RoleName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        角色描述：
-                    </th>
-                    <td>
-                        <input name="RoleDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        角色权限：
-                    </th>
-                    <td>
-                        <ul id="iRoleLimit" class="easyui-tree" data-options="url: '/System/AjaxGetRoleActoionData?infoid=@Request["infoid"]',method: 'post',animate:true,checkbox:true"></ul>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
+
 
 <script type="text/javascript">
     var _id = '@Request["infoid"]';
@@ -65,22 +68,45 @@
                 }
             });
         }
+
+        $('#ilimitmodule').tree({
+            checkbox: true,
+            lines: true,
+            parentField: "pid",
+            textFiled: "text",
+            idFiled: "id",
+            dnd: false,
+            cascadeCheck: false,
+            url: '/System/AjaxGetAllFunctionData?rid=' + _id,
+            onBeforeExpand: function (node, param) {
+                $('#ilimitmodule').tree('options').url = "/system/AjaxGetAllFunctionData?id=" + node.id + "&rid=" + _id;
+            }
+        });
     });
+    function treeChecked(selected, treeMenu) {
+        var roots = $('#' + treeMenu).tree('getRoots');//返回tree的所有根节点数组
+        if (selected.checked) {
+            $('#' + treeMenu + " .tree-checkbox").addClass("tree-checkbox1");
+        } else {
+            $('#' + treeMenu + " .tree-checkbox").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+        }
+    }
     function BtnSaveOrUpdate() {
         var actionids = new Array();
-            var nodes = $('#iRoleLimit').tree('getChecked');
-            var s = '';
-            for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].id != '')
+        var nodes = $('#ilimitmodule').tree('getChecked');
+        var s = '';
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].id != '')
                 actionids.push(nodes[i].id)
-            }
-        
-            if ($("#form1").form("validate")) {
+
+        }
+        if ($("#form1").form("validate")) {
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/System/AjaxSaveRole?infoid=' + _id + '&ActionIDS=' + JSON.stringify(actionids),
-                data: $('#form1').serialize(),
+                dataType: "html",
+                url: '/System/AjaxSaveRole?infoid=' + _id + "&" + $('#form1').serialize(),
+                data: { ActionIDS: JSON.stringify(actionids) },
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     parent.TopNotify(errorThrown, 'error');
