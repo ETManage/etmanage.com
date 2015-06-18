@@ -1,4 +1,4 @@
-window._deel = { name: '易特网IT资讯', url: '', ajaxpager: 'on', commenton: 0, roll: [2, 5], appkey: { tqq: '635895342', tsina: '635895342@qq.com' } }
+window._deel = { name: '弈泰网络资讯', url: '', ajaxpager: 'on', commenton: 0, roll: [2, 5], appkey: { tqq: '635895342', tsina: '635895342@qq.com' } }
 //if (document.domain == "images.etmanage.com") { window.location.href = 'http://etmanage.com/; }
 
 

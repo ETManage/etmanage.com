@@ -50,6 +50,14 @@
                 iconCls: 'icon-edit',
                 handler: fixEdit
             }, '-', {
+                text: '禁用',
+                iconCls: 'icon-no',
+                handler: fixDisable
+            }, '-', {
+                text: '启用',
+                iconCls: 'icon-ok',
+                handler: fixEnabled
+            }, '-', {
                 text: '删除',
                 iconCls: 'icon-remove',
                 handler: fixDel
@@ -105,6 +113,48 @@
             return '<img src="/images/public/icon-no.png" />'
 
     }
+    function fixDisable() {
+        var selected = $('#InfoGridData').datagrid('getChecked');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        $.messager.confirm("确认提示框", "确认禁用这 " + selected.length + " 条吗？", function (r) {
+            if (r) {
+                var ls = $.map(selected, function (a) { return "'" + a.UserID + "'"; }).toString();
+                $.post('/mblog/AjaxDisableArticle', { ids: ls }, function (res) {
+                    if (res == "true") {
+                        $("#InfoGridData").datagrid('reload')
+                        TopNotify("状态已改变", 'info');
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
+            }
+        });
+    };
+    function fixEnabled() {
+        var selected = $('#InfoGridData').datagrid('getChecked');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        $.messager.confirm("确认提示框", "确认启用这 " + selected.length + " 条吗？", function (r) {
+            if (r) {
+                var ls = $.map(selected, function (a) { return "'" + a.UserID + "'"; }).toString();
+                $.post('/mblog/AjaxEnabledArticle', { ids: ls }, function (res) {
+                    if (res == "true") {
+                        $("#InfoGridData").datagrid('reload')
+                        TopNotify("状态已改变", 'info');
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
+            }
+        });
+    };
     function fixAdd() {
 
         openWindow('新增', "/mblog/articlemanage", { width: $(document).width(), height: $(document).height() - 50 })

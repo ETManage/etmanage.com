@@ -19,7 +19,7 @@ namespace ET.Sys_Base
     {
         public string LoginSinglePoint(string username, string pwd)
         {
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (Status=1 OR (Status=0 AND StartTime<='{2}' AND EndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
@@ -39,7 +39,7 @@ namespace ET.Sys_Base
 
         public string LoginUser(string username, string pwd)
         {
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (Status=1 OR (Status=0 AND StartTime<='{2}' AND EndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 try
@@ -63,7 +63,7 @@ namespace ET.Sys_Base
         /// <returns></returns>
         public string WebLoginSinglePoint(string username, string pwd, bool IsRememberMe)
         {
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (Status=1 OR (Status=0 AND StartTime<='{2}' AND EndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
@@ -82,7 +82,7 @@ namespace ET.Sys_Base
         }
         public string WebLoginUser(string username, string pwd, bool IsRememberMe)
         {
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (Status=1 OR (Status=0 AND StartTime<='{2}' AND EndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             if (info != null)
             {
                 try
@@ -107,12 +107,12 @@ namespace ET.Sys_Base
         /// <returns></returns>
         public string LoginUser(string username, string pwd, bool blnIsUserID)
         {
-            UserBaseInfo info = null;
+            UserBase info = null;
 
             if (!blnIsUserID)
-                info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{2}' AND UserEndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserName='{0}' AND UserPwd='{1}'  AND (Status=1 OR (Status=0 AND StartTime<='{2}' AND EndTime>'{2}'))", StringHelper.ClearSqlDangerous(username), ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(StringHelper.ClearSqlDangerous(pwd)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             else
-                info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(string.Format(" AND UserID='{0}'  AND (UserStatus=1 OR (UserStatus=0 AND UserStartTime<='{1}' AND UserEndTime>'{1}'))", StringHelper.ClearSqlDangerous(username), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(string.Format(" AND UserID='{0}'  AND (Status=1 OR (Status=0 AND StartTime<='{1}' AND EndTime>'{1}'))", StringHelper.ClearSqlDangerous(username), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
 
 
             if (info != null)
@@ -134,7 +134,7 @@ namespace ET.Sys_Base
         public CurrentUserInfo GetCurrentUserInfo(string userID)
         {
             CurrentUserInfo userinfo = new CurrentUserInfo();
-            User_Full_Info info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
+            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
             if (info != null)
             {
                 
@@ -153,17 +153,15 @@ namespace ET.Sys_Base
             return userinfo;
         }
 
-        public void LoginRecord(UserBaseInfo info)
+        public void LoginRecord(UserBase info)
         {
             CurrentUserInfo userinfo = new CurrentUserInfo();
             userinfo.UserID = info.UserID;
             userinfo.UserName = info.UserName;
-            UserPropertyInfo stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + info.UserID.ToString() + "'");
+            UserProperty stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + info.UserID.ToString() + "'");
             userinfo.UserCNName = stuinfo.CNName;
-            List<SysRoleInfo> sturole = new ET.Sys_BLL.SystemBLL().List_SysRoleInfo(info.UserID.ToString());
-            var roleIDs = sturole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
-            userinfo.RoleIDS = roleIDs;
             FormAuthService.SignIn(info.UserID.ToString(), false, new string[] { "admin" });
+            userinfo.UserLimit = new ET.Sys_BLL.SystemBLL().GetUserALLFunc(info.UserID.ToString());
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
             ET.Sys_Base.OnlineUser.OnlineHttpModule.ProcessRequest();
             try
@@ -178,22 +176,15 @@ namespace ET.Sys_Base
         /// 前端处理
         /// </summary>
         /// <returns></returns>
-        public void WebLoginRecord(UserBaseInfo info, bool IsRememberMe)
+        public void WebLoginRecord(UserBase info, bool IsRememberMe)
         {
             CurrentUserInfo userinfo = new CurrentUserInfo();
             userinfo.UserID = info.UserID;
             userinfo.UserName = info.UserName;
-            UserPropertyInfo stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + info.UserID.ToString() + "'");
+            UserProperty stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + info.UserID.ToString() + "'");
             userinfo.UserCNName = stuinfo.CNName;
-            List<SysRoleInfo> sturole = new ET.Sys_BLL.SystemBLL().List_SysRoleInfo(info.UserID.ToString());
-            string roleIDs = "";
-            if (sturole.Count > 0)
-            {
-                roleIDs = sturole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
-            }
-
-            userinfo.RoleIDS = roleIDs;
             FormAuthService.SignIn(info.UserID.ToString(), IsRememberMe, new string[] { "user" });
+            userinfo.UserLimit = new ET.Sys_BLL.SystemBLL().GetUserALLFunc(info.UserID.ToString());
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
             ET.Sys_Base.OnlineUser.OnlineHttpModule.ProcessRequest();
             try
@@ -226,7 +217,7 @@ namespace ET.Sys_Base
         public string CheckUserName(string username)
         {
             username = StringHelper.ClearSqlDangerous(username);
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND UserName='" + username + "'");
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND UserName='" + username + "'");
             if (info != null)
                 return "true";
             else
@@ -235,7 +226,7 @@ namespace ET.Sys_Base
 
         public string CheckPwd(string UserID, string pwdold)
         {
-            UserBaseInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND UserID='" + UserID + "'");
+            UserBase info = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND UserID='" + UserID + "'");
             if (info.UserPwd == ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(pwdold))
                 return "true";
             else
@@ -250,16 +241,16 @@ namespace ET.Sys_Base
             UserLoginForDomain CheckUserLogin = new UserLoginForDomain();
             if (CheckUserLogin.TryAuthenticate(username, domain, pwd))
             {
-                UserBaseInfo userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND  UserName='" + username + "'");
+                UserBase userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND  UserName='" + username + "'");
                 if (userinfo != null)
                 {
                     return checkADuser(userinfo);
                 }
                 else
                 {
-                    User_Full_Info info = new User_Full_Info();
-                    UserBaseInfo baseinfo = new UserBaseInfo();
-                    UserPropertyInfo stuinfo = new UserPropertyInfo();
+                    UserFullInfo info = new UserFullInfo();
+                    UserBase baseinfo = new UserBase();
+                    UserProperty stuinfo = new UserProperty();
 
                     info.userbaseinfo = baseinfo;
                     info.userstuinfo = stuinfo;
@@ -272,25 +263,25 @@ namespace ET.Sys_Base
                     info.userstuinfo.ENName = username;
                     info.userstuinfo.Sex = "保密";
 
-                    UserDepartmentInfo DEPinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND   DEPName='" + domain + "'");
+                    UserDepartment DEPinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartment(" AND   DEPName='" + domain + "'");
                     if (DEPinfo == null)
                     {
-                        DEPinfo = new UserDepartmentInfo();
+                        DEPinfo = new UserDepartment();
                         DEPinfo.DepName = domain;
                         DEPinfo.DepSort = "A000";
                         DEPinfo.DepDescription = "";
                         DEPinfo.DepPID = " -1";
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(DEPinfo, true);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartment(DEPinfo, true);
                     }
 
-                    UserPositionInfo Pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND   PostName='" + domain + "'");
+                    UserPosition Pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPosition(" AND   PostName='" + domain + "'");
                     if (Pinfo == null)
                     {
-                        Pinfo = new UserPositionInfo();
+                        Pinfo = new UserPosition();
                         Pinfo.PostName = domain;
                         Pinfo.PostSort = "A000";
                         Pinfo.PostDescription = "";
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserPositionInfo(Pinfo, true);
+                        new ET.Sys_BLL.OrganizationBLL().Operate_UserPosition(Pinfo, true);
                     }
 
 
@@ -307,7 +298,7 @@ namespace ET.Sys_Base
                 return "false";
         }
 
-        public string checkADuser(UserBaseInfo info)
+        public string checkADuser(UserBase info)
         {
             if (info != null)
             {
@@ -319,7 +310,7 @@ namespace ET.Sys_Base
                 CurrentUserInfo userinfo = new CurrentUserInfo();
                 userinfo.UserID = info.UserID;
                 userinfo.UserName = info.UserName;
-                UserPropertyInfo stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + info.UserID.ToString() + "'");
+                UserProperty stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + info.UserID.ToString() + "'");
                 userinfo.UserCNName = stuinfo.CNName;
                 //userinfo.Dep_id = stuinfo.Dep_id;
                 //userinfo.P_id = stuinfo.P_id;

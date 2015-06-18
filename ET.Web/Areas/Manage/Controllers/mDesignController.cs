@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Areas.Manage.Controllers
 {
+    [UserAuthorize]
     public class mDesignController : ManageControllerBase
     {
         //

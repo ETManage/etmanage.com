@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ET.Sys_DEF;
 namespace Web.Areas.Manage.Controllers
 {
+    [UserAuthorize]
     public class NewsController : ManageControllerBase
     {
         //

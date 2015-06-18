@@ -60,11 +60,6 @@ namespace Web.Areas.Manage.Controllers
             loginAjax.Logout();
             return RedirectToAction("Login");
         }
-        [HttpGet]
-        public JsonResult Test()
-        {
-            return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_BlogModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
-        }
         #endregion
     }
 }

@@ -9,6 +9,7 @@ using ET.ToolKit.Common;
 
 namespace Web.Areas.Manage.Controllers
 {
+    [UserAuthorize]
     public class SystemController : ManageControllerBase
     {
         //
@@ -17,16 +18,11 @@ namespace Web.Areas.Manage.Controllers
         public ActionResult Default()
         {
             getSystemConfig();
-            //左侧模块权限
-            if (!ApplicationConfig.dirApplicationUserLimit.Keys.Contains(this.UserID))
-            {
-                ApplicationConfig.dirApplicationUserLimit.Add(this.UserID, new ET.Sys_BLL.SystemBLL().GetUserALLFunc(this.UserID.ToString()));
-            }
             ViewBag.STU_CNNAME = this.CurrentUserInfo.UserCNName;
             ViewBag.ONLINE_USER_COUNT = GetOnlineUser();
             return View();
         }
-
+        
         [HttpPost]
         public JsonResult AjaxQueryMenusList()
         {
@@ -59,7 +55,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', ROLENAME)>0";
             long RecordTotalCount = 0;
-            List<SysRoleInfo> list = new ET.Sys_BLL.SystemBLL().PageList_SysRoleInfo("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
+            List<SysRole> list = new ET.Sys_BLL.SystemBLL().PageList_SysRole("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -68,10 +64,10 @@ namespace Web.Areas.Manage.Controllers
         {
             bool IsInsert = false;
             string strResult = "false";
-            SysRoleInfo info = new ET.Sys_BLL.SystemBLL().Get_SysRoleInfo(" AND ROLEID='" + infoid + "'");
+            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + infoid + "'");
             if (info == null)
             {
-                info = new SysRoleInfo();
+                info = new SysRole();
                 IsInsert = true;
             }
             info.RoleName = collection["RoleName"];
@@ -83,7 +79,7 @@ namespace Web.Areas.Manage.Controllers
             {
                 RoleIDS = JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
             }
-            if (new ET.Sys_BLL.SystemBLL().Operate_SysRoleInfo(info, RoleIDS.Where(c => !string.IsNullOrEmpty(c)).ToList(), IsInsert))
+            if (new ET.Sys_BLL.SystemBLL().Operate_SysRole(info, RoleIDS.Where(c => !string.IsNullOrEmpty(c)).ToList(), IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
@@ -92,7 +88,7 @@ namespace Web.Areas.Manage.Controllers
         {
             if (string.IsNullOrEmpty(infoid))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            SysRoleInfo info = new ET.Sys_BLL.SystemBLL().Get_SysRoleInfo(" AND ROLEID='" + infoid + "'");
+            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + infoid + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
@@ -100,7 +96,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteRole(string infoid)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysRoleInfo(" AND ROLEID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysRole(" AND ROLEID='" + infoid + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -108,7 +104,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpGet]
         public JsonResult AjaxSearchRole(string query)
         {
-            List<SysRoleInfo> list = new ET.Sys_BLL.SystemBLL().List_SysRoleInfo(" top 10 Rolename", " AND  CHARINDEX('" + query + "', Rolename)>0", "ROLECreateTime");
+            List<SysRole> list = new ET.Sys_BLL.SystemBLL().List_SysRole(" top 10 Rolename", " AND  CHARINDEX('" + query + "', Rolename)>0", "ROLECreateTime");
             var arrData = list.Select(c => c.RoleName);
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
 
@@ -138,11 +134,11 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxUpdatePwd(FormCollection collection)
         {
-            UserBaseInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["OldUserPwd"])) + "'");
+            UserBase uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["OldUserPwd"])) + "'");
             if (uinfo != null)
             {
                 uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBaseInfo(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBase(uinfo))
                 {
                     return Content("true");
                 }
@@ -175,7 +171,7 @@ namespace Web.Areas.Manage.Controllers
             string condition = " AND  FuncPID='-1' ";
             if (!string.IsNullOrEmpty(id))
                 condition = " AND  FuncPID='" + id + "' ";
-            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state", ET.Constant.DBConst.TableNames.SysFunction, condition, "FuncSORT");
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state", ET.Constant.DBConst.TableNames.SysFunction, condition, "FuncSORT desc");
             if (string.IsNullOrEmpty(id))
                 list.Insert(0, new TreeModuleInfo() { id = "-1", text = "所有资源", state = "open", iconCls = "icon-root" });
             return Json(list, JsonRequestBehavior.AllowGet);

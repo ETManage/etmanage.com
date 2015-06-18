@@ -74,6 +74,7 @@ namespace ET.Web.Controllers
         }
         public ActionResult Detail(string id)
         {
+            
 
             if (string.IsNullOrEmpty(id))
                 return Json("", JsonRequestBehavior.AllowGet);
@@ -86,10 +87,6 @@ namespace ET.Web.Controllers
                 BlogTypeInfo infotype = new ET.Sys_BLL.BlogBLL().Get_BlogTypeInfoByID(info.TypeID.ToString());
                 if (infotype != null)
                     ViewBag.ArticleType = infotype;
-                //List<BlogCommentInfo> listArticleComment = new ET.Sys_BLL.BlogBLL().List_BlogCommentInfo("*", "AND ArticleID='" + info.ArticleID + "'", "CreateTime desc");
-                //ViewBag.listArticleComment = listArticleComment;
-
-
                 List<BlogArticleInfo> listLastArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(1, " ARTICLEUrl,ARTICLETITLE", TableNames.BlogArticleInfo, "AND Status=1 AND CreateTime>'" + info.CreateTime + "'", "CreateTime DESC");
                 if (listLastArticle.Count == 0)
                     listLastArticle.Add(new BlogArticleInfo { ArticleUrl = "javascript:;", ArticleTitle = "第一条了！" });
@@ -205,10 +202,6 @@ namespace ET.Web.Controllers
         }
 
         public ActionResult AdTest()
-        {
-            return View();
-        }
-        public ActionResult QQLoginCallBack()
         {
             return View();
         }
@@ -363,7 +356,21 @@ namespace ET.Web.Controllers
 
 
 
-
+        [HttpPost]
+        public ActionResult AjaxPostAccess(string id)
+        {
+            BlogArticleInfo info = new Sys_BLL.BlogBLL().Get_BlogArticleInfoByID(id);
+            if (info != null)
+            {
+                info.AccessCount++;
+                new Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
+                return Content("true");
+            }
+            else
+                return Content("false");
+        }
         #endregion
+
+
     }
 }

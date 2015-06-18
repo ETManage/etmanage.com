@@ -266,7 +266,7 @@
 <script type="text/javascript">
        @if (!Request.IsAuthenticated)
        {
-           @:alert('您还未登录！无权操作此页面！');        location.href='/' ;
+         @:alert('您还未登录！无权操作此页面！'); location.href = '/account/login';
        }
     $(function () {
         if ('@Request.QueryString["s"]' == "editpass") {

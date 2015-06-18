@@ -14,18 +14,18 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 用户角色
         /// </summary>
-        public const string V_USER_ROLE_INFO = "V_USER_ROLE_INFO";
+        public const string V_USERROLE = "V_USERROLE";
 
 
         /// <summary>
         /// 用户信息，仅仅显示未冻结用户
         /// </summary>
-        public const string V_AVAILABLE_USER_INFO = "V_AVAILABLE_USER_INFO";
+        public const string V_AVAILABLEUSER = "V_AVAILABLEUSER";
 
         /// <summary>
         /// 所有用户信息，包括冻结和未冻结的
         /// </summary>
-        public const string V_USER_FULL_INFO = "V_USER_FULL_INFO";
+        public const string V_USERFULL = "V_USERFULL";
         /// <summary>
         /// 所有用户权限信息
         /// </summary>

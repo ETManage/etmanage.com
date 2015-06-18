@@ -1,4 +1,5 @@
-﻿using ET.Sys_DEF;
+﻿using ET.Constant.DBConst;
+using ET.Sys_DEF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Areas.Manage.Controllers
 {
+    [UserAuthorize]
     public class OrganizationController : ManageControllerBase
     {
         //
@@ -22,7 +24,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public JsonResult AjaxQueryCompanyList(string id)
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("CompanyID id,CompanyName text,CompanyPID pid", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("CompanyID id,CompanyName text,CompanyPID pid", ET.Constant.DBConst.TableNames.UserCompany, null, "CompanySort DESC");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -30,10 +32,10 @@ namespace Web.Areas.Manage.Controllers
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
+            UserCompany info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompany(" AND CompanyID='" + id + "'");
             if (info == null)
             {
-                info = new UserCompanyInfo();
+                info = new UserCompany();
                 info.CreateTime = DateTime.Now;
                 info.CreatorID = this.UserID;
                 IsInsert = true;
@@ -45,7 +47,7 @@ namespace Web.Areas.Manage.Controllers
             info.CompanyName = collection["CompanyName"];
             info.CompanySort = collection["CompanySort"];
             info.CompanyDescription = collection["CompanyDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserCompanyInfo(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserCompany(info, IsInsert))
             {
                 id = info.CompanyID.ToString();
                 strResult = "true";
@@ -57,7 +59,7 @@ namespace Web.Areas.Manage.Controllers
         {
             if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserCompanyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompanyInfo(" AND CompanyID='" + id + "'");
+            UserCompany info = new ET.Sys_BLL.OrganizationBLL().Get_UserCompany(" AND CompanyID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
@@ -65,7 +67,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteCompany(string id)
         {
-            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND CompanyID='" + id + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompany(" AND CompanyID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -83,7 +85,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public JsonResult AjaxQueryDepartmentList(string id)
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("DepID id,DepName text,DepPID pid", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSort DESC");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("DepID id,DepName text,DepPID pid", ET.Constant.DBConst.TableNames.UserDepartment, null, "DepSort DESC");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -91,10 +93,10 @@ namespace Web.Areas.Manage.Controllers
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
+            UserDepartment info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartment(" AND DepID='" + id + "'");
             if (info == null)
             {
-                info = new UserDepartmentInfo();
+                info = new UserDepartment();
                 info.CreateTime = DateTime.Now;
                 info.CreatorID = this.UserID;
                 IsInsert = true;
@@ -105,7 +107,7 @@ namespace Web.Areas.Manage.Controllers
             info.DepName = collection["DepName"];
             info.DepSort = collection["DepSort"];
             info.DepDescription = collection["DepDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartmentInfo(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartment(info, IsInsert))
             {
                 id = info.DepID.ToString();
                 strResult = "true";
@@ -117,7 +119,7 @@ namespace Web.Areas.Manage.Controllers
         {
             if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserDepartmentInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartmentInfo(" AND DepID='" + id + "'");
+            UserDepartment info = new ET.Sys_BLL.OrganizationBLL().Get_UserDepartment(" AND DepID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
@@ -125,7 +127,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteDepartment(string id)
         {
-            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompanyInfo(" AND DepID='" + id + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserCompany(" AND DepID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -143,7 +145,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public JsonResult AjaxQueryPositionList(string id)
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("PostID id,PostName text,PostPID pid", ET.Constant.DBConst.TableNames.UserPositionInfo, null, "PostSort DESC");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("PostID id,PostName text,PostPID pid", ET.Constant.DBConst.TableNames.UserPosition, null, "PostSort DESC");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -151,10 +153,10 @@ namespace Web.Areas.Manage.Controllers
         {
             bool IsInsert = false;
             string strResult = "false";
-            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
+            UserPosition info = new ET.Sys_BLL.OrganizationBLL().Get_UserPosition(" AND PostID='" + id + "'");
             if (info == null)
             {
-                info = new UserPositionInfo();
+                info = new UserPosition();
                 info.CreateTime = DateTime.Now;
                 info.CreatorID = this.UserID;
                 IsInsert = true;
@@ -164,7 +166,7 @@ namespace Web.Areas.Manage.Controllers
             info.PostName = collection["PostName"];
             info.PostSort = collection["PostSort"];
             info.PostDescription = collection["PostDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPositionInfo(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPosition(info, IsInsert))
             {
                 id = info.PostID.ToString();
                 strResult = "true";
@@ -176,7 +178,7 @@ namespace Web.Areas.Manage.Controllers
         {
             if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            UserPositionInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPositionInfo(" AND PostID='" + id + "'");
+            UserPosition info = new ET.Sys_BLL.OrganizationBLL().Get_UserPosition(" AND PostID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
@@ -184,7 +186,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeletePosition(string id)
         {
-            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserPositionInfo(" AND PostID='" + id + "'"))
+            if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.OrganizationBLL().Delete_UserPosition(" AND PostID='" + id + "'"))
                 return Content("true");
             else
                 return Content("false");
@@ -192,7 +194,7 @@ namespace Web.Areas.Manage.Controllers
 
         #endregion
 
-        
+
 
         #region 组织架构
         public ActionResult OrgQuery()
@@ -202,12 +204,12 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public JsonResult AjaxQueryOrgList()
         {
-            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.CompanyID=CAST(UserCompanyInfo.CompanyID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>(string.Format("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from {0} c where c.CompanyID=CAST({1}.CompanyID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment, TableNames.UserCompany), TableNames.UserCompany, null, "CompanySort DESC");
             for (int i = 0; i < listc.Count; i++)
             {
                 string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
                 List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, condition, "DepSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition(string.Format("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from {0} c where c.DepPID=CAST({0}.DEPID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment), TableNames.UserDepartment, condition, "DepSort DESC");
                 NestOrgRecursion(list, "-1", Outlist);
                 listc[i].children = list;
             }
@@ -220,7 +222,7 @@ namespace Web.Areas.Manage.Controllers
             foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
             {
                 string condition = " AND  DepID='" + item.id + "' ";
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", ET.Constant.DBConst.TableNames.UserPositionInfo, condition, "PostSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", TableNames.UserPosition, condition, "PostSort DESC");
 
                 TreeModuleInfo info = item;
                 List<TreeModuleInfo> children = new List<TreeModuleInfo>();
@@ -234,23 +236,23 @@ namespace Web.Areas.Manage.Controllers
         }
 
 
-
+        [HttpPost]
         public JsonResult AjaxQueryAllCompanyList(string id)
         {
             string condition = " AND  CompanyPID='-1' ";
             if (!string.IsNullOrEmpty(id))
                 condition = " AND  CompanyPID='" + id + "' ";
-            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.CompanyID=CAST(UserCompanyInfo.CompanyID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>(string.Format("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from {0} c where c.CompanyID=CAST({0}.CompanyID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserCompany), TableNames.UserCompany, null, "CompanySort DESC");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult AjaxQueryAllDeptList()
         {
-            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.CompanyID=CAST(UserCompanyInfo.CompanyID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>(string.Format("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from {0} c where c.CompanyID=CAST({1}.CompanyID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment, TableNames.UserCompany), TableNames.UserCompany, null, "CompanySort DESC");
             for (int i = 0; i < listc.Count; i++)
             {
                 string condition = "  AND CompanyID='" + listc[i].id + "' ";
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, condition, "DepSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition(string.Format("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from {0} c where c.DepPID=CAST({0}.DEPID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment), ET.Constant.DBConst.TableNames.UserDepartment, condition, "DepSort DESC");
                 listc[i].children = list;
             }
 
@@ -258,12 +260,12 @@ namespace Web.Areas.Manage.Controllers
         }
         public JsonResult AjaxQueryAllPostList()
         {
-            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.CompanyID=CAST(UserCompanyInfo.CompanyID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>(string.Format("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from {0} c where c.CompanyID=CAST({1}.CompanyID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment, TableNames.UserCompany), ET.Constant.DBConst.TableNames.UserCompany, null, "CompanySort DESC");
             for (int i = 0; i < listc.Count; i++)
             {
                 string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
                 List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, condition, "DepSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition(string.Format("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from {0} c where c.DepPID=CAST({0}.DEPID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment), ET.Constant.DBConst.TableNames.UserDepartment, condition, "DepSort DESC");
                 NestPostRecursion(list, "-1", Outlist);
                 listc[i].children = list;
             }
@@ -275,12 +277,12 @@ namespace Web.Areas.Manage.Controllers
         {
 
 
-            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.CompanyID=CAST(UserCompanyInfo.CompanyID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySort DESC");
+            List<TreeModuleInfo> listc = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>(string.Format("CompanyID id,CompanyName text,CompanyPID pid,'icon-company' iconCls,case when exists(select 1 from {0} c where c.CompanyID=CAST({1}.CompanyID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment, TableNames.UserCompany), ET.Constant.DBConst.TableNames.UserCompany, null, "CompanySort DESC");
             for (int i = 0; i < listc.Count; i++)
             {
                 string condition = " AND  ISNULL(DepPID,'-1')='-1' AND CompanyID='" + listc[i].id + "' ";
                 List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from UserDepartmentInfo c where c.DepPID=CAST(UserDepartmentInfo.DEPID as varchar(36))) then  'closed' else  'open' end state", ET.Constant.DBConst.TableNames.UserDepartmentInfo, condition, "DepSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition(string.Format("DepID id,DepName text,DepPID pid,'icon-dept' iconCls,case when exists(select 1 from {0} c where c.DepPID=CAST({0}.DEPID as varchar(36))) then  'closed' else  'open' end state", TableNames.UserDepartment), ET.Constant.DBConst.TableNames.UserDepartment, condition, "DepSort DESC");
                 NestUserRecursion(list, "-1", Outlist);
                 listc[i].children = list;
             }
@@ -290,7 +292,7 @@ namespace Web.Areas.Manage.Controllers
         {
             foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
             {
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListBySql<TreeModuleInfo>("SELECT A.UserID id,A.CNName text,'icon-person' iconCls,'open'  state FROM UserPropertyInfo A INNER JOIN UserOrgLink B ON A.USERID=B.USERID WHERE B.TYPE='dept' order by A.createtime");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListBySql<TreeModuleInfo>(string.Format("SELECT A.UserID id,A.CNName text,'icon-person' iconCls,'open'  state FROM {0} A INNER JOIN {1} B ON A.USERID=B.USERID WHERE B.TYPE='dept' order by A.createtime", ET.Constant.DBConst.TableNames.UserProperty, ET.Constant.DBConst.TableNames.UserOrgLink));
                 TreeModuleInfo info = item;
                 List<TreeModuleInfo> children = new List<TreeModuleInfo>();
                 children.AddRange(list);
@@ -306,7 +308,7 @@ namespace Web.Areas.Manage.Controllers
             foreach (TreeModuleInfo item in Alllist.Where(info => info.pid == PID))
             {
                 string condition = " AND  DepID='" + item.id + "' ";
-                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", ET.Constant.DBConst.TableNames.UserPositionInfo, condition, "PostSort DESC");
+                List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<TreeModuleInfo>("PostID id,PostName text,'icon-post' iconCls,'open' state", ET.Constant.DBConst.TableNames.UserPosition, condition, "PostSort DESC");
 
                 TreeModuleInfo info = item;
                 List<TreeModuleInfo> children = new List<TreeModuleInfo>();
@@ -327,6 +329,9 @@ namespace Web.Areas.Manage.Controllers
         }
         public ActionResult UserManage()
         {
+            ViewBag.ListSysRole = new ET.Sys_BLL.SystemBLL().List_SysRole("*", null, null);
+
+
             return View();
         }
         [HttpGet]
@@ -337,58 +342,122 @@ namespace Web.Areas.Manage.Controllers
             int pageSize = int.Parse(Request["rows"]);
             string Condition = "";
             if (!string.IsNullOrEmpty(Request["name"]))
-                Condition = " AND CHARINDEX('" + Request["name"] + "', CNName)>0";
+                Condition += " AND (CHARINDEX('" + Request["name"] + "', CNName)>0 or CHARINDEX('" + Request["name"] + "', UserName)>0) ";
+            if (!string.IsNullOrEmpty(Request["sex"]))
+                Condition += " AND SEX='" + Request["sex"] + "'";
             long RecordTotalCount = 0;
-            List<UserPropertyInfo> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserPropertyInfo("UserID,CNName,Sex,Age", null, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<UserFullProperty> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserFullProperty("UserID,CNName,mobile,Sex,Age,CreateTime,Source,livearea+livecity+liveprovince livearea,Status", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetCompanySelectData()
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("CompanyID id,CompanyNAME text", ET.Constant.DBConst.TableNames.UserCompanyInfo, null, "CompanySORT");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("CompanyID id,CompanyNAME text", ET.Constant.DBConst.TableNames.UserCompany, null, "CompanySORT");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetDepartmentSelectData()
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("DepID id,DepNAME text,DepPID pid", ET.Constant.DBConst.TableNames.UserDepartmentInfo, null, "DepSORT");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestListByCondition("DepID id,DepNAME text,DepPID pid", ET.Constant.DBConst.TableNames.UserDepartment, null, "DepSORT");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetPositionSelectData()
         {
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("PostID id,PostNAME text", ET.Constant.DBConst.TableNames.UserPositionInfo, null, "PostSORT");
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("PostID id,PostNAME text", ET.Constant.DBConst.TableNames.UserPosition, null, "PostSORT");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AjaxSaveUser(FormCollection collection, string infoid)
+        public ActionResult AjaxSaveUser(FormCollection collection, string infoid, string ActionIDS, string RoleIDs)
         {
             string strResult = "false";
-            UserPropertyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfoByID(infoid);
+            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(infoid);
+            bool IsInsert = false;
             if (info == null)
             {
-                info = new UserPropertyInfo();
-                info.UserID = Guid.NewGuid();
-                info.CreateTime = DateTime.Now;
+                IsInsert = true;
+                UserBase baseinfo = new UserBase();
+                baseinfo.UserID = Guid.NewGuid();
+                baseinfo.UserName = collection["UserName"];
+                baseinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5("123456");
+                info.userbaseinfo = baseinfo;
+                UserProperty propertyinfo = new UserProperty();
+                propertyinfo.CNName = propertyinfo.Nickname = collection["CNName"];
+                propertyinfo.Sex = collection["Sex"];
+                propertyinfo.Source = "后台添加";
+                propertyinfo.CreateTime = DateTime.Now;
+                propertyinfo.EMail = collection["EMail"];
+                propertyinfo.Mobile = collection["Mobile"];
+                info.userstuinfo = propertyinfo;
+            }
+            if (!string.IsNullOrEmpty(collection["Status"]) && collection["Status"] == "on")
+            {
+                info.userbaseinfo.Status = 1;
+            }
+            if (!string.IsNullOrEmpty(collection["IsReset"]) && collection["IsReset"] == "on")
+            {
+                info.userbaseinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5("123456");
+            }
+            List<UserRoleLink> listRole=new List<UserRoleLink>();
+            if (!string.IsNullOrEmpty(RoleIDs))
+            {
+                foreach (string item in RoleIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    listRole.Add(new UserRoleLink() { RoleID = Guid.Parse(item) });
+
+                }
+                info.userrole = listRole;
+            }
+           
+            List<string> aIDS = null;
+            if (!string.IsNullOrEmpty(ActionIDS))
+            {
+                aIDS = ET.ToolKit.Common.JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
             }
 
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPropertyInfo(info))
+            if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, IsInsert))
+            {
+                new ET.Sys_BLL.OrganizationBLL().Delete_UserFuncLink(string.Format("AND UserID='{0}'", infoid));
+                foreach (string item in aIDS)
+                {
+
+                    UserFuncLink ainfo = new UserFuncLink();
+                    ainfo.FuncID = Guid.Parse(infoid);
+                    ainfo.UserID = Guid.Parse(item);
+                    ainfo.CreateTime = DateTime.Now;
+                    ainfo.CreatorID = Guid.Parse(this.UserID);
+                    new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(ainfo, true);
+                }
                 strResult = "true";
+            }
             return Content(strResult);
+        }
+        [HttpPost]
+        public JsonResult AjaxGetAllFunctionData(string id,string uid)
+        {
+            string ischecked = "";
+            if (!string.IsNullOrEmpty(uid))
+                ischecked = ",case when exists(select 1 from V_ALLUSERLIMIT A where  USERID='" + uid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+            //string condition = " AND  FuncPID='-1' ";
+            //if (!string.IsNullOrEmpty(id))
+            //    condition = " AND  FuncPID='" + id + "' ";
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, null, "FuncSORT");
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult AjaxGetUserDetail(string infoid)
         {
             if (string.IsNullOrEmpty(infoid))
                 return Json("", JsonRequestBehavior.AllowGet);
-            UserPropertyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfoByID(infoid);
+            UserFullProperty info = new ET.Sys_BLL.OrganizationBLL().Get_UserFullPropertyByID(infoid);
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxDeleteUser(string infoid)
+        public ActionResult AjaxDeleteUser(string ids)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.OrganizationBLL().Delete_User_Info(infoid))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Delete_User_Info(" AND USERID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -396,9 +465,25 @@ namespace Web.Areas.Manage.Controllers
         [HttpGet]
         public ActionResult AjaxSearchUser(string query)
         {
-            List<UserPropertyInfo> list = new ET.Sys_BLL.OrganizationBLL().List_UserPropertyInfo("CNName,Nickname", " AND ( CHARINDEX('" + query + "', CNName)>0 or CHARINDEX('" + query + "', Nickname)>0)", "CreateTime desc");
+            List<UserProperty> list = new ET.Sys_BLL.OrganizationBLL().List_UserProperty("CNName,Nickname", " AND ( CHARINDEX('" + query + "', CNName)>0 or CHARINDEX('" + query + "', Nickname)>0)", "CreateTime desc");
             var arrData = list.Select(c => c.CNName + "(" + c.Nickname + ")");
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AjaxDisableUser(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Operate_DisableUser(" AND USERID IN (" + ids + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+        [HttpPost]
+        public ActionResult AjaxEnabledUser(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Operate_EnabledUser(" AND USERID IN (" + ids + ")"))
+                return Content("true");
+            else
+                return Content("false");
         }
         #endregion
     }

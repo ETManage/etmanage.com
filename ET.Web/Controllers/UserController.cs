@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
+    [UserAuthorize(ErrorUrl = "/account/login")]
     public class UserController : WebControllerBase
     {
         //
@@ -40,7 +41,7 @@ namespace Web.Controllers
             int pageSize = 10;
             long RecordTotalCount = 0;
             //收藏中心-文章收藏 Start
-            List<BlogPublish> list = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogPublish>("*",TableNames.BlogPublish, " AND Creator='" + this.UserID + "'", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogPublish> list = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogPublish>("*", TableNames.BlogPublish, " AND Creator='" + this.UserID + "'", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
 
             _GetListPager(pageIndex, pageSize, RecordTotalCount);
 
@@ -65,7 +66,7 @@ namespace Web.Controllers
             {
                 this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
             }
-            UserPropertyInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfoByID(this.UserID.ToString());
+            UserProperty uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyByID(this.UserID.ToString());
             if (uinfo != null)
             {
                 ViewBag.UserInfo = uinfo;
@@ -80,7 +81,7 @@ namespace Web.Controllers
             {
                 this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
             }
-            UserPropertyInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND USERID='" + this.UserID.ToString() + "'");
+            UserProperty info = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND USERID='" + this.UserID.ToString() + "'");
             if (info != null)
             {
                 return Json(info, JsonRequestBehavior.AllowGet);
@@ -97,7 +98,7 @@ namespace Web.Controllers
             {
                 return Content("用户还未登录！或已经登录超时！请重新登录");
             }
-            UserPropertyInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND USERID='" + this.UserID.ToString() + "'");
+            UserProperty uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND USERID='" + this.UserID.ToString() + "'");
             if (uinfo != null)
             {
                 uinfo.CNName = collection["CNName"];
@@ -112,7 +113,7 @@ namespace Web.Controllers
                 uinfo.LiveArea = collection["livearea"];
                 uinfo.QQ = collection["QQ"];
                 uinfo.Detail = collection["detail"];
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPropertyInfo(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserProperty(uinfo))
                 {
                     return Content("true");
                 }
@@ -129,11 +130,11 @@ namespace Web.Controllers
             {
                 return Content("用户还未登录！或已经登录超时！请重新登录");
             }
-            UserBaseInfo uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBaseInfo(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["oldUserPwd"])) + "'");
+            UserBase uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["oldUserPwd"])) + "'");
             if (uinfo != null)
             {
                 uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBaseInfo(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBase(uinfo))
                 {
                     return Content("true");
                 }

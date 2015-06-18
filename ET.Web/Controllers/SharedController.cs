@@ -43,7 +43,7 @@ namespace Web.Controllers
                 <a href='" + PublicHelper.GetHostAddress() + "/account/login?t=0&l=" + Request.Url.ToString() + "' rel=\"nofollow\">免费注册</a><span class=\"ml10 mr10\">|</span><a href='" + PublicHelper.GetHostAddress() + "/account/login?l=" + Request.Url.ToString() + "' rel=\"nofollow\">登录</a><br>                <span id=\"ibtnQQLogin\"></span></div>";
             if (this.IsLogin)
             {
-                UserPropertyInfo userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPropertyInfo(" AND UserID='" + this.UserID.ToString() + "'");
+                UserProperty userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + this.UserID.ToString() + "'");
 
                 if (userinfo != null)
                 {
@@ -60,14 +60,14 @@ namespace Web.Controllers
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult _PartialDemoDesign()
         {
-            List<DesignGoodInfo> listDesign = new ET.Sys_BLL.DesignBLL().List_DesignGoodInfo(" *", "AND Status=1 ", " CreateTime desc");
+            List<DesignGoodInfo> listDesign = new ET.Sys_BLL.DesignBLL().List_DesignGoodInfo(" top 6 *", "AND Status=1 ", " CreateTime desc");
             return PartialView(listDesign);
         }
         [ChildActionOnly]
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult _PartialBlogroll()
         {
-            List<BlogRollInfo> listRoll = new ET.Sys_BLL.BlogBLL().List_BlogRollInfo(" *", "AND Status=1 ", " RollSort desc");
+            List<BlogRollInfo> listRoll = new ET.Sys_BLL.BlogBLL().List_BlogRollInfo(" top 20 *", "AND Status=1 ", " RollSort desc");
             return PartialView(listRoll);
         }
         [ChildActionOnly]

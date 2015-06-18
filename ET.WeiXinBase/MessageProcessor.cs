@@ -210,19 +210,19 @@ namespace ET.WeiXinBase
                       Description = "GTD微信快捷平台",
                       Url = "http://etmanage.com/onegtd/index",
                       PicUrl = "http://etmanage.com/Images/Public/nopicture.jpg",
-                      Title = "您的访问是易特网改进的动力！"
+                      Title = "您的访问是弈泰网络改进的动力！"
                   });
                     break;
-                case "易特网":
+                case "弈泰":
                 case "首页":
                 case "文章":
                 case "关于我们":
                     items.Add(new NewsReplyMessageItem()
                     {
-                        Description = "专业IT文章分享基地，您的访问是易特改进的动力",
+                        Description = "专业IT文章分享基地，您的访问是弈泰改进的动力",
                         Url = "http://etmanage.com/",
                         PicUrl = "http://etmanage.com/Images/Public/nopicture.jpg",
-                        Title = "您的访问是易特改进的动力！"
+                        Title = "您的访问是弈泰改进的动力！"
                     });
 
                     break;
@@ -380,10 +380,10 @@ namespace ET.WeiXinBase
 
             items.Add(new NewsReplyMessageItem()
             {
-                Description = "专业IT文章分享基地，您的访问是易特改进的动力",
+                Description = "专业IT文章分享基地，您的访问是弈泰改进的动力",
                 Url = "http://etmanage.com/",
                 PicUrl = "http://etmanage.com/Images/Public/nopicture.jpg",
-                Title = "您的访问是易特改进的动力！"
+                Title = "您的访问是弈泰改进的动力！"
             });
 
             NewsReplyMessage replyMsg = new NewsReplyMessage()

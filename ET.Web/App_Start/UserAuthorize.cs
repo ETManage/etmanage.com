@@ -4,22 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ET.Extensions
+namespace Web
 {
     /// <summary>
     /// 自定义AuthorizeAttribute(授权属性)
     /// </summary>
-    public class UserAuthorize:AuthorizeAttribute
+    public class UserAuthorize : AuthorizeAttribute
     {
         /// <summary>
         /// 有权限的用户
         /// </summary>
-        public string AllowUser { get; set; }
+        public string FuncName { get; set; }
+
 
         /// <summary>
-        /// 授权失败时呈现的视图名称
+        /// 授权失败时呈现的地址
         /// </summary>
-        public string View { get; set; }
+        public string ErrorUrl { get; set; }
 
         /// <summary>
         /// 请求授权时执行
@@ -40,14 +41,16 @@ namespace ET.Extensions
         /// <returns></returns>
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            //return base.AuthorizeCore(httpContext);//系统授权验证
-            foreach (string s in AllowUser.Split(','))
+            if (!string.IsNullOrEmpty(FuncName))
             {
-                if (ApplicationConfig.dirApplicationUserLimit[httpContext.User.Identity.Name].Contains(s))
+                if (ApplicationConfig.dirApplicationUserLimit[httpContext.User.Identity.Name].Contains(FuncName))
                 {
                     return true;
                 }
             }
+            else
+                return base.AuthorizeCore(httpContext);//系统授权验证
+
             return false;//进入HandleUnauthorizedRequest
         }
 
@@ -58,7 +61,21 @@ namespace ET.Extensions
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             base.HandleUnauthorizedRequest(filterContext);
-            filterContext.Result = new ViewResult { ViewName = View };
+            //filterContext.Result = new ViewResult { ViewName = View };
+            base.HandleUnauthorizedRequest(filterContext);
+            if (filterContext == null)
+            {
+                throw new ArgumentNullException("filterContext");
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(ErrorUrl))
+                {
+                    filterContext.HttpContext.Response.Redirect(ErrorUrl);
+                }
+                else
+                    filterContext.HttpContext.Response.Redirect("/maccount/login");
+            }
             //filterContext.Result = new RedirectResult("/Admin/Dashboard");
         }
     }

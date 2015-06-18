@@ -20,7 +20,7 @@ namespace ET.Sys_BLL
         /// 操作角色权限关系
         /// </summary>
         /// <param name="info"></param>
-        public bool Operate_SysRoleInfo(SysRoleInfo info, List<string> RoleIDS, bool IsInsert)
+        public bool Operate_SysRole(SysRole info, List<string> RoleIDS, bool IsInsert)
         {
             return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
@@ -28,7 +28,7 @@ namespace ET.Sys_BLL
                 if (IsInsert)
                 {
                     info.RoleID = Guid.NewGuid();
-                    new TBaseDAL<SysRoleInfo>().InsertInstance(info);
+                    new TBaseDAL<SysRole>().InsertInstance(info);
                     foreach (string item in RoleIDS)
                     {
                         SysRoleFuncLink acinfo = new SysRoleFuncLink();
@@ -41,7 +41,7 @@ namespace ET.Sys_BLL
                 }
                 else
                 {
-                    new TBaseDAL<SysRoleInfo>().UpdateInstance(info);
+                    new TBaseDAL<SysRole>().UpdateInstance(info);
                     foreach (string item in RoleIDS)
                     {
                         SysRoleFuncLink acinfo = new SysRoleFuncLink();
@@ -59,13 +59,13 @@ namespace ET.Sys_BLL
         /// 删除角色信息
         /// </summary>
         /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_SysRoleInfo(string Condition)
+        public bool Delete_SysRole(string Condition)
         {
             return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
                 new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(Condition);
                 new TBaseDAL<SysRoleFuncLink>(dataBase).DeleteInstances(Condition);
-                new TBaseDAL<SysRoleInfo>(dataBase).DeleteInstances(Condition);
+                new TBaseDAL<SysRole>(dataBase).DeleteInstances(Condition);
             }));
         }
 
@@ -96,26 +96,26 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="Condition"></param>
         /// <returns></returns>
-        public SysRoleInfo Get_SysRoleInfo(string Condition)
+        public SysRole Get_SysRole(string Condition)
         {
-            SysRoleInfo info = new TBaseDAL<SysRoleInfo>().GetInstanceByCondition(Condition);
+            SysRole info = new TBaseDAL<SysRole>().GetInstanceByCondition(Condition);
             return info;
         }
-        public List<SysRoleInfo> List_SysRoleInfo(string Fields, string Condition, string strOrder)
+        public List<SysRole> List_SysRole(string Fields, string Condition, string strOrder)
         {
-            return new TBaseDAL<SysRoleInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TBaseDAL<SysRole>().GetListByCondition(Fields, Condition, strOrder);
         }
-        public List<SysRoleInfo> PageList_SysRoleInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        public List<SysRole> PageList_SysRole(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
         {
-            return new TBaseDAL<SysRoleInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TBaseDAL<SysRole>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
 
         /// <summary>
         /// 获取用户角色集合
         /// </summary>
-        public List<SysRoleInfo> List_SysRoleInfo(string UserID)
+        public List<SysRole> List_SysRole(string UserID)
         {
-            return new BaseDAL().GetListByCondition<SysRoleInfo>("RoleID,RoleName", ViewNames.V_USER_ROLE_INFO, " AND UserID='" + UserID + "'", "RoleName DESC");
+            return new BaseDAL().GetListByCondition<SysRole>("RoleID,RoleName", ViewNames.V_USERROLE, " AND UserID='" + UserID + "'", "RoleName DESC");
         }
         
         /// <summary>
@@ -141,7 +141,7 @@ namespace ET.Sys_BLL
 
         public List<string> GetUserALLFunc(string UserID)
         {
-            List<string> list = new BaseDAL().GetListByCondition<string>(" FuncKey", ViewNames.V_ALLUSERLIMIT, " and  cast(UserID as varchar(50))='" + UserID + "'", null);
+            List<string> list = new BaseDAL().GetListByCondition<string>("FuncKey", ViewNames.V_ALLUSERLIMIT, " and  cast(UserID as varchar(50))='" + UserID + "'", null);
             return list;
         }
         /// <summary>

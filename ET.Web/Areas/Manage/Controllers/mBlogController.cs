@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Areas.Manage.Controllers
 {
+    [UserAuthorize]
     public class mBlogController : ManageControllerBase
     {
         //
@@ -108,6 +109,23 @@ namespace Web.Areas.Manage.Controllers
             else
                 return Content("false");
         }
+        [HttpPost]
+        public ActionResult AjaxDisableArticle(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Operate_DisableArticle(" AND ArticleID IN (" + ids + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+        [HttpPost]
+        public ActionResult AjaxEnabledArticle(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Operate_EnabledArticle(" AND ArticleID IN (" + ids + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+
         [HttpGet]
         public ActionResult AjaxSearchArticle(string query)
         {
@@ -289,6 +307,7 @@ namespace Web.Areas.Manage.Controllers
             {
                 IsInsert = true;
                 info = new BlogRollInfo();
+                info.CreateTime = DateTime.Now;
             }
 
             info.RollName = collection["RollName"];
@@ -437,6 +456,7 @@ namespace Web.Areas.Manage.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AjaxSavePublish(FormCollection collection, string infoid)
         {
             bool IsInsert = false;
@@ -456,6 +476,8 @@ namespace Web.Areas.Manage.Controllers
             info.Description = collection["Description"];
             info.PublishSource = collection["PublishSource"];
             info.Label = collection["Label"];
+            info.Cover = collection["Cover"];
+            info.TypeID =Guid.Parse(collection["TypeID"]);
             info.CreateTime = DateTime.Now;
 
 

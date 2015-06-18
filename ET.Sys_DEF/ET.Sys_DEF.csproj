@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataExpand\UserFullProperty.cs" />
     <Compile Include="Data\BlogPublish.cs" />
     <Compile Include="Data\BlogMessageInfo.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
@@ -60,9 +61,8 @@
     <Compile Include="GTD\GTDScene.cs" />
     <Compile Include="GTD\GTDTask.cs" />
     <Compile Include="GTD\GTDInbox.cs" />
-    <Compile Include="DataExpand\OnlineUser.cs" />
     <Compile Include="DataExpand\CurrentUserInfo.cs" />
-    <Compile Include="DataExpand\User_Full_Info.cs" />
+    <Compile Include="DataExpand\UserFullInfo.cs" />
     <Compile Include="Data\BlogViewRecordInfo.cs" />
     <Compile Include="Data\BlogArticleFavoriteInfo.cs" />
     <Compile Include="Data\BlogCommentInfo.cs" />
@@ -72,14 +72,14 @@
     <Compile Include="Data\NewTypeInfo.cs" />
     <Compile Include="Data\BlogTypeInfo.cs" />
     <Compile Include="Data\NewInfo.cs" />
-    <Compile Include="Data\UserCompanyInfo.cs" />
+    <Compile Include="Data\UserCompany.cs" />
     <Compile Include="Data\UserRoleLink.cs" />
-    <Compile Include="Data\SysRoleInfo.cs" />
+    <Compile Include="Data\SysRole.cs" />
     <Compile Include="Data\SysRoleFuncLink.cs" />
-    <Compile Include="Data\UserBaseInfo.cs" />
-    <Compile Include="Data\UserDepartmentInfo.cs" />
-    <Compile Include="Data\UserPositionInfo.cs" />
-    <Compile Include="Data\UserPropertyInfo.cs" />
+    <Compile Include="Data\UserBase.cs" />
+    <Compile Include="Data\UserDepartment.cs" />
+    <Compile Include="Data\UserPosition.cs" />
+    <Compile Include="Data\UserProperty.cs" />
     <Compile Include="DEFCommon\ListActionInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{028322BE-AB5E-4255-AC6D-988AB141FDC1}" Name="数据库平台设计" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="数据库平台设计.pdm"/>
+		<Model Expanded="Yes" ID="{028322BE-AB5E-4255-AC6D-988AB141FDC1}" Name="数据库平台设计" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="数据库平台设计.pdm"/>
 		<Model Expanded="Yes" ID="{2D08CBF9-2523-4032-BC74-10D442DABCBC}" Loaded="No" Name="GTD平台" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="file:///E|/【公司文件】/我的研究/数据库设计/GTD平台.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>

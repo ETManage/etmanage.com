@@ -10,12 +10,12 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 用户表
         /// </summary>
-        public const string UserBaseInfo = "UserBaseInfo";
+        public const string UserBase = "UserBase";
 
         /// <summary>
         /// 用户扩展信息
         /// </summary>
-        public const string UserPropertyInfo = "UserPropertyInfo";
+        public const string UserProperty = "UserProperty";
 
         /// <summary>
         /// 用户角色信息
@@ -48,7 +48,7 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 角色
         /// </summary>
-        public const string SysRoleInfo = "SysRoleInfo";
+        public const string SysRole = "SysRole";
 
         /// <summary>
         /// 角色权限关系
@@ -59,17 +59,17 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 部门信息表
         /// </summary>
-        public const string UserDepartmentInfo = "UserDepartmentInfo";
+        public const string UserDepartment = "UserDepartment";
 
         /// <summary>
         /// 岗位信息表
         /// </summary>
-        public const string UserPositionInfo = "UserPositionInfo";
+        public const string UserPosition = "UserPosition";
 
         /// <summary>
         /// 公司信息表
         /// </summary>
-        public const string UserCompanyInfo = "UserCompanyInfo";
+        public const string UserCompany = "UserCompany";
 
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using ET.DALContract;
+﻿using ET.Constant.DBConst;
+using ET.DALContract;
 using ET.Sys_DEF;
 using ET.ToolKit.DBLayer;
 using System;
@@ -16,21 +17,21 @@ namespace ET.Sys_BLL
         /// 操作信息
         /// </summary>
         /// <param name="info">部门信息</param>
-       public bool Operate_UserCompanyInfo(UserCompanyInfo info, bool IsInsert)
+       public bool Operate_UserCompany(UserCompany info, bool IsInsert)
         {
             if (IsInsert)
-                return new TBaseDAL<UserCompanyInfo>().InsertInstance(info) > 0;
+                return new TBaseDAL<UserCompany>().InsertInstance(info) > 0;
             else
-                return new TBaseDAL<UserCompanyInfo>().UpdateInstance(info) > 0;
+                return new TBaseDAL<UserCompany>().UpdateInstance(info) > 0;
         }
 
         /// <summary>
         /// 删除信息
         /// </summary>
         /// <param name="Condition"></param>
-       public bool Delete_UserCompanyInfo(string Condition)
+       public bool Delete_UserCompany(string Condition)
         {
-            return new TBaseDAL<UserCompanyInfo>().DeleteInstances(Condition) > 0;
+            return new TBaseDAL<UserCompany>().DeleteInstances(Condition) > 0;
         }
 
         /// <summary>
@@ -38,18 +39,18 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>部门信息</returns>
-       public UserCompanyInfo Get_UserCompanyInfo(string Condition)
+       public UserCompany Get_UserCompany(string Condition)
         {
-            UserCompanyInfo info = new TBaseDAL<UserCompanyInfo>().GetInstanceByCondition(Condition);
+            UserCompany info = new TBaseDAL<UserCompany>().GetInstanceByCondition(Condition);
             return info;
         }
 
        /// <summary>
        /// 获取所有公司列表
        /// </summary>
-       public List<UserCompanyInfo> List_UserCompanyInfo(string Fields, string Condition, string strOrder)
+       public List<UserCompany> List_UserCompany(string Fields, string Condition, string strOrder)
        {
-           return new TBaseDAL<UserCompanyInfo>().GetListByCondition(Fields, Condition, strOrder);
+           return new TBaseDAL<UserCompany>().GetListByCondition(Fields, Condition, strOrder);
        }
 
         #endregion 部门管理
@@ -60,21 +61,21 @@ namespace ET.Sys_BLL
         /// 操作信息
         /// </summary>
         /// <param name="info">部门信息</param>
-       public bool Operate_UserDepartmentInfo(UserDepartmentInfo info, bool IsInsert)
+       public bool Operate_UserDepartment(UserDepartment info, bool IsInsert)
         {
             if (IsInsert)
-                return new TBaseDAL<UserDepartmentInfo>().InsertInstance(info) > 0;
+                return new TBaseDAL<UserDepartment>().InsertInstance(info) > 0;
             else
-                return new TBaseDAL<UserDepartmentInfo>().UpdateInstance(info) > 0;
+                return new TBaseDAL<UserDepartment>().UpdateInstance(info) > 0;
         }
 
         /// <summary>
         /// 删除信息
         /// </summary>
         /// <param name="Condition"></param>
-        public bool Delete_UserDepartmentInfo(string Condition)
+        public bool Delete_UserDepartment(string Condition)
         {
-            return new TBaseDAL<UserDepartmentInfo>().DeleteInstances(Condition) > 0;
+            return new TBaseDAL<UserDepartment>().DeleteInstances(Condition) > 0;
         }
 
         /// <summary>
@@ -82,9 +83,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>部门信息</returns>
-        public UserDepartmentInfo Get_UserDepartmentInfo(string Condition)
+        public UserDepartment Get_UserDepartment(string Condition)
         {
-            UserDepartmentInfo info = new TBaseDAL<UserDepartmentInfo>().GetInstanceByCondition(Condition);
+            UserDepartment info = new TBaseDAL<UserDepartment>().GetInstanceByCondition(Condition);
             return info;
         }
         /// <summary>
@@ -92,9 +93,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>部门信息</returns>
-        public List<UserDepartmentInfo> Get_UserDepartmentInfos(string Condition)
+        public List<UserDepartment> Get_UserDepartments(string Condition)
         {
-            List<UserDepartmentInfo> infos = new TBaseDAL<UserDepartmentInfo>().GetInstancesByCondition(Condition);
+            List<UserDepartment> infos = new TBaseDAL<UserDepartment>().GetInstancesByCondition(Condition);
             return infos;
         }
 
@@ -107,21 +108,21 @@ namespace ET.Sys_BLL
         /// 岗位操作
         /// </summary>
         /// <param name="info">岗位信息</param>
-        public bool Operate_UserPositionInfo(UserPositionInfo info, bool IsInsert)
+        public bool Operate_UserPosition(UserPosition info, bool IsInsert)
         {
             if (IsInsert)
-                return new TBaseDAL<UserPositionInfo>().InsertInstance(info) > 0;
+                return new TBaseDAL<UserPosition>().InsertInstance(info) > 0;
             else
-                return new TBaseDAL<UserPositionInfo>().UpdateInstance(info) > 0;
+                return new TBaseDAL<UserPosition>().UpdateInstance(info) > 0;
         }
 
         /// <summary>
         /// 删除岗位信息
         /// </summary>
         /// <param name="Condition"></param>
-        public bool Delete_UserPositionInfo(string Condition)
+        public bool Delete_UserPosition(string Condition)
         {
-            return new TBaseDAL<UserPositionInfo>().DeleteInstances(Condition) > 0;
+            return new TBaseDAL<UserPosition>().DeleteInstances(Condition) > 0;
         }
 
         /// <summary>
@@ -129,9 +130,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>岗位信息</returns>
-        public UserPositionInfo Get_UserPositionInfo(string Condition)
+        public UserPosition Get_UserPosition(string Condition)
         {
-            UserPositionInfo info = new TBaseDAL<UserPositionInfo>().GetInstanceByCondition(Condition);
+            UserPosition info = new TBaseDAL<UserPosition>().GetInstanceByCondition(Condition);
             return info;
         }
 
@@ -140,9 +141,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>岗位信息</returns>
-        public List<UserPositionInfo> Get_UserPositionInfos(string Condition)
+        public List<UserPosition> Get_UserPositions(string Condition)
         {
-            List<UserPositionInfo> infos = new TBaseDAL<UserPositionInfo>().GetInstancesByCondition(Condition);
+            List<UserPosition> infos = new TBaseDAL<UserPosition>().GetInstancesByCondition(Condition);
             return infos;
         }
 
@@ -158,15 +159,15 @@ namespace ET.Sys_BLL
         /// 操作账户信息
         /// </summary>
         /// <param name="info"></param>
-        public bool Operate_User_Info(User_Full_Info info, bool IsInsert)
+        public bool Operate_User_Info(UserFullInfo info, bool IsInsert)
         {
             return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                if (info.userbaseinfo.UserID == Guid.Empty)
+                if (IsInsert)
                 {
-                    new TBaseDAL<UserBaseInfo>(dataBase).InsertInstance(info.userbaseinfo);
+                    new TBaseDAL<UserBase>(dataBase).InsertInstance(info.userbaseinfo);
                     info.userstuinfo.UserID = info.userbaseinfo.UserID;
-                    new TBaseDAL<UserPropertyInfo>(dataBase).InsertInstance(info.userstuinfo);
+                    new TBaseDAL<UserProperty>(dataBase).InsertInstance(info.userstuinfo);
                     foreach (UserRoleLink role in info.userrole)
                     {
                         role.UserID = info.userbaseinfo.UserID;
@@ -175,14 +176,13 @@ namespace ET.Sys_BLL
                 }
                 else
                 {
-                    new TBaseDAL<UserBaseInfo>(dataBase).UpdateInstance(info.userbaseinfo);
-                    info.userstuinfo.UserID = info.userbaseinfo.UserID;
-                    new TBaseDAL<UserPropertyInfo>(dataBase).UpdateInstance(info.userstuinfo);
+                    new TBaseDAL<UserBase>(dataBase).UpdateInstance(info.userbaseinfo);
+                    new TBaseDAL<UserProperty>(dataBase).UpdateInstance(info.userstuinfo);
                     new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(" and UserID='" + info.userbaseinfo.UserID.ToString() + "'");
                     foreach (UserRoleLink role in info.userrole)
                     {
                         role.UserID = info.userbaseinfo.UserID;
-                        new TBaseDAL<UserRoleLink>(dataBase).UpdateInstance(role);
+                        new TBaseDAL<UserRoleLink>(dataBase).InsertInstance(role);
                     }
                 }
             }));
@@ -193,13 +193,13 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_UserPropertyInfo(UserPropertyInfo info)
+        public bool Operate_UserProperty(UserProperty info)
         {
             if (info.UserID == null)
             {
                 return false;
             }
-            return new TBaseDAL<UserPropertyInfo>().UpdateInstance(info) > 0;
+            return new TBaseDAL<UserProperty>().UpdateInstance(info) > 0;
         }
 
 
@@ -208,37 +208,49 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>模块信息</returns>
-        public UserPropertyInfo Get_UserPropertyInfoByID(string infoid)
+        public UserProperty Get_UserPropertyByID(string infoid)
         {
-            UserPropertyInfo info = null;
-            info = new TBaseDAL<UserPropertyInfo>().GetInstanceById(infoid);
+            UserProperty info = new TBaseDAL<UserProperty>().GetInstanceById(infoid);
 
             return info;
         }
-        public List<UserPropertyInfo> List_UserPropertyInfo(string Fields, string Condition, string strOrder)
+        public List<UserProperty> List_UserProperty(string Fields, string Condition, string strOrder)
         {
-            return new TBaseDAL<UserPropertyInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TBaseDAL<UserProperty>().GetListByCondition(Fields, Condition, strOrder);
         }
-        public List<UserPropertyInfo> PageList_UserPropertyInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        public List<UserProperty> PageList_UserProperty(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
         {
-            return new TBaseDAL<UserPropertyInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TBaseDAL<UserProperty>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
-
+        public List<UserFullProperty> PageList_UserFullProperty(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new PublicBLL().GetListByPager<UserFullProperty>(Fields, ViewNames.V_USERFULL, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        public UserFullProperty Get_UserFullProperty(string fields, string condition, string orderby)
+        {
+            UserFullProperty info = new PublicBLL().GetObjectByCondition<UserFullProperty>(fields, ViewNames.V_USERFULL,condition,orderby);
+            return info;
+        }
+        public UserFullProperty Get_UserFullPropertyByID(string userID)
+        {
+            return Get_UserFullProperty("*"," AND USERID='"+userID+"'",null);
+        }
         /// <summary>
         /// 只能用户修改用户的登录帐号信息，如果是用户的添加请使用Operate_User_Info
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_UserBaseInfo(UserBaseInfo info)
+        public bool Operate_UserBase(UserBase info)
         {
             if (info.UserID == null)
             {
                 return false;
             }
-            return new TBaseDAL<UserBaseInfo>().UpdateInstance(info) > 0;
+            return new TBaseDAL<UserBase>().UpdateInstance(info) > 0;
         }
 
-        public bool Operate_User_Info(User_Full_Info[] info, bool IsInsert)
+
+        public bool Operate_User_Info(UserFullInfo[] info, bool IsInsert)
         {
 
             for (int i = 0; i < info.Length; i++)
@@ -247,19 +259,40 @@ namespace ET.Sys_BLL
             }
             return true;
         }
+       /// <summary>
+       /// 禁用用户状态
+       /// </summary>
+       /// <param name="info"></param>
+       /// <returns></returns>
+        public bool Operate_DisableUser(string condition)
+        {
+            if (string.IsNullOrEmpty(condition))
+                return false;
+            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=-1 WHERE 1=1"+condition,TableNames.UserBase))>0;
+        }
+        /// <summary>
+        /// 启用用户状态
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool Operate_EnabledUser(string condition)
+        {
+            if (string.IsNullOrEmpty(condition))
+                return false;
+            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=1 WHERE 1=1" + condition, TableNames.UserBase)) > 0;
+        }
 
         /// <summary>
         /// 删除账户信息
         /// </summary>
         /// <param name="Condition"></param>
-        public bool Delete_User_Info(string userid)
+        public bool Delete_User_Info(string condition)
         {
             return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                string Condition = " AND UserID='" + userid + "'";
-                new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(Condition);
-                new TBaseDAL<UserPropertyInfo>(dataBase).DeleteInstances(Condition);
-                new TBaseDAL<UserBaseInfo>(dataBase).DeleteInstances(Condition);
+                new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(condition);
+                new TBaseDAL<UserProperty>(dataBase).DeleteInstances(condition);
+                new TBaseDAL<UserBase>(dataBase).DeleteInstances(condition);
             }));
         }
 
@@ -268,9 +301,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public UserBaseInfo Get_UserBaseInfo(string Condition)
+        public UserBase Get_UserBase(string Condition)
         {
-            UserBaseInfo info = new TBaseDAL<UserBaseInfo>().GetInstanceByCondition(Condition);
+            UserBase info = new TBaseDAL<UserBase>().GetInstanceByCondition(Condition);
             return info;
         }
 
@@ -279,9 +312,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_UserRoleLink(UserRoleLink info)
+        public bool Operate_UserRoleLink(UserRoleLink info, bool IsInsert)
         {
-            if (info.LinkID == Guid.Empty)
+            if (IsInsert)
                 return new TBaseDAL<UserRoleLink>().InsertInstance(info) > 0;
             else
                 return new TBaseDAL<UserRoleLink>().UpdateInstance(info) > 0;
@@ -302,12 +335,16 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public User_Full_Info Get_User_Info(string userid)
+        public UserFullInfo Get_User_Info(string userid)
         {
-            User_Full_Info info = new User_Full_Info();
+            UserFullInfo info = new UserFullInfo();
             string Condition = " AND UserID='" + userid + "'";
-            info.userbaseinfo = new TBaseDAL<UserBaseInfo>().GetInstanceByCondition(Condition);
-            info.userstuinfo = new TBaseDAL<UserPropertyInfo>().GetInstanceByCondition(Condition);
+            info.userbaseinfo = new TBaseDAL<UserBase>().GetInstanceByCondition(Condition);
+            if (info.userbaseinfo == null)
+                return null;
+            info.userstuinfo = new TBaseDAL<UserProperty>().GetInstanceByCondition(Condition);
+            if (info.userstuinfo == null)
+                return null;
             info.userrole = new TBaseDAL<UserRoleLink>().GetInstancesByCondition(Condition);
             return info;
         }
@@ -317,9 +354,9 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public UserPropertyInfo Get_UserPropertyInfo(string Condition)
+        public UserProperty Get_UserProperty(string Condition)
         {
-            UserPropertyInfo info = new TBaseDAL<UserPropertyInfo>().GetInstanceByCondition(Condition);
+            UserProperty info = new TBaseDAL<UserProperty>().GetInstanceByCondition(Condition);
             return info;
         }
 

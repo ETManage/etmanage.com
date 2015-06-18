@@ -59,7 +59,7 @@ function getParam(pname) {
 }
 
 
-var reMethod = "GET",
+var reMethod = "HttpPost",
     pwdmin = 6;
 $(document).ready(function () {
     $('#btnLogin').click(function () {

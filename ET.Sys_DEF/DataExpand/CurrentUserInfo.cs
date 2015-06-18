@@ -21,5 +21,7 @@ namespace ET.Sys_DEF
         /// </summary>
         public string RoleIDS { get; set; }
 
+        public List<string> UserLimit { get; set; }
+
     }
 }

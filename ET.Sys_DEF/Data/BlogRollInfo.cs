@@ -17,5 +17,8 @@ namespace ET.Sys_DEF
          public String RollSort { get; set; }
          public String RollUrl { get; set; }
          public Int32? Status { get; set; }
+         public DateTime? CreateTime { get; set; }
+         public DateTime? StartTime { get; set; }
+         public DateTime? EndTime { get; set; }
     }
 }

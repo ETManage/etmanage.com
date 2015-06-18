@@ -138,7 +138,10 @@ namespace ET.Sys_BLL
         {
             return new BaseDAL().GetListBySql<T>(Sql);
         }
-
+        public List<T> GetListByPager<T>(string Fields,string tableName, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount) where T : class
+        {
+            return new BaseDAL().GetListByPager<T>(Fields, tableName, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
         public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder)
         {
             List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder);
@@ -191,7 +194,7 @@ namespace ET.Sys_BLL
         }
 
         /// <summary>
-        /// 执行SQL语句返回操作条数，一般用于执行增删改
+        /// 获取满足条件的第一条数据第一个字段数据
         /// </summary>
         /// <param name="Sql"></param>
         /// <returns></returns>
@@ -201,7 +204,7 @@ namespace ET.Sys_BLL
         }
 
         /// <summary>
-        /// 获取满足条件的第一条数据第一个字段数据
+        /// 执行SQL语句返回操作条数，一般用于执行增删改
         /// </summary>
         /// <param name="Sql"></param>
         /// <returns></returns>

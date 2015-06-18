@@ -92,15 +92,16 @@
         }
     }
     function BtnSaveOrUpdate() {
-        var actionids = new Array();
-        var nodes = $('#ilimitmodule').tree('getChecked');
-        var s = '';
-        for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].id != '')
-                actionids.push(nodes[i].id)
-
-        }
+       
         if ($("#form1").form("validate")) {
+            var actionids = new Array();
+            var nodes = $('#ilimitmodule').tree('getChecked');
+            var s = '';
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].id != '')
+                    actionids.push(nodes[i].id)
+
+            }
             $.ajax({
                 cache: true,
                 type: "POST",

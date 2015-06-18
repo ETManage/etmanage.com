@@ -1,6 +1,7 @@
 ﻿using ET.Sys_DEF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,6 +70,9 @@ namespace Web.Controllers
 
         }
 
+        public ActionResult PageOk()
+        {return View();
+             }
         [HttpPost]
         public ActionResult AjaxAddMessage(FormCollection collection)
         {
@@ -97,18 +101,97 @@ namespace Web.Controllers
             info.Description = collection["Description"];
             info.PublishSource = collection["PublishSource"];
             info.Label = collection["Label"];
-            if (!string.IsNullOrEmpty(collection["Cover"]))
-                info.Cover = collection["Cover"];
-            else
-                info.Cover = "";
+            info.Cover = collection["Cover"];
+          
+
             info.CreateTime = DateTime.Now;
             info.Status = 0;
             if (new ET.Sys_BLL.BlogBLL().Operate_BlogPublish(info, true))
+            {
                 return Content("true");
+                
+            }
             else
                 return Content("error");
 
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult Upload(HttpPostedFileBase fileData)
+        {
+            if (fileData != null)
+            {
+                try
+                {
+                    // 文件上传后的保存路径
+                    string filePath = Server.MapPath("~/Upload/blog/webimage/");
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    string fileName = Path.GetFileName(fileData.FileName);// 原始文件名称
+                    string fileExtension = Path.GetExtension(fileName); // 文件扩展名
+                    string saveName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileExtension; // 保存文件名称
 
+                    fileData.SaveAs(filePath + saveName);
+
+                    return Json(new { Success = true, FileName = fileName, SaveName = "/upload/blog/webimage/" + saveName });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { Success = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+
+                return Json(new { Success = false, Message = "请选择要上传的文件！" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult DeleteUploadPic(string Url)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Url))
+                    System.IO.File.Delete(Server.MapPath("~") + Server.UrlDecode(Url));
+                return Content("true");
+            }
+            catch { return Content("error"); }
+
+        }
+        public ActionResult ValidateCode()
+        {
+            int width = 100;
+            int height = 40;
+            int fontsize = 20;
+            string code = string.Empty;
+            byte[] bytes = ET.ToolKit.ToolKit.Drawing.ValidateCodeHelper.CreateValidateGraphic(out code, 4, width, height, fontsize);
+            ET.ToolKit.ToolKit.Common.SessionHelper.Add(SystemConfigConst.SessioncheckValiCode, code);
+            return File(bytes, @"image/jpeg");
+        }
+        [HttpPost]
+        public ActionResult AjaxCheckValidatecode(string code)
+        {
+            string resultMsg = "true";
+            string pCode = code;
+            string sCode = "";
+            object obj = ET.ToolKit.ToolKit.Common.SessionHelper.Get(SystemConfigConst.SessioncheckValiCode);
+            if (obj != null)
+                sCode = obj.ToString();
+            if (string.IsNullOrEmpty(pCode))
+            {
+                resultMsg = "请输入验证码";
+            }
+            else if (string.IsNullOrEmpty(sCode))
+            {
+                resultMsg = "验证码过期";
+            }
+            else if (pCode.ToLower() != sCode.ToLower())
+            {
+                resultMsg = "验证码不正确";
+            }
+
+            return Content(resultMsg);
+
+        }
     }
 }

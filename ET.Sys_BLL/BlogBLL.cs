@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ET.Sys_DEF;
 using ET.DALContract;
+using ET.Constant.DBConst;
 
 namespace ET.Sys_BLL
 {
@@ -70,7 +71,28 @@ namespace ET.Sys_BLL
             else
                 return new TBaseDAL<BlogArticleInfo>().UpdateInstance(info) > 0;
         }
-
+        /// <summary>
+        /// 禁用状态
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool Operate_DisableArticle(string condition)
+        {
+            if (string.IsNullOrEmpty(condition))
+                return false;
+            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=-1 WHERE 1=1" + condition, TableNames.BlogArticleInfo)) > 0;
+        }
+        /// <summary>
+        /// 启用状态
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool Operate_EnabledArticle(string condition)
+        {
+            if (string.IsNullOrEmpty(condition))
+                return false;
+            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=1 WHERE 1=1" + condition, TableNames.BlogArticleInfo)) > 0;
+        }
         /// <summary>
         /// 删除信息
         /// </summary>

@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Condition>
   <System>
-    <CompanyName>易特工作室</CompanyName>
-    <PageTitle>易特工作室信息管理平台</PageTitle>
+    <CompanyName>弈泰工作室</CompanyName>
+    <PageTitle>弈泰信息管理平台</PageTitle>
+    <BlogTitle>弈泰网络资讯平台</BlogTitle>
     <Url>http://www.etmanage.com</Url>
     <CompanyLogo>/favicon.ico</CompanyLogo>
     <TitleImg>/images/rlogo60x60.png</TitleImg>

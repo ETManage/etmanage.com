@@ -13,50 +13,24 @@
         博客文章管理
     </div>
     <div class="ManageOperate">
-        <form id="form1"  action="/" method="post">
+        <form id="form1" action="/" method="post">
             <table class="datatable">
                 <tr>
-                    <th>
-                        所属公司：
-                    </th>
-                    <td>
-                        <select name="CompanyID" id="sltCompany_id" style="width: 200px" class="easyui-combotree"
-                                data-options="required:true,url:'AjaxGetTypeCompanyData'"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        所属部门：
-                    </th>
-                    <td>
-                        <select name="DepartmentID" id="sltDepartment_id" style="width: 200px" class="easyui-combotree"
-                                data-options="required:true,url:'AjaxGetDepartmentSelectData'"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        所属岗位：
-                    </th>
-                    <td>
-                        <select name="PositionID" id="sltPosition_id" style="width: 200px" class="easyui-combotree"
-                                data-options="required:true,url:'AjaxGetTypePositionData'"></select>
-                    </td>
-                </tr>
-                @*<tr>
                     <th>
                         用户名：
                     </th>
                     <td>
                         <input name="UserName" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
                     </td>
-                </tr><tr>
-    <th>
-        密码：
-    </th>
-    <td>
-        <input name="UserPwd" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
-    </td>
-</tr>*@
+                </tr>
+                <tr>
+                    <th>
+                        密码：
+                    </th>
+                    <td>
+                        初始密码为123456，勾选进行重置<input name="IsReset" type="checkbox" id="ickIsReset" />
+                    </td>
+                </tr>
 
                 <tr>
                     <th>
@@ -64,6 +38,42 @@
                     </th>
                     <td>
                         <input name="CNName" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        邮箱：
+                    </th>
+                    <td>
+                        <input name="EMail" type="text" class="easyui-textbox" style="width: 550px" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        手机：
+                    </th>
+                    <td>
+                        <input name="Mobile" type="text" class="easyui-textbox" style="width: 550px" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        操作：
+                    </th>
+                    <td>
+                        启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        角色：
+                    </th>
+                    <td>
+                        @foreach (ET.Sys_DEF.SysRole item in ViewBag.ListSysRole)
+                        {
+                            <input name="RoleID" type="checkbox" id="ick_@item.RoleID" value="@item.RoleID" />@item.RoleName
+                        }
                     </td>
                 </tr>
             </table>
@@ -89,6 +99,14 @@
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
+                    if (data.Status == 1)
+                        $('#ickStatus').attr("checked", true);
+                    $("[name='RoleID']").each(function () {
+                        if (data.RoleIDs.toLowerCase().indexOf($(this).val()) >= 0) {
+                            $(this).attr("checked", "true");
+                        }
+                    })
+
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     parent.TopNotify(errorThrown, 'error');
@@ -102,7 +120,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSaveUser?infoid='+_id,
+                url: '/Organization/AjaxSaveUser?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

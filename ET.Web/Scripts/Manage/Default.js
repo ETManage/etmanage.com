@@ -5,7 +5,7 @@ $(function () {
         $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function (r) {
 
             if (r) {
-                $.get("/Account/AjaxLogout", {}, function (data, textStatus) { location.href = '/Account/Login'; }, 'html');
+                $.post("/mAccount/AjaxLogout", {}, function (data, textStatus) { location.href = '/Account/Login'; }, 'html');
 
             }
 
