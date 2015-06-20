@@ -48,7 +48,10 @@
     <Compile Include="Data\BlogPublish.cs" />
     <Compile Include="Data\BlogMessageInfo.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
+    <Compile Include="Data\BlogUserLevel.cs" />
     <Compile Include="Data\SysFunction.cs" />
+    <Compile Include="Data\BlogUserSignIn.cs" />
+    <Compile Include="Data\BlogUserLevelLink.cs" />
     <Compile Include="Data\UserFuncLink.cs" />
     <Compile Include="Data\UserPostFuncLink.cs" />
     <Compile Include="Data\UserDeptFuncLink.cs" />

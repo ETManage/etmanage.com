@@ -167,11 +167,11 @@ if (CookieHelper.getCookie("qqloginstatus") != "1")
     InitQQLogin();
 
 $(document).ready(function () {
-    var options = { serviceUrl: '@PublicHelper.GetHostAddress()/blog/ajaxsearch' };
+    var options = { serviceUrl: '/blog/ajaxsearch' };
     searchobj = $('#txtSearch').autocomplete(options);
 
     $("#btnSearch").click(function () {
-        location.href = "@PublicHelper.GetHostAddress()/blog/search?q=" + escape($('#txtSearch').val());
+        location.href = "/blog/search?q=" + escape($('#txtSearch').val());
     });
 
     //»Øµ½¶¥²¿ Start

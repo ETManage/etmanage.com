@@ -100,7 +100,7 @@ namespace ET.Constant.DBConst
          /// <summary>
         /// 博客文章收集信息表
         /// </summary>
-        public const string BlogArticleFavoriteInfo = "BlogArticleFavoriteInfo";
+        public const string BlogArticleFavorite = "BlogArticleFavorite";
         /// <summary>
         /// 平评论表
         /// </summary>
@@ -112,12 +112,23 @@ namespace ET.Constant.DBConst
         /// <summary>
         /// 预览记录
         /// </summary>
-        public const string BlogViewRecordInfo = "BlogViewRecordInfo";
+        public const string BlogViewRecord = "BlogViewRecord";
         /// <summary>
         /// 用户投稿
         /// </summary>
         public const string BlogPublish = "BlogPublish";
-        
+        /// <summary>
+        /// 用户签到
+        /// </summary>
+        public const string BlogUserSignIn = "BlogUserSignIn";
+        /// <summary>
+        /// 用户经验
+        /// </summary>
+        public const string BlogUserLevelLink = "BlogUserLevelLink";
+        /// <summary>
+        /// 用户等级
+        /// </summary>
+        public const string BlogUserLevel = "BlogUserLevel";
         #endregion
 
 

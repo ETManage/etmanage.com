@@ -57,16 +57,16 @@ h6, .h6 { margin-top: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-s
 
     .bottombar-inner h4 { font-weight: normal; width: 214px; height: 43px; line-height: 43px; overflow: hidden; font: 16px/1.5 'Microsoft Yahei',Arial,Helvetica,sans-serif; color: #333; }
 .bot-left { float: left; width: 350px; }
-.bot-center { float: left; width: 500px; }
-.bot-right { float: right; width: 325px; }
+.bot-center { float: left; width: 451px; }
+.bot-right { float: right; width: 360px; }
 .bot-left-list { width: 330px; border-right: 1px solid #f4f6f9; overflow: hidden; }
     .bot-left-list ul { width: 350px; }
         .bot-left-list ul li { width: 86px; height: 28px; line-height: 28px; float: left; }
-    .bot-left-list a:link, .bottombar a:visited { font-size: 12px; color: #333; }
-    .bot-left-list a:hover { font-size: 12px; color: #333; text-decoration: underline; }
-.bot-center-list { width: 450px; overflow: hidden; border-right: 1px solid #f4f6f9; }
-.bot-right .p1 { width: 325px; color: #999; font-size: 12px; }
-.bot-right .p2 { width: 325px; line-height: 24px; color: #999; font-size: 12px; margin-top: 10px; }
+    .footerwrapper a:link, .bottombar a:visited { font-size: 12px;}
+    .footerwrapper a:hover { font-size: 12px; color: #333; text-decoration: underline; }
+.bot-center-list { width: 450px; overflow: hidden; line-height: 24px; border-right: 1px solid #f4f6f9; }
+.bot-right .p1 { width: 350px; line-height: 24px;  margin-bottom: 10px;}
+.bot-right .p2 { width: 325px; line-height: 24px; color: #999; font-size: 12px;  }
 /*
  * Footer
  */

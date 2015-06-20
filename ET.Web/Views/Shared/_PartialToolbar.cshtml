@@ -12,13 +12,28 @@
                 <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress() /user/" class="user-name">@Model.UserCNName</a></strong> <a href="@PublicHelper.GetHostAddress()/account/logout" class="y">退出</a></li>
                 <li>
                     <a href="@PublicHelper.GetHostAddress()/user/usersetting">设置中心</a>
-                    @*<a href="/plugin.php?id=vip:vip" class="y" style="color:#f60">开通VIP</a>*@
+
                 </li>
             </ul>
         </div>
+        <div class="tool-lis">
+            @if (ViewBag.IsSignIn)
+            {
 
-      
+                <a href="javascript:;" id="ibtnsignup">
+                    <i class="icon iconfont"></i>
+                    <div class="name" style="color:red">已签到</div>
+                </a>
+            }
+            else
+            {
+                <a href="javascript:UserSignIn()" id="ibtnsignup">
+                    <i class="icon iconfont"></i>
+                    <div class="name">签到</div>
+                </a>
 
+            }
+        </div>
         <div class="tool-lis">
             <a href="@PublicHelper.GetHostAddress()/user/?mod=collect">
                 <i class="icon iconfont"></i>
@@ -93,3 +108,21 @@
         *@
     </ul>
 </div>
+<script type="text/javascript">
+    function UserSignIn() {
+        $.post("/user/ajaxpostusersignin",
+         function (data) {
+             if ('true' == data) {
+                 $('#ibtnsignup').css('color', 'red').removeAttr('onclick')
+                 $('#ibtnsignup name').val('已签到');
+
+             }
+             else if ('repeat' == data) {
+                 alert('您已签到');
+             }
+             else
+                 alert('签到失败！请刷新后重试！');
+         });
+    }
+
+</script>

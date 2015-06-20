@@ -74,7 +74,7 @@ namespace ET.Web.Controllers
         }
         public ActionResult Detail(string id)
         {
-            
+
 
             if (string.IsNullOrEmpty(id))
                 return Json("", JsonRequestBehavior.AllowGet);
@@ -107,7 +107,7 @@ namespace ET.Web.Controllers
                 //收藏按钮处理
                 if (this.IsLogin)
                 {
-                    BlogArticleFavoriteInfo favoriteinfo = new ET.Sys_BLL.BlogBLL().Get_BlogArticleFavoriteInfo(string.Format(" AND ArticleID='{0}' AND UserID='{1}'", id, this.UserID));
+                    BlogArticleFavorite favoriteinfo = new ET.Sys_BLL.BlogBLL().Get_BlogArticleFavorite(string.Format(" AND ArticleID='{0}' AND UserID='{1}'", id, this.UserID));
                     if (favoriteinfo != null)
                         ViewBag.scriptIsFavorite = "$('#iAddFavorite').html('已收藏');$('#iAddFavorite').addClass('cYellow');";
                 }
@@ -116,7 +116,7 @@ namespace ET.Web.Controllers
             }
             else
                 return Redirect("/PageError/error404.html");
-            return View();
+            return View(info);
         }
 
         public ActionResult Original(string id)
@@ -182,7 +182,7 @@ namespace ET.Web.Controllers
         }
 
 
-     
+
         public ActionResult Search(string q, string page)
         {
             string strCondition = "";
@@ -208,7 +208,7 @@ namespace ET.Web.Controllers
         #endregion
 
         #region Ajax处理方法
-       
+
 
         //异步加载数据
         [HttpGet]
@@ -331,11 +331,11 @@ namespace ET.Web.Controllers
         {
             if (this.IsLogin)
             {
-                BlogArticleFavoriteInfo info = new BlogArticleFavoriteInfo();
+                BlogArticleFavorite info = new BlogArticleFavorite();
                 info.ArticleID = new Guid(id);
                 info.UserID = Guid.Parse(this.UserID);
                 info.CreateTime = DateTime.Now;
-                if (new Sys_BLL.BlogBLL().Operate_BlogArticleFavoriteInfo(info, true))
+                if (new Sys_BLL.BlogBLL().Operate_BlogArticleFavorite(info, true))
                     return Content("true");
                 else
                     return Content("error");
@@ -362,12 +362,36 @@ namespace ET.Web.Controllers
             BlogArticleInfo info = new Sys_BLL.BlogBLL().Get_BlogArticleInfoByID(id);
             if (info != null)
             {
-                info.AccessCount++;
+                if (info.AccessCount.HasValue)
+                    info.AccessCount++;
+                else
+                    info.AccessCount = 1;
                 new Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
                 return Content("true");
             }
             else
                 return Content("false");
+        }
+
+        [HttpPost]
+        public ActionResult AjaxPostUserView(string id,string type,string cate)
+        {
+            if (this.IsLogin)
+            {
+                BlogViewRecord info = new BlogViewRecord();
+                if (info != null)
+                {
+                    info.UserID =Guid.Parse(this.UserID);
+                    info.InfoCategory = cate;
+                    info.InfoType = type;
+                    info.InfoID =id;
+                    info.CreateTime = DateTime.Now;
+                    new Sys_BLL.BlogBLL().Operate_BlogViewRecord(info, true);
+                    return Content("true");
+                }
+            }
+
+            return Content("false");
         }
         #endregion
 

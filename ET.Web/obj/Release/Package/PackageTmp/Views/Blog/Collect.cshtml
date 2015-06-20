@@ -73,3 +73,15 @@
     }
     //异步加载数据 End
 </script>
+<script type="text/javascript">
+    //这里记录访问量
+    window.onload = function () {
+        if (!window.name) {
+            window.name = 'FirstLoad';
+            var _id = '@ViewBag.InfoBlogTypeName';
+            $.post("/blog/ajaxpostuserview", { type: _id, cate: "资讯中心" },
+               function (data) {
+               });
+        }
+    }
+</script>

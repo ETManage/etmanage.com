@@ -8,8 +8,8 @@ using System.Data;
 namespace ET.Sys_DEF
 {
      [Serializable]
-     [Table(TableName = "BlogArticleFavoriteInfo", PrimaryKey = "FavoriteID", PrimaryKeyType = typeof(Guid))]
-    public class BlogArticleFavoriteInfo
+     [Table(TableName = "BlogArticleFavorite", PrimaryKey = "FavoriteID", PrimaryKeyType = typeof(Guid))]
+    public class BlogArticleFavorite
     {
         [PrimaryKey(true)]
          public Guid FavoriteID { get; set; }

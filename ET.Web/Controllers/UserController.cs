@@ -14,24 +14,12 @@ namespace Web.Controllers
         //
         // GET: user/
 
-        public ActionResult Index(string page)
+        public ActionResult Index()
         {
-            int pageIndex = 1;
-            if (this.CheckInfoInt(page))
-                pageIndex = int.Parse(page);
-            int pageSize = 10;
-            long RecordTotalCount = 0;
-            //收藏中心-文章收藏 Start
-            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavoriteInfo b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + ET.Constant.DBConst.TableNames.BlogArticleFavoriteInfo + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
-            ViewBag.listCollectArticle = listCollectArticle;
-
-            //收藏中心-文章收藏 End
-            //查看记录 Start
-            //List<KeyAndValue> listBlogViewRecord = new ET.Sys_BLL.PublicBLL().GetListByCondition<KeyAndValue>("")
-
-            _GetListPager(pageIndex, pageSize, RecordTotalCount);
-
-            return View();
+            UserFullProperty info = new ET.Sys_BLL.OrganizationBLL().Get_UserFullPropertyByID(this.UserID);
+            if (info == null)
+                Response.Redirect("/maccount/login");
+            return View(info);
         }
         public ActionResult MyPublish(string page)
         {
@@ -55,7 +43,7 @@ namespace Web.Controllers
             int pageSize = 10;
             long RecordTotalCount = 0;
             //收藏中心-文章收藏 Start
-            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavoriteInfo b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + ET.Constant.DBConst.TableNames.BlogArticleFavoriteInfo + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavorite b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + ET.Constant.DBConst.TableNames.BlogArticleFavorite + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
             _GetListPager(pageIndex, pageSize, RecordTotalCount);
 
             return View(listCollectArticle);
@@ -144,6 +132,42 @@ namespace Web.Controllers
             else
 
                 return Content("原始密码不匹配");
+        }
+        [HttpPost]
+        public ActionResult AjaxPostUserSignIn()
+        {
+            if (this.IsLogin)
+            {
+                BlogUserSignIn info = new ET.Sys_BLL.BlogBLL().Get_BlogUserSignIn(string.Format("AND USERID='{0}' AND CONVERT(VARCHAR,CREATETIME,23)='{1}' ", this.UserID, DateTime.Now.ToString("yyyy-MM-dd")));
+                if (info == null)
+                {
+                    info = new BlogUserSignIn();
+                    info.UserID = Guid.Parse(this.UserID);
+                    info.CreateTime = DateTime.Now;
+                    if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserSignIn(info, true))
+                    {
+                        BlogUserLevelLink link = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelLink(string.Format("AND USERID='{0}' ", this.UserID));
+                        if (link == null)
+                        {
+                            link = new BlogUserLevelLink();
+
+                            link.UserID = Guid.Parse(this.UserID);
+                             link.Exp = 10;
+                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
+                        }
+                        else
+                        {
+                            link.Exp++;
+                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                        }
+                        return Content("true");
+                    }
+                }
+                else
+                    return Content("repeat");
+            }
+
+            return Content("false");
         }
         #endregion
     }

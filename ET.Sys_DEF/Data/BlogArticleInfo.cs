@@ -31,6 +31,7 @@ namespace ET.Sys_DEF
          public Int64? LoveCount { get; set; }
          public Int64? ShareCount { get; set; }
          public Boolean? IsRoll { get; set; }
+         public String SpecMark { get; set; }
          public String Reserve1 { get; set; }
          public String Reserve2 { get; set; }
          

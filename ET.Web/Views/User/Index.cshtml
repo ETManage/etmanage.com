@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ET.Sys_DEF.UserFullProperty
+@{
     ViewBag.Title = "UserCenter";
     Layout = "~/Views/Shared/_LayoutBlog.cshtml";
 }
@@ -41,15 +42,15 @@
                 <div class="ibx-inner">
                     <div class="ibx-uc-uimg">
                         <div class="ibx-uc-uimg-mask"><a class="ibx-uc-ulink" target="_blank" href="/user/usersetting/changepic">更换头像</a></div>
-                        <img class="ibx-uc-img" src="/images/Blog/nopicture.jpg">
+                        <img class="ibx-uc-img" onerror='this.src="/images/Blog/nopicture.jpg"' src="@Model.Photo">
                     </div>
-                    <div class="ibx-uc-unick"><a target="_blank" href="/user/usersetting/basic" class="ibx-uc-nick">liuweisime</a></div><div class="ibx-uc-utool">
+                    <div class="ibx-uc-unick"><a target="_blank" href="/user/usersetting/basic" class="ibx-uc-nick">@Model.CNName</a></div><div class="ibx-uc-utool">
                         <span class="ibx-uc-utool-cover"></span>
-                        <span class="ibx-uc-utool-cover ibx-uc-utool-cover-mask"></span><div class="ibx-uc-utool-title" id="ibx-uc-ur-level">0级 :</div>
+                        <span class="ibx-uc-utool-cover ibx-uc-utool-cover-mask"></span><div class="ibx-uc-utool-title" id="ibx-uc-ur-level">@Model.UserLevel :</div>
                         <div class="ibx-uc-utool-content">
                             <a target="_blank" href="#" class="ibx-uc-utool-rank">
-                                <div id="ibx-uc-ur-rate" class="rank-bg" style="width: 0%;"></div>
-                                <div id="ibx-uc-ur-rate-num" class="rank-num">0/100</div>
+                                <div id="ibx-uc-ur-rate" class="rank-bg" style="width: @Model.NextExp/@Model.Exp %;"></div>
+                                <div id="ibx-uc-ur-rate-num" class="rank-num">@Model.Exp/@Model.NextExp</div>
                             </a>
                         </div>
                     </div>
@@ -69,7 +70,8 @@
                             <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=13" width="650" height="251" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
                         </div>
                         <div class="fLeft">
-                            <iframe class="ad-big-box pointer" src="/blog/AdTest" width="300" height="241" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                            <iframe class="ad-big-box pointer" src="/blog/AdTest" width="290" height="241" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                            
                         </div>
                     </div>
                 </div>
@@ -93,7 +95,7 @@
                         <div class="col span_4_3">
                             <div class="ibx-his-title">
                                 <span class="ibx-his-title-item">
-                                    <a href="/my/history" class="ibx-his-title-link">查看搜索记录</a>
+                                    @*<a href="/my/history" class="ibx-his-title-link">查看搜索记录</a>*@
                                 </span>
                                 <span class="ibx-his-title-item ibx-his-title-rank">本周累计浏览<em class="ibx-his-title-em">116</em>次，高于全国<em class="ibx-his-title-em">96.20%</em>的网友！</span>
                                 <div class="ibx-his-title-tab">
@@ -128,11 +130,11 @@
             DrawLineByWeek();
             //绘制兴趣雷达图 Start
             var arrPolarindicator = new Array();
-            arrPolarindicator.push({ text: '原创', max: 50 });
-            arrPolarindicator.push({ text: '收集', max: 50 });
-            arrPolarindicator.push({ text: '图库', max: 50 });
+            arrPolarindicator.push({ text: '资讯', max: 50 });
+            arrPolarindicator.push({ text: '设计', max: 50 });
+            arrPolarindicator.push({ text: '建站', max: 50 });
             var arrSeriesdata2 = new Array();
-            arrSeriesdata2.push({ value: [10, 20, 50], name: 'West' });
+            arrSeriesdata2.push({ value: [50, 20, 50], name: 'West' });
             DrawRadar('ibx-charts-radar', arrPolarindicator, arrSeriesdata2, '个人兴趣偏向');
             //绘制兴趣雷达图 Start
 
@@ -155,7 +157,7 @@
 
             DrawLine('ibx-charts-line', arrDaylist, arrSeriesdata, '个人浏览次数');
         }
-
+      
     </script>
 
     <iframe scrolling="no" name="MyFavorites" frameborder="0" src="/user/MyFavorites" style="width: 100%; height: 500px; "></iframe>

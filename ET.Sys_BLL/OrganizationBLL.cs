@@ -226,14 +226,14 @@ namespace ET.Sys_BLL
         {
             return new PublicBLL().GetListByPager<UserFullProperty>(Fields, ViewNames.V_USERFULL, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
-        public UserFullProperty Get_UserFullProperty(string fields, string condition, string orderby)
+        public UserFullProperty Get_UserFullProperty(string fields, string condition)
         {
-            UserFullProperty info = new PublicBLL().GetObjectByCondition<UserFullProperty>(fields, ViewNames.V_USERFULL,condition,orderby);
+            UserFullProperty info = new PublicBLL().GetObjectByCondition<UserFullProperty>(fields, ViewNames.V_USERFULL,condition,null);
             return info;
         }
         public UserFullProperty Get_UserFullPropertyByID(string userID)
         {
-            return Get_UserFullProperty("*"," AND USERID='"+userID+"'",null);
+            return Get_UserFullProperty("*"," AND USERID='"+userID+"'");
         }
         /// <summary>
         /// 只能用户修改用户的登录帐号信息，如果是用户的添加请使用Operate_User_Info

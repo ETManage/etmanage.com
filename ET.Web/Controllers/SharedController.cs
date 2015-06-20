@@ -91,6 +91,13 @@ namespace Web.Controllers
         }
         public ActionResult _PartialToolbar()
         {
+            BlogUserSignIn info = new ET.Sys_BLL.BlogBLL().Get_BlogUserSignIn(string.Format("AND USERID='{0}' AND CONVERT(VARCHAR,CREATETIME,23)='{1}' ", this.UserID, DateTime.Now.ToString("yyyy-MM-dd")));
+            if (info != null)
+            {
+                ViewBag.IsSignIn = true;
+            }
+            else
+                ViewBag.IsSignIn = false;
             return PartialView(this.CurrentUserInfo);
 
         }

@@ -3,14 +3,14 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    博客友情链接管理
+    博客友情链接
 }
 @section Header{
 
 }
 <div class="ManageBody">
     <div class="ManageOperateTitle">
-       友情链接管理
+       用户经验管理
     </div>
     <div class="ManageOperate">
         <form id="form1"  action="/" method="post">
@@ -18,34 +18,19 @@
                
                 <tr>
                     <th>
-                        链接名称：
+                        等级名称：
                     </th>
                     <td>
-                        <input name="RollName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <input name="LevelName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
                     </td>
                 </tr>
+              
                 <tr>
                     <th>
-                        链接地址：
+                        需要分数：
                     </th>
                     <td>
-                        <input name="RollUrl" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" /><span class="cRed">需要http://</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        类别排序：
-                    </th>
-                    <td>
-                        <input name="RollSort" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        状态操作：
-                    </th>
-                    <td>
-                        是否启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />
+                        <input name="NeedExp" type="text" class="easyui-numberbox" style="width: 200px" data-options="min:0,required:true" />
                     </td>
                 </tr>
             </table>
@@ -63,7 +48,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mBlog/AjaxGetRollDetail",
+                url: "/mBlog/AjaxGetLevelDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -83,7 +68,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mBlog/AjaxSaveRoll?infoid=' + _id,
+                url: '/mBlog/AjaxSaveLevel?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

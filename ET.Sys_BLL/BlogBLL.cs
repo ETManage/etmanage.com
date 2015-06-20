@@ -154,48 +154,48 @@ namespace ET.Sys_BLL
         /// 信息操作
         /// </summary>
         /// <param name="info">信息</param>
-        public bool Operate_BlogArticleFavoriteInfo(BlogArticleFavoriteInfo info, bool IsInsert)
+        public bool Operate_BlogArticleFavorite(BlogArticleFavorite info, bool IsInsert)
         {
             if (IsInsert)
-                return new TBaseDAL<BlogArticleFavoriteInfo>().InsertInstance(info) > 0;
+                return new TBaseDAL<BlogArticleFavorite>().InsertInstance(info) > 0;
             else
-                return new TBaseDAL<BlogArticleFavoriteInfo>().UpdateInstance(info) > 0;
+                return new TBaseDAL<BlogArticleFavorite>().UpdateInstance(info) > 0;
         }
 
         /// <summary>
         /// 删除信息
         /// </summary>
         /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogArticleFavoriteInfo(string Condition)
+        public bool Delete_BlogArticleFavorite(string Condition)
         {
-            return new TBaseDAL<BlogArticleFavoriteInfo>().DeleteInstances(Condition) > 0;
+            return new TBaseDAL<BlogArticleFavorite>().DeleteInstances(Condition) > 0;
         }
         /// <summary>
         /// 获取单个信息
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns>模块信息</returns>
-        public BlogArticleFavoriteInfo Get_BlogArticleFavoriteInfoByID(string infoid)
+        public BlogArticleFavorite Get_BlogArticleFavoriteByID(string infoid)
         {
-            BlogArticleFavoriteInfo info = null;
-            info = new TBaseDAL<BlogArticleFavoriteInfo>().GetInstanceById(infoid);
+            BlogArticleFavorite info = null;
+            info = new TBaseDAL<BlogArticleFavorite>().GetInstanceById(infoid);
 
             return info;
         }
-        public BlogArticleFavoriteInfo Get_BlogArticleFavoriteInfo(string Condition)
+        public BlogArticleFavorite Get_BlogArticleFavorite(string Condition)
         {
-            BlogArticleFavoriteInfo info = null;
-            info = new TBaseDAL<BlogArticleFavoriteInfo>().GetInstanceByCondition(Condition);
+            BlogArticleFavorite info = null;
+            info = new TBaseDAL<BlogArticleFavorite>().GetInstanceByCondition(Condition);
 
             return info;
         }
-        public List<BlogArticleFavoriteInfo> List_BlogArticleFavoriteInfo(string Fields, string Condition, string strOrder)
+        public List<BlogArticleFavorite> List_BlogArticleFavorite(string Fields, string Condition, string strOrder)
         {
-            return new TBaseDAL<BlogArticleFavoriteInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TBaseDAL<BlogArticleFavorite>().GetListByCondition(Fields, Condition, strOrder);
         }
-        public List<BlogArticleFavoriteInfo> PageList_BlogArticleFavoriteInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        public List<BlogArticleFavorite> PageList_BlogArticleFavorite(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
         {
-            return new TBaseDAL<BlogArticleFavoriteInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TBaseDAL<BlogArticleFavorite>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
         #region 友情链接
@@ -252,21 +252,35 @@ namespace ET.Sys_BLL
         /// 信息操作
         /// </summary>
         /// <param name="info">信息</param>
-        public bool Operate_BlogViewRecordInfo(BlogViewRecordInfo info, bool IsInsert)
+        public bool Operate_BlogViewRecord(BlogViewRecord info, bool IsInsert)
         {
             if (IsInsert)
-                return new TBaseDAL<BlogViewRecordInfo>().InsertInstance(info) > 0;
+                return new TBaseDAL<BlogViewRecord>().InsertInstance(info) > 0;
             else
-                return new TBaseDAL<BlogViewRecordInfo>().UpdateInstance(info) > 0;
+                return new TBaseDAL<BlogViewRecord>().UpdateInstance(info) > 0;
         }
 
         /// <summary>
         /// 删除信息
         /// </summary>
         /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogViewRecordInfo(string Condition)
+        public bool Delete_BlogViewRecord(string Condition)
         {
-            return new TBaseDAL<BlogViewRecordInfo>().DeleteInstances(Condition) > 0;
+            return new TBaseDAL<BlogViewRecord>().DeleteInstances(Condition) > 0;
+        }
+        public BlogViewRecord Get_BlogViewRecordByCondition(string condition)
+        {
+            BlogViewRecord info = new TBaseDAL<BlogViewRecord>().GetInstanceByCondition(condition);
+
+            return info;
+        }
+        public List<BlogViewRecord> List_BlogViewRecord(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogViewRecord>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogViewRecord> PageList_BlogViewRecord(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogViewRecord>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
 
@@ -369,6 +383,156 @@ namespace ET.Sys_BLL
         public List<BlogPublish> PageList_BlogPublish(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
         {
             return new TBaseDAL<BlogPublish>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
+
+        #region 博客签到
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogUserSignIn(BlogUserSignIn info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogUserSignIn>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogUserSignIn>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogUserSignIn(string Condition)
+        {
+            return new TBaseDAL<BlogUserSignIn>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogUserSignIn Get_BlogUserSignInByID(string infoid)
+        {
+            BlogUserSignIn info = null;
+            info = new TBaseDAL<BlogUserSignIn>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogUserSignIn Get_BlogUserSignIn(string Condition)
+        {
+            BlogUserSignIn info = null;
+            info = new TBaseDAL<BlogUserSignIn>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogUserSignIn> List_BlogUserSignIn(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogUserSignIn>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogUserSignIn> PageList_BlogUserSignIn(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogUserSignIn>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
+
+        #region 博客用户等级
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogUserLevel(BlogUserLevel info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogUserLevel>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogUserLevel>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogUserLevel(string Condition)
+        {
+            return new TBaseDAL<BlogUserLevel>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogUserLevel Get_BlogUserLevelByID(string infoid)
+        {
+            BlogUserLevel info = null;
+            info = new TBaseDAL<BlogUserLevel>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogUserLevel Get_BlogUserLevel(string Condition)
+        {
+            BlogUserLevel info = null;
+            info = new TBaseDAL<BlogUserLevel>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogUserLevel> List_BlogUserLevel(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogUserLevel>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogUserLevel> PageList_BlogUserLevel(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogUserLevel>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
+
+        #region 用户经验关联
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogUserLevelLink(BlogUserLevelLink info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogUserLevelLink>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogUserLevelLink>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogUserLevelLink(string Condition)
+        {
+            return new TBaseDAL<BlogUserLevelLink>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogUserLevelLink Get_BlogUserLevelLinkByID(string infoid)
+        {
+            BlogUserLevelLink info = null;
+            info = new TBaseDAL<BlogUserLevelLink>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogUserLevelLink Get_BlogUserLevelLink(string Condition)
+        {
+            BlogUserLevelLink info = null;
+            info = new TBaseDAL<BlogUserLevelLink>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogUserLevelLink> List_BlogUserLevelLink(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogUserLevelLink>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogUserLevelLink> PageList_BlogUserLevelLink(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogUserLevelLink>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
     }

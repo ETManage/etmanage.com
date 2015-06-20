@@ -1311,6 +1311,10 @@
     <Content Include="Areas\Manage\Views\mBlog\PublishManage.cshtml" />
     <Content Include="Areas\Manage\Views\News\NewsQuery.cshtml" />
     <Content Include="Areas\Manage\Views\News\NewsManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserLevelQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserLevelManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserSignQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserViewQuery.cshtml" />
     <None Include="Properties\PublishProfiles\etmanage.pubxml" />
     <Content Include="Views\Message\Publish.cshtml" />
     <Content Include="Views\User\Index.cshtml" />

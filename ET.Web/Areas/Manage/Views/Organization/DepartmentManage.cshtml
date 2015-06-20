@@ -25,48 +25,54 @@
         </a>
     </div>
     <div>
+        <div id="tabs" class="easyui-tabs" style="width: auto;">
+            <div id="divDept" title="部门详细" style="height: 800px; overflow: hidden;">
+                <input id="ihidPID" type="hidden" value="-1" />
+                <form id="form1" accept-charset="" action="/" method="post">
+                    <table class="datatable">
+                        <tr>
+                            <th>父节点</th>
+                            <td>
+                                【<input id="ilblParentName" type="text" disabled="disabled" name="PName" style="font-weight: bold;width:150px;" value="根节点">】
 
-        <input id="ihidPID" type="hidden" value="-1" />
-        <form id="form1" accept-charset="" action="/" method="post">
-            <table class="datatable">
-                <tr>
-                    <th>父节点</th>
-                    <td>
-                        【<input id="ilblParentName" type="text" disabled="disabled" name="PName" style="font-weight: bold;width:150px;" value="根节点">】
-
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        部门名称：
-                    </th>
-                    <td>
-                        <input name="DepName" id="iDepName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        部门排序：
-                    </th>
-                    <td>
-                        <input name="DepSort" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        部门描述：
-                    </th>
-                    <td>
-                        <input name="DepDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
-                    </td>
-                </tr>
-
-
-
-            </table>
-        </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                部门名称：
+                            </th>
+                            <td>
+                                <input name="DepName" id="iDepName" type="text" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                部门排序：
+                            </th>
+                            <td>
+                                <input name="DepSort" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                部门描述：
+                            </th>
+                            <td>
+                                <input name="DepDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:50px" />
+                            </td>
+                        </tr>
 
 
+
+                    </table>
+                </form>
+
+            </div>
+            <div title="关联权限" style="overflow: hidden;">
+                <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限<input title="" type="checkbox" onclick="treeChecked(this, 'ilimitmodule')" />全选/反选</div>
+                <ul id="ilimitmodule"></ul>
+            </div>
+        </div>
 
     </div>
 
@@ -102,16 +108,44 @@
                 }
             });
         }
-
+        $('#ilimitmodule').tree({
+            checkbox: true,
+            lines: true,
+            parentField: "pid",
+            textFiled: "text",
+            idFiled: "id",
+            dnd: false,
+            cascadeCheck: false,
+            url: '/Organization/AjaxGetAllFunctionData?t=dept&uid=' + _id,
+            onBeforeExpand: function (node, param) {
+                $('#ilimitmodule').tree('options').url = "/Organization/AjaxGetAllFunctionData?t=dept&id=" + node.id + "&uid=" + _id;
+            }
+        });
 
     })
+    function treeChecked(selected, treeMenu) {
+        var roots = $('#' + treeMenu).tree('getRoots');//返回tree的所有根节点数组
+        if (selected.checked) {
+            $('#' + treeMenu + " .tree-checkbox").addClass("tree-checkbox1");
+        } else {
+            $('#' + treeMenu + " .tree-checkbox").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+        }
+    }
     function BtnSaveOrUpdate() {
         if ($("#form1").form("validate")) {
+            var actionids = new Array();
+            var nodes = $('#ilimitmodule').tree('getChecked');
+            var s = '';
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].id != '')
+                    actionids.push(nodes[i].id)
+
+            }
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSaveDepartment?id=' + _id + '&cid=' + _cid + '&pid=' + _pid,
-                data: $('#form1').serialize(),
+                url: '/Organization/AjaxSaveDepartment?id=' + _id + '&cid=' + _cid + '&pid=' + _pid + "&" + $('#form1').serialize(),
+                data: { ActionIDS: JSON.stringify(actionids) },
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     parent.TopNotify(errorThrown, 'error');

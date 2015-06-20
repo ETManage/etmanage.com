@@ -142,6 +142,10 @@ namespace ET.Sys_BLL
         {
             return new BaseDAL().GetListByPager<T>(Fields, tableName, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
+        public List<T> GetListByPager<T>(string Fields, string tableName, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount,bool IsNoLock) where T : class
+        {
+            return new BaseDAL().GetListByPager<T>(Fields, tableName, Condition, Orderby, Offset, Count, ref  RecordTotalCount, IsNoLock);
+        }
         public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder)
         {
             List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder);

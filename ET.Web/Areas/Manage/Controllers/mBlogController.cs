@@ -1,4 +1,5 @@
-﻿using ET.Sys_DEF;
+﻿using ET.Constant.DBConst;
+using ET.Sys_DEF;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,6 +56,8 @@ namespace Web.Areas.Manage.Controllers
                 info.ArticleID = Guid.NewGuid();
                 info.CreateTime = DateTime.Now;
             }
+
+            info.ArticleSource = collection["SpecMark"];
             info.ArticleSource = collection["ArticleSource"];
             info.TypeID = Guid.Parse(collection["Typeid"]);
             info.ArticleTitle = collection["ArticleTitle"];
@@ -594,5 +597,154 @@ namespace Web.Areas.Manage.Controllers
         }
         #endregion
         #endregion
+
+
+
+        #region 博客用户等级
+        public ActionResult UserLevelManage()
+        {
+            return View();
+        }
+        public ActionResult UserLevelQuery()
+        {
+            return View();
+        }
+
+        
+        #region Ajax处理方法
+        [HttpGet]
+        public JsonResult AjaxQueryLevelPageList()
+        {
+            //接收datagrid传来的参数 
+            int pageIndex = int.Parse(Request["page"]);
+            int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', LevelNAME)>0";
+            long RecordTotalCount = 0;
+            List<BlogUserLevel> list = new ET.Sys_BLL.BlogBLL().PageList_BlogUserLevel("LevelID,LevelNAME,NeedExp", Condition, "NeedExp", pageIndex, pageSize, ref RecordTotalCount);
+            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AjaxSaveLevel(FormCollection collection, string infoid)
+        {
+            bool IsInsert = false;
+            string strResult = "false";
+            BlogUserLevel info = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelByID(infoid);
+            if (info == null)
+            {
+                IsInsert = true;
+                info = new BlogUserLevel();
+            }
+
+            info.LevelName = collection["LevelName"];
+            info.NeedExp =Convert.ToInt64( collection["NeedExp"]);
+
+
+
+
+            if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevel(info, IsInsert))
+                strResult = "true";
+
+            return Content(strResult);
+        }
+        [HttpGet]
+        public JsonResult AjaxGetLevelDetail(string infoid)
+        {
+            if (string.IsNullOrEmpty(infoid))
+                return Json("", JsonRequestBehavior.AllowGet);
+            BlogUserLevel info = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelByID(infoid);
+            if (info == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
+            return Json(info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AjaxDeleteLevel(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserLevel(" AND LevelID='" + infoid + "'"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+        [HttpGet]
+        public ActionResult AjaxSearchLevel(string query)
+        {
+            List<BlogUserLevel> list = new ET.Sys_BLL.BlogBLL().List_BlogUserLevel("LevelNAME", " AND  CHARINDEX('" + query + "', LevelNAME)>0", "NeedExp");
+            var arrData = list.Select(c => c.LevelName);
+            return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        #endregion
+
+
+        #region 博客用户签到
+       
+        public ActionResult UserSignQuery()
+        {
+            return View();
+        }
+
+        #region Ajax处理方法
+        [HttpGet]
+        public JsonResult AjaxQuerySignPageList()
+        {
+            //接收datagrid传来的参数 
+            int pageIndex = int.Parse(Request["page"]);
+            int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', CNNAME)>0";
+            long RecordTotalCount = 0;
+            List<BlogUserSignIn> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogUserSignIn>("SignID,UserID,CreateTime,cnname Reserve1,cast(Exp as varchar(20))+'['+UserLevel+']' Reserve2",string.Format("(SELECT A.*,B.CNNAME,B.EXP,B.USERLEVEL FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)a",ViewNames.V_USERFULL,TableNames.BlogUserSignIn),Condition,"CreateTime desc", pageIndex, pageSize, ref RecordTotalCount,false);
+            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AjaxDeleteSign(string infoid)
+        {
+                if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserSignIn(" AND SignID in (" + infoid + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+      
+        #endregion
+        #endregion
+
+        #region 博客用户预览
+
+        public ActionResult UserViewQuery()
+        {
+            return View();
+        }
+
+        #region Ajax处理方法
+        [HttpGet]
+        public JsonResult AjaxQueryViewPageList()
+        {
+            //接收datagrid传来的参数 
+            int pageIndex = int.Parse(Request["page"]);
+            int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', CNNAME)>0";
+            long RecordTotalCount = 0;
+            List<BlogViewRecord> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogViewRecord>("ViewID,UserID,CreateTime,InfoType,(select top 1 ArticleTitle from BlogArticleInfo art where art.ArticleID=tmp.InfoID) Reserve2,cnname Reserve1", string.Format("(SELECT A.*,B.CNNAME FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)tmp", TableNames.UserProperty, TableNames.BlogViewRecord), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AjaxDeleteView(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogViewRecord(" AND ViewID in (" + infoid + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+
+        #endregion
+        #endregion
+
     }
 }

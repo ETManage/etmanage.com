@@ -89,7 +89,7 @@ namespace Web.Areas.Manage.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult AjaxSaveDepartment(FormCollection collection, string id, string cid, string pid)
+        public JsonResult AjaxSaveDepartment(FormCollection collection, string id, string cid, string pid, string ActionIDS)
         {
             bool IsInsert = false;
             string strResult = "false";
@@ -110,6 +110,22 @@ namespace Web.Areas.Manage.Controllers
             if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartment(info, IsInsert))
             {
                 id = info.DepID.ToString();
+                List<string> aIDS = null;
+                if (!string.IsNullOrEmpty(ActionIDS))
+                {
+                    aIDS = ET.ToolKit.Common.JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
+                }
+                new ET.Sys_BLL.OrganizationBLL().Delete_UserDeptFuncLink(string.Format("AND DepID='{0}'", id));
+                foreach (string item in aIDS)
+                {
+                    UserDeptFuncLink ainfo = new UserDeptFuncLink();
+                    ainfo.FuncID = Guid.Parse(item);
+                    ainfo.DepID = info.DepID;
+                    ainfo.CreateTime = DateTime.Now;
+                    ainfo.CreatorID = Guid.Parse(this.UserID);
+                    new ET.Sys_BLL.OrganizationBLL().Operate_UserDeptFuncLink(ainfo, true);
+                }
+
                 strResult = "true";
             }
             return Json(new { result = strResult, id = id }, JsonRequestBehavior.AllowGet);
@@ -149,7 +165,7 @@ namespace Web.Areas.Manage.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxSavePosition(FormCollection collection, string id, string cid, string did)
+        public ActionResult AjaxSavePosition(FormCollection collection, string id, string cid, string did, string ActionIDS)
         {
             bool IsInsert = false;
             string strResult = "false";
@@ -169,6 +185,22 @@ namespace Web.Areas.Manage.Controllers
             if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPosition(info, IsInsert))
             {
                 id = info.PostID.ToString();
+                List<string> aIDS = null;
+                if (!string.IsNullOrEmpty(ActionIDS))
+                {
+                    aIDS = ET.ToolKit.Common.JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
+                }
+                new ET.Sys_BLL.OrganizationBLL().Delete_UserPostFuncLink(string.Format("AND PostID='{0}'", id));
+                foreach (string item in aIDS)
+                {
+                    UserPostFuncLink ainfo = new UserPostFuncLink();
+                    ainfo.FuncID = Guid.Parse(item);
+                    ainfo.PostID = info.PostID;
+                    ainfo.CreateTime = DateTime.Now;
+                    ainfo.CreatorID = Guid.Parse(this.UserID);
+                    new ET.Sys_BLL.OrganizationBLL().Operate_UserPostFuncLink(ainfo, true);
+                }
+
                 strResult = "true";
             }
             return Json(new { result = strResult, id = id }, JsonRequestBehavior.AllowGet);
@@ -346,7 +378,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["sex"]))
                 Condition += " AND SEX='" + Request["sex"] + "'";
             long RecordTotalCount = 0;
-            List<UserFullProperty> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserFullProperty("UserID,CNName,mobile,Sex,Age,CreateTime,Source,livearea+livecity+liveprovince livearea,Status", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<UserFullProperty> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserFullProperty("UserID,CNName,mobile,Sex,Age,CreateTime,Source,livearea+livecity+liveprovince livearea,Status, cast(Exp as varchar(20))+'['+UserLevel+']' UserLevel", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetCompanySelectData()
@@ -397,7 +429,7 @@ namespace Web.Areas.Manage.Controllers
             {
                 info.userbaseinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5("123456");
             }
-            List<UserRoleLink> listRole=new List<UserRoleLink>();
+            List<UserRoleLink> listRole = new List<UserRoleLink>();
             if (!string.IsNullOrEmpty(RoleIDs))
             {
                 foreach (string item in RoleIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
@@ -407,22 +439,23 @@ namespace Web.Areas.Manage.Controllers
                 }
                 info.userrole = listRole;
             }
-           
-            List<string> aIDS = null;
-            if (!string.IsNullOrEmpty(ActionIDS))
-            {
-                aIDS = ET.ToolKit.Common.JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
-            }
+
+
 
             if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, IsInsert))
             {
-                new ET.Sys_BLL.OrganizationBLL().Delete_UserFuncLink(string.Format("AND UserID='{0}'", infoid));
+                List<string> aIDS = null;
+                if (!string.IsNullOrEmpty(ActionIDS))
+                {
+                    aIDS = ET.ToolKit.Common.JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
+                }
+                new ET.Sys_BLL.OrganizationBLL().Delete_UserFuncLink(string.Format("AND UserID='{0}'", info.userbaseinfo.UserID));
                 foreach (string item in aIDS)
                 {
 
                     UserFuncLink ainfo = new UserFuncLink();
-                    ainfo.FuncID = Guid.Parse(infoid);
-                    ainfo.UserID = Guid.Parse(item);
+                    ainfo.FuncID = Guid.Parse(item);
+                    ainfo.UserID = info.userbaseinfo.UserID;
                     ainfo.CreateTime = DateTime.Now;
                     ainfo.CreatorID = Guid.Parse(this.UserID);
                     new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(ainfo, true);
@@ -432,15 +465,27 @@ namespace Web.Areas.Manage.Controllers
             return Content(strResult);
         }
         [HttpPost]
-        public JsonResult AjaxGetAllFunctionData(string id,string uid)
+        public JsonResult AjaxGetAllFunctionData(string t,string id, string uid)
         {
             string ischecked = "";
             if (!string.IsNullOrEmpty(uid))
-                ischecked = ",case when exists(select 1 from V_ALLUSERLIMIT A where  USERID='" + uid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+                switch (t)
+                {
+                    case "dept":
+                        ischecked = ",case when exists(select 1 from UserDeptFuncLink A where  DepID='" + uid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+                        break;
+                    case "post":
+                        ischecked = ",case when exists(select 1 from UserPostFuncLink A where  PostID='" + uid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+                        break;
+                    default:
+                        ischecked = ",case when exists(select 1 from V_ALLUSERLIMIT A where  USERID='" + uid + "' AND A.FUNCID=SysFunction.FUNCID) then 1 else 0 end checked";
+                        break;
+
+                }
             //string condition = " AND  FuncPID='-1' ";
             //if (!string.IsNullOrEmpty(id))
             //    condition = " AND  FuncPID='" + id + "' ";
-            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, null, "FuncSORT");
+            List<TreeModuleInfo> list = new ET.Sys_BLL.PublicBLL().GetNestTreeByCondition("FuncID id,FuncNAME text,FuncPID pid,case when functype=1 then 'icon-company' when functype=-1 then 'icon-children' else 'icon-group' end iconCls,case when exists(select 1 from SysFunction c where c.funcpid=CAST(SysFunction.FuncID as varchar(36))) then 'closed' else 'open' end state" + ischecked, ET.Constant.DBConst.TableNames.SysFunction, null, "FuncSORT  DESC");
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

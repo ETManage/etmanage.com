@@ -3,7 +3,7 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    友情链接列表
+    博客类别列表
 }
 @section Header{
     <link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
@@ -17,7 +17,7 @@
         <table class="datatable">
             <tr>
                 <th style="width:80px;">
-                    链接名称：
+                    等级名称：
                 </th>
                 <td>
                     <input id="txtSearch" style="width: 175px" type="text" data-options="prompt:'请输入查询内容'"
@@ -67,7 +67,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mblog/ajaxqueryrollpagelist", method: 'get',
+            url: "/mblog/ajaxqueryLevelpagelist", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -76,22 +76,22 @@
             rownumbers: true,
             pageSize: 10,
             columns: [[
-                    { field: 'RollID', width: 10, title: 'ID', sortable: true, hidden: true },
-                    { field: 'RollName', width: 220, title: '链接名称', sortable: true, formatter: formatterUrl },
+                    { field: 'LevelID', width: 10, title: 'ID', sortable: true, hidden: true },
+                    { field: 'LevelName', width: 220, title: '等级名称', sortable: true, formatter: formatterUrl },
    
-                    { field: 'RollSort', width: 220, title: '链接排序', sortable: true }
+                    { field: 'NeedExp', width: 220, title: '需要经验', sortable: true }
             ]],
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/mblog/ajaxsearchroll' };
+        var options = { serviceUrl: '/mblog/ajaxsearchLevel' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
     function formatterUrl(val, row, index) {
-        return '<a href="' + row.ArticleUrl + '" target="_blank" >' + row.RollName + '</a>'
+        return '<a href="' + row.ArticleUrl + '" target="_blank" >' + row.LevelName + '</a>'
     }
     function fixAdd() {
-        openWindow('新增', "RollManage", { width: 600, height: 450 })
+        openWindow('新增', "LevelManage", { width: 600, height: 450 })
     };
 
     function fixDel() {
@@ -102,8 +102,8 @@
         }
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
-                $.post('/mblog/AjaxDeleteRoll', { infoid: ls }, function (res) {
+                var ls = $.map(selected, function (a) { return a.LevelID; }).toString();
+                $.post('/mblog/AjaxDeleteLevel', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');
@@ -122,7 +122,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openWindow('修改', "rollmanage?infoid=" + selected.RollID, { width: 600, height: 450 })
+        openWindow('修改', "Levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
     };
 
     function fixView() {
@@ -131,7 +131,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "rollmanage?infoid=" + selected.RollID, { width: 600, height: 450 })
+        openSimpleWindow('查看', "Levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
     };
 
     function queryClick() {
