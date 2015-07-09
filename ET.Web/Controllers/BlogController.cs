@@ -68,16 +68,16 @@ namespace ET.Web.Controllers
         #region 页面控制器
         public ActionResult Index()
         {
+            if (IsMobileDevice())
+                return RedirectToAction("index", "blogmobile");
             ViewBag.listTopArticle = GetArticleList(5, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,case when CHARINDEX(',',ArticleCover)>0 then ArticleCover else ',' end ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", " AND IsRoll=1 ", "CreateTime DESC"); ;
             _GetPartialArticleList(null, null, null);
             return View();
         }
         public ActionResult Detail(string id)
         {
-
-
             if (string.IsNullOrEmpty(id))
-                return Json("", JsonRequestBehavior.AllowGet);
+                return Redirect("/pageerror/error404.html");
             id = StringHelper.ClearSqlDangerous(id);
             BlogArticleInfo info = new ET.Sys_BLL.BlogBLL().Get_BlogArticleInfoByID(id);
             if (info != null)
@@ -105,17 +105,18 @@ namespace ET.Web.Controllers
                 ViewBag.listOtherArticle2 = listOtherArticle.Skip(4);
 
                 //收藏按钮处理
+                ViewBag.HtmlIsFavorite ="<a style='float:right;text-indent: 0;' href='javascript:AddFavorite();' title='' id='iAddFavorite' target='_blank' data-original-title='收藏本文' data-id='"+info.ArticleID+"'>收藏本文</a>";
                 if (this.IsLogin)
                 {
                     BlogArticleFavorite favoriteinfo = new ET.Sys_BLL.BlogBLL().Get_BlogArticleFavorite(string.Format(" AND ArticleID='{0}' AND UserID='{1}'", id, this.UserID));
                     if (favoriteinfo != null)
-                        ViewBag.scriptIsFavorite = "$('#iAddFavorite').html('已收藏');$('#iAddFavorite').addClass('cYellow');";
+                        ViewBag.HtmlIsFavorite = "<span class='cYellow'>已收藏</span>";
                 }
 
                 GetCommentList(info.ArticleID.ToString());
             }
             else
-                return Redirect("/PageError/error404.html");
+                return Redirect("/pageerror/error404.html");
             return View(info);
         }
 

@@ -47,6 +47,7 @@
     <Compile Include="DataExpand\UserFullProperty.cs" />
     <Compile Include="Data\BlogPublish.cs" />
     <Compile Include="Data\BlogMessageInfo.cs" />
+    <Compile Include="Data\BlogUserRequest.cs" />
     <Compile Include="Data\BlogRollInfo.cs" />
     <Compile Include="Data\BlogUserLevel.cs" />
     <Compile Include="Data\SysFunction.cs" />

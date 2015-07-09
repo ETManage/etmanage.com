@@ -273,6 +273,10 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteFunction(string id)
         {
+     if (new ET.Sys_BLL.PublicBLL().GetRecordCount(ET.Constant.DBConst.TableNames.SysFunction, "AND FUNCPID='" + id + "'")>0)
+            {
+                return Content("有子项，无法删除!");
+            }
             if (!string.IsNullOrEmpty(id) && new ET.Sys_BLL.SystemBLL().Delete_SysFunction(" AND FuncID='" + id + "'"))
                 return Content("true");
             else

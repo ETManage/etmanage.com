@@ -190,6 +190,10 @@ namespace ET.Sys_BLL
         /// <param name="Condition"></param>
         public bool Delete_SysFunction(string Condition)
         {
+            new OrganizationBLL().Delete_UserFuncLink(Condition);
+            new OrganizationBLL().Delete_UserDeptFuncLink(Condition);
+            new OrganizationBLL().Delete_UserPostFuncLink(Condition);
+            new SystemBLL().Delete_SysRoleFuncLink(Condition);
             return new TBaseDAL<SysFunction>().DeleteInstances(Condition) > 0;
         }
         public SysFunction Get_SysFunction(string Condition)

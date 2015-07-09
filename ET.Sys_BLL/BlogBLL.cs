@@ -11,7 +11,7 @@ namespace ET.Sys_BLL
     {
 
 
-
+        #region 文章类型
         /// <summary>
         /// 信息操作
         /// </summary>
@@ -58,6 +58,10 @@ namespace ET.Sys_BLL
         {
             return new TBaseDAL<BlogTypeInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
+
+        #endregion
+
+        #region 文章操作
         /// <summary>
         /// 信息操作
         /// </summary>
@@ -122,7 +126,9 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogArticleInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
 
+        #endregion
 
+        #region 文章评论
         public bool Operate_BlogCommentInfo(BlogCommentInfo info, bool IsInsert)
         {
             if (IsInsert)
@@ -148,6 +154,7 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogCommentInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
 
+        #endregion
 
         #region 收藏
         /// <summary>
@@ -198,6 +205,7 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogArticleFavorite>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
+
         #region 友情链接
         /// <summary>
         /// 信息操作
@@ -247,6 +255,7 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogRollInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
+
         #region 博客预览
         /// <summary>
         /// 信息操作
@@ -283,7 +292,6 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogViewRecord>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
-
 
         #region 留言板
         /// <summary>
@@ -334,7 +342,6 @@ namespace ET.Sys_BLL
             return new TBaseDAL<BlogMessageInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
-
 
         #region 博客文章投稿
         /// <summary>
@@ -533,6 +540,56 @@ namespace ET.Sys_BLL
         public List<BlogUserLevelLink> PageList_BlogUserLevelLink(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
         {
             return new TBaseDAL<BlogUserLevelLink>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+        }
+        #endregion
+
+        #region 用户请求
+        /// <summary>
+        /// 信息操作
+        /// </summary>
+        /// <param name="info">信息</param>
+        public bool Operate_BlogUserRequest(BlogUserRequest info, bool IsInsert)
+        {
+            if (IsInsert)
+                return new TBaseDAL<BlogUserRequest>().InsertInstance(info) > 0;
+            else
+                return new TBaseDAL<BlogUserRequest>().UpdateInstance(info) > 0;
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="Condition">条件需要以AND开头</param>
+        public bool Delete_BlogUserRequest(string Condition)
+        {
+            return new TBaseDAL<BlogUserRequest>().DeleteInstances(Condition) > 0;
+        }
+        /// <summary>
+        /// 获取单个信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns>模块信息</returns>
+        public BlogUserRequest Get_BlogUserRequestByID(string infoid)
+        {
+            BlogUserRequest info = null;
+            info = new TBaseDAL<BlogUserRequest>().GetInstanceById(infoid);
+
+            return info;
+        }
+        public BlogUserRequest Get_BlogUserRequest(string Condition)
+        {
+            BlogUserRequest info = null;
+            info = new TBaseDAL<BlogUserRequest>().GetInstanceByCondition(Condition);
+
+            return info;
+        }
+        public List<BlogUserRequest> List_BlogUserRequest(string Fields, string Condition, string strOrder)
+        {
+            return new TBaseDAL<BlogUserRequest>().GetListByCondition(Fields, Condition, strOrder);
+        }
+        public List<BlogUserRequest> PageList_BlogUserRequest(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        {
+            return new TBaseDAL<BlogUserRequest>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
         }
         #endregion
     }

@@ -22,12 +22,14 @@
             </div>
         </header>
         <article class="article-content">
-            <div>@Html.Raw(@Model.ArticleContent)</div>
+            <div>@Html.Raw(Model.ArticleContent)</div>
 
             <div class="txt_right mt20 mb20">来源：@Model.ArticleSource</div>
             <div class="txt_right mt20 mb20">@Model.SpecMark</div>
             <p>转载请注明：<a href="@PublicHelper.GetHostAddress()" data-original-title="" title="">弈泰网络资讯平台</a> » <a href="@Model.ArticleUrl" data-original-title="" title="">@Model.ArticleTitle</a></p>
-            <div class="open-message"><i class="fa fa-bullhorn"></i> 如果你觉得这篇文章或者我分享的内容对你有帮助，请继续关注我 ！<a style="float:right;text-indent: 0;" href="javascript:AddFavorite();" title="" id="iAddFavorite" target="_blank" data-original-title="收藏本文" data-id="@Model.ArticleID">收藏本文</a></div>
+            <div class="open-message"><i class="fa fa-bullhorn"></i> 如果你觉得这篇文章或者我分享的内容对你有帮助，请继续关注我 ！
+                @Html.Raw(ViewBag.HtmlIsFavorite)
+            </div>
             <div class="article-social">
                 <a href="javascript:;ViewBag.checkIsFavorite" data-action="ding" data-id="@Model.ArticleID" id="Addlike" class="action" data-original-title="" title="">
                     <i class="fa fa-heart-o"></i>喜欢 (<span class="count">@Model.LoveCount</span>)
@@ -115,10 +117,6 @@
         @{Html.RenderPartial("_PartialWxCode");}
     </div>
 </div>
-<script type="text/javascript">
-    @Html.Raw(ViewBag.scriptIsFavorite)
-
-</script>
 <script type="text/javascript">
     //这里记录访问量
     window.onload = function () {

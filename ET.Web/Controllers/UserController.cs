@@ -136,39 +136,57 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult AjaxPostUserSignIn()
         {
-            if (this.IsLogin)
+            BlogUserSignIn info = new ET.Sys_BLL.BlogBLL().Get_BlogUserSignIn(string.Format("AND USERID='{0}' AND CONVERT(VARCHAR,CREATETIME,23)='{1}' ", this.UserID, DateTime.Now.ToString("yyyy-MM-dd")));
+            if (info == null)
             {
-                BlogUserSignIn info = new ET.Sys_BLL.BlogBLL().Get_BlogUserSignIn(string.Format("AND USERID='{0}' AND CONVERT(VARCHAR,CREATETIME,23)='{1}' ", this.UserID, DateTime.Now.ToString("yyyy-MM-dd")));
-                if (info == null)
+                info = new BlogUserSignIn();
+                info.UserID = Guid.Parse(this.UserID);
+                info.CreateTime = DateTime.Now;
+                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserSignIn(info, true))
                 {
-                    info = new BlogUserSignIn();
-                    info.UserID = Guid.Parse(this.UserID);
-                    info.CreateTime = DateTime.Now;
-                    if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserSignIn(info, true))
+                    BlogUserLevelLink link = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelLink(string.Format("AND USERID='{0}' ", this.UserID));
+                    if (link == null)
                     {
-                        BlogUserLevelLink link = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelLink(string.Format("AND USERID='{0}' ", this.UserID));
-                        if (link == null)
-                        {
-                            link = new BlogUserLevelLink();
+                        link = new BlogUserLevelLink();
 
-                            link.UserID = Guid.Parse(this.UserID);
-                             link.Exp = 10;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
-                        }
-                        else
-                        {
-                            link.Exp++;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
-                        }
-                        return Content("true");
+                        link.UserID = Guid.Parse(this.UserID);
+                        link.Exp = 10;
+                        new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
                     }
+                    else
+                    {
+                        link.Exp++;
+                        new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                    }
+                    return Content("true");
                 }
-                else
-                    return Content("repeat");
             }
-
+            else
+                return Content("repeat");
             return Content("false");
         }
+
+        [HttpPost]
+        public ActionResult AjaxPostVipRequest()
+        {
+            BlogUserRequest info = new ET.Sys_BLL.BlogBLL().Get_BlogUserRequest(string.Format("AND Requester='{0}' AND STATUS<>0 ", this.UserID));
+            if (info == null)
+            {
+                info = new BlogUserRequest();
+                info.Requester = Guid.Parse(this.UserID);
+                info.CreateTime = DateTime.Now;
+                info.Status = 0;
+                info.RequestName = "申请成为正式会员";
+                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserRequest(info, true))
+                {
+                    return Content("true");
+                }
+            }
+            else
+                return Content("已发送过申请了！请等待审核！");
+            return Content("false");
+        }
+
         #endregion
     }
 }

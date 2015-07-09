@@ -13,13 +13,14 @@ namespace ET.Sys_DEF
         public String UserName { get; set; }
 
         public String UserCNName { get; set; }
-        public string DepID { get; set; }
+        public String DepID { get; set; }
 
-        public string PostID { get; set; }
+        public String PostID { get; set; }
         /// <summary>
         /// 用,隔开的角色ID
         /// </summary>
-        public string RoleIDS { get; set; }
+        public String RoleIDS { get; set; }
+        public String UserGrade { get; set; }
 
         public List<string> UserLimit { get; set; }
 

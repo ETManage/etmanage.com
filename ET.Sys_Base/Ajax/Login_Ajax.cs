@@ -141,6 +141,7 @@ namespace ET.Sys_Base
                 userinfo.UserID = info.userbaseinfo.UserID;
                 userinfo.UserName = info.userbaseinfo.UserName;
                 userinfo.UserCNName = info.userstuinfo.CNName;
+                userinfo.UserGrade = (info.userstuinfo.UserGrade.HasValue && info.userstuinfo.UserGrade > 0 ? "初级会员" : "普通用户");
                 var roleIDs = info.userrole.Select(c => c.RoleID.ToString()).ToArray().Aggregate((current, next) => String.Format("{0},{1}", current, next));
                 userinfo.RoleIDS = roleIDs;
                 System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;

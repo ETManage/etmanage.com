@@ -78,6 +78,19 @@
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101213317" charset="utf-8" data-redirecturi="http://etmanage.com/Account/qqlogincallback"></script>
 
     <script src="@Url.Content("~/scripts/blog/header.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        function sendViprequest() {
+            $.post("/user/ajaxpostviprequest",
+               function (data) {
+                   if (data == "true") {
+                       alert('申请已发送！请等待管理员审核！');
+                       $("#iapplyvip").html("已申请").removeAttr("href");
+                   }
+                   else
+                       alert(data);
+               });
 
+        }
+    </script>
 </body>
 </html>

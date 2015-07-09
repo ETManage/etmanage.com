@@ -146,14 +146,44 @@ namespace ET.Sys_BLL
         {
             return new BaseDAL().GetListByPager<T>(Fields, tableName, Condition, Orderby, Offset, Count, ref  RecordTotalCount, IsNoLock);
         }
-        public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder)
+     
+           public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder,bool IsNoLock)
         {
-            List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder);
+            List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder,IsNoLock);
 
             List<KeyAndValue> Outlist = new List<KeyAndValue>();
             NestRecursion(Alllist, "-1", Outlist);
             return Outlist;
         }
+           public List<KeyAndValue> GetNestListByCondition(string Fields, string TableName, string Condition, string strOrder)
+           {
+               List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition, strOrder);
+
+               List<KeyAndValue> Outlist = new List<KeyAndValue>();
+               NestRecursion(Alllist, "-1", Outlist);
+               return Outlist;
+           }
+           public List<KeyAndValue> GetNestPageListByCondition(string Fields, string TableName, string Condition, string strOrder, int Offset, int Count, ref long RecordTotalCount)
+           {
+               List<KeyAndValue> Alllist = new BaseDAL().GetListByPager<KeyAndValue>(Fields, TableName, Condition+" AND pid='-1'", strOrder, Offset,Count,ref RecordTotalCount,true);
+
+               List<KeyAndValue> Outlist = new List<KeyAndValue>();
+               PageNestRecursion(Fields, TableName, Condition, strOrder, "-1", Outlist);
+               return Outlist;
+           }
+           void PageNestRecursion(string Fields, string TableName, string Condition, string strOrder, string PID, List<KeyAndValue> Outlist)
+           {
+               List<KeyAndValue> Alllist = new BaseDAL().GetListByCondition<KeyAndValue>(Fields, TableName, Condition + " AND pid='"+PID+"'", strOrder);
+               foreach (KeyAndValue item in Alllist.Where(info => info.pid == PID))
+               {
+                   KeyAndValue info = item;
+                   List<KeyAndValue> children = new List<KeyAndValue>();
+                   PageNestRecursion(Fields, TableName, Condition, strOrder, item.id, children);
+                   info.children = children;
+                   Outlist.Add(info);
+               }
+
+           }
         void NestRecursion(List<KeyAndValue> Alllist, string PID, List<KeyAndValue> Outlist)
         {
             foreach (KeyAndValue item in Alllist.Where(info => info.pid == PID))

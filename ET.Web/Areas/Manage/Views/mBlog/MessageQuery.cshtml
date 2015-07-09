@@ -3,7 +3,7 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    博客类别列表
+    博客留言列表
 }
 @section Header{
     <link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
@@ -17,7 +17,7 @@
         <table class="datatable">
             <tr>
                 <th style="width:80px;">
-                    类别名称：
+                    留言标题：
                 </th>
                 <td>
                     <input id="txtSearch" style="width: 175px" type="text" data-options="prompt:'请输入查询内容'"
@@ -118,7 +118,7 @@
         }
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                var ls = $.map(selected, function (a) { return a.MsgID; }).toString();
                 $.post('/mblog/AjaxDeleteRoll', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
@@ -140,7 +140,7 @@
         }
         $.messager.confirm("确认提示框", "确认审核通过这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                var ls = $.map(selected, function (a) { return a.MsgID; }).toString();
                 $.post('/mblog/AjaxAuditPass', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
@@ -161,7 +161,7 @@
         }
         $.messager.confirm("确认提示框", "确认不通过这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                var ls = $.map(selected, function (a) { return a.MsgID; }).toString();
                 $.post('/mblog/AjaxAuditNoPass', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
@@ -180,7 +180,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "rollmanage?infoid=" + selected.RollID, { width: 600, height: 450 })
+        openSimpleWindow('查看', "rollmanage?infoid=" + selected.MsgID, { width: 600, height: 450 })
     };
 
     function queryClick() {

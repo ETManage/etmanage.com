@@ -132,7 +132,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpGet]
         public ActionResult AjaxSearchArticle(string query)
         {
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().List_BlogArticleInfo("ARTICLETITLE", " AND CHARINDEX('" + query + "', ARTICLETITLE)>0", "CreateTime");
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().List_BlogArticleInfo("ARTICLETITLE", " AND CHARINDEX('" + query + "', ARTICLETITLE)>0", "CreateTime DESC");
             var arrData = list.Select(c => c.ArticleTitle);
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
         }
@@ -276,7 +276,7 @@ namespace Web.Areas.Manage.Controllers
         #endregion
 
 
-        #region 博客友情链接操作方法
+        #region 博客友情链接
         public ActionResult RollManage()
         {
             return View();
@@ -373,7 +373,7 @@ namespace Web.Areas.Manage.Controllers
             int pageSize = int.Parse(Request["rows"]);
             string Condition = "";
             if (!string.IsNullOrEmpty(Request["name"]))
-                Condition = " AND CHARINDEX('" + Request["name"] + "', ARTICLETITLE)>0";
+                Condition = " AND CHARINDEX('" + Request["name"] + "', MsgTitle)>0";
             long RecordTotalCount = 0;
             List<BlogMessageInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogMessageInfo("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
@@ -480,7 +480,7 @@ namespace Web.Areas.Manage.Controllers
             info.PublishSource = collection["PublishSource"];
             info.Label = collection["Label"];
             info.Cover = collection["Cover"];
-            info.TypeID =Guid.Parse(collection["TypeID"]);
+            info.TypeID = Guid.Parse(collection["TypeID"]);
             info.CreateTime = DateTime.Now;
 
 
@@ -509,7 +509,7 @@ namespace Web.Areas.Manage.Controllers
                 arinfo.ArticleCover = info.Cover;
                 arinfo.ArticleContent = info.PublishContent;
                 arinfo.ArticleDescription = info.Description;
-                new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true); 
+                new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true);
             }
             else
                 info.Status = 0;
@@ -567,7 +567,7 @@ namespace Web.Areas.Manage.Controllers
                     arinfo.ArticleCover = info.Cover;
                     arinfo.ArticleContent = info.PublishContent;
                     arinfo.ArticleDescription = info.Description;
-                    new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true); 
+                    new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true);
 
 
 
@@ -610,7 +610,7 @@ namespace Web.Areas.Manage.Controllers
             return View();
         }
 
-        
+
         #region Ajax处理方法
         [HttpGet]
         public JsonResult AjaxQueryLevelPageList()
@@ -639,7 +639,7 @@ namespace Web.Areas.Manage.Controllers
             }
 
             info.LevelName = collection["LevelName"];
-            info.NeedExp =Convert.ToInt64( collection["NeedExp"]);
+            info.NeedExp = Convert.ToInt64(collection["NeedExp"]);
 
 
 
@@ -679,7 +679,7 @@ namespace Web.Areas.Manage.Controllers
 
 
         #region 博客用户签到
-       
+
         public ActionResult UserSignQuery()
         {
             return View();
@@ -696,19 +696,19 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', CNNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogUserSignIn> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogUserSignIn>("SignID,UserID,CreateTime,cnname Reserve1,cast(Exp as varchar(20))+'['+UserLevel+']' Reserve2",string.Format("(SELECT A.*,B.CNNAME,B.EXP,B.USERLEVEL FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)a",ViewNames.V_USERFULL,TableNames.BlogUserSignIn),Condition,"CreateTime desc", pageIndex, pageSize, ref RecordTotalCount,false);
+            List<BlogUserSignIn> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogUserSignIn>("SignID,UserID,CreateTime,cnname Reserve1,cast(Exp as varchar(20))+'['+UserLevel+']' Reserve2", string.Format("(SELECT A.*,B.CNNAME,B.EXP,B.USERLEVEL FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)a", ViewNames.V_USERFULL, TableNames.BlogUserSignIn), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult AjaxDeleteSign(string infoid)
         {
-                if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserSignIn(" AND SignID in (" + infoid + ")"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserSignIn(" AND SignID in (" + infoid + ")"))
                 return Content("true");
             else
                 return Content("false");
         }
-      
+
         #endregion
         #endregion
 
@@ -743,6 +743,81 @@ namespace Web.Areas.Manage.Controllers
                 return Content("false");
         }
 
+        #endregion
+        #endregion
+
+
+        #region 博客友情链接
+        public ActionResult UserRequestManage()
+        {
+            return View();
+        }
+        public ActionResult UserRequestQuery()
+        {
+            return View();
+        }
+        #region Ajax处理方法
+        [HttpGet]
+        public JsonResult AjaxQueryRequestPageList()
+        {
+            //接收datagrid传来的参数 
+            int pageIndex = int.Parse(Request["page"]);
+            int pageSize = int.Parse(Request["rows"]);
+            string Condition = "";
+            if (!string.IsNullOrEmpty(Request["name"]))
+                Condition = " AND CHARINDEX('" + Request["name"] + "', RequestNAME)>0";
+            long RecordTotalCount = 0;
+            List<BlogUserRequest> list = new ET.Sys_BLL.BlogBLL().PageList_BlogUserRequest("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AjaxSaveRequest(FormCollection collection, string infoid)
+        {
+            string strResult = "false";
+            BlogUserRequest info = new ET.Sys_BLL.BlogBLL().Get_BlogUserRequestByID(infoid);
+            if (info != null)
+            {
+                info.AuditeTime = DateTime.Now;
+                info.AuditeResult = collection["AuditeResult"];
+
+                info.Auditor = Guid.Parse(this.UserID);
+
+                info.Status = Convert.ToInt32(collection["Status"]);
+
+
+
+
+                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserRequest(info, false))
+                    strResult = "true";
+            }
+            return Content(strResult);
+        }
+        [HttpGet]
+        public JsonResult AjaxGetRequestDetail(string infoid)
+        {
+            if (string.IsNullOrEmpty(infoid))
+                return Json("", JsonRequestBehavior.AllowGet);
+            BlogUserRequest info = new ET.Sys_BLL.BlogBLL().Get_BlogUserRequestByID(infoid);
+            if (info == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
+            return Json(info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AjaxDeleteRequest(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserRequest(" AND RequestID in (" + infoid + ")"))
+                return Content("true");
+            else
+                return Content("false");
+        }
+        [HttpGet]
+        public ActionResult AjaxSearchRequest(string query)
+        {
+            List<BlogUserRequest> list = new ET.Sys_BLL.BlogBLL().List_BlogUserRequest("RequestNAME", " AND  CHARINDEX('" + query + "', RequestNAME)>0", "RequestSORT");
+            var arrData = list.Select(c => c.RequestName);
+            return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #endregion
 

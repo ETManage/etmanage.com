@@ -1,127 +1,28 @@
-﻿.datatable
-{
-    
-    width: 100%;
-    border: solid #ccc;
-    border-width: 1px;
-    border-collapse: collapse;
-}
-.datatable td
-{
-    border: solid #fafafa;
-    border-width: 1px;
-    border-collapse: collapse;
-    height: 30px;
-    padding: 1px;
-}
-.datatable th
-{
-    border: solid #fafafa;
-    border-width: 1px;
-    border-collapse: collapse;
-    background: #EEEEFF;
-    color: #000;
-    height:30px;
-    font-weight: normal;
-    padding: 1px;
-    padding-left:5px;
-    min-width:40px;
-}
-    .datatable input { width:auto;}
-.input
-{
-    border: 1px solid #97b1c5;
-    background: #ffffff;
-    height: 25px;
-    font-size: 12px;
-    line-height:25px;
-}
-.button  
-{
-    height:28px;line-height:28px;
-    position: relative; 
-    overflow: visible; 
-    display:inline-block;
-    border: 1px solid #d4d4d4; 
-    text-decoration: none; 
-    text-shadow: 1px 1px 0 #fff; 
-    font:11px/normal sans-serif; 
-    color: #333; 
-    white-space: nowrap; 
-    cursor: pointer; 
-    outline: none; 
-    background-color: #ececec;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-    background-image: -o-linear-gradient(#f4f4f4, #ececec);
-    background-image: linear-gradient(#f4f4f4, #ececec);
-    -webkit-background-clip: padding;
-    -moz-background-clip: padding;
-    -o-background-clip: padding-box; 
-    /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
-    /* IE hacks */
-    zoom: 1; 
-    *display: inline; 
-}
+﻿.datatable { width: 100%; border: solid #ccc; border-width: 1px; border-collapse: collapse; }
+    .datatable td { border: solid #fafafa; border-width: 1px; border-collapse: collapse; height: 30px; padding: 1px; }
+    .datatable th { border: solid #fafafa; border-width: 1px; border-collapse: collapse; background: #EEEEFF; color: #000; height: 30px; font-weight: normal; padding: 1px; padding-left: 5px; min-width: 40px; }
+        .bg-lightblue { background-color: #F3F8F7; }
+    .datatable input { width: auto; }
+.input { border: 1px solid #97b1c5; background: #ffffff; height: 25px; font-size: 12px; line-height: 25px; }
+.button { height: 28px; line-height: 28px; position: relative; overflow: visible; display: inline-block; border: 1px solid #d4d4d4; text-decoration: none; text-shadow: 1px 1px 0 #fff; font: 11px/normal sans-serif; color: #333; white-space: nowrap; cursor: pointer; outline: none; background-color: #ececec; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec)); background-image: -moz-linear-gradient(#f4f4f4, #ececec); background-image: -o-linear-gradient(#f4f4f4, #ececec); background-image: linear-gradient(#f4f4f4, #ececec); -webkit-background-clip: padding; -moz-background-clip: padding; -o-background-clip: padding-box; /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */ /* IE hacks */ zoom: 1; *display: inline; }
+    .button:hover,
+    .button:focus,
+    .button:active { border-color: #4A8BF5; border-bottom-color: #3A8CF9; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); color: #fff; background-color: #4A8BF5; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3A8CF9)); background-image: -moz-linear-gradient(#599bdc, #3A8CF9); background-image: -o-linear-gradient(#599bdc, #3A8CF9); background-image: linear-gradient(#599bdc, #3A8CF9); }
 
-.button:hover,
-.button:focus,
-.button:active {
-    border-color: #4A8BF5;
-    border-bottom-color: #3A8CF9;
-    text-decoration: none; 
-    text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
-    color: #fff; 
-    background-color: #4A8BF5;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3A8CF9));
-    background-image: -moz-linear-gradient(#599bdc, #3A8CF9);
-    background-image: -o-linear-gradient(#599bdc, #3A8CF9);
-    background-image: linear-gradient(#599bdc, #3A8CF9);
-}
+    .button:active,
+    .button.active { border-color: #3A8CF9; border-bottom-color: #4A8BF5; color: #fff; background-color: #4A8BF5; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4A8BF5), to(#3A8CF9)); background-image: -moz-linear-gradient(#4A8BF5, #3A8CF9); background-image: -o-linear-gradient(#4A8BF5, #3A8CF9); background-image: linear-gradient(#4A8BF5, #3A8CF9); }
 
-.button:active,
-.button.active {
-    border-color: #3A8CF9;
-    border-bottom-color: #4A8BF5;
-    color: #fff; 
-    background-color: #4A8BF5;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4A8BF5), to(#3A8CF9));
-    background-image: -moz-linear-gradient(#4A8BF5, #3A8CF9);
-    background-image: -o-linear-gradient(#4A8BF5, #3A8CF9);
-    background-image: linear-gradient(#4A8BF5, #3A8CF9);
-}
+    /* overrides extra padding on button elements in Firefox */
+    .button::-moz-focus-inner { padding: 0; border: 0; }
+.textboxs { background: #E0ECFF; width: 18px; height: 20px; overflow: hidden; display: inline-block; vertical-align: top; cursor: pointer; opacity: 0.8; filter: alpha(opacity=60); }
+div .validatebox-invalid { background-image: none; }
 
-/* overrides extra padding on button elements in Firefox */
-.button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-}
-.textboxs
-{
-    background: #E0ECFF ;
-    width: 18px;
-    height: 20px;
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: top;
-    cursor: pointer;
-    opacity: 0.8;
-    filter: alpha(opacity=60);
-}
-div .validatebox-invalid{background-image:none;}
+#ManageBody { margin: 5px; }
 
-#ManageBody {margin:5px;
-}
-
-.ManageOperateTitle{background-image: url('/images/Manage/tiaotiao.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 25px; width: auto; line-height: 30px; height: 30px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #0092DC; font-weight: bold; font-size: 14px;}
-.ManageListTitle{height:20px;width:100%;}
-.ManageSearch
-{
-	border: 1px dashed #0092DC;
-	padding:5px;
-}
-.ManageSearch legend{font-size: 14px;
-	color: #0092DC;}
-.ManageList{margin-top:10px;overflow:hidden;}
-.ManageOperate{padding-top: 15px;}
-.ManageTitle{height:30px;width:100%;}
+.ManageOperateTitle { background-image: url('/images/Manage/tiaotiao.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 25px; width: auto; line-height: 30px; height: 30px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #0092DC; font-weight: bold; font-size: 14px; }
+.ManageListTitle { height: 20px; width: 100%; }
+.ManageSearch { border: 1px dashed #0092DC; padding: 5px; }
+    .ManageSearch legend { font-size: 14px; color: #0092DC; }
+.ManageList { margin-top: 10px; overflow: hidden; }
+.ManageOperate { padding-top: 15px; }
+.ManageTitle { height: 30px; width: 100%; }

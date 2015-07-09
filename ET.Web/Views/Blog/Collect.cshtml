@@ -79,8 +79,12 @@
         if (!window.name) {
             window.name = 'FirstLoad';
             var _id = '@ViewBag.InfoBlogTypeName';
-            $.post("/blog/ajaxpostuserview", { type: _id, cate: "资讯中心" },
+            $.post("/user/ajaxpostuserview", { type: _id, cate: "资讯中心" },
                function (data) {
+                   if (data == "true")
+                       alert('申请已发送')
+                   else
+                       alert(data);
                });
         }
     }

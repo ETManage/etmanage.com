@@ -9,11 +9,12 @@
             <i class="icon iconfont"><a href="@PublicHelper.GetHostAddress() /user/"><img src="@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif" onerror="this.onerror = null; this.src = '@PublicHelper.GetHostAddress()/images/blog/noavatar_small.gif'"></a></i>
             <div class="name"><a href="@PublicHelper.GetHostAddress() /user/" title="@Model.UserCNName">@Model.UserCNName</a></div>
             <ul>
-                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress() /user/" class="user-name">@Model.UserCNName</a></strong> <a href="@PublicHelper.GetHostAddress()/account/logout" class="y">退出</a></li>
+                <li class="um-reply"><strong class="vwmy qq" style="margin-left:0px;background-position:0px 3px;"><a href="@PublicHelper.GetHostAddress() /user/" class="user-name">@Model.UserCNName</a></strong>[@Model.UserGrade]</li>
                 <li>
                     <a href="@PublicHelper.GetHostAddress()/user/usersetting">设置中心</a>
 
                 </li>
+                <li><a href="@PublicHelper.GetHostAddress()/account/logout" class="y" style="color:white;">退出</a></li>
             </ul>
         </div>
         <div class="tool-lis">

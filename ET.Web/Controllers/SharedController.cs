@@ -50,7 +50,7 @@ namespace Web.Controllers
                     bool IsQQLogin = false;
                     ViewBag.LoginUserName = userinfo.CNName;
                     ViewBag.LoginUserEMail = userinfo.EMail;
-                    strHtml = "<div class='user-ed' id='islogin'><div class='lot'><div class='fLeft cBlack'>" + userinfo.CNName + "</div><div class='fLeft'><a href='/user/' class='tit key' title='账号'><img src='/images/blog/noavatar_small.gif' onerror='this.onerror = null; this.src = '/images/blog/noavatar_small.gif''></a></div><ul><li class='um-reply'><strong class='vwmy " + (IsQQLogin ? "qq" : "") + "'><a href='/user/' class='user-name'>" + userinfo.CNName + "</a></strong></li><li><a href='javascript:alert(\'申请已发送\')'>申请转正</a></li><li><a href='/user/usersetting'>个人设置</a></li><li><a href='/user/?s=myacticle' _style='background-image:url(/images/blog/thread_b.png) !important'>我的博文</a></li><li><a href='/user/?s=myfavorite' _style='background-image:url(/images/blog/favorite_b.png) !important'>我的收藏</a></li><li class='last border-top1'><a href='/account/logout'>退出</a></li></ul></div></div>";
+                    strHtml = "<div class='user-ed' id='islogin'><div class='lot'><div class='fLeft cBlack'>" + userinfo.CNName + "</div><div class='fLeft'><a href='/user/' class='tit key' title='账号'><img src='/images/blog/noavatar_small.gif' onerror='this.onerror = null; this.src = '/images/blog/noavatar_small.gif''></a></div><ul><li class='um-reply'><strong class='vwmy " + (IsQQLogin ? "qq" : "") + "'><a href='/user/' class='user-name'>" + userinfo.CNName + "</a></strong>" + (userinfo.UserGrade.HasValue && userinfo.UserGrade > 0 ? "初级会员" : "普通用户") + "</li><li><a href='javascript:sendViprequest()' id='iapplyvip'>申请转正</a></li><li><a href='/user/usersetting'>个人设置</a></li><li><a href='/user/?s=myacticle' _style='background-image:url(/images/blog/thread_b.png) !important'>我的博文</a></li><li><a href='/user/?s=myfavorite' _style='background-image:url(/images/blog/favorite_b.png) !important'>我的收藏</a></li><li class='last border-top1'><a href='/account/logout'>退出</a></li></ul></div></div>";
                 }
             }
 
@@ -74,7 +74,7 @@ namespace Web.Controllers
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult _PartialArticleLove()
         {
-            return PartialView(GetArticleList(5, null, null, "LoveCount desc,CreateTime DESC"));
+            return PartialView(GetArticleList(5, null, "AND LEN(ARTICLECOVER)>0", "LoveCount desc,CreateTime DESC"));
         }
         [ChildActionOnly]
         [OutputCache(Duration = 60, VaryByParam = "none")]

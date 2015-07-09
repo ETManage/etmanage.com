@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.dll</HintPath>
     </Reference>
-    <Reference Include="ET.WeixinMpSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ET.AssemblyLibrary\ET.WeixinMpSdk.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data">
       <HintPath>..\ET.AssemblyLibrary\MySql.Data.dll</HintPath>
@@ -153,13 +149,14 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
     <Compile Include="Areas\Manage\Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\DesignMobileController.cs" />
+    <Compile Include="Controllers\BlogMobileController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OneGTDController.cs" />
     <Compile Include="Controllers\PageErrorController.cs" />
     <Compile Include="Areas\Manage\Controllers\mDesignController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\WeiXinController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +164,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\BlogMobile\arrow-top.png" />
+    <Content Include="Content\BlogMobile\Common.css" />
+    <Content Include="Content\BlogMobile\dhead_1.png" />
+    <Content Include="Content\BlogMobile\icons.png" />
+    <Content Include="Content\BlogMobile\ky_img\aboutus.png" />
+    <Content Include="Content\BlogMobile\ky_img\arrow1.png" />
+    <Content Include="Content\BlogMobile\ky_img\back.png" />
+    <Content Include="Content\BlogMobile\ky_img\bottom.png" />
+    <Content Include="Content\BlogMobile\empty.png" />
+    <Content Include="Content\BlogMobile\ky_img\design.png" />
+    <Content Include="Content\BlogMobile\ky_img\guestbook.png" />
+    <Content Include="Content\BlogMobile\ky_img\guide.png" />
+    <Content Include="Content\BlogMobile\ky_img\home.png" />
+    <Content Include="Content\BlogMobile\ky_img\loc.gif" />
+    <Content Include="Content\BlogMobile\ky_img\menu.png" />
+    <Content Include="Content\BlogMobile\ky_img\plugmenu.png" />
+    <Content Include="Content\BlogMobile\ky_img\refresh.png" />
+    <Content Include="Content\BlogMobile\ky_img\tel.png" />
+    <Content Include="Content\BlogMobile\ky_img\top.png" />
+    <Content Include="Content\BlogMobile\navigation.png" />
+    <Content Include="Content\BlogMobile\slide.png" />
+    <Content Include="Content\BlogMobile\social\facebook.png" />
+    <Content Include="Content\BlogMobile\social\guangbo.png" />
+    <Content Include="Content\BlogMobile\social\sina.png" />
+    <Content Include="Content\BlogMobile\social\twitter.png" />
+    <Content Include="Content\BlogMobile\style.css" />
+    <Content Include="Content\BlogMobile\loading.png" />
     <Content Include="Content\Manage\Login.css" />
     <Content Include="Content\base.css" />
     <Content Include="Content\Blog\blog.css" />
@@ -260,6 +284,7 @@
     <Content Include="Images\Public\nopicture.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Images\Public\icon-ok.png" />
+    <Content Include="Images\whitelogo.png" />
     <Content Include="Res\bootstrap\assets\brand\bootstrap-outline.svg" />
     <Content Include="Res\bootstrap\assets\brand\bootstrap-punchout.svg" />
     <Content Include="Res\bootstrap\assets\brand\bootstrap-solid.svg" />
@@ -1103,6 +1128,11 @@
     <Content Include="Res\uploadify\uploadify.css" />
     <Content Include="Res\uploadify\uploadify.swf" />
     <Content Include="Res\uploadify\说明.txt" />
+    <Content Include="Scripts\BlogMobile\fx.js" />
+    <Content Include="Scripts\BlogMobile\script.js" />
+    <Content Include="Scripts\BlogMobile\zepto.min.js" />
+    <Content Include="Scripts\jquery.draggable.js" />
+    <Content Include="Scripts\jquery.resizable.js" />
     <Content Include="Scripts\Manage\login.js" />
     <Content Include="Res\autocomplete\autocomplete.css" />
     <Content Include="Scripts\Blog\editor.js" />
@@ -1297,6 +1327,10 @@
       <Project>{95FDFC82-0183-4F86-AABD-12DC6FFA3ABC}</Project>
       <Name>ET.Sys_DEF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ET.Weixin.MP.CommonService\ET.Weixin.MP.CommonService.csproj">
+      <Project>{ccd291e9-16fa-4b53-b032-ebd3f659567b}</Project>
+      <Name>ET.Weixin.MP.CommonService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ET.WeiXinBase\ET.WeiXinBase.csproj">
       <Project>{bf2884f8-13e3-4cc7-837d-ff42f2e657ae}</Project>
       <Name>ET.WeiXinBase</Name>
@@ -1315,6 +1349,8 @@
     <Content Include="Areas\Manage\Views\mBlog\UserLevelManage.cshtml" />
     <Content Include="Areas\Manage\Views\mBlog\UserSignQuery.cshtml" />
     <Content Include="Areas\Manage\Views\mBlog\UserViewQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserRequestQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserRequestManage.cshtml" />
     <None Include="Properties\PublishProfiles\etmanage.pubxml" />
     <Content Include="Views\Message\Publish.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
@@ -1322,6 +1358,12 @@
     <Content Include="Views\User\MyPublish.cshtml" />
     <Content Include="Views\User\MyFavorites.cshtml" />
     <Content Include="Views\Message\PageOk.cshtml" />
+    <Content Include="Views\BlogMobile\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutBlogMobile.cshtml" />
+    <Content Include="Views\BlogMobile\Detail.cshtml" />
+    <Content Include="Views\Account\OauthLogin.cshtml" />
+    <Content Include="Views\DesignMobile\Index.cshtml" />
+    <Content Include="Views\DesignMobile\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

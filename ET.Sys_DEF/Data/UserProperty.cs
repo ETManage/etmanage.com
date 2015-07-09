@@ -62,6 +62,9 @@ namespace ET.Sys_DEF
         public String LiveCity { get; set; }
         public String LiveArea { get; set; }
         public String Detail { get; set; }
+
+        public Int32? UserGrade { get; set; }
+        
         
     }
 }

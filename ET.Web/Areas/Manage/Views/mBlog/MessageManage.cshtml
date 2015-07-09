@@ -3,7 +3,7 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    博客友情链接
+    博客留言信息
 }
 @section Header{
 
@@ -86,7 +86,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mDesign/AjaxGetMessageDetail",
+                url: "/mblog/AjaxGetMessageDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -106,7 +106,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mDesign/AjaxSaveMessage?infoid=' + _id,
+                url: '/mblog/AjaxSaveMessage?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
