@@ -1,0 +1,195 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    博客留言列表
+}
+@section Header{
+    <link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
+}
+
+<div class="ManageBody">
+    <div class="ManageListTitle"></div>
+    <fieldset class="ManageSearch" style="">
+        <legend>信息查询</legend>
+        <table class="datatable">
+            <tr>
+                <th style="width:80px;">
+                    留言标题：
+                </th>
+                <td>
+                    <input id="txtSearch" style="width: 175px" type="text" data-options="prompt:'请输入查询内容'"
+                           class="search input" />
+
+                    <a href='javascript:queryClick()' class='easyui-linkbutton' data-options='iconCls:"icon-search"'>
+                        查询
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <div class="ManageList">
+        <table id="InfoGridData"></table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#ManageMain").css("width", $(document).width() - 10)
+
+
+        //操作按钮，此处需要添加操作权限控制
+        var toolbarnode = [
+            {
+                text: '添加',
+                iconCls: 'icon-add',
+                handler: fixAdd
+            }, '-', {
+                text: '查看',
+                iconCls: 'icon-view',
+                handler: fixView
+            }, '-', {
+                text: '审核通过',
+                iconCls: 'icon-edit',
+                handler: fixPass
+            }, '-', {
+                text: '审核不通过',
+                iconCls: 'icon-edit',
+                handler: fixNoPass
+            }, '-', {
+                text: '删除',
+                iconCls: 'icon-remove',
+                handler: fixDel
+            }, '-'
+        ]
+        $('#InfoGridData').datagrid({
+            width: $(document).width() - 10,
+            height: 380,
+            fitColumns: false,
+            striped: true,
+            nowrap: false,
+            showFooter: true,
+            url: "/mblog/ajaxquerymessagepagelist", method: 'get',
+            collapsible: false,
+            remoteSort: false,
+            showFooter: true,
+            singleSelect: true,
+            pagination: true,
+            rownumbers: true,
+            pageSize: 10,
+            columns: [[
+                    { field: 'MsgID', width: 10, title: 'ID', sortable: true, hidden: true },
+                    { field: 'MsgTitle', width: 220, title: '留言标题', sortable: true },
+                    { field: 'Creator', width: 220, title: '昵称', sortable: true },
+                    { field: 'CreatorTel', width: 220, title: '手机', sortable: true },
+                    { field: 'CreatorEMail', width: 220, title: '邮箱', sortable: true },
+                    { field: 'Status', width: 60, title: '状态', align: 'center', sortable: true, formatter: formatterState },
+                    {
+                        field: 'CreateTime', width: 120, title: '发布时间', sortable: true,
+                        formatter: DateHelper.DateTimeFormatter
+                    }
+            ]],
+            toolbar: toolbarnode
+
+        });
+        var options = { serviceUrl: '/mblog/ajaxsearchroll' };
+        searchobj = $('#txtSearch').autocomplete(options);
+    });
+    function formatterState(val, row, index) {
+        if (val == "1")
+            return '<img src="/Images/Public/icon-ok.png" />'
+        else if (val == "0")
+            return '<img src="/Images/Public/icon-filter.png" />'
+        else
+            return '<img src="/Images/Public/icon-no.png" />'
+
+    }
+    function fixAdd() {
+        openWindow('新增', "RollManage", { width: 600, height: 450 })
+    };
+
+    function fixDel() {
+        var selected = $('#InfoGridData').datagrid('getChecked');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
+            if (r) {
+                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                $.post('/mblog/AjaxDeleteRoll', { infoid: ls }, function (res) {
+                    if (res == "true") {
+                        $("#InfoGridData").datagrid('reload')
+
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
+            }
+        });
+    };
+
+    function fixPass() {
+        var selected = $('#InfoGridData').datagrid('getChecked');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        $.messager.confirm("确认提示框", "确认审核通过这 " + selected.length + " 条吗？", function (r) {
+            if (r) {
+                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                $.post('/mblog/AjaxAuditPass', { infoid: ls }, function (res) {
+                    if (res == "true") {
+                        $("#InfoGridData").datagrid('reload')
+
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
+            }
+        });
+    };
+    function fixNoPass() {
+        var selected = $('#InfoGridData').datagrid('getChecked');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        $.messager.confirm("确认提示框", "确认不通过这 " + selected.length + " 条吗？", function (r) {
+            if (r) {
+                var ls = $.map(selected, function (a) { return a.RollID; }).toString();
+                $.post('/mblog/AjaxAuditNoPass', { infoid: ls }, function (res) {
+                    if (res == "true") {
+                        $("#InfoGridData").datagrid('reload')
+                        TopNotify("数据已删除", 'info');
+                    }
+                    else {
+                        TopNotify(res, 'error');
+                    }
+                });
+            }
+        });
+    };
+    function fixView() {
+        var selected = $('#InfoGridData').datagrid('getSelected');
+        if (null == selected || selected.length < 1) {
+            TopNotify("请选择数据", 'info');
+            return;
+        }
+        openSimpleWindow('查看', "rollmanage?infoid=" + selected.RollID, { width: 600, height: 450 })
+    };
+
+    function queryClick() {
+        $("#InfoGridData").datagrid('load', getQueryParam());
+    };
+
+    function getQueryParam() {
+        var query = { name: $("#txtSearch").val() };
+        return query;
+    };
+</script>
+

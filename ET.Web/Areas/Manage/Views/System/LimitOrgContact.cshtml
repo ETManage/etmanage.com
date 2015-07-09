@@ -1,0 +1,171 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    关联权限
+}
+@section Header{
+
+}
+
+<div id="itablimit">
+    <div style="overflow: hidden; width: 33%;" data-options="region:'west',title:'部门'">
+        <div class="Page-toolbar" style="border-right: 1px soild #eff;">
+            <a href="javascript:Submit('iuldept','dept')" style="float: left;" class="l-btn l-btn-plain">
+                <span class="l-btn-left">
+                    <span class="l-btn-text icon-save" style="padding-left: 20px;">
+                        保存
+                    </span>
+                </span>
+            </a><input title="" type="checkbox" onclick="treeChecked(this, 'iuldept')" />全选/反选
+        </div>
+        <div style="height: 92%; width: 100%;float: left; overflow: auto">
+            <ul id="iuldept"></ul>
+
+        </div>
+    </div>
+    <div style="overflow: hidden; width: 33%; " data-options="region:'center',title:'职务',split:false">
+        <div class="Page-toolbar" style="border-right: 1px soild #eff;">
+            <a href="javascript:Submit('iulpost','post')" style="float: left;" class="l-btn l-btn-plain">
+                <span class="l-btn-left">
+                    <span class="l-btn-text icon-save" style="padding-left: 20px;">
+                        保存
+                    </span>
+                </span>
+            </a><input title="全选/反选" type="checkbox" onclick="treeChecked(this, 'iulpost')" />全选/反选
+        </div>
+        <div style="height: 92%; width: 100%; float: left; overflow: auto">
+            <ul id="iulpost"></ul>
+
+        </div>
+    </div>
+    <div style="overflow: hidden; width: 33%; " data-options="region:'east',title:'人员',split:false">
+        <div class="Page-toolbar" style="border-right: 1px soild #eff;">
+            <a href="javascript:Submit('iulperson','person')" style="float: left;" class="l-btn l-btn-plain">
+                <span class="l-btn-left">
+                    <span class="l-btn-text icon-save" style="padding-left: 20px;">
+                        保存
+                    </span>
+                </span>
+            </a>
+
+            <input title="" type="checkbox" onclick="treeChecked(this, 'iulperson')" />全选/反选
+        </div>
+        <div style="height: 92%; width: 100%; float: left; overflow: auto">
+            <ul id="iulperson"></ul>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var _id = '@Request.QueryString["id"]';
+    $(function () {
+        $('#itablimit').height($(this).height()).width($(this).width()).layout({ fit: true });
+
+        loadtree('iuldept', 'dept', '/Organization/AjaxQueryAllDeptList');
+        loadtree('iulpost', 'post', '/Organization/AjaxQueryAllPostList');
+        loadtree('iulperson', 'person', '/Organization/AjaxQueryAllUserList');
+
+    });
+
+    function ParentTree(id) {
+        _id = id;
+        ParentLoadTree('iulpost', 'post');
+        ParentLoadTree('iuldept', 'dept');
+        ParentLoadTree('iulperson', 'person');
+    }
+
+    function ParentLoadTree(tree, t) {
+        //清空选择项
+        var nodes = $('#' + tree).tree('getChecked');
+        for (var i = 0; i < nodes.length; i++) {
+            $('#' + tree).tree('uncheck', nodes[i].target);
+        }
+
+        var roots = $('#' + tree).tree('getRoots');
+        for (var j = 0; j < roots.length; j++) {
+            $('#' + tree).tree('collapseAll', roots[j].target);
+        }
+
+        $.post("sessionedajax.ashx?rad=" + new Date().toGMTString() + "&className=Post&methodName=GetPostByRoles", { id: _id, t: t }, function (res) {
+            for (var i = 0; i < res.length; i++) {
+                debugger;
+                var treenode = $('#' + tree).tree('find', res[i]);
+                if (treenode == null) continue;
+                $('#' + tree).tree('check', treenode.target);
+                $('#' + tree).tree('expandTo', treenode.target);
+            }
+
+        }, "json");
+    }
+    function treeChecked(selected, treeMenu) {
+        var roots = $('#' + treeMenu).tree('getRoots');//返回tree的所有根节点数组
+        if (selected.checked) {
+
+            $('#' + treeMenu + " .tree-checkbox").addClass("tree-checkbox1");
+            
+            //for (var i = 0; i < roots.length; i++) {
+            //    var node = $('#' + treeMenu).tree('find', roots[i].id);//查找节点
+            //    $('#' + treeMenu).tree('check', node.target);//将得到的节点选中
+            //}
+        } else {
+            $('#' + treeMenu + " .tree-checkbox").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+            //for (var i = 0; i < roots.length; i++) {
+            //    alert(roots[i].id)
+            //    var node = $('#' + treeMenu).tree('find', roots[i].id);
+            //    $('#' + treeMenu).tree('uncheck', node.target);
+            //}
+        }
+    }
+    //
+
+    function loadtree(tree, t, url) {
+        $('#' + tree).tree({
+            checkbox: true,
+            lines: true,
+            method: "post",
+            parentField: "pid",
+            textFiled: "text",
+            idFiled: "id",
+            cascadeCheck: false,
+            animate: false,
+            url: url,
+            onLoadSuccess: function () {
+
+                $('#' + tree + ' .icon-company').parent().find('.tree-checkbox').remove();
+                if (tree != 'iuldept') {
+                    $('#' + tree + ' .icon-dept').parent().find('.tree-checkbox').remove();
+                }
+                if (_id != "") {
+                    $.post('/system/AjaxGetBelongLimitData', { type: t, fid: _id }, function (res) {
+
+                        for (var i = 0; i < res.length; i++) {
+                            var treenode = $('#' + tree).tree('find', res[i].value);
+                            if (treenode == null) continue;
+                            $('#' + tree).tree('check', treenode.target);
+                            $('#' + tree).tree('expandTo', treenode.target);
+                        }
+
+                    }, "json");
+                }
+            }
+        });
+    }
+
+    function Submit(tree, type) {
+        var nodes = $('#' + tree).tree('getChecked');
+        var str = '';
+        for (var i = 0; i < nodes.length; i++) {
+            str += nodes[i].id + ',';
+        }
+        $.post("/system/AjaxSaveFuncLimit", { fid: _id, type: type, ids: str },
+            function (data) {
+                TopNotify('保存成功！', "correct");
+
+            });
+    }
+
+
+</script>

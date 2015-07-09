@@ -1,0 +1,16 @@
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.MP.Sample.CommonService.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.MP.Sample.CommonService.pdb
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.MP.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.Open.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.QY.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.pdb
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.xml
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.MP.xml
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.Open.xml
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.QY.pdb
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.QY.xml
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\obj\Debug\Senparc.Weixin.MP.Sample.CommonService.csprojResolveAssemblyReference.cache
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\obj\Debug\Senparc.Weixin.MP.Sample.CommonService.dll
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\obj\Debug\Senparc.Weixin.MP.Sample.CommonService.pdb
+C:\Users\west\Desktop\WeiXinMPSDK-master\Senparc.Weixin.MP.Sample\Senparc.Weixin.MP.Sample.CommonService\bin\Debug\Senparc.Weixin.MP.pdb

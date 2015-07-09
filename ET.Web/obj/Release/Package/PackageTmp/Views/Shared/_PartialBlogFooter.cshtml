@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ET.Sys_DEF.KeyAndValue>
+
+<div id="footerwrapper">
+    <div class="bottombar">
+        <div class="bottombar-inner clearfix">
+            <div class="bot-left">
+                <h4>热门资讯频道推荐</h4>
+                <div class="bot-left-list">
+                    <ul>
+                        @foreach (ET.Sys_DEF.KeyAndValue item in Model)
+                        {
+                         
+                                <li><a href="@PublicHelper.GetHostAddress()/blog/collect/@item.reserve3/" target="_blank">@item.text</a></li>
+                           
+                        }
+
+
+                        <div style="clear:both"></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="bot-center">
+                <h4>弈泰业务扩展</h4>
+                <div class="bot-center-list">
+                    <p>为满足用户的不同需求，弈泰提供个性化定制开发，无论您是企业还是个人，<p>想要平台？ </p><p>想要网站？ </p>都没问题！赶快把您的需求投给我们吧！<br /> <a href="/message/publish" target="_blank">投递需求</a> 
+
+                </div>
+            </div>
+            <div class="bot-right">
+                <h4>弈泰网络资讯出品</h4>
+                <p class="p1">资讯由弈泰网络或网名发布选取定时更新,凡注明“来源：XXX或摘自XXX（非本站）”的文章均转载自其它媒体，转载目的在于传递更多信息，并不代表本网赞同其观点和对其真实性负责。<br />本站所有信息均来自互联网，如有侵犯您的权益，请联系我们！我们会在第一时间删除</p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfloat"></div>
+    <div class="blog-footer">
+        <a href="/message/publish">投诉中心</a>&nbsp;<span>版权所有<a href="@PublicHelper.GetHostAddress()">弈泰网络</a>.鄂ICP备15002827号</span>
+    </div>
+</div>
