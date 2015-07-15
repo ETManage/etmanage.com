@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>PrecompiledMvcViewEngineContrib</id>
+    <version>1.0</version>
+    <title>PrecompiledMvcViewEngine Contrib</title>
+    <authors>Mihai Mogosanu</authors>
+    <owners>Mihai Mogosanu</owners>
+    <licenseUrl>http://razorcontrib.codeplex.com/license</licenseUrl>
+    <projectUrl>http://razorcontrib.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVC View engine that supports precompiled Razor views in multiple assemblies</description>
+    <summary>MVC View engine that supports precompiled Razor views in multiple assemblies</summary>
+    <tags>razor precompiled view-engine mvc</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="System.Web.Mvc" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="System.Web.WebPages" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
