@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ET.Sys_BLL</RootNamespace>
     <AssemblyName>ET.Sys_BLL</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -23,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,11 +32,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ET.ToolKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ET.DALContract">
+      <HintPath>..\ET.AssemblyLibrary\ET.DALContract.dll</HintPath>
+    </Reference>
+    <Reference Include="ET.Tookit.Constant, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.dll</HintPath>
+      <HintPath>..\ET.AssemblyLibrary\ET.Tookit.Constant.dll</HintPath>
+    </Reference>
+    <Reference Include="ET.ToolKit.DBLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.DBLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

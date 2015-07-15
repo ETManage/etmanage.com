@@ -11,3 +11,9 @@ D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Constant\bin\Debug\E
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Constant\bin\Debug\ET.Constant.pdb
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Constant\obj\Debug\ET.Constant.dll
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Constant\obj\Debug\ET.Constant.pdb
+D:\个人中心\私人开发\ETManage\ET.Constant\bin\Debug\ET.Constant.dll
+D:\个人中心\私人开发\ETManage\ET.Constant\bin\Debug\ET.Constant.pdb
+D:\个人中心\私人开发\ETManage\ET.Constant\obj\Debug\ET.Constant.csprojResolveAssemblyReference.cache
+D:\个人中心\私人开发\ETManage\ET.Constant\obj\Debug\ET.Constant.dll
+D:\个人中心\私人开发\ETManage\ET.Constant\obj\Debug\ET.Constant.pdb
+D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Constant\obj\Debug\ET.Constant.csprojResolveAssemblyReference.cache
