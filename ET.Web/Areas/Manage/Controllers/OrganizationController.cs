@@ -406,6 +406,7 @@ namespace Web.Areas.Manage.Controllers
             bool IsInsert = false;
             if (info == null)
             {
+                info = new UserFullInfo();
                 IsInsert = true;
                 UserBase baseinfo = new UserBase();
                 baseinfo.UserID = Guid.NewGuid();

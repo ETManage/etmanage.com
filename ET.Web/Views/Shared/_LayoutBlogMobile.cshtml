@@ -18,6 +18,7 @@
         var logined = 0
     </script>
     <title>@RenderSection("Title", required: false)</title>
+    @Scripts.Render("~/scripts/modernizr")
     @Scripts.Render("~/scripts/jquery")
     @RenderSection("Header", required: false)
 </head>

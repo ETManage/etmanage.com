@@ -18,7 +18,7 @@ namespace Web.Controllers
         {
             UserFullProperty info = new ET.Sys_BLL.OrganizationBLL().Get_UserFullPropertyByID(this.UserID);
             if (info == null)
-                Response.Redirect("/maccount/login");
+                Response.Redirect("/account/login");
             return View(info);
         }
         public ActionResult MyPublish(string page)
@@ -50,7 +50,7 @@ namespace Web.Controllers
         }
         public ActionResult UserSetting()
         {
-            if (this.IsLogin)
+            if (!this.IsLogin)
             {
                 this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
             }
@@ -65,7 +65,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GetUserBaseSetting()
         {
-            if (this.IsLogin)
+            if (!this.IsLogin)
             {
                 this.JavaScript("alert('用户还未登录！或已经登录超时！请重新登录')");
             }

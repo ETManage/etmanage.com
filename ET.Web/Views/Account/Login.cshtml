@@ -174,8 +174,8 @@
         $.ajax({
             cache: true,
             type: "POST",
-            url: '/blog/ajaxregister?l=@Request.QueryString["l"]',
-            data: $('#login_form').serialize().replaceAll("'", "''"),
+            url: '/account/ajaxregister?l=@Request.QueryString["l"]',
+            data: $('#regUser').serialize().replaceAll("'", "''"),
             async: false,
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 TopNotify(errorThrown, 'error');

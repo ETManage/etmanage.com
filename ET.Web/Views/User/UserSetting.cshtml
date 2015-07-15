@@ -421,7 +421,7 @@
         $.ajax({
             cache: true,
             type: "POST",
-            url: '/blog/AjaxSettingInfo?s=baseinfo',
+            url: '/user/AjaxSettingInfo?s=baseinfo',
             data: $('#form1').serialize().replaceAll("'", "''"),
             async: false,
             error: function (XMLHttpRequest, textStatus, errorThrown) {

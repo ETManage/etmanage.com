@@ -91,7 +91,7 @@
         searchobj = $('#txtSearch').autocomplete(options);
     });
     function fixAdd() {
-        openWindow('新增', "/news/NewManage", { width: 600, height: 450 })
+        openWindow('新增', "/news/NewsManage", { width: 600, height: 450 })
     };
 
     function fixDel() {
@@ -122,7 +122,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openWindow('修改', "/news/newmanage?infoid=" + selected.NewID, { width: 600, height: 450 })
+        openWindow('修改', "/news/NewsManage?infoid=" + selected.NewID, { width: 600, height: 450 })
     };
 
     function fixView() {
@@ -131,7 +131,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "/news/newmanage?infoid=" + selected.NewID, { width: 600, height: 450 })
+        openSimpleWindow('查看', "/news/NewsManage?infoid=" + selected.NewID, { width: 600, height: 450 })
     };
 
     function queryClick() {
