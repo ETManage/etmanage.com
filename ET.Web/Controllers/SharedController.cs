@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class SharedController : WebControllerBase
     {
@@ -40,7 +40,7 @@ namespace Web.Controllers
         public ActionResult _PartialLoginStatus()
         {
             string strHtml = @"<div class='user-ed' id='nologin'>
-                <a href='" + PublicHelper.GetHostAddress() + "/account/login?t=0&l=" + Request.Url.ToString() + "' rel=\"nofollow\">免费注册</a><span class=\"ml10 mr10\">|</span><a href='" + PublicHelper.GetHostAddress() + "/account/login?l=" + Request.Url.ToString() + "' rel=\"nofollow\">登录</a><br>                <span id=\"ibtnQQLogin\"></span></div>";
+                <a href='" + PublicHelper.GetHostAddress() + "/login?t=0&l=" + Request.Url.ToString() + "' rel=\"nofollow\">免费注册</a><span class=\"ml10 mr10\">|</span><a href='" + PublicHelper.GetHostAddress() + "/login?l=" + Request.Url.ToString() + "' rel=\"nofollow\">登录</a><br>                <span id=\"ibtnQQLogin\"></span></div>";
             if (this.IsLogin)
             {
                 UserProperty userinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + this.UserID.ToString() + "'");
@@ -117,7 +117,7 @@ namespace Web.Controllers
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
 
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order);
             return listArticle;
         }
     }

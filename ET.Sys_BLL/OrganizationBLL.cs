@@ -9,273 +9,225 @@ using System.Text;
 
 namespace ET.Sys_BLL
 {
-   public class OrganizationBLL
+    public class OrganizationBLL
     {
         #region 公司管理
 
-        /// <summary>
-        /// 操作信息
-        /// </summary>
-        /// <param name="info">部门信息</param>
-       public bool Operate_UserCompany(UserCompany info, bool IsInsert)
+        public bool Update_UserCompany(UserCompany info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserCompany>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserCompany>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserCompany>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserCompany>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition"></param>
-       public bool Delete_UserCompany(string Condition)
+        public bool Delete_UserCompany(string condition)
         {
-            return new TBaseDAL<UserCompany>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserCompany>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取公司信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>部门信息</returns>
-       public UserCompany Get_UserCompany(string Condition)
+        public UserCompany Get_UserCompany(string condition)
         {
-            UserCompany info = new TBaseDAL<UserCompany>().GetInstanceByCondition(Condition);
+            UserCompany info = new TSqlBaseDAL<UserCompany>().GetByCondition(condition);
             return info;
         }
 
-       /// <summary>
-       /// 获取所有公司列表
-       /// </summary>
-       public List<UserCompany> List_UserCompany(string Fields, string Condition, string strOrder)
-       {
-           return new TBaseDAL<UserCompany>().GetListByCondition(Fields, Condition, strOrder);
-       }
+        public List<UserCompany> List_UserCompany(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<UserCompany>().GetListByCondition(fields, condition, orderby);
+        }
 
         #endregion 部门管理
 
         #region 部门管理
 
-        /// <summary>
-        /// 操作信息
-        /// </summary>
-        /// <param name="info">部门信息</param>
-       public bool Operate_UserDepartment(UserDepartment info, bool IsInsert)
+        public bool Update_UserDepartment(UserDepartment info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserDepartment>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserDepartment>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserDepartment>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserDepartment>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserDepartment(string Condition)
+        public bool Delete_UserDepartment(string condition)
         {
-            return new TBaseDAL<UserDepartment>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserDepartment>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取部门信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>部门信息</returns>
-        public UserDepartment Get_UserDepartment(string Condition)
+        public UserDepartment Get_UserDepartment(string condition)
         {
-            UserDepartment info = new TBaseDAL<UserDepartment>().GetInstanceByCondition(Condition);
+            UserDepartment info = new TSqlBaseDAL<UserDepartment>().GetByCondition(condition);
             return info;
         }
-        /// <summary>
-        /// 获取部门信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>部门信息</returns>
-        public List<UserDepartment> Get_UserDepartments(string Condition)
+
+        public List<UserDepartment> Get_UserDepartments(string condition)
         {
-            List<UserDepartment> infos = new TBaseDAL<UserDepartment>().GetInstancesByCondition(Condition);
+            List<UserDepartment> infos = new TSqlBaseDAL<UserDepartment>().GetsByCondition(condition);
             return infos;
         }
-
 
         #endregion 部门管理
 
         #region 岗位管理
 
-        /// <summary>
-        /// 岗位操作
-        /// </summary>
-        /// <param name="info">岗位信息</param>
-        public bool Operate_UserPosition(UserPosition info, bool IsInsert)
+        public bool Update_UserPosition(UserPosition info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserPosition>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserPosition>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserPosition>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserPosition>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除岗位信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserPosition(string Condition)
+        public bool Delete_UserPosition(string condition)
         {
-            return new TBaseDAL<UserPosition>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserPosition>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public UserPosition Get_UserPosition(string Condition)
+        public UserPosition Get_UserPosition(string condition)
         {
-            UserPosition info = new TBaseDAL<UserPosition>().GetInstanceByCondition(Condition);
+            UserPosition info = new TSqlBaseDAL<UserPosition>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public List<UserPosition> Get_UserPositions(string Condition)
+        public List<UserPosition> Get_UserPositions(string condition)
         {
-            List<UserPosition> infos = new TBaseDAL<UserPosition>().GetInstancesByCondition(Condition);
+            List<UserPosition> infos = new TSqlBaseDAL<UserPosition>().GetsByCondition(condition);
             return infos;
         }
 
-
         #endregion 岗位管理
-
 
         #region 用户管理
 
 
+        public bool Update_UserProperty(UserProperty info)
+        {
+            if (info.UserID == null)
+            {
+                return false;
+            }
+            return new TSqlBaseDAL<UserProperty>().Update(info) > 0;
+        }
+
+        public UserProperty Get_UserProperty(string condition)
+        {
+            UserProperty info = new TSqlBaseDAL<UserProperty>().GetByCondition(condition);
+            return info;
+        }
+
+        public UserProperty Get_UserPropertyByID(string infoid)
+        {
+            UserProperty info = new TSqlBaseDAL<UserProperty>().GetById(infoid);
+
+            return info;
+        }
+
+        public List<UserProperty> List_UserProperty(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<UserProperty>().GetListByCondition(fields, condition, orderby);
+        }
+
+        public List<UserProperty> Pagination_UserProperty(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new TSqlBaseDAL<UserProperty>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
+
+        public List<UserFullProperty> Pagination_UserFullProperty(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new PublicBLL().GetListByPager<UserFullProperty>(fields, ViewNames.V_USERFULL, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
+
+        public UserFullProperty Get_UserFullProperty(string fields, string condition)
+        {
+            UserFullProperty info = new PublicBLL().GetObjectByCondition<UserFullProperty>(fields, ViewNames.V_USERFULL, condition, null);
+            return info;
+        }
+
+        public UserFullProperty Get_UserFullPropertyByID(string userID)
+        {
+            return Get_UserFullProperty("*", " AND USERID='" + userID + "'");
+        }
+
+        public bool Update_UserBase(UserBase info)
+        {
+            if (info.UserID == null)
+            {
+                return false;
+            }
+            return new TSqlBaseDAL<UserBase>().Update(info) > 0;
+        }
+
+        public UserBase Get_UserBase(string condition)
+        {
+            UserBase info = new TSqlBaseDAL<UserBase>().GetByCondition(condition);
+            return info;
+        }
 
         /// <summary>
-        /// 操作账户信息
+        /// 新增或更新用户所有信息
         /// </summary>
-        /// <param name="info"></param>
-        public bool Operate_User_Info(UserFullInfo info, bool IsInsert)
+        public bool Update_UserInfo(UserFullInfo info, bool isinsert)
         {
-            return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
+            return new SqlBaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                if (IsInsert)
+                if (isinsert)
                 {
-                    new TBaseDAL<UserBase>(dataBase).InsertInstance(info.userbaseinfo);
+                    new TSqlBaseDAL<UserBase>().Insert(dataBase, info.userbaseinfo);
                     info.userstuinfo.UserID = info.userbaseinfo.UserID;
-                    new TBaseDAL<UserProperty>(dataBase).InsertInstance(info.userstuinfo);
-                    foreach (UserRoleLink role in info.userrole)
-                    {
-                        role.UserID = info.userbaseinfo.UserID;
-                        new TBaseDAL<UserRoleLink>(dataBase).InsertInstance(role);
-                    }
+                    new TSqlBaseDAL<UserProperty>().Insert(dataBase, info.userstuinfo);
+                    if (info.userrole != null)
+                        foreach (UserRoleLink role in info.userrole)
+                        {
+                            role.UserID = info.userbaseinfo.UserID;
+                            new TSqlBaseDAL<UserRoleLink>().Insert(dataBase, role);
+                        }
                 }
                 else
                 {
-                    new TBaseDAL<UserBase>(dataBase).UpdateInstance(info.userbaseinfo);
-                    new TBaseDAL<UserProperty>(dataBase).UpdateInstance(info.userstuinfo);
-                    new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(" and UserID='" + info.userbaseinfo.UserID.ToString() + "'");
-                    foreach (UserRoleLink role in info.userrole)
-                    {
-                        role.UserID = info.userbaseinfo.UserID;
-                        new TBaseDAL<UserRoleLink>(dataBase).InsertInstance(role);
-                    }
+                    new TSqlBaseDAL<UserBase>().Update(dataBase, info.userbaseinfo);
+                    new TSqlBaseDAL<UserProperty>().Update(dataBase, info.userstuinfo);
+                    new TSqlBaseDAL<UserRoleLink>().Delete(dataBase, " and UserID='" + info.userbaseinfo.UserID.ToString() + "'");
+                    if (info.userrole != null)
+                        foreach (UserRoleLink role in info.userrole)
+                        {
+                            role.UserID = info.userbaseinfo.UserID;
+                            new TSqlBaseDAL<UserRoleLink>().Insert(dataBase, role);
+                        }
                 }
             }));
         }
 
         /// <summary>
-        /// 只能用户修改用户的基本信息，如果是用户的添加请使用Operate_User_Info
+        /// 新增或更新用户列表所有信息
         /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public bool Operate_UserProperty(UserProperty info)
-        {
-            if (info.UserID == null)
-            {
-                return false;
-            }
-            return new TBaseDAL<UserProperty>().UpdateInstance(info) > 0;
-        }
-
-
-        /// <summary>
-        /// 获取单个模块信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
-        public UserProperty Get_UserPropertyByID(string infoid)
-        {
-            UserProperty info = new TBaseDAL<UserProperty>().GetInstanceById(infoid);
-
-            return info;
-        }
-        public List<UserProperty> List_UserProperty(string Fields, string Condition, string strOrder)
-        {
-            return new TBaseDAL<UserProperty>().GetListByCondition(Fields, Condition, strOrder);
-        }
-        public List<UserProperty> PageList_UserProperty(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
-        {
-            return new TBaseDAL<UserProperty>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
-        }
-        public List<UserFullProperty> PageList_UserFullProperty(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
-        {
-            return new PublicBLL().GetListByPager<UserFullProperty>(Fields, ViewNames.V_USERFULL, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
-        }
-        public UserFullProperty Get_UserFullProperty(string fields, string condition)
-        {
-            UserFullProperty info = new PublicBLL().GetObjectByCondition<UserFullProperty>(fields, ViewNames.V_USERFULL,condition,null);
-            return info;
-        }
-        public UserFullProperty Get_UserFullPropertyByID(string userID)
-        {
-            return Get_UserFullProperty("*"," AND USERID='"+userID+"'");
-        }
-        /// <summary>
-        /// 只能用户修改用户的登录帐号信息，如果是用户的添加请使用Operate_User_Info
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public bool Operate_UserBase(UserBase info)
-        {
-            if (info.UserID == null)
-            {
-                return false;
-            }
-            return new TBaseDAL<UserBase>().UpdateInstance(info) > 0;
-        }
-
-
-        public bool Operate_User_Info(UserFullInfo[] info, bool IsInsert)
+        public bool Update_UserInfo(UserFullInfo[] info, bool isinsert)
         {
 
             for (int i = 0; i < info.Length; i++)
             {
-                Operate_User_Info(info[i], IsInsert);
+                Update_UserInfo(info[i], isinsert);
             }
             return true;
         }
-       /// <summary>
-       /// 禁用用户状态
-       /// </summary>
-       /// <param name="info"></param>
-       /// <returns></returns>
-        public bool Operate_DisableUser(string condition)
+
+        /// <summary>
+        /// 禁用用户状态
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool Update_DisableUser(string condition)
         {
             if (string.IsNullOrEmpty(condition))
                 return false;
-            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=-1 WHERE 1=1"+condition,TableNames.UserBase))>0;
+            return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=-1 WHERE 1=1" + condition, TableNames.UserBase)) > 0;
         }
+
         /// <summary>
         /// 启用用户状态
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_EnabledUser(string condition)
+        public bool Update_EnabledUser(string condition)
         {
             if (string.IsNullOrEmpty(condition))
                 return false;
@@ -285,341 +237,199 @@ namespace ET.Sys_BLL
         /// <summary>
         /// 删除账户信息
         /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_User_Info(string condition)
+        /// <param name="condition"></param>
+        public bool Delete_UserInfo(string condition)
         {
-            return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
+            return new SqlBaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(condition);
-                new TBaseDAL<UserProperty>(dataBase).DeleteInstances(condition);
-                new TBaseDAL<UserBase>(dataBase).DeleteInstances(condition);
+                new TSqlBaseDAL<UserRoleLink>().Delete(dataBase, condition);
+                new TSqlBaseDAL<UserProperty>().Delete(dataBase, condition);
+                new TSqlBaseDAL<UserBase>().Delete(dataBase, condition);
             }));
         }
 
         /// <summary>
         /// 获取帐号信息
         /// </summary>
-        /// <param name="condition"></param>
+        /// <param name="userid"></param>
         /// <returns></returns>
-        public UserBase Get_UserBase(string Condition)
-        {
-            UserBase info = new TBaseDAL<UserBase>().GetInstanceByCondition(Condition);
-            return info;
-        }
-
-        /// <summary>
-        /// 操作用户-角色关系表
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public bool Operate_UserRoleLink(UserRoleLink info, bool IsInsert)
-        {
-            if (IsInsert)
-                return new TBaseDAL<UserRoleLink>().InsertInstance(info) > 0;
-            else
-                return new TBaseDAL<UserRoleLink>().UpdateInstance(info) > 0;
-        }
-
-        /// <summary>
-        /// 删除用户-角色关系表
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public bool Delete_UserRoleLink(string Condition)
-        {
-            return new TBaseDAL<UserRoleLink>().DeleteInstances(Condition) > 0;
-        }
-
-        /// <summary>
-        /// 获取帐号信息
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public UserFullInfo Get_User_Info(string userid)
+        public UserFullInfo Get_UserInfo(string userid)
         {
             UserFullInfo info = new UserFullInfo();
-            string Condition = " AND UserID='" + userid + "'";
-            info.userbaseinfo = new TBaseDAL<UserBase>().GetInstanceByCondition(Condition);
+            string condition = " AND UserID='" + userid + "'";
+            info.userbaseinfo = new TSqlBaseDAL<UserBase>().GetByCondition(condition);
             if (info.userbaseinfo == null)
                 return null;
-            info.userstuinfo = new TBaseDAL<UserProperty>().GetInstanceByCondition(Condition);
+            info.userstuinfo = new TSqlBaseDAL<UserProperty>().GetByCondition(condition);
             if (info.userstuinfo == null)
                 return null;
-            info.userrole = new TBaseDAL<UserRoleLink>().GetInstancesByCondition(Condition);
+            info.userrole = new TSqlBaseDAL<UserRoleLink>().GetsByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取扩展信息
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public UserProperty Get_UserProperty(string Condition)
+        public bool Update_UserRoleLink(UserRoleLink info, bool isinsert)
         {
-            UserProperty info = new TBaseDAL<UserProperty>().GetInstanceByCondition(Condition);
-            return info;
+            if (isinsert)
+                return new TSqlBaseDAL<UserRoleLink>().Insert(info) > 0;
+            else
+                return new TSqlBaseDAL<UserRoleLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 获取扩展信息
-        /// </summary>
-        /// <param name="querytext">查询列名</param>
-        /// <param name="condition">查询条件</param>
-        /// <param name="ordertext">排序列名</param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// 获取帐号角色信息
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public UserRoleLink Get_UserRoleLink(string Condition)
+        public bool Delete_UserRoleLink(string condition)
         {
-            UserRoleLink info = new TBaseDAL<UserRoleLink>().GetInstanceByCondition(Condition);
-            return info;
+            return new TSqlBaseDAL<UserRoleLink>().Delete(condition) > 0;
         }
 
-
-
-
+        public UserRoleLink Get_UserRoleLink(string condition)
+        {
+            UserRoleLink info = new TSqlBaseDAL<UserRoleLink>().GetByCondition(condition);
+            return info;
+        }
 
         #endregion 用户管理
+
         #region 用户组织架构管理
 
-        /// <summary>
-        /// 用户组织架构操作
-        /// </summary>
-        /// <param name="info">用户组织架构信息</param>
-        /// <param name="IsInsert">是否为插入</param>
-        public bool Operate_UserOrgLink(UserOrgLink info, bool IsInsert)
+        public bool Update_UserOrgLink(UserOrgLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserOrgLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserOrgLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserOrgLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserOrgLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除用户组织架构信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserOrgLink(string Condition)
+        public bool Delete_UserOrgLink(string condition)
         {
-            return new TBaseDAL<UserOrgLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserOrgLink>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取用户组织架构信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>用户组织架构信息</returns>
-        public UserOrgLink Get_UserOrgLink(string Condition)
+        public UserOrgLink Get_UserOrgLink(string condition)
         {
-            UserOrgLink info = new TBaseDAL<UserOrgLink>().GetInstanceByCondition(Condition);
+            UserOrgLink info = new TSqlBaseDAL<UserOrgLink>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取用户组织架构信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>用户组织架构信息</returns>
-        public List<UserOrgLink> Get_UserOrgLinks(string Condition)
+        public List<UserOrgLink> List_UserOrgLink(string condition)
         {
-            List<UserOrgLink> infos = new TBaseDAL<UserOrgLink>().GetInstancesByCondition(Condition);
+            List<UserOrgLink> infos = new TSqlBaseDAL<UserOrgLink>().GetsByCondition(condition);
             return infos;
         }
 
-
-        #endregion 
+        #endregion
 
         #region 岗位组织架构管理
 
-        /// <summary>
-        /// 岗位组织架构操作
-        /// </summary>
-        /// <param name="info">岗位组织架构信息</param>
-        public bool Operate_UserPositionOrgLink(UserPositionOrgLink info, bool IsInsert)
+        public bool Update_UserPositionOrgLink(UserPositionOrgLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserPositionOrgLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserPositionOrgLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserPositionOrgLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserPositionOrgLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除岗位组织架构信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserPositionOrgLink(string Condition)
+        public bool Delete_UserPositionOrgLink(string condition)
         {
-            return new TBaseDAL<UserPositionOrgLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserPositionOrgLink>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取岗位组织架构信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位组织架构信息</returns>
-        public UserPositionOrgLink Get_UserPositionOrgLink(string Condition)
+        public UserPositionOrgLink Get_UserPositionOrgLink(string condition)
         {
-            UserPositionOrgLink info = new TBaseDAL<UserPositionOrgLink>().GetInstanceByCondition(Condition);
+            UserPositionOrgLink info = new TSqlBaseDAL<UserPositionOrgLink>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取岗位组织架构信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位组织架构信息</returns>
-        public List<UserPositionOrgLink> Get_UserPositionOrgLinks(string Condition)
+        public List<UserPositionOrgLink> List_UserPositionOrgLink(string condition)
         {
-            List<UserPositionOrgLink> infos = new TBaseDAL<UserPositionOrgLink>().GetInstancesByCondition(Condition);
+            List<UserPositionOrgLink> infos = new TSqlBaseDAL<UserPositionOrgLink>().GetsByCondition(condition);
             return infos;
         }
-
 
         #endregion
+
         #region 部门权限管理
 
-        /// <summary>
-        /// 岗位操作
-        /// </summary>
-        /// <param name="info">岗位信息</param>
-        public bool Operate_UserDeptFuncLink(UserDeptFuncLink info, bool IsInsert)
+        public bool Update_UserDeptFuncLink(UserDeptFuncLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserDeptFuncLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserDeptFuncLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserDeptFuncLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserDeptFuncLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除岗位信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserDeptFuncLink(string Condition)
+        public bool Delete_UserDeptFuncLink(string condition)
         {
-            return new TBaseDAL<UserDeptFuncLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserDeptFuncLink>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public UserDeptFuncLink Get_UserDeptFuncLink(string Condition)
+        public UserDeptFuncLink Get_UserDeptFuncLink(string condition)
         {
-            UserDeptFuncLink info = new TBaseDAL<UserDeptFuncLink>().GetInstanceByCondition(Condition);
+            UserDeptFuncLink info = new TSqlBaseDAL<UserDeptFuncLink>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public List<UserDeptFuncLink> Get_UserDeptFuncLinks(string Condition)
+        public List<UserDeptFuncLink> List_UserDeptFuncLink(string condition)
         {
-            List<UserDeptFuncLink> infos = new TBaseDAL<UserDeptFuncLink>().GetInstancesByCondition(Condition);
+            List<UserDeptFuncLink> infos = new TSqlBaseDAL<UserDeptFuncLink>().GetsByCondition(condition);
             return infos;
         }
-
 
         #endregion 岗位管理
 
         #region 岗位权限管理
 
-        /// <summary>
-        /// 岗位操作
-        /// </summary>
-        /// <param name="info">岗位信息</param>
-        public bool Operate_UserPostFuncLink(UserPostFuncLink info, bool IsInsert)
+        public bool Update_UserPostFuncLink(UserPostFuncLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserPostFuncLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserPostFuncLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserPostFuncLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserPostFuncLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除岗位信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserPostFuncLink(string Condition)
+        public bool Delete_UserPostFuncLink(string condition)
         {
-            return new TBaseDAL<UserPostFuncLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserPostFuncLink>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public UserPostFuncLink Get_UserPostFuncLink(string Condition)
+        public UserPostFuncLink Get_UserPostFuncLink(string condition)
         {
-            UserPostFuncLink info = new TBaseDAL<UserPostFuncLink>().GetInstanceByCondition(Condition);
+            UserPostFuncLink info = new TSqlBaseDAL<UserPostFuncLink>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public List<UserPostFuncLink> Get_UserPostFuncLinks(string Condition)
+        public List<UserPostFuncLink> List_UserPostFuncLink(string condition)
         {
-            List<UserPostFuncLink> infos = new TBaseDAL<UserPostFuncLink>().GetInstancesByCondition(Condition);
+            List<UserPostFuncLink> infos = new TSqlBaseDAL<UserPostFuncLink>().GetsByCondition(condition);
             return infos;
         }
-
 
         #endregion 岗位管理
+
         #region 用户权限管理
 
-        /// <summary>
-        /// 岗位操作
-        /// </summary>
-        /// <param name="info">岗位信息</param>
-        public bool Operate_UserFuncLink(UserFuncLink info, bool IsInsert)
+        public bool Update_UserFuncLink(UserFuncLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<UserFuncLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<UserFuncLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<UserFuncLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<UserFuncLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除岗位信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_UserFuncLink(string Condition)
+        public bool Delete_UserFuncLink(string condition)
         {
-            return new TBaseDAL<UserFuncLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<UserFuncLink>().Delete(condition) > 0;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public UserFuncLink Get_UserFuncLink(string Condition)
+        public UserFuncLink Get_UserFuncLink(string condition)
         {
-            UserFuncLink info = new TBaseDAL<UserFuncLink>().GetInstanceByCondition(Condition);
+            UserFuncLink info = new TSqlBaseDAL<UserFuncLink>().GetByCondition(condition);
             return info;
         }
 
-        /// <summary>
-        /// 获取岗位信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>岗位信息</returns>
-        public List<UserFuncLink> Get_UserFuncLinks(string Condition)
+        public List<UserFuncLink> List_UserFuncLink(string condition)
         {
-            List<UserFuncLink> infos = new TBaseDAL<UserFuncLink>().GetInstancesByCondition(Condition);
+            List<UserFuncLink> infos = new TSqlBaseDAL<UserFuncLink>().GetsByCondition(condition);
             return infos;
         }
-
 
         #endregion 岗位管理
     }

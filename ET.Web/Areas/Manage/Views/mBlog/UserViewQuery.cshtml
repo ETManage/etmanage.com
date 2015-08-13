@@ -53,7 +53,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mblog/ajaxqueryviewpagelist", method: 'get',
+            url: "./ajaxqueryviewpagelist", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -64,9 +64,9 @@
             columns: [[
                     { field: 'ViewID', width: 10, title: 'ID', sortable: true, hidden: true },
                     { field: 'Reserve1', width: 220, title: '用户名', sortable: true },
-                      { field: 'InfoCategory', width: 220, title: '查看类型', sortable: true },
-                     { field: 'InfoType', width: 220, title: '查看类别', sortable: true },
-    { field: 'Reserve2', width: 220, title: '查看文章', sortable: true },
+                    { field: 'InfoCategory', width: 220, title: '查看类型', sortable: true },
+                    { field: 'InfoType', width: 220, title: '查看类别', sortable: true },
+                    { field: 'Reserve2', width: 220, title: '查看文章', sortable: true },
                     { field: 'CreateTime', width: 220, title: '查看时间', sortable: true, formatter: DateHelper.DateTimeFormatter }
             ]],
             toolbar: toolbarnode
@@ -84,7 +84,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.SignID + "'"; }).toString();
-                $.post('/mblog/AjaxDeleteSign', { infoid: ls }, function (res) {
+                $.post('./AjaxDeleteSign', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');

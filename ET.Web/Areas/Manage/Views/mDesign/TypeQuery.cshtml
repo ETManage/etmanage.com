@@ -3,13 +3,14 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    博客类别列表
+    类别列表
+}
+@section Styles{
+    <link href="/res/autocomplete/autocomplete.css" rel="stylesheet" type="text/css" />
 }
 @section Header{
-<link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
+    <script src="/Res/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
 }
-
 <div class="ManageBody">
     <div class="ManageListTitle"></div>
     <fieldset class="ManageSearch" style="">
@@ -99,7 +100,7 @@
         }
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.TypeID; }).toString();
+                var ls = $.map(selected, function (a) { return "'"+a.TypeID+"'"; }).toString();
                 $.post('/Design/AjaxDeleteModule', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')

@@ -7,7 +7,7 @@ using System.Data;
 using ET.Sys_DEF;
 using ET.ToolKit.Common;
 
-namespace Web.Areas.Manage.Controllers
+namespace ET.Web.Areas.Manage.Controllers
 {
     [UserAuthorize]
     public class SystemController : ManageControllerBase
@@ -29,6 +29,7 @@ namespace Web.Areas.Manage.Controllers
             return Json(new { menus = new ET.Sys_BLL.SystemBLL().List_BlogModuleMenuData(this.UserID.ToString()) }, JsonRequestBehavior.AllowGet);
         }
 
+       
         #endregion Default
 
         #region 角色管理文件夹
@@ -55,16 +56,16 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', ROLENAME)>0";
             long RecordTotalCount = 0;
-            List<SysRole> list = new ET.Sys_BLL.SystemBLL().PageList_SysRole("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
+            List<SysRole> list = new ET.Sys_BLL.SystemBLL().Pagination_SysRole("ROLEID,ROLENAME,RoleDescription", Condition, "ROLECreateTime", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult AjaxSaveRole(FormCollection collection, string infoid, string ActionIDS)
+        public ActionResult AjaxSaveRole(FormCollection collection, string id, string limitIds)
         {
             bool IsInsert = false;
             string strResult = "false";
-            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + infoid + "'");
+            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + id + "'");
             if (info == null)
             {
                 info = new SysRole();
@@ -72,31 +73,30 @@ namespace Web.Areas.Manage.Controllers
             }
             info.RoleName = collection["RoleName"];
             info.RoleDescription = collection["RoleDescription"];
-
             info.RoleDescription = collection["RoleDescription"];
-            List<string> RoleIDS = null;
-            if (!string.IsNullOrEmpty(ActionIDS))
+            List<string> RoleIDS = new List<string>();
+            if (!string.IsNullOrEmpty(limitIds))
             {
-                RoleIDS = JsonSerializeHelper.DeserializeFromJson<List<string>>(ActionIDS);
+                RoleIDS = JsonSerializeHelper.DeserializeFromJson<List<string>>(limitIds);
             }
-            if (new ET.Sys_BLL.SystemBLL().Operate_SysRole(info, RoleIDS.Where(c => !string.IsNullOrEmpty(c)).ToList(), IsInsert))
+            if (new ET.Sys_BLL.SystemBLL().Update_SysRole(info, RoleIDS.Where(c => !string.IsNullOrEmpty(c)).ToList(), IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
         [HttpGet]
-        public JsonResult AjaxGetRoleDetail(string infoid)
+        public JsonResult AjaxGetRoleDetail(string id)
         {
-            if (string.IsNullOrEmpty(infoid))
+            if (string.IsNullOrEmpty(id))
                 return Json("error", JsonRequestBehavior.AllowGet);
-            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + infoid + "'");
+            SysRole info = new ET.Sys_BLL.SystemBLL().Get_SysRole(" AND ROLEID='" + id + "'");
             if (info == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult AjaxDeleteRole(string infoid)
+        public ActionResult AjaxDeleteRole(string ids)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.SystemBLL().Delete_SysRole(" AND ROLEID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.SystemBLL().Delete_SysRole(" AND ROLEID in (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -138,7 +138,7 @@ namespace Web.Areas.Manage.Controllers
             if (uinfo != null)
             {
                 uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBase(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Update_UserBase(uinfo))
                 {
                     return Content("true");
                 }
@@ -214,7 +214,7 @@ namespace Web.Areas.Manage.Controllers
             info.Status = Convert.ToInt32(collection["Status"]);
 
             info.PublicLevel = Convert.ToInt32(collection["PublicLevel"]);
-            if (new ET.Sys_BLL.SystemBLL().Operate_SysFunction(info, IsInsert))
+            if (new ET.Sys_BLL.SystemBLL().Update_SysFunction(info, IsInsert))
             {
                 strResult = "true";
             }
@@ -297,7 +297,7 @@ namespace Web.Areas.Manage.Controllers
                 if (info != null)
                 {
                     info.FuncPID = item.pid;
-                    new ET.Sys_BLL.SystemBLL().Operate_SysFunction(info, false);
+                    new ET.Sys_BLL.SystemBLL().Update_SysFunction(info, false);
                 }
             }
             return Content("true");
@@ -319,7 +319,7 @@ namespace Web.Areas.Manage.Controllers
                         info.DepID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
                         info.CreatorID = Guid.Parse(this.UserID);
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDeptFuncLink(info, true);
+                        new ET.Sys_BLL.OrganizationBLL().Update_UserDeptFuncLink(info, true);
 
                     }
 
@@ -335,7 +335,7 @@ namespace Web.Areas.Manage.Controllers
                         info.PostID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
                         info.CreatorID = Guid.Parse(this.UserID);
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserPostFuncLink(info, true);
+                        new ET.Sys_BLL.OrganizationBLL().Update_UserPostFuncLink(info, true);
 
                     }
                     break;
@@ -349,7 +349,7 @@ namespace Web.Areas.Manage.Controllers
                         info.UserID = Guid.Parse(item);
                         info.CreateTime = DateTime.Now;
                         info.CreatorID = Guid.Parse(this.UserID);
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(info, true);
+                        new ET.Sys_BLL.OrganizationBLL().Update_UserFuncLink(info, true);
                     }
 
                     break;

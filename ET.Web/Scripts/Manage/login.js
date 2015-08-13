@@ -27,10 +27,11 @@ function CheckForm() {
 
 function login(Cuser, Cpwd) {
 
-    $.post(
-        "/maccount/ajaxlogin",
-        { Action: "post", strUserName: Cuser, strUserPass: Cpwd,strRememberMe:'1' },
-        function (data, textStatus) {
+    $.ajax({
+        type: "POST", dataType: "html",
+        url: "/maccount/ajaxlogin",
+        data: { strUserName: Cuser, strUserPass: Cpwd, strRememberMe: '1' },
+        success: function (data, textStatus) {
             if (data == 'true') {
                 if (getRequest("oldurl") != "") {
                     if (window.top == window.self) {
@@ -45,7 +46,7 @@ function login(Cuser, Cpwd) {
                     }
                 }
                 else
-                    parent.location.href = '/system/default';
+                    parent.location.href = '/manage/default';
 
             }
             else if (data == 'false') {
@@ -58,9 +59,8 @@ function login(Cuser, Cpwd) {
                 setButtonStyle(2);
                 return false;
             }
-        },
-        "html"
-    );
+        }
+    });
 }
 
 /*获得参数的方法*/

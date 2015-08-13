@@ -15,39 +15,34 @@ namespace ET.Sys_BLL
     public class SystemBLL
     {
         #region 角色管理
-
-        /// <summary>
-        /// 操作角色权限关系
-        /// </summary>
-        /// <param name="info"></param>
-        public bool Operate_SysRole(SysRole info, List<string> RoleIDS, bool IsInsert)
+        public bool Update_SysRole(SysRole info, List<string> roleids, bool isinsert)
         {
-            return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
+            return new SqlBaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                new TBaseDAL<SysRoleFuncLink>().DeleteInstances(" AND RoleID='" + info.RoleID + "'");
-                if (IsInsert)
+                new TSqlBaseDAL<SysRoleFuncLink>().Delete(" AND RoleID='" + info.RoleID + "'");
+                if (isinsert)
                 {
                     info.RoleID = Guid.NewGuid();
-                    new TBaseDAL<SysRole>().InsertInstance(info);
-                    foreach (string item in RoleIDS)
+                    new TSqlBaseDAL<SysRole>().Insert(info);
+                    foreach (string item in roleids)
                     {
                         SysRoleFuncLink acinfo = new SysRoleFuncLink();
                         acinfo.FuncID = Guid.Parse(item);
                         acinfo.RoleID = info.RoleID;
-                        new TBaseDAL<SysRoleFuncLink>().InsertInstance(acinfo);
+                        new TSqlBaseDAL<SysRoleFuncLink>().Insert(acinfo);
                     }
 
 
                 }
                 else
                 {
-                    new TBaseDAL<SysRole>().UpdateInstance(info);
-                    foreach (string item in RoleIDS)
+                    new TSqlBaseDAL<SysRole>().Update(info);
+                    foreach (string item in roleids)
                     {
                         SysRoleFuncLink acinfo = new SysRoleFuncLink();
                         acinfo.FuncID = Guid.Parse(item);
                         acinfo.RoleID = info.RoleID;
-                        new TBaseDAL<SysRoleFuncLink>().InsertInstance(acinfo);
+                        new TSqlBaseDAL<SysRoleFuncLink>().Insert(acinfo);
                     }
 
                 }
@@ -55,110 +50,175 @@ namespace ET.Sys_BLL
             }));
         }
 
-        /// <summary>
-        /// 删除角色信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_SysRole(string Condition)
+        public bool Delete_SysRole(string condition)
         {
-            return new BaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
+            return new SqlBaseDAL().TransactionForVoid(new Action<DataBase>(delegate(DataBase dataBase)
             {
-                new TBaseDAL<UserRoleLink>(dataBase).DeleteInstances(Condition);
-                new TBaseDAL<SysRoleFuncLink>(dataBase).DeleteInstances(Condition);
-                new TBaseDAL<SysRole>(dataBase).DeleteInstances(Condition);
+                new TSqlBaseDAL<UserRoleLink>().Delete(dataBase, condition);
+                new TSqlBaseDAL<SysRoleFuncLink>().Delete(dataBase, condition);
+                new TSqlBaseDAL<SysRole>().Delete(dataBase, condition);
             }));
         }
 
         /// <summary>
-        /// 操作角色权限关系
+        /// 根据ID删除,如果只有一个ID则不用带""，如果有多个则需要每个值带""
         /// </summary>
-        /// <param name="info"></param>
-        public bool Operate_SysRoleFuncLink(SysRoleFuncLink info, bool IsInsert)
+        /// <param name="condition"></param>
+        public bool Delete_SysRoleByID(string ids)
         {
-            if (IsInsert)
-                return new TBaseDAL<SysRoleFuncLink>().InsertInstance(info) > 0;
-            else
-                return new TBaseDAL<SysRoleFuncLink>().UpdateInstance(info) > 0;
-
+            return new TSqlBaseDAL<SysRole>().DeleteByID(ids) > 0;
         }
 
-        /// <summary>
-        /// 删除角色权限关系
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_SysRoleFuncLink(string Condition)
+        public SysRole Get_SysRole(string condition)
         {
-            return new TBaseDAL<SysRoleFuncLink>().DeleteInstances(Condition) > 0;
-        }
-
-        /// <summary>
-        /// 获取角色信息
-        /// </summary>
-        /// <param name="Condition"></param>
-        /// <returns></returns>
-        public SysRole Get_SysRole(string Condition)
-        {
-            SysRole info = new TBaseDAL<SysRole>().GetInstanceByCondition(Condition);
+            SysRole info = new TSqlBaseDAL<SysRole>().GetByCondition(condition);
             return info;
         }
-        public List<SysRole> List_SysRole(string Fields, string Condition, string strOrder)
+
+        public List<SysRole> List_SysRole(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<SysRole>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<SysRole>().GetListByCondition(fields, condition, orderby);
         }
-        public List<SysRole> PageList_SysRole(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        /// <summary>
+        /// 根据用户ID获取该用户的所有角色
+        /// </summary>
+        public List<SysRole> List_SysRole(string userid)
         {
-            return new TBaseDAL<SysRole>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new SqlBaseDAL().GetListByCondition<SysRole>("RoleID,RoleName", ViewNames.V_USERROLE, " AND userid='" + userid + "'", "RoleName DESC");
         }
 
-        /// <summary>
-        /// 获取用户角色集合
-        /// </summary>
-        public List<SysRole> List_SysRole(string UserID)
+        public List<SysRole> Pagination_SysRole(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new BaseDAL().GetListByCondition<SysRole>("RoleID,RoleName", ViewNames.V_USERROLE, " AND UserID='" + UserID + "'", "RoleName DESC");
+            return new TSqlBaseDAL<SysRole>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         
+        public bool Update_SysRoleFuncLink(SysRoleFuncLink info, bool isinsert)
+        {
+            if (isinsert)
+                return new TSqlBaseDAL<SysRoleFuncLink>().Insert(info) > 0;
+            else
+                return new TSqlBaseDAL<SysRoleFuncLink>().Update(info) > 0;
+
+        }
+
+        public bool Delete_SysRoleFuncLink(string condition)
+        {
+            return new TSqlBaseDAL<SysRoleFuncLink>().Delete(condition) > 0;
+        }
+
         /// <summary>
         /// 获取权限信息
         /// </summary>
-        /// <param name="Fields">如何为空则查询所有</param>
-        /// <param name="Condition">条件需要加上关键字AND</param>
+        /// <param name="fields">如何为空则查询所有</param>
+        /// <param name="condition">条件需要加上关键字AND</param>
         /// <param name="Order">不接Order by的排序</param>
         /// <returns></returns>
-        public List<Guid> List_SysRoleFuncLink(string Fields, string Condition, string strOrder)
+        public List<Guid> List_SysRoleFuncLink(string fields, string condition, string orderby)
         {
-            List<SysRoleFuncLink> limits = new TBaseDAL<SysRoleFuncLink>().GetListByCondition(Fields, Condition, strOrder);
+            List<SysRoleFuncLink> limits = new TSqlBaseDAL<SysRoleFuncLink>().GetListByCondition(fields, condition, orderby);
             List<Guid> listLimit_ids = limits.Select(c => c.FuncID).ToList();
             return listLimit_ids;
         }
 
-      
-
         #endregion 角色管理
 
-
         #region 权限控制
-
-        public List<string> GetUserALLFunc(string UserID)
+        public bool Update_SysFunction(SysFunction info, bool isinsert)
         {
-            List<string> list = new BaseDAL().GetListByCondition<string>("FuncKey", ViewNames.V_ALLUSERLIMIT, " and  cast(UserID as varchar(50))='" + UserID + "'", null);
+            if (isinsert)
+                return new TSqlBaseDAL<SysFunction>().Insert(info) > 0;
+            else
+                return new TSqlBaseDAL<SysFunction>().Update(info) > 0;
+        }
+
+        public bool Delete_SysFunction(string condition)
+        {
+            new OrganizationBLL().Delete_UserFuncLink(condition);
+            new OrganizationBLL().Delete_UserDeptFuncLink(condition);
+            new OrganizationBLL().Delete_UserPostFuncLink(condition);
+            new SystemBLL().Delete_SysRoleFuncLink(condition);
+            return new TSqlBaseDAL<SysFunction>().Delete(condition) > 0;
+        }
+
+        public SysFunction Get_SysFunction(string condition)
+        {
+            SysFunction info = new TSqlBaseDAL<SysFunction>().GetByCondition(condition);
+            return info;
+        }
+
+        public List<SysFunction> List_SysFunction(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<SysFunction>().GetListByCondition(fields, condition, orderby);
+        }
+
+        public List<SysFunction> Pagination_SysFunction(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new TSqlBaseDAL<SysFunction>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
+
+        public List<TreeModuleInfo> GetNestTreeByCondition(string fields, string tablename, string condition, string orderby)
+        {
+            List<SysFunction> alllist = new SqlBaseDAL().GetListByCondition<SysFunction>(fields, tablename, condition, orderby);
+            List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
+            foreach (SysFunction item in alllist)
+            {
+                TreeModuleInfo info = new TreeModuleInfo();
+                TreeAttributeInfo attr = new TreeAttributeInfo();
+                attr.type = item.FuncType;
+                info.id = item.FuncID.ToString();
+                info.pid = item.FuncPID;
+                info.text = item.FuncName;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+                NestTreeRecursion(alllist, info.id, children);
+                info.children = children;
+                Outlist.Add(info);
+            }
+            return Outlist;
+        }
+        private void NestTreeRecursion(List<SysFunction> alllist, string pid, List<TreeModuleInfo> outlist)
+        {
+            foreach (SysFunction item in alllist.Where(info => info.FuncPID == pid))
+            {
+                TreeModuleInfo info = new TreeModuleInfo();
+                TreeAttributeInfo attr = new TreeAttributeInfo();
+                attr.type = item.FuncType;
+                info.id = item.FuncID.ToString();
+                info.pid = item.FuncPID;
+                info.text = item.FuncName;
+                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
+                NestTreeRecursion(alllist, info.id, children);
+                info.children = children;
+                outlist.Add(info);
+            }
+
+        }
+
+
+        /// <summary>
+        /// 根据用户ID获取该用户的所有权限
+        /// </summary>
+        public List<string> GetUserALLFunc(string userid)
+        {
+            List<string> list = new SqlBaseDAL().GetListByCondition<string>("FuncKey", ViewNames.V_ALLUSERLIMIT, " and  cast(userid as varchar(50))='" + userid + "'", null);
             return list;
         }
+
         /// <summary>
         /// 递归遍历模块，得到菜单
         /// </summary>
-        public List<MenuModuleInfo> List_BlogModuleMenuData(string UserID)
+        public List<MenuModuleInfo> List_BlogModuleMenuData(string userid)
         {
             string currdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-            List<SysFunction> listModules = new BaseDAL().GetListByCondition<SysFunction>(" FuncID,FuncName,FuncKey,IconPath,FUNCTYPE,Source,FuncPID,FuncSort", ViewNames.V_ALLUSERLIMIT, "  and Functype=0 and (Status=1 OR (Status=0 AND StartTime<='" + currdate + "' AND EndTime>'" + currdate + "'))  AND cast(UserID as varchar(50))='" + UserID + "'", "FuncSort DESC");
+            List<SysFunction> listModules = new SqlBaseDAL().GetListByCondition<SysFunction>("distinct FuncID,FuncName,FuncKey,IconPath,FUNCTYPE,Source,FuncPID,FuncSort", ViewNames.V_ALLUSERLIMIT, "  and Functype=0 and (Status=1 OR (Status=0 AND StartTime<='" + currdate + "' AND EndTime>'" + currdate + "')) " + (userid == "a50ca689-1748-455d-b4b4-2c9303e186be" ? "" : " AND cast(userid as varchar(50))='" + userid + "'"), "FuncSort DESC");
             MenuModuleInfo menu = new MenuModuleInfo();
             List<MenuModuleInfo> modulelimitGroup = new List<MenuModuleInfo>();
             RecurseModule(listModules, "9c54e604-023a-4ccf-93bb-e25ce40f02ad", ref modulelimitGroup);
             return modulelimitGroup;
         }
-        void RecurseModule(List<SysFunction> listModules, string pid, ref  List<MenuModuleInfo> modulelimitGroup)
+
+        private void RecurseModule(List<SysFunction> listmodules, string pid, ref  List<MenuModuleInfo> modulelimitgroup)
         {
-            foreach (SysFunction item in listModules.Where(info => info.FuncPID == pid))
+            foreach (SysFunction item in listmodules.Where(info => info.FuncPID == pid))
             {
                 MenuModuleInfo modulelimit = new MenuModuleInfo();
                 modulelimit.menuid = item.FuncID.ToString();
@@ -166,99 +226,14 @@ namespace ET.Sys_BLL
                 modulelimit.icon = item.IconPath;
                 modulelimit.url = item.Source;
                 List<MenuModuleInfo> menuchildren = new List<MenuModuleInfo>();
-                RecurseModule(listModules, item.FuncID.ToString
+                RecurseModule(listmodules, item.FuncID.ToString
                     (), ref menuchildren);
                 modulelimit.menus = menuchildren;
-                modulelimitGroup.Add(modulelimit);
+                modulelimitgroup.Add(modulelimit);
 
             }
         }
 
-
-        public bool Operate_SysFunction(SysFunction info, bool IsInsert)
-        {
-            if (IsInsert)
-                return new TBaseDAL<SysFunction>().InsertInstance(info) > 0;
-            else
-                return new TBaseDAL<SysFunction>().UpdateInstance(info) > 0;
-        }
-
-
-        /// <summary>
-        /// 删除角色权限关系
-        /// </summary>
-        /// <param name="Condition"></param>
-        public bool Delete_SysFunction(string Condition)
-        {
-            new OrganizationBLL().Delete_UserFuncLink(Condition);
-            new OrganizationBLL().Delete_UserDeptFuncLink(Condition);
-            new OrganizationBLL().Delete_UserPostFuncLink(Condition);
-            new SystemBLL().Delete_SysRoleFuncLink(Condition);
-            return new TBaseDAL<SysFunction>().DeleteInstances(Condition) > 0;
-        }
-        public SysFunction Get_SysFunction(string Condition)
-        {
-            SysFunction info = new TBaseDAL<SysFunction>().GetInstanceByCondition(Condition);
-            return info;
-        }
-
-        public List<SysFunction> PageList_SysFunction(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
-        {
-            return new TBaseDAL<SysFunction>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
-        }
-        /// <summary>
-        /// 获取全部权限点
-        /// </summary>
-        public List<SysFunction> List_SysFunction(string Fields, string Condition, string strOrder)
-        {
-            return new TBaseDAL<SysFunction>().GetListByCondition(Fields, Condition, strOrder);
-        }
-
-
-        //public List<TreeModuleInfo> GetNestTreeByCondition(string PID,string Fields, string TableName, string Condition, string strOrder)
-        //{
-        //    List<SysFunction> Alllist = new BaseDAL().GetListByCondition<SysFunction>(Fields, TableName, Condition, strOrder);
-        //    List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
-        //    //NestTreeRecursion(Alllist, "-1", Outlist);
-        //    return Outlist;
-        //}
-
-        public List<TreeModuleInfo> GetNestTreeByCondition(string Fields, string TableName, string Condition, string strOrder)
-        {
-            List<SysFunction> Alllist = new BaseDAL().GetListByCondition<SysFunction>(Fields, TableName, Condition, strOrder);
-            List<TreeModuleInfo> Outlist = new List<TreeModuleInfo>();
-            foreach (SysFunction item in Alllist)
-            {
-                TreeModuleInfo info = new TreeModuleInfo();
-                TreeAttributeInfo attr = new TreeAttributeInfo();
-                attr.type = item.FuncType;
-                info.id = item.FuncID.ToString();
-                info.pid = item.FuncPID;
-                info.text = item.FuncName;
-                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
-                NestTreeRecursion(Alllist, info.id, children);
-                info.children = children;
-                Outlist.Add(info);
-            }
-            return Outlist;
-        }
-        void NestTreeRecursion(List<SysFunction> Alllist, string PID, List<TreeModuleInfo> Outlist)
-        {
-            foreach (SysFunction item in Alllist.Where(info => info.FuncPID == PID))
-            {
-                TreeModuleInfo info = new TreeModuleInfo();
-                TreeAttributeInfo attr = new TreeAttributeInfo();
-                attr.type = item.FuncType;
-                info.id = item.FuncID.ToString();
-                info.pid = item.FuncPID;
-                info.text = item.FuncName;
-                List<TreeModuleInfo> children = new List<TreeModuleInfo>();
-                NestTreeRecursion(Alllist, info.id, children);
-                info.children = children;
-                Outlist.Add(info);
-            }
-
-        }
         #endregion
 
     }

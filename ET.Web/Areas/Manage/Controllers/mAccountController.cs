@@ -4,21 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ET.Sys_DEF;
+using System.Web.Routing;
 
-namespace Web.Areas.Manage.Controllers
+namespace ET.Web.Areas.Manage.Controllers
 {
     public class mAccountController : WebControllerBase
     {
         //
         // GET: /Account/
+        //[Route("manage/login")]
         public ActionResult Login()
         {
-           getSystemConfig();
-            return View();
-        }
-
-        public ActionResult GoLogin()
-        {
+            base.getSystemConfig();
             return View();
         }
 
@@ -58,7 +55,7 @@ namespace Web.Areas.Manage.Controllers
         {
             ET.Sys_Base.Login_Ajax loginAjax = new ET.Sys_Base.Login_Ajax();
             loginAjax.Logout();
-            return RedirectToAction("Login");
+            return Redirect(PublicHelper.ManageLoginUrl);
         }
         #endregion
     }

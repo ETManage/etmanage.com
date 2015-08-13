@@ -70,20 +70,20 @@
 <script type="text/javascript">
     var _id = '@Request.QueryString["id"]';
     function AddCompany() {
-        location.href = '/Organization/CompanyManage';
+        location.href = './CompanyManage';
     }
     function AddDept() {
-        location.href = '/Organization/DepartmentManage?cid=' + _id;
+        location.href = './DepartmentManage?cid=' + _id;
     }
     function AddPost() {
-        location.href = '/Organization/PositionManage?cid=' + _id;
+        location.href = './PositionManage?cid=' + _id;
     }
 
     $(function () {
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/Organization/AjaxGetCompanyDetail?rad=" + new Date().toString(),
+                url: "./AjaxGetCompanyDetail?rad=" + new Date().toString(),
                 async: true,
                 data: { id: _id },
                 success: function (data) {
@@ -102,7 +102,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSaveCompany?id=' + _id,
+                url: './AjaxSaveCompany?id=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

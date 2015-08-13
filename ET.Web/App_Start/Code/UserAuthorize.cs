@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web
+namespace ET.Web
 {
     /// <summary>
     /// 自定义AuthorizeAttribute(授权属性)
@@ -43,7 +43,7 @@ namespace Web
         {
             if (!string.IsNullOrEmpty(FuncName))
             {
-                if (ApplicationConfig.dirApplicationUserLimit[httpContext.User.Identity.Name].Contains(FuncName))
+                if (ApplicationConfig.dirApplicationUserLimit[httpContext.User.Identity.Name].Contains(FuncName) || httpContext.User.Identity.Name=="www.etmanage.com")
                 {
                     return true;
                 }
@@ -74,7 +74,7 @@ namespace Web
                     filterContext.HttpContext.Response.Redirect(ErrorUrl);
                 }
                 else
-                    filterContext.HttpContext.Response.Redirect("/maccount/login");
+                    filterContext.HttpContext.Response.Redirect("/manage/login");
             }
             //filterContext.Result = new RedirectResult("/Admin/Dashboard");
         }

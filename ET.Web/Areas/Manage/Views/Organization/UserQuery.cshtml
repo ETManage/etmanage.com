@@ -5,9 +5,11 @@
 @section Title{
     博客文章列表
 }
+@section Styles{
+    <link href="/res/autocomplete/autocomplete.css" rel="stylesheet" type="text/css" />
+}
 @section Header{
-    <link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
+    <script src="/Res/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
 }
 <div class="ManageBody">
     <div class="ManageListTitle"></div>
@@ -80,7 +82,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/Organization/AjaxQueryUserPageList", method: 'get',
+            url: "./AjaxQueryUserPageList", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -105,7 +107,7 @@
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/Organization/AjaxSearchUser' };
+        var options = { serviceUrl: './AjaxSearchUser' };
         searchobj = $('#itxtSearch').autocomplete(options);
     });
     function formatterDoState(val, row, index) {
@@ -130,7 +132,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.UserID + "'"; }).toString();
-                $.post('/Organization/AjaxDeleteUser', { ids: ls }, function (res) {
+                $.post('./AjaxDeleteUser', { ids: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');
@@ -151,7 +153,7 @@
         $.messager.confirm("确认提示框", "确认禁用这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.UserID + "'"; }).toString();
-                $.post('/Organization/AjaxDisableUser', { ids: ls }, function (res) {
+                $.post('./AjaxDisableUser', { ids: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("状态已改变", 'info');
@@ -172,7 +174,7 @@
         $.messager.confirm("确认提示框", "确认启用这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.UserID + "'"; }).toString();
-                $.post('/Organization/AjaxEnabledUser', { ids: ls }, function (res) {
+                $.post('./AjaxEnabledUser', { ids: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("状态已改变", 'info');

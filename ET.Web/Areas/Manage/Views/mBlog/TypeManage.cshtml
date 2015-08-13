@@ -21,7 +21,7 @@
                     </th>
                     <td>
                         <select name="TypePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
-                                data-options="required:true,method:'get',url:'/mBlog/AjaxGetPTypeData',value:-1"></select>
+                                data-options="required:true,method:'get',url:'./AjaxGetPTypeData',value:-1"></select>
                     </td>
                 </tr>
                 <tr>
@@ -93,7 +93,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mblog/ajaxgettypedetail",
+                url: "./ajaxgettypedetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -116,7 +116,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mblog/ajaxsavetype?infoid=' + _id,
+                url: './ajaxsavetype?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

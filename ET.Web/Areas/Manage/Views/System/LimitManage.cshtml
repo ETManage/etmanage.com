@@ -3,12 +3,8 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    角色管理
+    权限管理
 }
-@section Header{
-
-}
-
 <body style="width: 100%; height: 99%" class="easyui-layout" fit="true">
     <div region="west" icon="icon-reload" title="所有系统/功能/资源" split="true" style="width: 250px;overflow:auto">
         <div class="Page-toolbar" style="margin-bottom:10px;">
@@ -48,16 +44,16 @@
             idFiled: "id",
             dnd: false,
             cascadeCheck: false,
-            url: '/system/ajaxgetlimitdata',
+            url: './ajaxgetlimitdata',
             onClick: function (node) {
                 if (null != node && node != "undefined") {
                     var oFrm = document.getElementById("iframecenter");
-                    oFrm.src = '/system/limitorgmanag?id=' + node.id + "&pid=" + node.pid;
+                    oFrm.src = './limitorgmanag?id=' + node.id + "&pid=" + node.pid;
 
                 }
             },
             onBeforeExpand: function (node, param) {
-                $('#ilimitmodule').tree('options').url = "/system/ajaxgetlimitdata?id=" + node.id;
+                $('#ilimitmodule').tree('options').url = "./ajaxgetlimitdata?id=" + node.id;
             },
             onLoadSuccess: function () {
                 //$('#ilimitmodule').tree('disableDnd');
@@ -117,7 +113,7 @@
         if (snode) {
             var child = $('#ilimitmodule').tree('getChildren', snode.target);
             if (child.length > 0) {
-                $('#ilimitmodule').tree('options').url = "/system/ajaxgetlimitdata?id=" + snode.id;
+                $('#ilimitmodule').tree('options').url = "./ajaxgetlimitdata?id=" + snode.id;
                 $('#ilimitmodule').tree('reload', snode.target);
             } else {
                 $('#ilimitmodule').tree('append', {
@@ -127,7 +123,7 @@
                         checked: true
                     }]
                 });
-                $('#ilimitmodule').tree('options').url = "/system/ajaxgetlimitdata?id=" + snode.id;
+                $('#ilimitmodule').tree('options').url = "./ajaxgetlimitdata?id=" + snode.id;
                 $('#ilimitmodule').tree('reload', snode.target);
             }
             mNode = snode; //[刷新的节点]
@@ -141,7 +137,7 @@
         if (snode) {
             var parentNode = $('#ilimitmodule').tree('getParent', snode.target)
             if (parentNode) {
-                $('#ilimitmodule').tree('options').url = "/system/ajaxgetlimitdata?id=" + parentNode.id;
+                $('#ilimitmodule').tree('options').url = "./ajaxgetlimitdata?id=" + parentNode.id;
                 $('#ilimitmodule').tree('reload', parentNode.target);
                 mNode = parentNode;
             } else {
@@ -163,7 +159,7 @@
             $.ajaxSetup({ cache: false });
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/system/ajaxgetfunctiondetail?id=" + id,
+                url: "./ajaxgetfunctiondetail?id=" + id,
                 async: true,
                 success: function (data) {
                     snode.text = data.FuncName;
@@ -305,13 +301,13 @@
             array.push({ 'id': node.id, 'pid': p.id });
         }
         debugger;
-        $.post('/system/AjaxFunctionParentChange', { ids: JSON.stringify(array) },
+        $.post('./AjaxFunctionParentChange', { ids: JSON.stringify(array) },
         function (res) {
             //alert(res + ',您已关闭拖拽功能');
             TopNotify('您已关闭拖拽功能', 'info');
             $('span[data-id]').removeAttr("data-id").removeClass("cRed");
             var oFrm = document.getElementById("iframecenter");
-            oFrm.src = '/system/limitorgmanag?id=' + node.id + "&pid=" + node.pid;
+            oFrm.src = './limitorgmanag?id=' + node.id + "&pid=" + node.pid;
 
         }, 'html');
     }

@@ -3,7 +3,7 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    我的账户
+    修改密码
 }
 @section Header{
 }
@@ -58,7 +58,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/System/AjaxUpdatePwd',
+                url: './AjaxUpdatePwd',
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

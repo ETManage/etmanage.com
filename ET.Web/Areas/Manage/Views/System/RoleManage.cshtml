@@ -7,43 +7,35 @@
 }
 @section Header{
 }
-
-
-
-
-
-    <div style="width: 100%; height: 99%" class="easyui-layout" fit="true">
-        <div region="west" icon="icon-reload" title="角色属性" split="true" style="width: 280px;overflow:auto">
-            <form id="form1" action="/" method="post">
-                <table class="datatable">
-                    <tr>
-                        <th>
-                            角色名称：
-                        </th>
-                        <td>
-                            <input name="RoleName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            角色描述：
-                        </th>
-                        <td>
-                            <input name="RoleDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:200px;height:200px" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
-
-        </div>
-        <div id="divQuery" region="center" style="height: auto; overflow: auto;">
-            <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限<input title="" type="checkbox" onclick="treeChecked(this, 'ilimitmodule')" />全选/反选</div>
-            <ul id="ilimitmodule"></ul>
-        </div>
-
-
+<div style="width: 100%; height: 99%" class="easyui-layout" fit="true">
+    <div region="west" icon="icon-reload" title="角色属性" split="true" style="width: 280px;overflow:auto">
+        <form id="form1" action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        角色名称：
+                    </th>
+                    <td>
+                        <input name="RoleName" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        角色描述：
+                    </th>
+                    <td>
+                        <input name="RoleDescription" type="text" class="easyui-textbox" data-options="multiline:true" style="width:200px;height:200px" />
+                    </td>
+                </tr>
+            </table>
+        </form>
 
     </div>
+    <div id="divQuery" region="center" style="height: auto; overflow: auto;">
+        <div class="Page-toolbar" style="border-right: 1px soild #eff;">角色权限<input title="" type="checkbox" onclick="treeChecked(this, 'ilimitmodule')" />全选/反选</div>
+        <ul id="ilimitmodule"></ul>
+    </div>
+</div>
 
 
 <script type="text/javascript">
@@ -56,9 +48,9 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/System/AjaxGetRoleDetail?rad=" + new Date().toString(),
+                url: "./AjaxGetRoleDetail?rad=" + new Date().toString(),
                 async: false,
-                data: { infoid: _id },
+                data: { id: _id },
                 success: function (data) {
                     $("#form1").form("reset");
                     $("#form1").form("load", data);
@@ -77,9 +69,9 @@
             idFiled: "id",
             dnd: false,
             cascadeCheck: false,
-            url: '/System/AjaxGetAllFunctionData?rid=' + _id,
+            url: './AjaxGetAllFunctionData?rid=' + _id,
             onBeforeExpand: function (node, param) {
-                $('#ilimitmodule').tree('options').url = "/system/AjaxGetAllFunctionData?id=" + node.id + "&rid=" + _id;
+                $('#ilimitmodule').tree('options').url = "./AjaxGetAllFunctionData?id=" + node.id + "&rid=" + _id;
             }
         });
     });
@@ -92,7 +84,7 @@
         }
     }
     function BtnSaveOrUpdate() {
-       
+
         if ($("#form1").form("validate")) {
             var actionids = new Array();
             var nodes = $('#ilimitmodule').tree('getChecked');
@@ -106,8 +98,8 @@
                 cache: true,
                 type: "POST",
                 dataType: "html",
-                url: '/System/AjaxSaveRole?infoid=' + _id + "&" + $('#form1').serialize(),
-                data: { ActionIDS: JSON.stringify(actionids) },
+                url: './AjaxSaveRole?id=' + _id + "&" + $('#form1').serialize(),
+                data: { limitIds: JSON.stringify(actionids) },
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     parent.TopNotify(errorThrown, 'error');

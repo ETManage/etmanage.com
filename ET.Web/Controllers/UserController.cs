@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
-    [UserAuthorize(ErrorUrl = "/account/login")]
+    [UserAuthorize(ErrorUrl = "/login")]
     public class UserController : WebControllerBase
     {
         //
@@ -18,18 +18,18 @@ namespace Web.Controllers
         {
             UserFullProperty info = new ET.Sys_BLL.OrganizationBLL().Get_UserFullPropertyByID(this.UserID);
             if (info == null)
-                Response.Redirect("/account/login");
+                Response.Redirect("/login");
             return View(info);
         }
         public ActionResult MyPublish(string page)
         {
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 10;
             long RecordTotalCount = 0;
             //收藏中心-文章收藏 Start
-            List<BlogPublish> list = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogPublish>("*", TableNames.BlogPublish, " AND Creator='" + this.UserID + "'", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogPublish> list = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogPublish>("*", TableNames.BlogPublish, " AND Creator='" + this.UserID + "'", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
 
             _GetListPager(pageIndex, pageSize, RecordTotalCount);
 
@@ -38,12 +38,12 @@ namespace Web.Controllers
         public ActionResult MyFavorites(string page)
         {
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (this.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 10;
             long RecordTotalCount = 0;
             //收藏中心-文章收藏 Start
-            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavorite b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + ET.Constant.DBConst.TableNames.BlogArticleFavorite + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogArticleInfo> listCollectArticle = new ET.Sys_BLL.PublicBLL().GetListByConditionPager<BlogArticleInfo>("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=td.ArticleID) ArticleSource", string.Format("(select a.*,b.CreateTime FavoriteTime from BlogArticleInfo a inner join BlogArticleFavorite b on a.ARTICLEID=b.ARTICLEID where  a.Status=1 )td"), "AND Status=1 AND ARTICLEID IN (SELECT ARTICLEID FROM " + ET.Constant.DBConst.TableNames.BlogArticleFavorite + " WHERE UserID='" + this.UserID + "')", "FavoriteTime desc", pageIndex, pageSize, ref RecordTotalCount);
             _GetListPager(pageIndex, pageSize, RecordTotalCount);
 
             return View(listCollectArticle);
@@ -101,7 +101,7 @@ namespace Web.Controllers
                 uinfo.LiveArea = collection["livearea"];
                 uinfo.QQ = collection["QQ"];
                 uinfo.Detail = collection["detail"];
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserProperty(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Update_UserProperty(uinfo))
                 {
                     return Content("true");
                 }
@@ -122,7 +122,7 @@ namespace Web.Controllers
             if (uinfo != null)
             {
                 uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Operate_UserBase(uinfo))
+                if (new ET.Sys_BLL.OrganizationBLL().Update_UserBase(uinfo))
                 {
                     return Content("true");
                 }
@@ -142,7 +142,7 @@ namespace Web.Controllers
                 info = new BlogUserSignIn();
                 info.UserID = Guid.Parse(this.UserID);
                 info.CreateTime = DateTime.Now;
-                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserSignIn(info, true))
+                if (new ET.Sys_BLL.BlogBLL().Update_BlogUserSignIn(info, true))
                 {
                     BlogUserLevelLink link = new ET.Sys_BLL.BlogBLL().Get_BlogUserLevelLink(string.Format("AND USERID='{0}' ", this.UserID));
                     if (link == null)
@@ -151,12 +151,12 @@ namespace Web.Controllers
 
                         link.UserID = Guid.Parse(this.UserID);
                         link.Exp = 10;
-                        new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
+                        new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, true);
                     }
                     else
                     {
                         link.Exp++;
-                        new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                        new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, false);
                     }
                     return Content("true");
                 }
@@ -177,7 +177,7 @@ namespace Web.Controllers
                 info.CreateTime = DateTime.Now;
                 info.Status = 0;
                 info.RequestName = "申请成为正式会员";
-                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserRequest(info, true))
+                if (new ET.Sys_BLL.BlogBLL().Update_BlogUserRequest(info, true))
                 {
                     return Content("true");
                 }

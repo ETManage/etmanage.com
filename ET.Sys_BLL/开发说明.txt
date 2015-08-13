@@ -5,14 +5,16 @@
 
 命名规则:
 操作方法，添加和修改都调用该方法，如果ID有值修改，反之添加
-Operate_{InstanceName}
+Update_{Name}
 删除方法
-Delete_{InstanceName}
+Delete_{Name}
 根据条件获取实例
-Get_{InstanceName}
+Get_{Name}
 根据ID获取实例
-Get_{InstanceName}ByID
+Get_{Name}ByID
 按条件获取实例
-List_{InstanceName}
+List_{Name}
 翻页获取实例
-PageList_{InstanceName}
+Pagination_{Name}
+
+其中有注释的说明是规则之外的方法，而且规则之外添加的方法都必须有注释

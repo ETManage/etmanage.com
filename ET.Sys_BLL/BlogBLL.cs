@@ -9,78 +9,52 @@ namespace ET.Sys_BLL
 {
     public class BlogBLL
     {
-
-
         #region 文章类型
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogTypeInfo(BlogTypeInfo info, bool IsInsert)
+        public bool Update_BlogTypeInfo(BlogTypeInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogTypeInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogTypeInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogTypeInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogTypeInfo>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogTypeInfo(string Condition)
+        public bool Delete_BlogTypeInfo(string condition)
         {
-            return new TBaseDAL<BlogTypeInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogTypeInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个模块信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogTypeInfo Get_BlogTypeInfoByID(string infoid)
         {
-            BlogTypeInfo info = null;
-            info = new TBaseDAL<BlogTypeInfo>().GetInstanceById(infoid);
-
-            return info;
+            return new TSqlBaseDAL<BlogTypeInfo>().GetById(infoid);
         }
         public BlogTypeInfo Get_BlogTypeInfoByCondition(string contidion)
         {
-            BlogTypeInfo info = new TBaseDAL<BlogTypeInfo>().GetInstanceByCondition(contidion);
-
-            return info;
+            return new TSqlBaseDAL<BlogTypeInfo>().GetByCondition(contidion);
         }
-        public List<BlogTypeInfo> List_BlogTypeInfo(string Fields, string Condition, string strOrder)
+        public List<BlogTypeInfo> List_BlogTypeInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogTypeInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogTypeInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogTypeInfo> PageList_BlogTypeInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+        public List<BlogTypeInfo> Pagination_BlogTypeInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogTypeInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogTypeInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
-
         #endregion
 
         #region 文章操作
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="IsInsert">是否新增</param>
-        /// <returns></returns>
-        public bool Operate_BlogArticleInfo(BlogArticleInfo info, bool IsInsert)
+        public bool Update_BlogArticleInfo(BlogArticleInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogArticleInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogArticleInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogArticleInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogArticleInfo>().Update(info) > 0;
         }
         /// <summary>
         /// 禁用状态
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_DisableArticle(string condition)
+        public bool Update_DisableArticle(string condition)
         {
             if (string.IsNullOrEmpty(condition))
                 return false;
@@ -91,505 +65,367 @@ namespace ET.Sys_BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool Operate_EnabledArticle(string condition)
+        public bool Update_EnabledArticle(string condition)
         {
             if (string.IsNullOrEmpty(condition))
                 return false;
             return new PublicBLL().ExecuteSqlNonQuery(string.Format("UPDATE {0} SET Status=1 WHERE 1=1" + condition, TableNames.BlogArticleInfo)) > 0;
         }
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogArticleInfo(string Condition)
+
+        public bool Delete_BlogArticleInfo(string condition)
         {
-            return new TBaseDAL<BlogArticleInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogArticleInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个模块信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogArticleInfo Get_BlogArticleInfoByID(string infoid)
         {
-            BlogArticleInfo info = null;
-            info = new TBaseDAL<BlogArticleInfo>().GetInstanceById(infoid);
-
-            return info;
-        }
-        public List<BlogArticleInfo> List_BlogArticleInfo(string Fields, string Condition, string strOrder)
-        {
-            return new TBaseDAL<BlogArticleInfo>().GetListByCondition(Fields, Condition, strOrder);
-        }
-        public List<BlogArticleInfo> PageList_BlogArticleInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
-        {
-            return new TBaseDAL<BlogArticleInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogArticleInfo>().GetById(infoid);
         }
 
+        public List<BlogArticleInfo> List_BlogArticleInfo(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<BlogArticleInfo>().GetListByCondition(fields, condition, orderby);
+        }
+
+        public List<BlogArticleInfo> Pagination_BlogArticleInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new TSqlBaseDAL<BlogArticleInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
         #endregion
 
         #region 文章评论
-        public bool Operate_BlogCommentInfo(BlogCommentInfo info, bool IsInsert)
+        public bool Update_BlogCommentInfo(BlogCommentInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogCommentInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogCommentInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogCommentInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogCommentInfo>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogCommentInfo(string Condition)
+        public bool Delete_BlogCommentInfo(string condition)
         {
-            return new TBaseDAL<BlogCommentInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogCommentInfo>().Delete(condition) > 0;
         }
-        public List<BlogCommentInfo> List_BlogCommentInfo(string Fields, string Condition, string strOrder)
+
+        public List<BlogCommentInfo> List_BlogCommentInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogCommentInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogCommentInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogCommentInfo> PageList_BlogCommentInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogCommentInfo> Pagination_BlogCommentInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogCommentInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogCommentInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
 
         #endregion
 
         #region 收藏
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogArticleFavorite(BlogArticleFavorite info, bool IsInsert)
+        public bool Update_BlogArticleFavorite(BlogArticleFavorite info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogArticleFavorite>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogArticleFavorite>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogArticleFavorite>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogArticleFavorite>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogArticleFavorite(string Condition)
+        public bool Delete_BlogArticleFavorite(string condition)
         {
-            return new TBaseDAL<BlogArticleFavorite>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogArticleFavorite>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogArticleFavorite Get_BlogArticleFavoriteByID(string infoid)
         {
-            BlogArticleFavorite info = null;
-            info = new TBaseDAL<BlogArticleFavorite>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogArticleFavorite>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogArticleFavorite Get_BlogArticleFavorite(string Condition)
+        public BlogArticleFavorite Get_BlogArticleFavorite(string condition)
         {
-            BlogArticleFavorite info = null;
-            info = new TBaseDAL<BlogArticleFavorite>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogArticleFavorite>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogArticleFavorite> List_BlogArticleFavorite(string Fields, string Condition, string strOrder)
+        public List<BlogArticleFavorite> List_BlogArticleFavorite(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogArticleFavorite>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogArticleFavorite>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogArticleFavorite> PageList_BlogArticleFavorite(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogArticleFavorite> Pagination_BlogArticleFavorite(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogArticleFavorite>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogArticleFavorite>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 友情链接
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogRollInfo(BlogRollInfo info, bool IsInsert)
+        public bool Update_BlogRollInfo(BlogRollInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogRollInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogRollInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogRollInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogRollInfo>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogRollInfo(string Condition)
+        public bool Delete_BlogRollInfo(string condition)
         {
-            return new TBaseDAL<BlogRollInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogRollInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogRollInfo Get_BlogRollInfoByID(string infoid)
         {
-            BlogRollInfo info = null;
-            info = new TBaseDAL<BlogRollInfo>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogRollInfo>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogRollInfo Get_BlogRollInfo(string Condition)
+        public BlogRollInfo Get_BlogRollInfo(string condition)
         {
-            BlogRollInfo info = null;
-            info = new TBaseDAL<BlogRollInfo>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogRollInfo>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogRollInfo> List_BlogRollInfo(string Fields, string Condition, string strOrder)
+        public List<BlogRollInfo> List_BlogRollInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogRollInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogRollInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogRollInfo> PageList_BlogRollInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogRollInfo> Pagination_BlogRollInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogRollInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogRollInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 博客预览
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogViewRecord(BlogViewRecord info, bool IsInsert)
+        public bool Update_BlogViewRecord(BlogViewRecord info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogViewRecord>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogViewRecord>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogViewRecord>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogViewRecord>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogViewRecord(string Condition)
+        public bool Delete_BlogViewRecord(string condition)
         {
-            return new TBaseDAL<BlogViewRecord>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogViewRecord>().Delete(condition) > 0;
         }
+
         public BlogViewRecord Get_BlogViewRecordByCondition(string condition)
         {
-            BlogViewRecord info = new TBaseDAL<BlogViewRecord>().GetInstanceByCondition(condition);
+            return new TSqlBaseDAL<BlogViewRecord>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogViewRecord> List_BlogViewRecord(string Fields, string Condition, string strOrder)
+        public List<BlogViewRecord> List_BlogViewRecord(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogViewRecord>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogViewRecord>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogViewRecord> PageList_BlogViewRecord(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogViewRecord> Pagination_BlogViewRecord(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogViewRecord>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogViewRecord>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 留言板
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogMessageInfo(BlogMessageInfo info, bool IsInsert)
+        public bool Update_BlogMessageInfo(BlogMessageInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogMessageInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogMessageInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogMessageInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogMessageInfo>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogMessageInfo(string Condition)
+        public bool Delete_BlogMessageInfo(string condition)
         {
-            return new TBaseDAL<BlogMessageInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogMessageInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogMessageInfo Get_BlogMessageInfoByID(string infoid)
         {
-            BlogMessageInfo info = null;
-            info = new TBaseDAL<BlogMessageInfo>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogMessageInfo>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogMessageInfo Get_BlogMessageInfo(string Condition)
+        public BlogMessageInfo Get_BlogMessageInfo(string condition)
         {
-            BlogMessageInfo info = null;
-            info = new TBaseDAL<BlogMessageInfo>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogMessageInfo>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogMessageInfo> List_BlogMessageInfo(string Fields, string Condition, string strOrder)
+        public List<BlogMessageInfo> List_BlogMessageInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogMessageInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogMessageInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogMessageInfo> PageList_BlogMessageInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogMessageInfo> Pagination_BlogMessageInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogMessageInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogMessageInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 博客文章投稿
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogPublish(BlogPublish info, bool IsInsert)
+        public bool Update_BlogPublish(BlogPublish info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogPublish>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogPublish>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogPublish>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogPublish>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogPublish(string Condition)
+        public bool Delete_BlogPublish(string condition)
         {
-            return new TBaseDAL<BlogPublish>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogPublish>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogPublish Get_BlogPublishByID(string infoid)
         {
-            BlogPublish info = null;
-            info = new TBaseDAL<BlogPublish>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogPublish>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogPublish Get_BlogPublish(string Condition)
+        public BlogPublish Get_BlogPublish(string condition)
         {
-            BlogPublish info = null;
-            info = new TBaseDAL<BlogPublish>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogPublish>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogPublish> List_BlogPublish(string Fields, string Condition, string strOrder)
+        public List<BlogPublish> List_BlogPublish(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogPublish>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogPublish>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogPublish> PageList_BlogPublish(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogPublish> Pagination_BlogPublish(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogPublish>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogPublish>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 博客签到
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogUserSignIn(BlogUserSignIn info, bool IsInsert)
+        public bool Update_BlogUserSignIn(BlogUserSignIn info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogUserSignIn>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogUserSignIn>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogUserSignIn>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogUserSignIn>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogUserSignIn(string Condition)
+        public bool Delete_BlogUserSignIn(string condition)
         {
-            return new TBaseDAL<BlogUserSignIn>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogUserSignIn>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogUserSignIn Get_BlogUserSignInByID(string infoid)
         {
-            BlogUserSignIn info = null;
-            info = new TBaseDAL<BlogUserSignIn>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogUserSignIn>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogUserSignIn Get_BlogUserSignIn(string Condition)
+        public BlogUserSignIn Get_BlogUserSignIn(string condition)
         {
-            BlogUserSignIn info = null;
-            info = new TBaseDAL<BlogUserSignIn>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogUserSignIn>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogUserSignIn> List_BlogUserSignIn(string Fields, string Condition, string strOrder)
+        public List<BlogUserSignIn> List_BlogUserSignIn(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogUserSignIn>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogUserSignIn>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogUserSignIn> PageList_BlogUserSignIn(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogUserSignIn> Pagination_BlogUserSignIn(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogUserSignIn>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogUserSignIn>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 博客用户等级
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogUserLevel(BlogUserLevel info, bool IsInsert)
+        public bool Update_BlogUserLevel(BlogUserLevel info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogUserLevel>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogUserLevel>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogUserLevel>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevel>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogUserLevel(string Condition)
+        public bool Delete_BlogUserLevel(string condition)
         {
-            return new TBaseDAL<BlogUserLevel>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogUserLevel>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogUserLevel Get_BlogUserLevelByID(string infoid)
         {
-            BlogUserLevel info = null;
-            info = new TBaseDAL<BlogUserLevel>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogUserLevel>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogUserLevel Get_BlogUserLevel(string Condition)
+        public BlogUserLevel Get_BlogUserLevel(string condition)
         {
-            BlogUserLevel info = null;
-            info = new TBaseDAL<BlogUserLevel>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogUserLevel>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogUserLevel> List_BlogUserLevel(string Fields, string Condition, string strOrder)
+        public List<BlogUserLevel> List_BlogUserLevel(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogUserLevel>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogUserLevel>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogUserLevel> PageList_BlogUserLevel(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogUserLevel> Pagination_BlogUserLevel(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogUserLevel>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogUserLevel>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 用户经验关联
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogUserLevelLink(BlogUserLevelLink info, bool IsInsert)
+        public bool Update_BlogUserLevelLink(BlogUserLevelLink info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogUserLevelLink>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogUserLevelLink>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogUserLevelLink>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevelLink>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogUserLevelLink(string Condition)
+        public bool Delete_BlogUserLevelLink(string condition)
         {
-            return new TBaseDAL<BlogUserLevelLink>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogUserLevelLink>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogUserLevelLink Get_BlogUserLevelLinkByID(string infoid)
         {
-            BlogUserLevelLink info = null;
-            info = new TBaseDAL<BlogUserLevelLink>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogUserLevelLink>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogUserLevelLink Get_BlogUserLevelLink(string Condition)
+        public BlogUserLevelLink Get_BlogUserLevelLink(string condition)
         {
-            BlogUserLevelLink info = null;
-            info = new TBaseDAL<BlogUserLevelLink>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogUserLevelLink>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogUserLevelLink> List_BlogUserLevelLink(string Fields, string Condition, string strOrder)
+        public List<BlogUserLevelLink> List_BlogUserLevelLink(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogUserLevelLink>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogUserLevelLink>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogUserLevelLink> PageList_BlogUserLevelLink(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogUserLevelLink> Pagination_BlogUserLevelLink(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogUserLevelLink>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogUserLevelLink>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 用户请求
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_BlogUserRequest(BlogUserRequest info, bool IsInsert)
+        public bool Update_BlogUserRequest(BlogUserRequest info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<BlogUserRequest>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<BlogUserRequest>().Insert(info) > 0;
             else
-                return new TBaseDAL<BlogUserRequest>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<BlogUserRequest>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_BlogUserRequest(string Condition)
+        public bool Delete_BlogUserRequest(string condition)
         {
-            return new TBaseDAL<BlogUserRequest>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<BlogUserRequest>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public BlogUserRequest Get_BlogUserRequestByID(string infoid)
         {
-            BlogUserRequest info = null;
-            info = new TBaseDAL<BlogUserRequest>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<BlogUserRequest>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public BlogUserRequest Get_BlogUserRequest(string Condition)
+        public BlogUserRequest Get_BlogUserRequest(string condition)
         {
-            BlogUserRequest info = null;
-            info = new TBaseDAL<BlogUserRequest>().GetInstanceByCondition(Condition);
+            return new TSqlBaseDAL<BlogUserRequest>().GetByCondition(condition);
+        }
 
-            return info;
-        }
-        public List<BlogUserRequest> List_BlogUserRequest(string Fields, string Condition, string strOrder)
+        public List<BlogUserRequest> List_BlogUserRequest(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<BlogUserRequest>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<BlogUserRequest>().GetListByCondition(fields, condition, orderby);
         }
-        public List<BlogUserRequest> PageList_BlogUserRequest(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<BlogUserRequest> Pagination_BlogUserRequest(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<BlogUserRequest>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<BlogUserRequest>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
     }

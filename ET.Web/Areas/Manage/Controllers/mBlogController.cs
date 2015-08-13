@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Areas.Manage.Controllers
+namespace ET.Web.Areas.Manage.Controllers
 {
     [UserAuthorize]
     public class mBlogController : ManageControllerBase
@@ -33,7 +33,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', ARTICLETITLE)>0";
             long RecordTotalCount = 0;
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ARTICLEID,ARTICLETITLE,ArticleLabel,ArticleUrl,ArticleUrl,LoveCount,ShareCount,Status,CreateTime,ACCESSCOUNT,TYPEID,(SELECT TYPENAME FROM BlogTypeInfo WHERE TYPEID=BlogArticleInfo.TYPEID)Reserve1", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogArticleInfo("ARTICLEID,ARTICLETITLE,ArticleLabel,ArticleUrl,LoveCount,ShareCount,Status,CreateTime,ACCESSCOUNT,TYPEID,(SELECT TYPENAME FROM BlogTypeInfo WHERE TYPEID=BlogArticleInfo.TYPEID)Reserve1", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetTypeSelectData()
@@ -90,7 +90,7 @@ namespace Web.Areas.Manage.Controllers
             info.ArticleCover = collection["ArticleCover"];
             info.ArticleContent = collection["ArticleContent"];
             info.ArticleDescription = collection["ArticleDescription"];
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, IsInsert))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogArticleInfo(info, IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
@@ -115,7 +115,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDisableArticle(string ids)
         {
-            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Operate_DisableArticle(" AND ArticleID IN (" + ids + ")"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Update_DisableArticle(" AND ArticleID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -123,7 +123,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxEnabledArticle(string ids)
         {
-            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Operate_EnabledArticle(" AND ArticleID IN (" + ids + ")"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.BlogBLL().Update_EnabledArticle(" AND ArticleID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -135,50 +135,6 @@ namespace Web.Areas.Manage.Controllers
             List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().List_BlogArticleInfo("ARTICLETITLE", " AND CHARINDEX('" + query + "', ARTICLETITLE)>0", "CreateTime DESC");
             var arrData = list.Select(c => c.ArticleTitle);
             return Json(new { query = query, suggestions = arrData, data = arrData }, JsonRequestBehavior.AllowGet);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult Upload(HttpPostedFileBase fileData)
-        {
-            if (fileData != null)
-            {
-                try
-                {
-                    // 文件上传后的保存路径
-                    string filePath = Server.MapPath("~/Upload/blog/image/");
-                    if (!Directory.Exists(filePath))
-                    {
-                        Directory.CreateDirectory(filePath);
-                    }
-                    string fileName = Path.GetFileName(fileData.FileName);// 原始文件名称
-                    string fileExtension = Path.GetExtension(fileName); // 文件扩展名
-                    string saveName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileExtension; // 保存文件名称
-
-                    fileData.SaveAs(filePath + saveName);
-
-                    return Json(new { Success = true, FileName = fileName, SaveName = "/upload/blog/image/" + saveName });
-                }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
-                }
-            }
-            else
-            {
-
-                return Json(new { Success = false, Message = "请选择要上传的文件！" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public ActionResult DeleteUploadPic(string Url)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(Url))
-                    System.IO.File.Delete(Server.MapPath("~") + Server.UrlDecode(Url));
-                return Content("true");
-            }
-            catch { return Content("error"); }
-
         }
         #endregion
 
@@ -202,7 +158,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', TYPENAME)>0";
             long RecordTotalCount = 0;
-            List<BlogTypeInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogTypeInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -242,7 +198,7 @@ namespace Web.Areas.Manage.Controllers
             else
                 info.IsOnlyNav = false;
 
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogTypeInfo(info, IsInsert))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogTypeInfo(info, IsInsert))
                 strResult = "true";
 
             return Content(strResult);
@@ -260,7 +216,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteType(string infoid)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogTypeInfo(" AND TYPEID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogTypeInfo(" AND TYPEID  in (" + infoid + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -296,7 +252,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', RollNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogRollInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogRollInfo("RollID,RollNAME,RollSORT", Condition, "RollSORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogRollInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogRollInfo("RollID,RollNAME,RollSORT", Condition, "RollSORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -324,7 +280,7 @@ namespace Web.Areas.Manage.Controllers
 
 
 
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogRollInfo(info, IsInsert))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogRollInfo(info, IsInsert))
                 strResult = "true";
 
             return Content(strResult);
@@ -342,7 +298,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteRoll(string infoid)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogRollInfo(" AND RollID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogRollInfo(" AND RollID in (" + infoid + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -375,7 +331,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', MsgTitle)>0";
             long RecordTotalCount = 0;
-            List<BlogMessageInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogMessageInfo("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogMessageInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogMessageInfo("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -408,7 +364,7 @@ namespace Web.Areas.Manage.Controllers
             else
                 info.Status = 0;
 
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogMessageInfo(info, false))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogMessageInfo(info, false))
                 strResult = "true";
             return Content(strResult);
         }
@@ -429,6 +385,14 @@ namespace Web.Areas.Manage.Controllers
                 return Content("false");
 
 
+        }
+        [HttpPost]
+        public ActionResult AjaxDeleteMessage(string infoid)
+        {
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogMessageInfo(" AND MsgID in (" + infoid + ")"))
+                return Content("true");
+            else
+                return Content("false");
         }
         #endregion
 
@@ -454,7 +418,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', Title)>0";
             long RecordTotalCount = 0;
-            List<BlogPublish> list = new ET.Sys_BLL.BlogBLL().PageList_BlogPublish("PublishID,Title,PublishSource,PublishType,Status,CreateTime", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogPublish> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogPublish("PublishID,Title,PublishSource,PublishType,Status,CreateTime", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -509,14 +473,14 @@ namespace Web.Areas.Manage.Controllers
                 arinfo.ArticleCover = info.Cover;
                 arinfo.ArticleContent = info.PublishContent;
                 arinfo.ArticleDescription = info.Description;
-                new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true);
+                new ET.Sys_BLL.BlogBLL().Update_BlogArticleInfo(arinfo, true);
             }
             else
                 info.Status = 0;
 
 
 
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogPublish(info, IsInsert))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogPublish(info, IsInsert))
                 strResult = "true";
 
             return Content(strResult);
@@ -567,12 +531,12 @@ namespace Web.Areas.Manage.Controllers
                     arinfo.ArticleCover = info.Cover;
                     arinfo.ArticleContent = info.PublishContent;
                     arinfo.ArticleDescription = info.Description;
-                    new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(arinfo, true);
+                    new ET.Sys_BLL.BlogBLL().Update_BlogArticleInfo(arinfo, true);
 
 
 
                     info.Status = 1;
-                    new ET.Sys_BLL.BlogBLL().Operate_BlogPublish(info, false);
+                    new ET.Sys_BLL.BlogBLL().Update_BlogPublish(info, false);
                 }
             }
 
@@ -622,7 +586,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', LevelNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogUserLevel> list = new ET.Sys_BLL.BlogBLL().PageList_BlogUserLevel("LevelID,LevelNAME,NeedExp", Condition, "NeedExp", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogUserLevel> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogUserLevel("LevelID,LevelNAME,NeedExp", Condition, "NeedExp", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -644,7 +608,7 @@ namespace Web.Areas.Manage.Controllers
 
 
 
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevel(info, IsInsert))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogUserLevel(info, IsInsert))
                 strResult = "true";
 
             return Content(strResult);
@@ -662,7 +626,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteLevel(string infoid)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserLevel(" AND LevelID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.BlogBLL().Delete_BlogUserLevel(" AND LevelID in ('" + infoid + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -696,7 +660,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', CNNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogUserSignIn> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogUserSignIn>("SignID,UserID,CreateTime,cnname Reserve1,cast(Exp as varchar(20))+'['+UserLevel+']' Reserve2", string.Format("(SELECT A.*,B.CNNAME,B.EXP,B.USERLEVEL FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)a", ViewNames.V_USERFULL, TableNames.BlogUserSignIn), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogUserSignIn> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogUserSignIn>("SignID,UserID,CreateTime,cnname Reserve1,cast(Exp as varchar(20))+'['+UserLevel+']' Reserve2", string.Format("(SELECT A.*,B.CNNAME,B.EXP,B.USERLEVEL FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)a", ViewNames.V_USERFULL, TableNames.BlogUserSignIn), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -730,7 +694,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', CNNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogViewRecord> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogViewRecord>("ViewID,UserID,CreateTime,InfoType,(select top 1 ArticleTitle from BlogArticleInfo art where art.ArticleID=tmp.InfoID) Reserve2,cnname Reserve1", string.Format("(SELECT A.*,B.CNNAME FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)tmp", TableNames.UserProperty, TableNames.BlogViewRecord), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount, false);
+            List<BlogViewRecord> list = new ET.Sys_BLL.PublicBLL().GetListByPager<BlogViewRecord>("ViewID,UserID,CreateTime,InfoType,(select top 1 ArticleTitle from BlogArticleInfo art where art.ArticleID=tmp.InfoID) Reserve2,cnname Reserve1", string.Format("(SELECT A.*,B.CNNAME FROM {0} B INNER JOIN {1} A ON A.USERID=B.USERID)tmp", TableNames.UserProperty, TableNames.BlogViewRecord), Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -767,7 +731,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', RequestNAME)>0";
             long RecordTotalCount = 0;
-            List<BlogUserRequest> list = new ET.Sys_BLL.BlogBLL().PageList_BlogUserRequest("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogUserRequest> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogUserRequest("*", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -788,7 +752,7 @@ namespace Web.Areas.Manage.Controllers
 
 
 
-                if (new ET.Sys_BLL.BlogBLL().Operate_BlogUserRequest(info, false))
+                if (new ET.Sys_BLL.BlogBLL().Update_BlogUserRequest(info, false))
                     strResult = "true";
             }
             return Content(strResult);

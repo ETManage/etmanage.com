@@ -6,13 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class MessageController : WebControllerBase
     {
         //
         // GET: /Message/
-        public void _GetListPager(int pageIndex, int pageSize, long RecordTotalCount)
+        public  void _GetListPager(int pageIndex, int pageSize, long RecordTotalCount)
         {
 
             string strPagerText = "<div class=' pagination'><ul>";
@@ -51,11 +51,11 @@ namespace Web.Controllers
         {
             string strCondition = "";
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 10;
             long RecordTotalCount = 0;
-            List<BlogMessageInfo> listMessage = new ET.Sys_BLL.BlogBLL().PageList_BlogMessageInfo("*", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogMessageInfo> listMessage = new ET.Sys_BLL.BlogBLL().Pagination_BlogMessageInfo("*", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             ViewBag.listMessage = listMessage;
 
 
@@ -84,7 +84,7 @@ namespace Web.Controllers
             info.MsgTitle = collection["MsgTitle"];
             info.MsgContent = collection["MsgContent"];
             info.CreateTime = DateTime.Now;
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogMessageInfo(info, true))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogMessageInfo(info, true))
                 return Content("true");
             else
                 return Content("error");
@@ -106,7 +106,7 @@ namespace Web.Controllers
 
             info.CreateTime = DateTime.Now;
             info.Status = 0;
-            if (new ET.Sys_BLL.BlogBLL().Operate_BlogPublish(info, true))
+            if (new ET.Sys_BLL.BlogBLL().Update_BlogPublish(info, true))
             {
                 return Content("true");
                 

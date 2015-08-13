@@ -39,13 +39,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ET.DALContract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ET.AssemblyLibrary\ET.DALContract.dll</HintPath>
+    </Reference>
+    <Reference Include="ET.Tookit.Constant, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ET.AssemblyLibrary\ET.Tookit.Constant.dll</HintPath>
+    </Reference>
     <Reference Include="ET.ToolKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.dll</HintPath>
     </Reference>
+    <Reference Include="ET.ToolKit.DBLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ET.AssemblyLibrary\ET.ToolKit.DBLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="ET.Weixin.Web">
+      <HintPath>..\ET.Weixin.Web\bin\ET.Weixin.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PrecompiledMvcViewEngineContrib">
       <HintPath>..\packages\PrecompiledMvcViewEngineContrib.1.0\lib\net40\PrecompiledMvcViewEngineContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="SecModule">
+      <HintPath>..\ET.AssemblyLibrary\SecModule.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -61,13 +79,20 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -101,18 +126,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <Private>True</Private>
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -127,10 +140,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Manage\Models\" />
-    <Folder Include="Content\Account\" />
     <Folder Include="Res\editor\upload\EditorFiles\" />
-    <Folder Include="Scripts\Account\" />
     <Folder Include="UpLoad\Blog\WebEditorFiles\" />
     <Folder Include="UpLoad\Design\EditorFiles\" />
     <Folder Include="UpLoad\Design\Image\" />
@@ -147,22 +157,31 @@
     <Compile Include="App_Start\Code\ViewEngineStart.cs" />
     <Compile Include="App_Start\Code\WebUserAuthorize.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteCode\DomainData.cs" />
+    <Compile Include="App_Start\RouteCode\DomainRoute.cs" />
+    <Compile Include="App_Start\RouteCode\LinkExtensions.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Api\BlogController.cs" />
+    <Compile Include="Areas\Ajax\AjaxAreaRegistration.cs" />
+    <Compile Include="Areas\Ajax\Controllers\WebEditorController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\BlogEditorController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\DesignUploaderController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\WebUploaderController.cs" />
     <Compile Include="Areas\Manage\Controllers\mAccountController.cs" />
     <Compile Include="Areas\Manage\Controllers\mBlogController.cs" />
     <Compile Include="Areas\Manage\Controllers\mDesignController.cs" />
     <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
     <Compile Include="Areas\Manage\Controllers\OrganizationController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\BlogUploaderController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
-    <Compile Include="Api\BlogController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogAPIController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\BlogMobileController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\DesignMobileController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OneGTDController.cs" />
     <Compile Include="Controllers\PageErrorController.cs" />
@@ -319,11 +338,14 @@
     <Content Include="Images\PageError\404\02.png" />
     <Content Include="Images\PageError\404\03.png" />
     <Content Include="Images\PageError\404\04.png" />
+    <Content Include="Images\Public\icon-delete.gif" />
+    <Content Include="Images\Public\icon-download.gif" />
     <Content Include="Images\Public\icon-clear.png" />
     <Content Include="Images\Public\icon-filter.png" />
     <Content Include="Images\Public\icon-no.png" />
     <Content Include="Images\Public\icon-ok.png" />
     <Content Include="Images\Public\nopicture.jpg" />
+    <Content Include="Images\Public\button_upload.png" />
     <Content Include="Images\whitelogo.png" />
     <Content Include="Res\autocomplete\autocomplete.css" />
     <Content Include="Res\autocomplete\jquery.autocomplete.js" />
@@ -599,7 +621,6 @@
     <Content Include="Res\easyui\easyloader.js" />
     <Content Include="Res\easyui\easyui-extend.js" />
     <Content Include="Res\easyui\jquery-easyui-min.js" />
-    <Content Include="Res\easyui\jquery-easyui-min1.3.js" />
     <Content Include="Res\easyui\jquery-min.js" />
     <Content Include="Res\easyui\locale\easyui-lang-af.js" />
     <Content Include="Res\easyui\locale\easyui-lang-am.js" />
@@ -777,6 +798,7 @@
     <Content Include="Res\easyui\themes\blue\tree.css" />
     <Content Include="Res\easyui\themes\blue\validatebox.css" />
     <Content Include="Res\easyui\themes\blue\window.css" />
+    <Content Include="Res\easyui\themes\color.css" />
     <Content Include="Res\easyui\themes\bootstrap\accordion.css" />
     <Content Include="Res\easyui\themes\bootstrap\calendar.css" />
     <Content Include="Res\easyui\themes\bootstrap\combo.css" />
@@ -825,7 +847,6 @@
     <Content Include="Res\easyui\themes\bootstrap\tree.css" />
     <Content Include="Res\easyui\themes\bootstrap\validatebox.css" />
     <Content Include="Res\easyui\themes\bootstrap\window.css" />
-    <Content Include="Res\easyui\themes\color.css" />
     <Content Include="Res\easyui\themes\default\accordion.css" />
     <Content Include="Res\easyui\themes\default\calendar.css" />
     <Content Include="Res\easyui\themes\default\combo.css" />
@@ -993,7 +1014,6 @@
     <Content Include="Res\echarts\theme\roma.js" />
     <Content Include="Res\echarts\theme\sakura.js" />
     <Content Include="Res\echarts\theme\shine.js" />
-    <Content Include="Res\editor\editor.js" />
     <Content Include="Res\editor\editor_emot\default\angry.gif" />
     <Content Include="Res\editor\editor_emot\default\awkward.gif" />
     <Content Include="Res\editor\editor_emot\default\bye.gif" />
@@ -1377,20 +1397,20 @@
     <Content Include="Res\pictureView\winForm.js" />
     <Content Include="Res\pictureView\zoomin.cur" />
     <Content Include="Res\pictureView\zoomout.cur" />
-    <Content Include="Res\uploadify\jquery.uploadify-3.1.js" />
-    <Content Include="Res\uploadify\jquery.uploadify-3.1.min.js" />
-    <Content Include="Res\uploadify\uploadify-cancel.png" />
-    <Content Include="Res\uploadify\uploadify.css" />
-    <Content Include="Res\uploadify\uploadify.swf" />
-    <Content Include="Res\uploadify\说明.txt" />
+    <Content Include="Res\webuploader\webuploader.fis.js" />
+    <Content Include="Res\webuploader\webuploader.noimage.js" />
+    <Content Include="Res\webuploader\webuploader.noimage.min.js" />
+    <Content Include="Res\webuploader\webuploader.nolog.js" />
+    <Content Include="Res\webuploader\webuploader.nolog.min.js" />
     <Content Include="Scripts\BlogMobile\fx.js" />
     <Content Include="Scripts\BlogMobile\script.js" />
     <Content Include="Scripts\BlogMobile\zepto.min.js" />
-    <Content Include="Scripts\Blog\editor.js" />
+    <Content Include="Res\editor\editor.js" />
     <Content Include="Scripts\Blog\effects.js" />
     <Content Include="Scripts\Blog\header.js" />
     <Content Include="Scripts\Blog\index.js" />
     <Content Include="Scripts\Blog\login.js" />
+    <Content Include="Res\webuploader\webupload.js" />
     <Content Include="Scripts\Blog\快速登录.txt" />
     <Content Include="Scripts\common\area3.js" />
     <Content Include="Scripts\common\common.js" />
@@ -1402,18 +1422,34 @@
     <Content Include="Scripts\common\selectlinkage.js" />
     <Content Include="Scripts\common\timeago.js" />
     <Content Include="Scripts\Design\editor.js" />
-    <Content Include="Scripts\jquery-expand.js" />
-    <Content Include="Scripts\jquery-min.js" />
-    <Content Include="Scripts\jquery-min1-8.js" />
-    <Content Include="Scripts\jquery.draggable.js" />
-    <Content Include="Scripts\jquery.form.js" />
-    <Content Include="Scripts\jquery.parser.js" />
-    <Content Include="Scripts\jquery.resizable.js" />
-    <Content Include="Scripts\JS Minifier javascript在线压缩.html" />
+    <Content Include="Scripts\JQuery\jquery.draggable.js" />
+    <Content Include="Scripts\JQuery\jquery.form.js" />
+    <Content Include="Scripts\JQuery\jquery.parser.js" />
+    <Content Include="Scripts\JQuery\jquery.resizable.js" />
+    <Content Include="Scripts\JQuery\jquery-1.11.1.js" />
+    <Content Include="Scripts\JQuery\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\JQuery\jquery-2.1.1.js" />
+    <Content Include="Scripts\JQuery\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\JQuery\jquery.d.ts" />
+    <Content Include="Scripts\lib\JS Minifier javascript在线压缩.html" />
+    <Content Include="Scripts\lib\html5.js" />
+    <Content Include="Scripts\lib\json2.js" />
     <Content Include="Scripts\Manage\Default.js" />
     <Content Include="Scripts\Manage\login.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Scripts\OneGtd\EntryComm.js" />
+    <Content Include="Res\webuploader\Uploader.swf" />
+    <Content Include="Res\webuploader\webuploader.css" />
+    <Content Include="Res\webuploader\webuploader.custom.js" />
+    <Content Include="Res\webuploader\webuploader.custom.min.js" />
+    <Content Include="Res\webuploader\webuploader.flashonly.js" />
+    <Content Include="Res\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="Res\webuploader\webuploader.html5only.js" />
+    <Content Include="Res\webuploader\webuploader.html5only.min.js" />
+    <Content Include="Res\webuploader\webuploader.js" />
+    <Content Include="Res\webuploader\webuploader.min.js" />
+    <Content Include="Res\webuploader\webuploader.withoutimage.js" />
+    <Content Include="Res\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="UpLoad\Blog\EditorFiles\day_150403\201504031055080994463.jpg" />
     <Content Include="UpLoad\Blog\Image\20150527091133364.jpg" />
     <Content Include="UpLoad\Blog\Image\20150527091457615.jpg" />
@@ -1461,8 +1497,6 @@
     <Content Include="Content\Blog\字体源文件\fontawesome-webfont.vfb" />
     <Content Include="Content\Blog\字体源文件\iconfont.bak" />
     <Content Include="Content\Blog\字体源文件\iconfont.vfb" />
-    <Content Include="Scripts\Blog\saveremoteimg.ashx" />
-    <Content Include="Scripts\Blog\upload.ashx" />
     <Content Include="Scripts\Design\saveremoteimg.ashx" />
     <Content Include="Scripts\Design\upload.ashx" />
     <Content Include="UpLoad\LoginLog\2015-05-13.log" />
@@ -1538,47 +1572,6 @@
     <Content Include="Res\editor\upload.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manage\Views\mAccount\GoLogin.cshtml" />
-    <Content Include="Areas\Manage\Views\mAccount\Login.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\ArticleManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\ArticleQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\MessageManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\MessageQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\PublishManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\PublishQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\RollManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\RollQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\TypeManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\TypeQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserLevelManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserLevelQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserRequestManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserRequestQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserSignQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mBlog\UserViewQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mDesign\GoodManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mDesign\GoodQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\mDesign\TypeManage.cshtml" />
-    <Content Include="Areas\Manage\Views\mDesign\TypeQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\News\NewsManage.cshtml" />
-    <Content Include="Areas\Manage\Views\News\NewsQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\CompanyManage.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\DepartmentManage.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\OrgQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\PositionManage.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\UserManage.cshtml" />
-    <Content Include="Areas\Manage\Views\Organization\UserQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\Shared\_ManagePartial.cshtml" />
-    <Content Include="Areas\Manage\Views\System\Default.cshtml" />
-    <Content Include="Areas\Manage\Views\System\EditUserPwd.cshtml" />
-    <Content Include="Areas\Manage\Views\System\LimitManage.cshtml" />
-    <Content Include="Areas\Manage\Views\System\LimitOrgContact.cshtml" />
-    <Content Include="Areas\Manage\Views\System\LimitOrgManag.cshtml" />
-    <Content Include="Areas\Manage\Views\System\RoleManage.cshtml" />
-    <Content Include="Areas\Manage\Views\System\RoleQuery.cshtml" />
-    <Content Include="Areas\Manage\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Account\OauthLogin.cshtml" />
@@ -1651,10 +1644,49 @@
       <Project>{95fdfc82-0183-4f86-aabd-12dc6ffa3abc}</Project>
       <Name>ET.Sys_DEF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ET.WxWeb\ET.Weixin.Web.csproj">
-      <Project>{bf2884f8-13e3-4cc7-837d-ff42f2e657ae}</Project>
-      <Name>ET.Weixin.Web</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manage\Views\web.config" />
+    <Content Include="Areas\Manage\Views\mAccount\Login.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\ArticleManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\ArticleQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\MessageManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\MessageQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\PublishManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\PublishQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\RollManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\RollQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\TypeManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\TypeQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserLevelManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserLevelQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserRequestManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserRequestQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserSignQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mBlog\UserViewQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\GoodManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\GoodQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\TypeManage.cshtml" />
+    <Content Include="Areas\Manage\Views\mDesign\TypeQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\News\NewsManage.cshtml" />
+    <Content Include="Areas\Manage\Views\News\NewsQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\CompanyManage.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\DepartmentManage.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\OrgQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\PositionManage.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\UserManage.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\UserQuery.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_ManagePartial.cshtml" />
+    <Content Include="Areas\Manage\Views\System\Default.cshtml" />
+    <Content Include="Areas\Manage\Views\System\EditUserPwd.cshtml" />
+    <Content Include="Areas\Manage\Views\System\LimitManage.cshtml" />
+    <Content Include="Areas\Manage\Views\System\LimitOrgContact.cshtml" />
+    <Content Include="Areas\Manage\Views\System\LimitOrgManag.cshtml" />
+    <Content Include="Areas\Manage\Views\System\RoleManage.cshtml" />
+    <Content Include="Areas\Manage\Views\System\RoleQuery.cshtml" />
+    <None Include="Properties\PublishProfiles\etmanage.com.pubxml" />
+    <Content Include="Scripts\JQuery\jquery-1.11.1.min.map" />
+    <Content Include="Scripts\JQuery\jquery-2.1.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1674,7 +1706,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5031</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5031/</IISUrl>
+          <IISUrl>http://localhost:8031/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

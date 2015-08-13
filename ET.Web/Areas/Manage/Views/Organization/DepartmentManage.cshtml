@@ -84,17 +84,17 @@
     var _cid = '@Request.QueryString["cid"]';
     var _pid = '@Request.QueryString["pid"]';
     function AddDept() {
-        location.href = '/Organization/DepartmentManage?cid=' + _cid + '&pid=' + _pid;
+        location.href = './DepartmentManage?cid=' + _cid + '&pid=' + _pid;
     }
     function AddPost() {
-        location.href = '/Organization/PositionManage?cid=' + _cid + '&did==' + _id;
+        location.href = './PositionManage?cid=' + _cid + '&did==' + _id;
     }
 
     $(function () {
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/Organization/AjaxGetDepartmentDetail?rad=" + new Date().toString(),
+                url: "./AjaxGetDepartmentDetail?rad=" + new Date().toString(),
                 async: true,
                 data: { id: _id },
                 success: function (data) {
@@ -116,9 +116,9 @@
             idFiled: "id",
             dnd: false,
             cascadeCheck: false,
-            url: '/Organization/AjaxGetAllFunctionData?t=dept&uid=' + _id,
+            url: './AjaxGetAllFunctionData?t=dept&uid=' + _id,
             onBeforeExpand: function (node, param) {
-                $('#ilimitmodule').tree('options').url = "/Organization/AjaxGetAllFunctionData?t=dept&id=" + node.id + "&uid=" + _id;
+                $('#ilimitmodule').tree('options').url = "./AjaxGetAllFunctionData?t=dept&id=" + node.id + "&uid=" + _id;
             }
         });
 
@@ -144,7 +144,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSaveDepartment?id=' + _id + '&cid=' + _cid + '&pid=' + _pid + "&" + $('#form1').serialize(),
+                url: './AjaxSaveDepartment?id=' + _id + '&cid=' + _cid + '&pid=' + _pid + "&" + $('#form1').serialize(),
                 data: { ActionIDS: JSON.stringify(actionids) },
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

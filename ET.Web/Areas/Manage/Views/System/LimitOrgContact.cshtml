@@ -139,7 +139,7 @@
                     $('#' + tree + ' .icon-dept').parent().find('.tree-checkbox').remove();
                 }
                 if (_id != "") {
-                    $.post('/system/AjaxGetBelongLimitData', { type: t, fid: _id }, function (res) {
+                    $.post('./AjaxGetBelongLimitData', { type: t, fid: _id }, function (res) {
 
                         for (var i = 0; i < res.length; i++) {
                             var treenode = $('#' + tree).tree('find', res[i].value);
@@ -160,7 +160,7 @@
         for (var i = 0; i < nodes.length; i++) {
             str += nodes[i].id + ',';
         }
-        $.post("/system/AjaxSaveFuncLimit", { fid: _id, type: type, ids: str },
+        $.post("./AjaxSaveFuncLimit", { fid: _id, type: type, ids: str },
             function (data) {
                 TopNotify('保存成功！', "correct");
 

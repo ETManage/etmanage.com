@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class PageErrorController : Controller
     {

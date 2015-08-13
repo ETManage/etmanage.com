@@ -8,86 +8,64 @@ namespace ET.Sys_BLL
 {
     public class DesignBLL
     {
-
-        
-
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_DesignTypeInfo(DesignTypeInfo info, bool IsInsert)
+        #region 设计类别管理
+        public bool Update_DesignTypeInfo(DesignTypeInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<DesignTypeInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<DesignTypeInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<DesignTypeInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<DesignTypeInfo>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_DesignTypeInfo(string Condition)
+        public bool Delete_DesignTypeInfo(string condition)
         {
-            return new TBaseDAL<DesignTypeInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<DesignTypeInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个模块信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public DesignTypeInfo Get_DesignTypeInfoByID(string infoid)
         {
-            DesignTypeInfo info  = new TBaseDAL<DesignTypeInfo>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<DesignTypeInfo>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<DesignTypeInfo> List_DesignTypeInfo(string Fields, string Condition, string strOrder)
+        public List<DesignTypeInfo> List_DesignTypeInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<DesignTypeInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<DesignTypeInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<DesignTypeInfo> PageList_DesignTypeInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<DesignTypeInfo> Pagination_DesignTypeInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<DesignTypeInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<DesignTypeInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_DesignGoodInfo(DesignGoodInfo info, bool IsInsert)
+        #endregion
+
+        #region 设计管理
+        public bool Update_DesignGoodInfo(DesignGoodInfo info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<DesignGoodInfo>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<DesignGoodInfo>().Insert(info) > 0;
             else
-                return new TBaseDAL<DesignGoodInfo>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<DesignGoodInfo>().Update(info) > 0;
         }
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_DesignGoodInfo(string Condition)
+
+        public bool Delete_DesignGoodInfo(string condition)
         {
-            return new TBaseDAL<DesignGoodInfo>().DeleteInstances(Condition) > 0;
+            return new TSqlBaseDAL<DesignGoodInfo>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个模块信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>模块信息</returns>
+
         public DesignGoodInfo Get_DesignGoodInfoByID(string infoid)
         {
-            DesignGoodInfo info = null;
-            info = new TBaseDAL<DesignGoodInfo>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<DesignGoodInfo>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<DesignGoodInfo> List_DesignGoodInfo(string Fields, string Condition, string strOrder)
+        public List<DesignGoodInfo> List_DesignGoodInfo(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<DesignGoodInfo>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<DesignGoodInfo>().GetListByCondition(fields, condition, orderby);
         }
-        public List<DesignGoodInfo> PageList_DesignGoodInfo(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<DesignGoodInfo> Pagination_DesignGoodInfo(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<DesignGoodInfo>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<DesignGoodInfo>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
+        #endregion
     }
 }

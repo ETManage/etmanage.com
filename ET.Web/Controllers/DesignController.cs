@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class DesignController : WebControllerBase
     {
@@ -29,11 +29,11 @@ namespace Web.Controllers
             if (!string.IsNullOrEmpty(q))
                 strCondition = " AND CHARINDEX('" + q + "', ArticleTitle)>0";
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 15;
             long RecordTotalCount = 0;
-            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().PageList_DesignGoodInfo("GoodID,GoodUrl,GoodName,GoodPicture,GoodDescription,CreateTime,ACCESSCOUNT,TYPEID", " AND STATUS=1 ", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().Pagination_DesignGoodInfo("GoodID,GoodUrl,GoodName,GoodPicture,GoodDescription,CreateTime,ACCESSCOUNT,TYPEID", " AND STATUS=1 ", "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             ViewBag.DesignGoodInfo = list;
 
 

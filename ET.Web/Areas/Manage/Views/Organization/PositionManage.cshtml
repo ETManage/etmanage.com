@@ -72,14 +72,14 @@
             var _cid = '@Request.QueryString["cid"]';
             var _did = '@Request.QueryString["did"]';
             function AddPost() {
-                location.href = '/Organization/PositionManage?cid=' + _cid + '&did=' + _did;
+                location.href = './PositionManage?cid=' + _cid + '&did=' + _did;
             }
 
             $(function () {
                 if (_id != "") {
                     $.ajax({
                         type: "get", dataType: "json",
-                        url: "/Organization/AjaxGetPositionDetail?rad=" + new Date().toString(),
+                        url: "./AjaxGetPositionDetail?rad=" + new Date().toString(),
                         async: true,
                         data: { id: _id },
                         success: function (data) {
@@ -103,9 +103,9 @@
                     idFiled: "id",
                     dnd: false,
                     cascadeCheck: false,
-                    url: '/Organization/AjaxGetAllFunctionData?t=post&uid=' + _id,
+                    url: './AjaxGetAllFunctionData?t=post&uid=' + _id,
                     onBeforeExpand: function (node, param) {
-                        $('#ilimitmodule').tree('options').url = "/Organization/AjaxGetAllFunctionData?t=dept&id=" + node.id + "&uid=" + _id;
+                        $('#ilimitmodule').tree('options').url = "./AjaxGetAllFunctionData?t=dept&id=" + node.id + "&uid=" + _id;
                     }
                 });
 
@@ -131,7 +131,7 @@
                     $.ajax({
                         cache: true,
                         type: "POST",
-                        url: '/Organization/AjaxSavePosition?cid=' + _cid + '&did=' + _did + '&id=' + _id + "&" + $('#form1').serialize(),
+                        url: './AjaxSavePosition?cid=' + _cid + '&did=' + _did + '&id=' + _id + "&" + $('#form1').serialize(),
                         data: { ActionIDS: JSON.stringify(actionids) },
                         async: false,
                         error: function (XMLHttpRequest, textStatus, errorThrown) {

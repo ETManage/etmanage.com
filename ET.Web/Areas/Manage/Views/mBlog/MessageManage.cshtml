@@ -5,6 +5,9 @@
 @section Title{
     博客留言信息
 }
+@section Styles{
+    
+}
 @section Header{
 
 }
@@ -86,7 +89,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mblog/AjaxGetMessageDetail",
+                url: "./AjaxGetMessageDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -106,7 +109,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mblog/AjaxSaveMessage?infoid=' + _id,
+                url: './AjaxSaveMessage?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

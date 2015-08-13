@@ -602,7 +602,7 @@ function windowClose() {
     var myopenwindow = $('div.myopenwindow').last().parent();
     myopenwindow.next("div").remove();
     myopenwindow.remove();
-    $("#InfoGridData").datagrid('load', getQueryParam());
+    $("#InfoGridData").datagrid('reload')
 }
 $(function () {
     document.onkeydown = function (e) {

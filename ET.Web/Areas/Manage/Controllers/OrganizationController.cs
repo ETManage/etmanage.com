@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Areas.Manage.Controllers
+namespace ET.Web.Areas.Manage.Controllers
 {
     [UserAuthorize]
     public class OrganizationController : ManageControllerBase
@@ -47,7 +47,7 @@ namespace Web.Areas.Manage.Controllers
             info.CompanyName = collection["CompanyName"];
             info.CompanySort = collection["CompanySort"];
             info.CompanyDescription = collection["CompanyDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserCompany(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Update_UserCompany(info, IsInsert))
             {
                 id = info.CompanyID.ToString();
                 strResult = "true";
@@ -107,7 +107,7 @@ namespace Web.Areas.Manage.Controllers
             info.DepName = collection["DepName"];
             info.DepSort = collection["DepSort"];
             info.DepDescription = collection["DepDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartment(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Update_UserDepartment(info, IsInsert))
             {
                 id = info.DepID.ToString();
                 List<string> aIDS = null;
@@ -123,7 +123,7 @@ namespace Web.Areas.Manage.Controllers
                     ainfo.DepID = info.DepID;
                     ainfo.CreateTime = DateTime.Now;
                     ainfo.CreatorID = Guid.Parse(this.UserID);
-                    new ET.Sys_BLL.OrganizationBLL().Operate_UserDeptFuncLink(ainfo, true);
+                    new ET.Sys_BLL.OrganizationBLL().Update_UserDeptFuncLink(ainfo, true);
                 }
 
                 strResult = "true";
@@ -182,7 +182,7 @@ namespace Web.Areas.Manage.Controllers
             info.PostName = collection["PostName"];
             info.PostSort = collection["PostSort"];
             info.PostDescription = collection["PostDescription"];
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_UserPosition(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Update_UserPosition(info, IsInsert))
             {
                 id = info.PostID.ToString();
                 List<string> aIDS = null;
@@ -198,7 +198,7 @@ namespace Web.Areas.Manage.Controllers
                     ainfo.PostID = info.PostID;
                     ainfo.CreateTime = DateTime.Now;
                     ainfo.CreatorID = Guid.Parse(this.UserID);
-                    new ET.Sys_BLL.OrganizationBLL().Operate_UserPostFuncLink(ainfo, true);
+                    new ET.Sys_BLL.OrganizationBLL().Update_UserPostFuncLink(ainfo, true);
                 }
 
                 strResult = "true";
@@ -378,7 +378,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["sex"]))
                 Condition += " AND SEX='" + Request["sex"] + "'";
             long RecordTotalCount = 0;
-            List<UserFullProperty> list = new ET.Sys_BLL.OrganizationBLL().PageList_UserFullProperty("UserID,CNName,mobile,Sex,Age,CreateTime,Source,livearea+livecity+liveprovince livearea,Status, cast(Exp as varchar(20))+'['+UserLevel+']' UserLevel", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<UserFullProperty> list = new ET.Sys_BLL.OrganizationBLL().Pagination_UserFullProperty("UserID,CNName,mobile,Sex,Age,CreateTime,Source,livearea+livecity+liveprovince livearea,Status, cast(Exp as varchar(20))+'['+UserLevel+']' UserLevel", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetCompanySelectData()
@@ -399,10 +399,15 @@ namespace Web.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AjaxSaveUser(FormCollection collection, string infoid, string ActionIDS, string RoleIDs)
+        public ActionResult AjaxSaveUser(string infoid, string ActionIDS, string RoleIDs)
         {
+            UserBase bbaseinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase("AND UserName='" + Request.QueryString["UserName"] + "'");
+            if (string.IsNullOrEmpty(infoid) && bbaseinfo != null)
+            {
+                return Content("用户名已存在");
+            }
             string strResult = "false";
-            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(infoid);
+            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserInfo(infoid);
             bool IsInsert = false;
             if (info == null)
             {
@@ -410,23 +415,23 @@ namespace Web.Areas.Manage.Controllers
                 IsInsert = true;
                 UserBase baseinfo = new UserBase();
                 baseinfo.UserID = Guid.NewGuid();
-                baseinfo.UserName = collection["UserName"];
+                baseinfo.UserName = Request.QueryString["UserName"];
                 baseinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5("123456");
                 info.userbaseinfo = baseinfo;
                 UserProperty propertyinfo = new UserProperty();
-                propertyinfo.CNName = propertyinfo.Nickname = collection["CNName"];
-                propertyinfo.Sex = collection["Sex"];
+                propertyinfo.CNName = propertyinfo.Nickname = Request.QueryString["CNName"];
+                propertyinfo.Sex = Request.QueryString["Sex"];
                 propertyinfo.Source = "后台添加";
                 propertyinfo.CreateTime = DateTime.Now;
-                propertyinfo.EMail = collection["EMail"];
-                propertyinfo.Mobile = collection["Mobile"];
+                propertyinfo.EMail = Request.QueryString["EMail"];
+                propertyinfo.Mobile = Request.QueryString["Mobile"];
                 info.userstuinfo = propertyinfo;
             }
-            if (!string.IsNullOrEmpty(collection["Status"]) && collection["Status"] == "on")
+            if (!string.IsNullOrEmpty(Request.QueryString["Status"]) && Request.QueryString["Status"] == "on")
             {
                 info.userbaseinfo.Status = 1;
             }
-            if (!string.IsNullOrEmpty(collection["IsReset"]) && collection["IsReset"] == "on")
+            if (!string.IsNullOrEmpty(Request.QueryString["IsReset"]) && Request.QueryString["IsReset"] == "on")
             {
                 info.userbaseinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5("123456");
             }
@@ -443,7 +448,7 @@ namespace Web.Areas.Manage.Controllers
 
 
 
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, IsInsert))
+            if (new ET.Sys_BLL.OrganizationBLL().Update_UserInfo(info, IsInsert))
             {
                 List<string> aIDS = null;
                 if (!string.IsNullOrEmpty(ActionIDS))
@@ -459,7 +464,7 @@ namespace Web.Areas.Manage.Controllers
                     ainfo.UserID = info.userbaseinfo.UserID;
                     ainfo.CreateTime = DateTime.Now;
                     ainfo.CreatorID = Guid.Parse(this.UserID);
-                    new ET.Sys_BLL.OrganizationBLL().Operate_UserFuncLink(ainfo, true);
+                    new ET.Sys_BLL.OrganizationBLL().Update_UserFuncLink(ainfo, true);
                 }
                 strResult = "true";
             }
@@ -503,7 +508,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteUser(string ids)
         {
-            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Delete_User_Info(" AND USERID IN (" + ids + ")"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Delete_UserInfo(" AND USERID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -518,7 +523,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDisableUser(string ids)
         {
-            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Operate_DisableUser(" AND USERID IN (" + ids + ")"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Update_DisableUser(" AND USERID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");
@@ -526,7 +531,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxEnabledUser(string ids)
         {
-            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Operate_EnabledUser(" AND USERID IN (" + ids + ")"))
+            if (!string.IsNullOrEmpty(ids) && new ET.Sys_BLL.OrganizationBLL().Update_EnabledUser(" AND USERID IN (" + ids + ")"))
                 return Content("true");
             else
                 return Content("false");

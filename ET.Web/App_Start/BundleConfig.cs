@@ -9,10 +9,10 @@ namespace ET.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             //可以利用*代替字符
-            bundles.Add(new ScriptBundle("~/scripts/jquery").Include(
-                        "~/scripts/jquery-min.js", "~/scripts/jquery.parser.js", "~/scripts/jquery.form.js"));
-            bundles.Add(new ScriptBundle("~/scripts/jquery1-8").Include(
-                        "~/scripts/jquery-min1-8.js", "~/scripts/jquery.parser.js", "~/scripts/jquery.form.js"));
+            bundles.Add(new ScriptBundle("~/scripts/jquery1.1").Include(
+                        "~/scripts/jquery/jquery-1.11.1.min.js", "~/scripts/jquery/jquery.parser.js", "~/scripts/jquery/jquery.form.js"));
+            bundles.Add(new ScriptBundle("~/scripts/jquery2.1").Include(
+                        "~/scripts/jquery/jquery-2.1.1.min.js", "~/scripts/jquery/jquery.parser.js", "~/scripts/jquery/jquery.form.js"));
             bundles.Add(new StyleBundle("~/content/basestyle").Include(
                  "~/content/base.css"));
             bundles.Add(new StyleBundle("~/content/manage/managestyle").Include(

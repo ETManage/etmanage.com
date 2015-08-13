@@ -5,11 +5,12 @@
 @section Title{
     博客类别列表
 }
-@section Header{
-    <link href="@Url.Content("~/Res/autocomplete/autocomplete.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Res/autocomplete/jquery.autocomplete.js")" type="text/javascript"></script>
+@section Styles{
+    <link href="/res/autocomplete/autocomplete.css" rel="stylesheet" type="text/css" />
 }
-
+@section Header{
+    <script src="/Res/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
+}
 <div class="ManageBody">
     <div class="ManageListTitle"></div>
     <fieldset class="ManageSearch" style="">
@@ -67,7 +68,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mblog/ajaxqueryLevelpagelist", method: 'get',
+            url: "./ajaxqueryLevelpagelist", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -84,14 +85,14 @@
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/mblog/ajaxsearchLevel' };
+        var options = { serviceUrl: './ajaxsearchLevel' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
     function formatterUrl(val, row, index) {
         return '<a href="' + row.ArticleUrl + '" target="_blank" >' + row.LevelName + '</a>'
     }
     function fixAdd() {
-        openWindow('新增', "LevelManage", { width: 600, height: 450 })
+        openWindow('新增', "./levelmanage", { width: 600, height: 450 })
     };
 
     function fixDel() {
@@ -102,8 +103,8 @@
         }
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
-                var ls = $.map(selected, function (a) { return a.LevelID; }).toString();
-                $.post('/mblog/AjaxDeleteLevel', { infoid: ls }, function (res) {
+                var ls = $.map(selected, function (a) { return "'"+a.LevelID+"'"; }).toString();
+                $.post('./AjaxDeleteLevel', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');
@@ -122,7 +123,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openWindow('修改', "Levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
+        openWindow('修改', "./levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
     };
 
     function fixView() {
@@ -131,7 +132,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "Levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
+        openSimpleWindow('查看', "./levelmanage?infoid=" + selected.LevelID, { width: 600, height: 450 })
     };
 
     function queryClick() {

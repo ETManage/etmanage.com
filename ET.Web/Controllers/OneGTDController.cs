@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class OneGTDController : WebControllerBase
     {
@@ -102,7 +102,7 @@ namespace Web.Controllers
             //if (!string.IsNullOrEmpty(collection["EndTime"]))
             //info.EndTime = Convert.ToDateTime(collection["EndTime"]);
             info.Priority = collection["Priority"];
-            if (new ET.Sys_BLL.OneGTDBLL().Operate_GTDInbox(info, IsInsert))
+            if (new ET.Sys_BLL.OneGTDBLL().Update_GTDInbox(info, IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
@@ -142,7 +142,7 @@ namespace Web.Controllers
             //if (!string.IsNullOrEmpty(collection["EndTime"]))
             //info.EndTime = Convert.ToDateTime(collection["EndTime"]);
             info.Priority = collection["Priority"];
-            if (new ET.Sys_BLL.OneGTDBLL().Operate_GTDTask(info, IsInsert))
+            if (new ET.Sys_BLL.OneGTDBLL().Update_GTDTask(info, IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
@@ -171,7 +171,7 @@ namespace Web.Controllers
                     binfo.BoxLabel = collection["BoxLabel"];
                     binfo.BoxContent = collection["BoxContent"];
                     binfo.Priority = collection["Priority"];
-                    if (new ET.Sys_BLL.OneGTDBLL().Operate_GTDInbox(binfo, true))
+                    if (new ET.Sys_BLL.OneGTDBLL().Update_GTDInbox(binfo, true))
                         strResult = "true";
                     break;
                 case "today":
@@ -183,7 +183,7 @@ namespace Web.Controllers
                     tinfo.TaskContent = collection["BoxContent"];
                     tinfo.Priority = collection["Priority"];
                     tinfo.DoType = collection["DoType"];
-                    if (new ET.Sys_BLL.OneGTDBLL().Operate_GTDTask(tinfo, true))
+                    if (new ET.Sys_BLL.OneGTDBLL().Update_GTDTask(tinfo, true))
                         strResult = "true";
                     break;
             }
@@ -209,7 +209,7 @@ namespace Web.Controllers
                     info.Priority = boxinfo.Priority;
                     info.CreateTime = DateTime.Now;
                     info.DoType = t;
-                    if (new ET.Sys_BLL.OneGTDBLL().Operate_GTDTask(info, true)) ;
+                    if (new ET.Sys_BLL.OneGTDBLL().Update_GTDTask(info, true)) ;
                     new ET.Sys_BLL.OneGTDBLL().Delete_GTDInbox(boxinfo);
                 }
             }
@@ -242,7 +242,7 @@ namespace Web.Controllers
             int intPageSize = 20;
             long lngRecordTotalCount = 0;
             string strCondition = "";
-            List<GTDInbox> list = new ET.Sys_BLL.OneGTDBLL().PageList_GTDInbox("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<GTDInbox> list = new ET.Sys_BLL.OneGTDBLL().Pagination_GTDInbox("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -253,7 +253,7 @@ namespace Web.Controllers
             int intPageSize = 20;
             long lngRecordTotalCount = 0;
             string strCondition = "AND DOTYPE='today'";
-            List<GTDTask> list = new ET.Sys_BLL.OneGTDBLL().PageList_GTDTask("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<GTDTask> list = new ET.Sys_BLL.OneGTDBLL().Pagination_GTDTask("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -264,7 +264,7 @@ namespace Web.Controllers
             int intPageSize = 20;
             long lngRecordTotalCount = 0;
             string strCondition = "AND DOTYPE='tomorrow'";
-            List<GTDTask> list = new ET.Sys_BLL.OneGTDBLL().PageList_GTDTask("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<GTDTask> list = new ET.Sys_BLL.OneGTDBLL().Pagination_GTDTask("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -275,7 +275,7 @@ namespace Web.Controllers
             int intPageSize = 20;
             long lngRecordTotalCount = 0;
             string strCondition = "AND RecycleType='taskover'";
-            List<GTDRecycle> list = new ET.Sys_BLL.OneGTDBLL().PageList_GTDRecycle("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<GTDRecycle> list = new ET.Sys_BLL.OneGTDBLL().Pagination_GTDRecycle("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -286,7 +286,7 @@ namespace Web.Controllers
             int intPageSize = 20;
             long lngRecordTotalCount = 0;
             string strCondition = "AND charindex(RecycleType,'taskover')=0";
-            List<GTDRecycle> list = new ET.Sys_BLL.OneGTDBLL().PageList_GTDRecycle("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<GTDRecycle> list = new ET.Sys_BLL.OneGTDBLL().Pagination_GTDRecycle("*", strCondition, "CreateTime desc", int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         #endregion

@@ -3,7 +3,7 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    公司管理
+    组织权限管理
 }
 @section Header{
     <script src="/Res/My97DatePicker/WdatePicker.js"></script>
@@ -191,7 +191,7 @@
         if (_id != "" && _id != "-1") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/System/AjaxGetFunctionDetail?id=" + _id,
+                url: "./AjaxGetFunctionDetail?id=" + _id,
                 success: function (data) {
                     if (data) {
                         $("#form1").form("reset");
@@ -213,7 +213,7 @@
             onSelect: function (title) {
                 if (title == "关联权限") {
                     var oFrm = document.getElementById("IframeContact");
-                    oFrm.src = '/system/LimitOrgContact?id=' + _id;
+                    oFrm.src = './LimitOrgContact?id=' + _id;
                 }
             }
         });
@@ -223,7 +223,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/System/AjaxSaveFunction?id=' + _id + "&pid=" + _pid,
+                url: './AjaxSaveFunction?id=' + _id + "&pid=" + _pid,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -242,7 +242,7 @@
     function fixDelete() {
         $.messager.confirm("确认提示框", "确认删除这条吗？", function (r) {
             if (r) {
-                $.post('/System/AjaxDeleteFunction?id=' + _id, function (res) {
+                $.post('./AjaxDeleteFunction?id=' + _id, function (res) {
                     if (res == "true") {
                         $("#form1").form("reset");
                         parent.AsynRemoveNode(_id);

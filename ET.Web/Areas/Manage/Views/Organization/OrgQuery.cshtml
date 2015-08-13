@@ -31,15 +31,15 @@
     var _id;
     function AddCompany() {
         var oFrm = document.getElementById("iframecenter");
-        oFrm.src = '/Organization/CompanyManage?id=' + _id;
+        oFrm.src = './CompanyManage?id=' + _id;
     }
     function AddDept() {
         var oFrm = document.getElementById("iframecenter");
-        oFrm.src = '/Organization/DepartmentManage?id=' + _id;
+        oFrm.src = './DepartmentManage?id=' + _id;
     }
     function AddCompany() {
         var oFrm = document.getElementById("iframecenter");
-        oFrm.src = '/Organization/PositionManage?id=' + _id;
+        oFrm.src = './PositionManage?id=' + _id;
     }
 
     $(function () {
@@ -55,19 +55,19 @@
             idFiled: "id",
             dnd: false,
             cascadeCheck: false,
-            url: '/Organization/AjaxQueryOrgList',
+            url: './AjaxQueryOrgList',
             onClick: function (node) {
                 if (null != node && node != "undefined") {
                     var oFrm = document.getElementById("iframecenter");
                     switch (node.iconCls) {
                         case "icon-company":
-                            oFrm.src = '/Organization/CompanyManage?id=' + node.id ;
+                            oFrm.src = './CompanyManage?id=' + node.id ;
                             break;
                         case "icon-dept":
-                            oFrm.src = '/Organization/DepartmentManage?id=' + node.id ;
+                            oFrm.src = './DepartmentManage?id=' + node.id ;
                             break;
                         case "icon-post":
-                            oFrm.src = '/Organization/PositionManage?id=' + node.id;
+                            oFrm.src = './PositionManage?id=' + node.id;
                             break;
                         default:
                             oFrm.src = 'about: blank';

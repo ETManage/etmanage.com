@@ -58,13 +58,17 @@
     <Compile Include="OrganizationBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewsBLL.cs" />
-    <Compile Include="Public\PublicQuery.cs" />
+    <Compile Include="Public\PublicBLL.cs" />
     <Compile Include="SystemBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ET.Constant\ET.Constant.csproj">
       <Project>{66334CB9-10D3-469D-9287-3CECA173C00D}</Project>
       <Name>ET.Constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ET.Interface\ET.Interface.csproj">
+      <Project>{a30e095d-5699-436a-91fc-89685cc38bba}</Project>
+      <Name>ET.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\ET.Sys_DEF\ET.Sys_DEF.csproj">
       <Project>{95FDFC82-0183-4F86-AABD-12DC6FFA3ABC}</Project>

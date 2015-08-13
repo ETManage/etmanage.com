@@ -1,33 +1,28 @@
 ﻿using System.Web.Mvc;
 
-namespace Web.Areas.Manage
+namespace ET.Web.Areas.Manage
 {
-    public class ManageAreaRegistration : AreaRegistration
+    public class ManageAreaRegistration : AreaRegistration 
     {
-        public override string AreaName
+        public override string AreaName 
         {
-            get
+            get 
             {
                 return "Manage";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context)
+        public override void RegisterArea(AreaRegistrationContext context) 
         {
-            //context.MapRoute(
-            //    "Manage_default",
-            //    "manage/{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
-            //);
-
-            //2015/5/11 West 修改系统默认路由器！清除掉区域前缀
+            context.MapRoute("Manage_login", "manage/login",
+                       new { controller = "mAccount", action = "Login" });
+            context.MapRoute("Manage_Index", "manage/default",
+           new { controller = "System", action = "Default" });
             context.MapRoute(
                 "Manage_default",
-                "{controller}/{action}/{id}",
-                new[] { "Ed.Web.Areas.Manage" }, //默认控制器的命名空间 (这里一定要加，非常重要)
-                new { controller = "mAccount", action = "Login", id = UrlParameter.Optional }
-                );
-
+                "Manage/{controller}/{action}/{id}",
+                new { controller = "Blog", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

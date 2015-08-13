@@ -6,7 +6,7 @@
     博客文章列表
 }
 @section Header{
-    <script src="~/Res/editor/editor.js"></script>
+
 }
 <div class="ManageBody">
     <div class="ManageOperateTitle">
@@ -40,6 +40,18 @@
                             </th>
                             <td>
                                 <input name="CNName" type="text" class="easyui-textbox" style="width: 550px" data-options="required:true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                邮箱：
+                            </th>
+                            <td>
+                                <select name="Sex" style="width: 550px">
+                                    <option>保密</option>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +115,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/Organization/AjaxGetUserDetail?rad=" + new Date().toGMTString(),
+                url: "./AjaxGetUserDetail?rad=" + new Date().toGMTString(),
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -131,9 +143,9 @@
             idFiled: "id",
             dnd: false,
             cascadeCheck: false,
-            url: '/Organization/AjaxGetAllFunctionData?uid=' + _id,
+            url: './AjaxGetAllFunctionData?uid=' + _id,
             onBeforeExpand: function (node, param) {
-                $('#ilimitmodule').tree('options').url = "/Organization/AjaxGetAllFunctionData?id=" + node.id + "&uid=" + _id;
+                $('#ilimitmodule').tree('options').url = "./AjaxGetAllFunctionData?id=" + node.id + "&uid=" + _id;
             }
         });
     });
@@ -168,7 +180,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/Organization/AjaxSaveUser?infoid=' +  _id + "&" + $('#form1').serialize(),
+                url: './AjaxSaveUser?infoid=' +  _id + "&" + $('#form1').serialize(),
                 data: { ActionIDS: JSON.stringify(actionids), RoleIDs: RoleIDs },
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

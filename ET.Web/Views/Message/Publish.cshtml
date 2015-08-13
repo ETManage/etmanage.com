@@ -6,17 +6,14 @@
     用户投稿
 }
 @section Header{
-    <link href="/Content/Blog/login.css" rel="stylesheet" />
+    <link href="/content/blog/login.css" rel="stylesheet" />
     <script src="/Scripts/common/jquery.webtopbar.js"></script>
     <script src="~/Scripts/common/jquery-browser.js"></script>
-    <script src="/Scripts/Blog/editor.js"></script>
-    <link href="/Res/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
-    <script src="/Res/uploadify/jquery.uploadify-3.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
      @if (!Request.IsAuthenticated)
      {
-         @:alert('您还未登录！无权操作此页面！'); location.href = '/account/login';
-            }
+         @:alert('您还未登录！无权操作此页面！'); location.href = '/login';
+                                    }
     </script>
 }
 
@@ -59,8 +56,10 @@
                                             <tr>
                                                 <th>封面：</th>
                                                 <td>
-                                                    <input type="file" id="file_upload" class="inputstyle" /><span class="cRed">小图(200*100)为第一张,大图为第二张(830*300)*限10M</span>
-                                                    <div class="uploadify-picbox"></div>
+                                                    <div id="uploader">
+                                                    </div><span class="cRed">第一张小图(200*100),第二张大图(830*300)*限10M</span>
+                                                    <input type="hidden" name="uploadhidden" id="uploadhidden" />
+                                                    <input type="hidden" name="Cover" id="txtCover" />
                                                 </td>
                                             </tr>
                                             <tr><th>标签：</th><td><input type="text" id="iLabel" name="Label" class="inputstyle" maxlength="50" /><span>英文,符号隔开</span></td></tr>
@@ -86,45 +85,29 @@
 
     </div>
 </div>
-<style type="text/css">
-    .uploadify-itemdel { position: absolute; top: 0; right: 0; background: url("/Images/Public/icon-clear.png") no-repeat white; cursor: pointer; text-indent: -99999px; margin-left: 20px; height: 20px; }
-        .uploadify-itemdel:hover { background-color: #ccc; }
-    .uploadify-picbox { padding: 5px; border: 1px solid #ccc; height: 100px; overflow: auto; }
-        .uploadify-picbox li { float: left; display: block; width: 100px; height: 80px; padding: 2px; border: 1px solid #ccc; margin: 5px; }
-    .relative { position: relative; }
-</style>
+
+<script src="/res/editor/editor.js" type="text/javascript"></script>
+<script src="/res/webuploader/webupload.js" type="text/javascript"></script>
 <script type="text/javascript">
 
     var _publishCover = "";
     $(function () {
         $('#iPublishContent').editor({ tools: 'full' });
 
-        $('#file_upload').uploadify({
-            'buttonText': '请选择上传文件',
-            'swf': '/Res/uploadify/uploadify.swf',
-            'uploader': '/message/upload',
-            'sizeLimit ': '10240',
-            'fileTypeExts': '*.jpg;*.jpeg;*.bmp;*.gif;*.png;',
-            'method': "post",
-            'onUploadSuccess': function (file, data, response) {
-                var jsondata = JSON.parse(data)
-                var html = "<li><div class='relative'> <img src=" + jsondata.SaveName + " width='100px' height='80px' class='uploadify-preimgs'/><span class='uploadify-itemdel'>删除</span></div></li>";
-                $(".uploadify-picbox").append(html);
-                _publishCover = jsondata.SaveName
 
-            },
-            'onFallback': function () {
-                alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
-            },
-            'onError': function (event, queueID, fileObj) {
-                alert("文件:" + fileObj.name + " 上传失败");
+        ApplicationAjaxUploaderUrl = "BlogUploader";
+        ApplicationAjaxEditorUrl = "BlogEditor";
+
+        $("#uploader").powerWebUpload({
+            hiddenInputId: "uploadhidden",
+            fileSingleSizeLimit: 10240,
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*',
+                fileNumLimit: 2
             }
         });
-        $(".uploadify-itemdel").off().on('click', function () {
-
-            $(this).parent().parent().remove();
-        });
-
 
         $("#GL_StandardCode").click(function () {
             var newSrc = "/message/validatecode?t=" + (new Date()).getTime();
@@ -166,6 +149,7 @@
                 border: "1px solid #D7D7D7",
                 boxShadow: "none"
             });
+
             $.ajax({
                 type: "post",
                 url: "/message/ajaxcheckvalidatecode",
@@ -187,16 +171,14 @@
                             boxShadow: "none"
                         });
 
-
-                        $(".savepreimgs").remove();
                         var presrc = "";
-                        $(".uploadify-preimgs").each(function () {
-                            presrc = $(this).attr("src");
-
-
+                        $("#uploader").find("div.item").each(function () {
+                            if (presrc == "")
+                                presrc = $(this).data('file');
+                            else
+                                presrc += "," + $(this).data('file');
                         });
-                        presrc = "<input type='hidden' name='Cover'  class='savepreimgs'  value=" + presrc + ">";
-                        $("#iAddmsgForm").append(presrc);
+                        $("#txtCover").val(presrc);
                         $.ajax({
                             type: "POST",
                             url: '/message/ajaxaddpublish',

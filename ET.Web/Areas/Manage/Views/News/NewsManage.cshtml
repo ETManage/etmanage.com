@@ -6,7 +6,7 @@
     博客友情链接
 }
 @section Header{
-<script src="/Scripts/Blog/editor.js"></script>
+
 }
 <div class="ManageBody">
     <div class="ManageOperateTitle">
@@ -21,7 +21,7 @@
                         信息标题：
                     </th>
                     <td>
-                        <input name="NewTitle" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <input name="NewTitle" type="text" class="easyui-textbox" data-options="required:true" style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
@@ -29,7 +29,7 @@
                         信息来源：
                     </th>
                     <td>
-                        <input name="NewSource" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <input name="NewSource" type="text" class="easyui-textbox" data-options="required:true" style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
@@ -37,7 +37,7 @@
                         内容：
                     </th>
                     <td>
-                        <input name="NewContent" type="text" class="easyui-textbox" style="width: 200px" data-options="required:true" />
+                        <textarea name="NewContent" id="NewContent" style="height:320px;width:100%;"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -45,14 +45,14 @@
                         状态操作：
                     </th>
                     <td>
-                        是否启用<input name="Status" type="checkbox" id="ickStatus" />
+                        是否启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />
                     </td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
-
+<script src="/res/editor/editor.js" type="text/javascript"></script>
 <script type="text/javascript">
     var _id = '@Request["infoid"]';
     $(function () {
@@ -60,11 +60,11 @@
         $(window).ApplyQuickKey(83, BtnSaveOrUpdate);
         //启用快捷键 83/ALT+c关闭
         $(window).ApplyQuickKey(67, parent.windowClose);
-        $('#ArticleContent').editor({ tools: 'full' });
+        $('#NewContent').editor({ tools: 'full' });
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/news/AjaxGetNewDetail",
+                url: "./AjaxGetNewDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -84,7 +84,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/news/AjaxSaveNew?infoid=' + _id,
+                url: './AjaxSaveNew?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

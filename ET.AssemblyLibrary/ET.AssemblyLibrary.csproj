@@ -73,13 +73,18 @@
     <Content Include="Aspose.Cells.dll" />
     <Content Include="Aspose.Words.dll" />
     <Content Include="ET.DALContract.dll" />
+    <Content Include="ET.SecHandle.dll" />
     <Content Include="ET.Tookit.Constant.dll" />
     <Content Include="ET.ToolKit.DBLayer.dll" />
     <Content Include="ET.ToolKit.dll" />
-    <Content Include="ET.WeixinMpSdk.dll" />
     <Content Include="MySql.Data.dll" />
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="SecModule.dll" />
+    <Content Include="Wx\Senparc.Weixin.dll" />
+    <Content Include="Wx\Senparc.Weixin.MP.dll" />
+    <Content Include="Wx\Senparc.Weixin.MP.MvcExtension.dll" />
+    <Content Include="Wx\Senparc.Weixin.Open.dll" />
+    <Content Include="Wx\Senparc.Weixin.QY.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

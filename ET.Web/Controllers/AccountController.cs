@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class AccountController : WebControllerBase
     {
@@ -78,7 +78,7 @@ namespace Web.Controllers
                         info.userrole = new List<UserRoleLink>();
                         UserRoleLink role = new UserRoleLink();
                         info.userrole.Add(role);
-                        if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, true))
+                        if (new ET.Sys_BLL.OrganizationBLL().Update_UserInfo(info, true))
                         {
                         }
                     }
@@ -115,12 +115,12 @@ namespace Web.Controllers
 
                             link.UserID = baseinfo.UserID;
                              link.Exp = 10;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, true);
                         }
                         else
                         {
                             link.Exp++;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, false);
                         }
                     }
                 }
@@ -168,12 +168,12 @@ namespace Web.Controllers
 
                             link.UserID = Guid.Parse(this.UserID);
                             link.Exp = 10;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, true);
                         }
                         else
                         {
                             link.Exp++;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, false);
                         }
                     }
                 }
@@ -208,12 +208,12 @@ namespace Web.Controllers
 
                             link.UserID = Guid.Parse(this.UserID);
                             link.Exp = 10;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, true);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, true);
                         }
                         else
                         {
                             link.Exp++;
-                            new ET.Sys_BLL.BlogBLL().Operate_BlogUserLevelLink(link, false);
+                            new ET.Sys_BLL.BlogBLL().Update_BlogUserLevelLink(link, false);
                         }
                     }
                 }
@@ -289,7 +289,7 @@ namespace Web.Controllers
             info.userrole = new List<UserRoleLink>();
             UserRoleLink role = new UserRoleLink();
             info.userrole.Add(role);
-            if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, true))
+            if (new ET.Sys_BLL.OrganizationBLL().Update_UserInfo(info, true))
             {
                 return Content("true");
             }

@@ -53,7 +53,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mblog/ajaxquerySignpagelist", method: 'get',
+            url: "./ajaxquerySignpagelist", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -82,7 +82,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.SignID + "'"; }).toString();
-                $.post('/mblog/AjaxDeleteSign', { infoid: ls }, function (res) {
+                $.post('./AjaxDeleteSign', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');

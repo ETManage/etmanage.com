@@ -3,14 +3,14 @@
     Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
 }
 @section Title{
-    博客文章列表
+    设计类别管理
 }
 @section Header{
 
 }
 <div class="ManageBody">
     <div class="ManageOperateTitle">
-        博客类别管理
+        设计类别管理
     </div>
     <div class="ManageOperate">
         <form id="form1"  action="/" method="post">
@@ -21,7 +21,7 @@
                     </th>
                     <td>
                         <select name="TypePID" id="sltModulePID" style="width: 120px" class="easyui-combotree"
-                                data-options="required:true,method:'get',url:'/mDesign/AjaxGetPTypeData',value:-1"></select>
+                                data-options="required:true,method:'get',url:'./AjaxGetPTypeData',value:-1"></select>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +55,7 @@
         if (_id != "") {
             $.ajax({
                 type: "get", dataType: "json",
-                url: "/mDesign/AjaxGetTypeDetail",
+                url: "./AjaxGetTypeDetail",
                 async: true,
                 data: { infoid: _id },
                 success: function (data) {
@@ -74,7 +74,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/mDesign/AjaxSaveType?infoid=' + _id,
+                url: './AjaxSaveType?infoid=' + _id,
                 data: $('#form1').serialize(),
                 async: false,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

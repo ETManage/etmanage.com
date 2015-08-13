@@ -13,12 +13,8 @@ D:\个人中心\私人开发\ETManage框架\ETManage\ET.Sys_DEF\bin\Release\MySq
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.Sys_DEF.dll
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.Sys_DEF.pdb
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.Constant.dll
-D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.ToolKit.dll
-D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\MySql.Data.dll
-D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\Newtonsoft.Json.dll
-D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\Aspose.Cells.dll
-D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\Aspose.Words.dll
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.Constant.pdb
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\obj\Release\ET.Sys_DEF.csprojResolveAssemblyReference.cache
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\obj\Release\ET.Sys_DEF.dll
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\obj\Release\ET.Sys_DEF.pdb
+D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.Sys_DEF\bin\Release\ET.Tookit.Constant.dll

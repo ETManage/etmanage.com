@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta property="qc:admins" content="6710324165161756375" />
     @Styles.Render("~/content/basestyle")
-    @Scripts.Render("~/scripts/jquery")
+    <script src="~/Scripts/JQuery/jquery-2.1.1.min.js"></script>
     <script src="/Scripts/common/jquery.topbar.js"></script>
     <link href="@Url.Content("~/content/blog/blog.css")" rel="stylesheet" />
     <link href="@Url.Content("~/content/blog/toolbar.css")" rel="stylesheet" />
@@ -50,7 +50,7 @@
             </div>
             @*@Html.Raw(ViewBag.htmlLoginOk)
                 <div class="user-ed" id="nologin">
-                    <a href="@PublicHelper.GetHostAddress()/account/login?t=0&l=@Request.Url.ToString()" rel="nofollow">免费注册</a><span class="ml10 mr10">|</span><a href="@PublicHelper.GetHostAddress()/account/login?l=@Request.Url.ToString()" rel="nofollow">登录</a><br>
+                    <a href="@PublicHelper.GetHostAddress()/login?t=0&l=@Request.Url.ToString()" rel="nofollow">免费注册</a><span class="ml10 mr10">|</span><a href="@PublicHelper.GetHostAddress()/login?l=@Request.Url.ToString()" rel="nofollow">登录</a><br>
                     <span id="ibtnQQLogin"></span>
                     <a id="ibtnSINALogin" href="javascript:;" rel="nofollow">新浪登录</a>
                 </div>*@

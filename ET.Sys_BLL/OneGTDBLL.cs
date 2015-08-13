@@ -10,222 +10,161 @@ namespace ET.Sys_BLL
     {
 
         #region 收集箱表
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_GTDInbox(GTDInbox info, bool IsInsert)
+
+        public bool Update_GTDInbox(GTDInbox info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<GTDInbox>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<GTDInbox>().Insert(info) > 0;
             else
-                return new TBaseDAL<GTDInbox>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<GTDInbox>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_GTDInbox(string Condition)
+        public bool Delete_GTDInbox(string condition)
         {
-            return new TBaseDAL<GTDInbox>().DeleteInstances(Condition) > 0;
-
+            return new TSqlBaseDAL<GTDInbox>().Delete(condition) > 0;
         }
+
         public bool Delete_GTDInbox(GTDInbox info)
         {
-            return new TBaseDAL<GTDInbox>().DeleteInstance(info) > 0;
-
+            return new TSqlBaseDAL<GTDInbox>().Delete(info) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>信息</returns>
+
         public GTDInbox Get_GTDInboxByID(string infoid)
         {
-            GTDInbox info  = new TBaseDAL<GTDInbox>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<GTDInbox>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<GTDInbox> List_GTDInbox(string Fields, string Condition, string strOrder)
+        public List<GTDInbox> List_GTDInbox(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<GTDInbox>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<GTDInbox>().GetListByCondition(fields, condition, orderby);
         }
-        public List<GTDInbox> PageList_GTDInbox(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<GTDInbox> Pagination_GTDInbox(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<GTDInbox>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<GTDInbox>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 任务表
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_GTDTask(GTDTask info, bool IsInsert)
+
+        public bool Update_GTDTask(GTDTask info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<GTDTask>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<GTDTask>().Insert(info) > 0;
             else
-                return new TBaseDAL<GTDTask>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<GTDTask>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_GTDTask(string Condition)
+        public bool Delete_GTDTask(string condition)
         {
-            return new TBaseDAL<GTDTask>().DeleteInstances(Condition) > 0;
-
+            return new TSqlBaseDAL<GTDTask>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>信息</returns>
+
         public GTDTask Get_GTDTaskByID(string infoid)
         {
-            GTDTask info = new TBaseDAL<GTDTask>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<GTDTask>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<GTDTask> List_GTDTask(string Fields, string Condition, string strOrder)
+        public List<GTDTask> List_GTDTask(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<GTDTask>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<GTDTask>().GetListByCondition(fields, condition, orderby);
         }
-        public List<GTDTask> PageList_GTDTask(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<GTDTask> Pagination_GTDTask(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<GTDTask>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<GTDTask>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 回收表
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_GTDRecycle(GTDRecycle info, bool IsInsert)
+
+        public bool Update_GTDRecycle(GTDRecycle info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<GTDRecycle>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<GTDRecycle>().Insert(info) > 0;
             else
-                return new TBaseDAL<GTDRecycle>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<GTDRecycle>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_GTDRecycle(string Condition)
+        public bool Delete_GTDRecycle(string condition)
         {
-            return new TBaseDAL<GTDRecycle>().DeleteInstances(Condition) > 0;
-
+            return new TSqlBaseDAL<GTDRecycle>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>信息</returns>
+
         public GTDRecycle Get_GTDRecycleByID(string infoid)
         {
-            GTDRecycle info =  new TBaseDAL<GTDRecycle>().GetInstanceById(infoid);
+            return new TSqlBaseDAL<GTDRecycle>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<GTDRecycle> List_GTDRecycle(string Fields, string Condition, string strOrder)
+        public List<GTDRecycle> List_GTDRecycle(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<GTDRecycle>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<GTDRecycle>().GetListByCondition(fields, condition, orderby);
         }
-        public List<GTDRecycle> PageList_GTDRecycle(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<GTDRecycle> Pagination_GTDRecycle(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<GTDRecycle>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<GTDRecycle>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 项目表
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_GTDProject(GTDProject info, bool IsInsert)
+        public bool Update_GTDProject(GTDProject info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<GTDProject>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<GTDProject>().Insert(info) > 0;
             else
-                return new TBaseDAL<GTDProject>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<GTDProject>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_GTDProject(string Condition)
+        public bool Delete_GTDProject(string condition)
         {
-            return new TBaseDAL<GTDProject>().DeleteInstances(Condition) > 0;
-
+            return new TSqlBaseDAL<GTDProject>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>信息</returns>
+
         public GTDProject Get_GTDProjectByID(string infoid)
         {
-            GTDProject info =  new TBaseDAL<GTDProject>().GetInstanceById(infoid);
+            return  new TSqlBaseDAL<GTDProject>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<GTDProject> List_GTDProject(string Fields, string Condition, string strOrder)
+        public List<GTDProject> List_GTDProject(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<GTDProject>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<GTDProject>().GetListByCondition(fields, condition, orderby);
         }
-        public List<GTDProject> PageList_GTDProject(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<GTDProject> Pagination_GTDProject(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<GTDProject>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<GTDProject>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
 
         #region 情景表
-        /// <summary>
-        /// 信息操作
-        /// </summary>
-        /// <param name="info">信息</param>
-        public bool Operate_GTDScene(GTDScene info, bool IsInsert)
+
+        public bool Update_GTDScene(GTDScene info, bool isinsert)
         {
-            if (IsInsert)
-                return new TBaseDAL<GTDScene>().InsertInstance(info) > 0;
+            if (isinsert)
+                return new TSqlBaseDAL<GTDScene>().Insert(info) > 0;
             else
-                return new TBaseDAL<GTDScene>().UpdateInstance(info) > 0;
+                return new TSqlBaseDAL<GTDScene>().Update(info) > 0;
         }
 
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="Condition">条件需要以AND开头</param>
-        public bool Delete_GTDScene(string Condition)
+        public bool Delete_GTDScene(string condition)
         {
-            return new TBaseDAL<GTDScene>().DeleteInstances(Condition) > 0;
-
+            return new TSqlBaseDAL<GTDScene>().Delete(condition) > 0;
         }
-        /// <summary>
-        /// 获取单个信息
-        /// </summary>
-        /// <param name="condition">查询条件</param>
-        /// <returns>信息</returns>
+
         public GTDScene Get_GTDSceneByID(string infoid)
         {
-            GTDScene info =  new TBaseDAL<GTDScene>().GetInstanceById(infoid);
+            return  new TSqlBaseDAL<GTDScene>().GetById(infoid);
+        }
 
-            return info;
-        }
-        public List<GTDScene> List_GTDScene(string Fields, string Condition, string strOrder)
+        public List<GTDScene> List_GTDScene(string fields, string condition, string orderby)
         {
-            return new TBaseDAL<GTDScene>().GetListByCondition(Fields, Condition, strOrder);
+            return new TSqlBaseDAL<GTDScene>().GetListByCondition(fields, condition, orderby);
         }
-        public List<GTDScene> PageList_GTDScene(string Fields, string Condition, string Orderby, int Offset, int Count, ref long RecordTotalCount)
+
+        public List<GTDScene> Pagination_GTDScene(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
         {
-            return new TBaseDAL<GTDScene>().GetListByPager(Fields, Condition, Orderby, Offset, Count, ref  RecordTotalCount);
+            return new TSqlBaseDAL<GTDScene>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
         #endregion
     }

@@ -67,7 +67,7 @@
             striped: true,
             nowrap: false,
             showFooter: true,
-            url: "/mblog/ajaxqueryRequestpagelist", method: 'get',
+            url: "./ajaxqueryRequestpagelist", method: 'get',
             collapsible: false,
             remoteSort: false,
             showFooter: true,
@@ -91,11 +91,11 @@
             toolbar: toolbarnode
 
         });
-        var options = { serviceUrl: '/mblog/ajaxsearchRequest' };
+        var options = { serviceUrl: './ajaxsearchRequest' };
         searchobj = $('#txtSearch').autocomplete(options);
     });
     function fixAdd() {
-        openWindow('新增', "UserRequestManage", { width: 600, height: 450 })
+        openWindow('新增', "./userrequestmanage", { width: 600, height: 450 })
     };
 
     function fixDel() {
@@ -107,7 +107,7 @@
         $.messager.confirm("确认提示框", "确认删除这 " + selected.length + " 条吗？", function (r) {
             if (r) {
                 var ls = $.map(selected, function (a) { return "'" + a.RequestID + "'"; }).toString();
-                $.post('/mblog/AjaxDeleteRequest', { infoid: ls }, function (res) {
+                $.post('./AjaxDeleteRequest', { infoid: ls }, function (res) {
                     if (res == "true") {
                         $("#InfoGridData").datagrid('reload')
                         TopNotify("数据已删除", 'info');
@@ -126,7 +126,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openWindow('修改', "UserRequestmanage?infoid=" + selected.RequestID, { width: 600, height: 450 })
+        openWindow('修改', "./userrequestmanage?infoid=" + selected.RequestID, { width: 600, height: 450 })
     };
 
     function fixView() {
@@ -135,7 +135,7 @@
             TopNotify("请选择数据", 'info');
             return;
         }
-        openSimpleWindow('查看', "UserRequestmanage?infoid=" + selected.RequestID, { width: 600, height: 450 })
+        openSimpleWindow('查看', "./userrequestmanage?infoid=" + selected.RequestID, { width: 600, height: 450 })
     };
 
     function queryClick() {

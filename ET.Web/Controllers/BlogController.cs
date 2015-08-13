@@ -33,7 +33,7 @@ namespace ET.Web.Controllers
                 Field = "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource";
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(10, Field, TableName, "AND Status=1 " + Condition, Order);
 
 
             ViewBag.listArticle = GetArticleList(10, Field, Condition, Order, TableName, IsNoLock);
@@ -58,7 +58,7 @@ namespace ET.Web.Controllers
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
 
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order);
             return listArticle;
         }
 
@@ -68,7 +68,7 @@ namespace ET.Web.Controllers
         #region 页面控制器
         public ActionResult Index()
         {
-            if (IsMobileDevice())
+            if (PublicHelper.IsMobileDevice())
                 return RedirectToAction("index", "blogmobile");
             ViewBag.listTopArticle = GetArticleList(5, "ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,case when CHARINDEX(',',ArticleCover)>0 then ArticleCover else ',' end ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", " AND IsRoll=1 ", "CreateTime DESC"); ;
             _GetPartialArticleList(null, null, null);
@@ -190,11 +190,11 @@ namespace ET.Web.Controllers
             if (!string.IsNullOrEmpty(q))
                 strCondition = " AND CHARINDEX('" + q + "', ArticleTitle)>0";
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 10;
             long RecordTotalCount = 0;
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.BlogBLL().Pagination_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", "AND Status=1 " + strCondition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             ViewBag.listArticle = listArticle;
 
 
@@ -248,7 +248,7 @@ namespace ET.Web.Controllers
             }
 
 
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", strCondition, _order, int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,CreateTime,AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) ArticleSource", strCondition, _order, int.Parse(groupNumber), intPageSize, ref lngRecordTotalCount);
             return Json(new { total = lngRecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -272,7 +272,7 @@ namespace ET.Web.Controllers
 
 
             info.CreateTime = DateTime.Now;
-            new ET.Sys_BLL.BlogBLL().Operate_BlogCommentInfo(info, true);
+            new ET.Sys_BLL.BlogBLL().Update_BlogCommentInfo(info, true);
             return Content(@"<ol class='commentlist'>
                 <li class='comment even thread-even depth-1' id='comment-" + info.CommentID + @"'>
                     <div class='c-avatar'>
@@ -320,7 +320,7 @@ namespace ET.Web.Controllers
             if (info != null)
             {
                 info.LoveCount++;
-                new Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
+                new Sys_BLL.BlogBLL().Update_BlogArticleInfo(info, false);
                 return Content(info.LoveCount.ToString());
             }
             else
@@ -336,7 +336,7 @@ namespace ET.Web.Controllers
                 info.ArticleID = new Guid(id);
                 info.UserID = Guid.Parse(this.UserID);
                 info.CreateTime = DateTime.Now;
-                if (new Sys_BLL.BlogBLL().Operate_BlogArticleFavorite(info, true))
+                if (new Sys_BLL.BlogBLL().Update_BlogArticleFavorite(info, true))
                     return Content("true");
                 else
                     return Content("error");
@@ -351,7 +351,7 @@ namespace ET.Web.Controllers
                 return Json(new { total = 0, rows = new List<DesignGoodInfo>() }, JsonRequestBehavior.AllowGet);
             int pageSize = 15;
             long RecordTotalCount = 0;
-            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().PageList_DesignGoodInfo("GoodID,GoodUrl,GoodName,GoodPicture,GoodDescription,CreateTime,ACCESSCOUNT,TYPEID", null, "CreateTime desc", int.Parse(groupNumber), pageSize, ref RecordTotalCount);
+            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().Pagination_DesignGoodInfo("GoodID,GoodUrl,GoodName,GoodPicture,GoodDescription,CreateTime,ACCESSCOUNT,TYPEID", null, "CreateTime desc", int.Parse(groupNumber), pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
 
@@ -367,7 +367,7 @@ namespace ET.Web.Controllers
                     info.AccessCount++;
                 else
                     info.AccessCount = 1;
-                new Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
+                new Sys_BLL.BlogBLL().Update_BlogArticleInfo(info, false);
                 return Content("true");
             }
             else
@@ -387,7 +387,7 @@ namespace ET.Web.Controllers
                     info.InfoType = type;
                     info.InfoID =id;
                     info.CreateTime = DateTime.Now;
-                    new Sys_BLL.BlogBLL().Operate_BlogViewRecord(info, true);
+                    new Sys_BLL.BlogBLL().Update_BlogViewRecord(info, true);
                     return Content("true");
                 }
             }

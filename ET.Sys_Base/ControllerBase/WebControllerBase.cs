@@ -27,105 +27,31 @@ namespace System.Web.Mvc
 {    /// <summary>
     /// 需要需要登陆验证，页面继承类
     /// </summary>
-    public class WebControllerBase : ControllerHelper
+    public class WebControllerBase : Controller
     {
-        public WebControllerBase()
-        {
 
-        }
-        public Boolean IsMobileDevice()
-        {
-
-            String[] mobileAgents = { "iphone", "android", "phone", "mobile", "wap", "netfront", "java", "opera mobi", "opera mini", "ucweb", "windows ce", "symbian", "series", "webos", "sony", "blackberry", "dopod", "nokia", "samsung", "palmsource", "xda", "pieplus", "meizu", "midp", "cldc", "motorola", "foma", "docomo", "up.browser", "up.link", "blazer", "helio", "hosin", "huawei", "novarra", "coolpad", "webos", "techfaith", "palmsource", "alcatel", "amoi", "ktouch", "nexian", "ericsson", "philips", "sagem", "wellcom", "bunjalloo", "maui", "smartphone", "iemobile", "spice", "bird", "zte-", "longcos", "pantech", "gionee", "portalmmm", "jig browser", "hiptop", "benq", "haier", "^lct", "320x320", "240x320", "176x220", "w3c ", "acs-", "alav", "alca", "amoi", "audi", "avan", "benq", "bird", "blac", "blaz", "brew", "cell", "cldc", "cmd-", "dang", "doco", "eric", "hipt", "inno", "ipaq", "java", "jigs", "kddi", "keji", "leno", "lg-c", "lg-d", "lg-g", "lge-", "maui", "maxo", "midp", "mits", "mmef", "mobi", "mot-", "moto", "mwbp", "nec-", "newt", "noki", "oper", "palm", "pana", "pant", "phil", "play", "port", "prox", "qwap", "sage", "sams", "sany", "sch-", "sec-", "send", "seri", "sgh-", "shar", "sie-", "siem", "smal", "smar", "sony", "sph-", "symb", "t-mo", "teli", "tim-", "tosh", "tsm-", "upg1", "upsi", "vk-v", "voda", "wap-", "wapa", "wapi", "wapp", "wapr", "webc", "winw", "winw", "xda", "xda-", "Googlebot-Mobile" };
-            Boolean isMoblie = false;
-            if (Request.UserAgent.ToString().ToLower() != null)
-            {
-                for (int i = 0; i < mobileAgents.Length; i++)
-                {
-                    if (Request.UserAgent.ToString().ToLower().IndexOf(mobileAgents[i]) >= 0)
-                    {
-                        isMoblie = true;
-                        break;
-                    }
-                }
-            }
-            if (isMoblie)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         public void getSystemConfig()
         {
             string xmlpath = Server.MapPath(SystemConfigConst.WebSiteDir + SystemConfigConst.SystemConfigFile);
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.Load(xmlpath);
-            if (xmldoc.SelectSingleNode("Condition/System/IsRegist").InnerXml == "1")
-            {
-                Response.Write("hideRegist();");
-            }
             ViewBag.PageTitleImg = xmldoc.SelectSingleNode("/Condition/System/TitleImg").InnerText;
-
             ViewBag.PageTitle = xmldoc.SelectSingleNode("Condition/System/PageTitle").InnerText;
             ViewBag.PageLogo = xmldoc.SelectSingleNode("Condition/System/CompanyLogo").InnerText;
             ViewBag.CompanyName = xmldoc.SelectSingleNode("Condition/System/CompanyName").InnerText;
+            ViewBag.CompanyUrl = xmldoc.SelectSingleNode("Condition/System/CompanyUrl").InnerText;
             ViewBag.PageVer = xmldoc.SelectSingleNode("Condition/System/Ver").InnerText;
-
+            ViewBag.IsCanRegist = xmldoc.SelectSingleNode("Condition/System/IsRegist").InnerText;
         }
 
         public int GetOnlineUser()
         {
-            return System.Web.HttpContext.Current.Cache.Count - 4;
+            ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
+            return recorder != null ? recorder.GetUserCount() : 0;
+
         }
 
         #region 共用方法
-
-        /// <summary>
-        /// 判断所有子集中是否存在某一个值
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="pfield"></param>
-        /// <param name="field"></param>
-        /// <param name="typeid"></param>
-        /// <param name="ptypeid"></param>
-        /// <returns></returns>
-        public bool IsunAccept(DataTable dt, string pfield, string field, string typeid, string ptypeid)
-        {
-            string ids = typeid + ",";
-            GetSubType(dt, pfield, field, typeid, ref ids);
-            string[] list = ids.Split(new string[] { "," }, StringSplitOptions.None);
-            for (int i = 0; i < list.Length; i++)
-            {
-                if (list[i] == ptypeid)
-                    return false;
-                else
-                    continue;
-            }
-            return true;
-        }
-        /// <summary>
-        /// 获取到类型中的所有子集ID，例1,2
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="pfield"></param>
-        /// <param name="field"></param>
-        /// <param name="pid"></param>
-        /// <param name="ids"></param>
-        private void GetSubType(DataTable dt, string pfield, string field, string pid, ref string ids)
-        {
-            foreach (DataRow Row in dt.Select("[" + pfield + "] =" + int.Parse(pid)))
-            {
-                ids += Row["" + field + ""].ToString() + ",";
-                GetSubType(dt, pfield, field, Row["" + field + ""].ToString(), ref ids);
-            }
-        }
-
-
-
-
         /// <summary>
         /// 分页查询，返回ViewBag.listPager
         /// </summary>
@@ -164,6 +90,111 @@ namespace System.Web.Mvc
             strPagerText += "</ul>        </div>";
             ViewBag.listPager = strPagerText;
         }
+
+
+        #region 参数验证
+
+        /// <summary>
+        /// 验证字符串是否为数值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        protected bool IsNumeric(string str)
+        {
+            System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex(@"^[0123456789]+$");
+            return rx.IsMatch(str);
+        }
+
+        #endregion
+
+
+        #region 通用方法处理
+        private void FuncCellBack(IAsyncResult ar)
+        {
+            try
+            {
+                BeginInvokeDelegate dl = (BeginInvokeDelegate)(ar as System.Runtime.Remoting.Messaging.AsyncResult).AsyncDelegate;
+                dl.EndInvoke(ar);
+            }
+            catch { }
+        }
+        private delegate void BeginInvokeDelegate();
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke(Action action)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action();
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke<T>(Action<T> action, T t)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action(t);
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke<T1, T2>(Action<T1, T2> action, T1 t1, T2 t2)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action(t1, t2);
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke<T1, T2, T3>(Action<T1, T2, T3> action, T1 t1, T2 t2, T3 t3)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action(t1, t2, t3);
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 t1, T2 t2, T3 t3, T4 t4)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action(t1, t2, t3, t4);
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+        /// <summary>
+        /// 异步处理方法
+        /// </summary>
+        /// <param name="action"></param>
+        public void BeginInvoke<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+        {
+            BeginInvokeDelegate update = new BeginInvokeDelegate(delegate()
+            {
+                action(t1, t2, t3, t4, t5);
+            });
+            update.BeginInvoke(new AsyncCallback(FuncCellBack), null);
+        }
+
+
+        #endregion
+
 
         #endregion
 
@@ -238,7 +269,7 @@ namespace System.Web.Mvc
         {
             try
             {
-                Response.Redirect("/Account/Login", true);
+                Response.Redirect(PublicHelper.WebLoginUrl, true);
             }
             catch { }
         }

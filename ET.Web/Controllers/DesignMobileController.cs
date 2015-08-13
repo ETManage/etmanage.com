@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace ET.Web.Controllers
 {
     public class DesignMobileController : WebControllerBase
     {
@@ -114,7 +114,7 @@ namespace Web.Controllers
             if (string.IsNullOrEmpty(Order))
                 Order = "CreateTime DESC";
 
-            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order, IsNoLock);
+            List<BlogArticleInfo> listArticle = new ET.Sys_BLL.PublicBLL().GetListByCondition<BlogArticleInfo>(TopCount, Field, TableName, "AND Status=1 " + Condition, Order);
             return listArticle;
         }
         [HttpPost]
@@ -124,7 +124,7 @@ namespace Web.Controllers
             if (info != null)
             {
                 info.LoveCount++;
-                new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
+                new ET.Sys_BLL.BlogBLL().Update_BlogArticleInfo(info, false);
                 return Content(info.LoveCount.ToString());
             }
             else
@@ -137,7 +137,7 @@ namespace Web.Controllers
             if (info != null)
             {
                 info.LoveCount--;
-                new ET.Sys_BLL.BlogBLL().Operate_BlogArticleInfo(info, false);
+                new ET.Sys_BLL.BlogBLL().Update_BlogArticleInfo(info, false);
                 return Content(info.LoveCount.ToString());
             }
             else
@@ -153,7 +153,7 @@ namespace Web.Controllers
                 info.ArticleID = new Guid(uid);
                 info.UserID = Guid.Parse(this.UserID);
                 info.CreateTime = DateTime.Now;
-                if (new ET.Sys_BLL.BlogBLL().Operate_BlogArticleFavorite(info, true))
+                if (new ET.Sys_BLL.BlogBLL().Update_BlogArticleFavorite(info, true))
                     return Content("true");
                 else
                     return Content("error");
@@ -179,7 +179,7 @@ namespace Web.Controllers
         {
             string strCondition = "";
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = int.Parse(page);
             int pageSize = 15;
             if (!string.IsNullOrEmpty(fid))
@@ -191,7 +191,7 @@ namespace Web.Controllers
                 strCondition += "AND CHARINDEX('" + search + "',ARTICLETITLE)>0";
             }
             long lngRecordTotalCount = 0;
-            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().PageList_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,(select typename from blogtypeinfo c where c.typeid=BlogArticleInfo.typeid ) Reserve1,CreateTime,ISNULL(AccessCount,0) AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) Reserve2", strCondition, sort, pageIndex, pageSize, ref lngRecordTotalCount);
+            List<BlogArticleInfo> list = new ET.Sys_BLL.BlogBLL().Pagination_BlogArticleInfo("ArticleID,ArticleTitle,ArticleLabel,ArticleDescription,ArticleCover,(select typename from blogtypeinfo c where c.typeid=BlogArticleInfo.typeid ) Reserve1,CreateTime,ISNULL(AccessCount,0) AccessCount,LoveCount,ShareCount,ArticleUrl,TypeID,(select count(1) from BlogCommentInfo where BlogCommentInfo.ArticleID=BlogArticleInfo.ArticleID) Reserve2", strCondition, sort, pageIndex, pageSize, ref lngRecordTotalCount);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -206,7 +206,7 @@ namespace Web.Controllers
                 postcid = "-1";
             info.CommentPID = postcid;
             info.CreateTime = DateTime.Now;
-            new ET.Sys_BLL.BlogBLL().Operate_BlogCommentInfo(info, true);
+            new ET.Sys_BLL.BlogBLL().Update_BlogCommentInfo(info, true);
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -236,11 +236,11 @@ namespace Web.Controllers
         {
             string strCondition = " AND Status=1 AND ArticleID='" + postid + "'";
             int pageIndex = 1;
-            if (this.CheckInfoInt(page))
+            if (base.IsNumeric(page))
                 pageIndex = Convert.ToInt32(page);
             int pageSize = 15;
             long lngRecordTotalCount = 0;
-            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestPageListByCondition("CommentID id,ArticleID reserve1,CreateTime reserve3,Creator reserve2,CommentContent text,CommentPID pid", TableNames.BlogCommentInfo, strCondition, "CreateTime DESC", pageIndex, pageSize, ref lngRecordTotalCount);
+            List<KeyAndValue> list = new ET.Sys_BLL.PublicBLL().GetNestPaginationByCondition("CommentID id,ArticleID reserve1,CreateTime reserve3,Creator reserve2,CommentContent text,CommentPID pid", TableNames.BlogCommentInfo, strCondition, "CreateTime DESC", pageIndex, pageSize, ref lngRecordTotalCount);
             return Json("true", JsonRequestBehavior.AllowGet);
         }
      

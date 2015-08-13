@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web.Areas.Manage.Controllers
+namespace ET.Web.Areas.Manage.Controllers
 {
     [UserAuthorize]
     public class mDesignController : ManageControllerBase
@@ -32,7 +32,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', GoodName)>0";
             long RecordTotalCount = 0;
-            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().PageList_DesignGoodInfo("GoodID,GoodName,CreateTime,ACCESSCOUNT,TYPEID", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
+            List<DesignGoodInfo> list = new ET.Sys_BLL.DesignBLL().Pagination_DesignGoodInfo("GoodID,GoodName,CreateTime,ACCESSCOUNT,TYPEID", Condition, "CreateTime desc", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult AjaxGetTypeSelectData()
@@ -79,7 +79,7 @@ namespace Web.Areas.Manage.Controllers
             info.GoodPicture = collection["GoodPicture"];
             
             info.Status = 1;
-            if (new ET.Sys_BLL.DesignBLL().Operate_DesignGoodInfo(info, IsInsert))
+            if (new ET.Sys_BLL.DesignBLL().Update_DesignGoodInfo(info, IsInsert))
                 strResult = "true";
             return Content(strResult);
         }
@@ -130,7 +130,7 @@ namespace Web.Areas.Manage.Controllers
             if (!string.IsNullOrEmpty(Request["name"]))
                 Condition = " AND CHARINDEX('" + Request["name"] + "', TYPENAME)>0";
             long RecordTotalCount = 0;
-            List<DesignTypeInfo> list = new ET.Sys_BLL.DesignBLL().PageList_DesignTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
+            List<DesignTypeInfo> list = new ET.Sys_BLL.DesignBLL().Pagination_DesignTypeInfo("TYPEID,TYPENAME,TYPESORT", Condition, "TYPESORT", pageIndex, pageSize, ref RecordTotalCount);
             return Json(new { total = RecordTotalCount, rows = list }, JsonRequestBehavior.AllowGet);
         }
          [HttpGet]
@@ -157,7 +157,7 @@ namespace Web.Areas.Manage.Controllers
             info.TypePID = collection["TypePID"];
             info.TypeName = collection["TypeName"];
             info.TypeSort = collection["TypeSort"];
-            if (new ET.Sys_BLL.DesignBLL().Operate_DesignTypeInfo(info, IsInsert))
+            if (new ET.Sys_BLL.DesignBLL().Update_DesignTypeInfo(info, IsInsert))
                 strResult = "true";
 
             return Content(strResult);
@@ -175,7 +175,7 @@ namespace Web.Areas.Manage.Controllers
         [HttpPost]
         public ActionResult AjaxDeleteType(string infoid)
         {
-            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.DesignBLL().Delete_DesignTypeInfo(" AND TYPEID='" + infoid + "'"))
+            if (!string.IsNullOrEmpty(infoid) && new ET.Sys_BLL.DesignBLL().Delete_DesignTypeInfo(" AND TYPEID in (" + infoid + ")"))
                 return Content("true");
             else
                 return Content("false");

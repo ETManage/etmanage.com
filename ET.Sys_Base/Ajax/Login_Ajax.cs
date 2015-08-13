@@ -25,8 +25,7 @@ namespace ET.Sys_Base
                 ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
                 if (recorder.GetUserList().Where(i => i.UserName == info.UserID.ToString()).Count() == 0 || username == "etadmin")
                 {
-                    LoginRecord(info);
-                    return "true";
+                    return LoginRecord(info);
                 }
                 else
                 {
@@ -44,8 +43,7 @@ namespace ET.Sys_Base
             {
                 try
                 {
-                    LoginRecord(info);
-                    return "true";
+                    return LoginRecord(info);
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +132,7 @@ namespace ET.Sys_Base
         public CurrentUserInfo GetCurrentUserInfo(string userID)
         {
             CurrentUserInfo userinfo = new CurrentUserInfo();
-            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_User_Info(userID);
+            UserFullInfo info = new ET.Sys_BLL.OrganizationBLL().Get_UserInfo(userID);
             if (info != null)
             {
                 
@@ -154,13 +152,18 @@ namespace ET.Sys_Base
             return userinfo;
         }
 
-        public void LoginRecord(UserBase info)
+        public string LoginRecord(UserBase info)
         {
             CurrentUserInfo userinfo = new CurrentUserInfo();
             userinfo.UserID = info.UserID;
             userinfo.UserName = info.UserName;
             UserProperty stuinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserProperty(" AND UserID='" + info.UserID.ToString() + "'");
-            userinfo.UserCNName = stuinfo.CNName;
+            if (stuinfo == null&&info.UserName!="www.etmanage.com")
+            {
+                return "非法用户";
+            }
+            else
+                userinfo.UserCNName =stuinfo == null?"内置管理员": stuinfo.CNName;
             FormAuthService.SignIn(info.UserID.ToString(), false, new string[] { "admin" });
             userinfo.UserLimit = new ET.Sys_BLL.SystemBLL().GetUserALLFunc(info.UserID.ToString());
             System.Web.HttpContext.Current.Session[SystemConfigConst.SessionUserInfo] = userinfo;
@@ -171,6 +174,7 @@ namespace ET.Sys_Base
                 txtHelper.WriteToFile(System.Web.HttpContext.Current.Request.PhysicalApplicationPath + SystemConfigConst.ManageLoginLogDir + DateTime.Now.ToString("yyyy-MM-dd") + ".log", "用户：" + info.UserName + "(" + stuinfo.CNName + ")" + "登陆");
             }
             catch { }
+            return "true";
         }
 
         /// <summary>
@@ -272,7 +276,7 @@ namespace ET.Sys_Base
                         DEPinfo.DepSort = "A000";
                         DEPinfo.DepDescription = "";
                         DEPinfo.DepPID = " -1";
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserDepartment(DEPinfo, true);
+                        new ET.Sys_BLL.OrganizationBLL().Update_UserDepartment(DEPinfo, true);
                     }
 
                     UserPosition Pinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserPosition(" AND   PostName='" + domain + "'");
@@ -282,14 +286,14 @@ namespace ET.Sys_Base
                         Pinfo.PostName = domain;
                         Pinfo.PostSort = "A000";
                         Pinfo.PostDescription = "";
-                        new ET.Sys_BLL.OrganizationBLL().Operate_UserPosition(Pinfo, true);
+                        new ET.Sys_BLL.OrganizationBLL().Update_UserPosition(Pinfo, true);
                     }
 
 
                     info.userrole = new List<UserRoleLink>();
                     UserRoleLink role = new UserRoleLink();
                     info.userrole.Add(role);
-                    if (new ET.Sys_BLL.OrganizationBLL().Operate_User_Info(info, true))
+                    if (new ET.Sys_BLL.OrganizationBLL().Update_UserInfo(info, true))
                         return checkADuser(baseinfo);
                     else
                         return "false";
