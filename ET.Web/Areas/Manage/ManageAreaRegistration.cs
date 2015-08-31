@@ -14,10 +14,13 @@ namespace ET.Web.Areas.Manage
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+
             context.MapRoute("Manage_login", "manage/login",
                        new { controller = "mAccount", action = "Login" });
-            context.MapRoute("Manage_Index", "manage/default",
+            context.MapRoute("Manage_index2", "manage/default",
            new { controller = "System", action = "Default" });
+            context.MapRoute("Manage_index", "manage/",
+          new { controller = "System", action = "index" });
             context.MapRoute(
                 "Manage_default",
                 "Manage/{controller}/{action}/{id}",

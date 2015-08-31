@@ -12,7 +12,8 @@ namespace ET.Sys_DEF
 
         public String UserName { get; set; }
 
-        public String UserCNName { get; set; }
+        public String CNName { get; set; }
+        public String Photo { get; set; }
         public String DepID { get; set; }
 
         public String PostID { get; set; }

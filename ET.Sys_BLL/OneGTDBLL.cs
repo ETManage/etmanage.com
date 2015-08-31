@@ -14,9 +14,9 @@ namespace ET.Sys_BLL
         public bool Update_GTDInbox(GTDInbox info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<GTDInbox>().Insert(info) > 0;
+                return new TSqlBaseDAL<GTDInbox>().Insert(info);
             else
-                return new TSqlBaseDAL<GTDInbox>().Update(info) > 0;
+                return new TSqlBaseDAL<GTDInbox>().Update(info);
         }
 
         public bool Delete_GTDInbox(string condition)
@@ -26,7 +26,7 @@ namespace ET.Sys_BLL
 
         public bool Delete_GTDInbox(GTDInbox info)
         {
-            return new TSqlBaseDAL<GTDInbox>().Delete(info) > 0;
+            return new TSqlBaseDAL<GTDInbox>().Delete(info);
         }
 
         public GTDInbox Get_GTDInboxByID(string infoid)
@@ -50,9 +50,9 @@ namespace ET.Sys_BLL
         public bool Update_GTDTask(GTDTask info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<GTDTask>().Insert(info) > 0;
+                return new TSqlBaseDAL<GTDTask>().Insert(info);
             else
-                return new TSqlBaseDAL<GTDTask>().Update(info) > 0;
+                return new TSqlBaseDAL<GTDTask>().Update(info);
         }
 
         public bool Delete_GTDTask(string condition)
@@ -81,9 +81,9 @@ namespace ET.Sys_BLL
         public bool Update_GTDRecycle(GTDRecycle info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<GTDRecycle>().Insert(info) > 0;
+                return new TSqlBaseDAL<GTDRecycle>().Insert(info);
             else
-                return new TSqlBaseDAL<GTDRecycle>().Update(info) > 0;
+                return new TSqlBaseDAL<GTDRecycle>().Update(info);
         }
 
         public bool Delete_GTDRecycle(string condition)
@@ -111,9 +111,9 @@ namespace ET.Sys_BLL
         public bool Update_GTDProject(GTDProject info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<GTDProject>().Insert(info) > 0;
+                return new TSqlBaseDAL<GTDProject>().Insert(info);
             else
-                return new TSqlBaseDAL<GTDProject>().Update(info) > 0;
+                return new TSqlBaseDAL<GTDProject>().Update(info);
         }
 
         public bool Delete_GTDProject(string condition)
@@ -142,9 +142,9 @@ namespace ET.Sys_BLL
         public bool Update_GTDScene(GTDScene info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<GTDScene>().Insert(info) > 0;
+                return new TSqlBaseDAL<GTDScene>().Insert(info);
             else
-                return new TSqlBaseDAL<GTDScene>().Update(info) > 0;
+                return new TSqlBaseDAL<GTDScene>().Update(info);
         }
 
         public bool Delete_GTDScene(string condition)

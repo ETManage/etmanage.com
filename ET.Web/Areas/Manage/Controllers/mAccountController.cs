@@ -33,12 +33,12 @@ namespace ET.Web.Areas.Manage.Controllers
                 {
                     if (loginAjax.SinglePointState() == "1")
                     {
-                        strReturn = loginAjax.LoginSinglePoint(strUserName, strUserPass);
+                        strReturn = loginAjax.LoginSinglePoint(strUserName, strUserPass, strRememberMe);
 
                     }
                     else
                     {
-                        strReturn = loginAjax.LoginUser(strUserName, strUserPass);
+                        strReturn = loginAjax.LoginUser(strUserName, strUserPass, strRememberMe);
 
                     }
                 }

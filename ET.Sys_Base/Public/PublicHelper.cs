@@ -43,7 +43,14 @@ using System.Data;
             return System.Web.HttpContext.Current.Request.UserAgent.Contains("MSIE") || System.Web.HttpContext.Current.Request.UserAgent.Contains("Trident");
         }
 
-
+        public static string GetTheme()
+        {
+            object obj = ET.ToolKit.Common.CookieHelper.GetCookie("ET-Theme"); ;
+            if (obj != null)
+                return obj.ToString();
+            else
+                return "Default";
+        }
         
        public static string WebLoginUrl="/login";
        public static string ManageLoginUrl = "/manage/login";

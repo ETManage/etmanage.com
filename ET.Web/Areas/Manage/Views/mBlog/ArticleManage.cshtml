@@ -11,115 +11,118 @@
 @section Header{
 
 }
-<div style="width: 100%; height: 99%" class="easyui-layout" fit="true">
+<div style="width: 100%;">
     <form id="form1" action="/" method="post">
-        <div region="west" icon="icon-reload" title="博客文章管理" split="true" style="width: 350px;overflow:auto">
-            <table class="datatable">
-                <tr>
-                    <th class="bg-lightblue">
-                        类别：
-                    </th>
-                    <td>
-                        <select name="TypeID" id="sltType_id" class="easyui-combotree" style="width:200px;"
-                                data-options="required:true,url:'./AjaxGetTypeSelectData'"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        标题：
-                    </th>
-                    <td>
-                        <input name="ArticleTitle" type="text" class="easyui-textbox" maxlength="50" data-options="required:true" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="bg-lightblue">
-                        链接：
-                    </th>
-                    <td>
-                        <input name="ArticleUrl" type="text" class="easyui-textbox" maxlength="500" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        封面：
-                    </th>
-                    <td>
-                        <div id="uploader">
-                        </div><span class="cRed">第一张小图(200*100),第二张大图(830*300)</span>
-                        <input type="hidden" name="uploadhidden" id="uploadhidden" />
-                        <input type="hidden" name="ArticleCover" id="txtArticleCover" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        来源：
-                    </th>
-                    <td>
-                        <input name="ArticleSource" type="text" class="easyui-textbox" maxlength="200" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        作者：
-                    </th>
-                    <td>
-                        <input name="ArticleAuthor" type="text" class="easyui-textbox" maxlength="200" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        操作：
-                    </th>
-                    <td>
-                        启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />&nbsp;&nbsp;推荐<input name="Recommend" type="checkbox" id="ickRecommend" /><br /> 图片滚动<input name="IsRoll" type="checkbox" id="ickIsRoll" />&nbsp;&nbsp;外部链接<input name="IsOutLink" type="checkbox" id="ickIsOutLink" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        标签：
-                    </th>
-                    <td>
-                        <input name="ArticleLabel" type="text" class="easyui-textbox" data-options="required:true" maxlength="200" /><br /><span class="cRed">使用英文符,隔开</span>
-                    </td>
-                </tr>
+        <table class="datatable">
+            <tr>
+                <td colspan="4" align="center">
+                    <div class="dialog-button" style="position: relative; top: -1px; width: 98%;"><a href="javascript:BtnSaveOrUpdate()" class="l-btn l-btn-small"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">保存(Alt+S)</span><span class="l-btn-icon icon-ok">&nbsp;</span></span></a></div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    标题：
+                </th>
+                <td>
+                    <input name="ArticleTitle" type="text" class="easyui-textbox" maxlength="50" data-options="required:true" style="width:90%;" />
+                </td>
+                <th>
+                    类别：
+                </th>
+                <td>
+                    <select name="TypeID" id="sltType_id" class="easyui-combotree" style="width:200px;"
+                            data-options="required:true,url:'./AjaxGetTypeSelectData'"></select>
+                </td>
 
-                <tr>
-                    <th>
-                        描述：
-                    </th>
-                    <td>
-                        <textarea name="ArticleDescription" cols="30" rows="10" maxlength="500"></textarea>
-                    </td>
-                </tr>
 
-                <tr>
-                    <th>
-                        底部标注：
-                    </th>
-                    <td>
-                        <textarea name="SpecMark" cols="30" rows="10" maxlength="500"></textarea>
-                    </td>
-                </tr>
+            </tr>
 
-            </table>
-        </div>
-        <div id="divQuery" region="center" style="height: auto; overflow: auto;">
+            <tr>
+                <th>
+                    封面：
+                </th>
+                <td>
+                    <span class="cRed">第一张小图(200*100),第二张大图(830*300)</span>
+                    <div id="uploader">
+                    </div>
+                    <input type="hidden" name="uploadhidden" id="uploadhidden" />
+                    <input type="hidden" name="ArticleCover" id="txtArticleCover" />
+                </td>
 
-            <table class="datatable">
-                <tr>
-                    <th>
-                        文章内容：
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <textarea name="ArticleContent" id="ArticleContent" style="height:320px;width:100%;"></textarea>
-                    </td>
-                </tr>
-            </table>
+                <th>
+                    来源：
+                </th>
+                <td>
+                    <input name="ArticleSource" type="text" class="easyui-textbox" maxlength="200" style="width:200px;" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    标签：
+                </th>
+                <td>
+                    <input name="ArticleLabel" type="text" class="easyui-textbox" data-options="required:true" maxlength="200" style="width:90%;" /><br /><span class="cRed">使用英文符,隔开</span>
+                </td>
+                <th>
+                    作者：
+                </th>
+                <td>
+                    <input name="ArticleAuthor" type="text" class="easyui-textbox" maxlength="200" style="width:200px;" />
+                </td>
 
-        </div>
+
+            </tr>
+            <tr>
+                <th>
+                    操作：
+                </th>
+                <td>
+                    启用<input name="Status" type="checkbox" id="ickStatus" checked="checked" />&nbsp;&nbsp;推荐<input name="Recommend" type="checkbox" id="ickRecommend" />&nbsp;&nbsp; 图片滚动<input name="IsRoll" type="checkbox" id="ickIsRoll" />&nbsp;&nbsp;外部链接<input name="IsOutLink" type="checkbox" id="ickIsOutLink" />
+                </td>
+                <th class="bg-lightblue">
+                    链接：
+                </th>
+                <td>
+                    <input name="ArticleUrl" type="text" class="easyui-textbox" maxlength="500" style="width:200px;" />
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    描述：
+                </th>
+                <td>
+                    <textarea name="ArticleDescription" rows="5" maxlength="200" style="width:90%;"></textarea>
+                </td>
+
+                <th>
+                    底部标注：
+                </th>
+                <td>
+                    <textarea name="SpecMark" rows="5" maxlength="200" style="width:200px;"></textarea>
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    文章内容：
+                </th>
+                <th colspan="3"></th>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <textarea name="ArticleContent" id="ArticleContent" style="height:320px;width:98%;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <div class="dialog-button" style="position: relative; top: -1px; width: 98%;"><a href="javascript:BtnSaveOrUpdate()" class="l-btn l-btn-small"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">保存(Alt+S)</span><span class="l-btn-icon icon-ok">&nbsp;</span></span></a></div>
+                </td>
+            </tr>
+        </table>
+
     </form>
 
 

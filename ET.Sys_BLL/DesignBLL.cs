@@ -12,9 +12,9 @@ namespace ET.Sys_BLL
         public bool Update_DesignTypeInfo(DesignTypeInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<DesignTypeInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<DesignTypeInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<DesignTypeInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<DesignTypeInfo>().Update(info);
         }
 
         public bool Delete_DesignTypeInfo(string condition)
@@ -42,9 +42,9 @@ namespace ET.Sys_BLL
         public bool Update_DesignGoodInfo(DesignGoodInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<DesignGoodInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<DesignGoodInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<DesignGoodInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<DesignGoodInfo>().Update(info);
         }
 
         public bool Delete_DesignGoodInfo(string condition)

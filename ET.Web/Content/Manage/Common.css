@@ -1,9 +1,8 @@
-﻿.datatable { width: 100%; border: solid #ccc; border-width: 1px; border-collapse: collapse; }
-    .datatable td { border: solid #fafafa; border-width: 1px; border-collapse: collapse; height: 30px; padding: 1px; }
-    .datatable th { border: solid #fafafa; border-width: 1px; border-collapse: collapse; background: #EEEEFF; color: #000; height: 30px; font-weight: normal; padding: 1px; padding-left: 5px; min-width: 40px; }
+﻿.datatable { width: 100%; border: solid #ccc; border-width: 1px; border-collapse: collapse;font-size:12px; }
+    .datatable th { border-collapse: collapse; background-color: #eff3f8; color: #000; height: 30px; font-weight: normal; padding: 1px; padding-left: 5px; min-width: 40px; }
         .bg-lightblue { background-color: #F3F8F7; }
     .datatable input { width: auto; }
-.input { border: 1px solid #97b1c5; background: #ffffff; height: 25px; font-size: 12px; line-height: 25px; }
+.datatable .input { border: 1px solid #97b1c5; background: #ffffff; height: 25px; font-size: 12px; line-height: 25px; }
 .button { height: 28px; line-height: 28px; position: relative; overflow: visible; display: inline-block; border: 1px solid #d4d4d4; text-decoration: none; text-shadow: 1px 1px 0 #fff; font: 11px/normal sans-serif; color: #333; white-space: nowrap; cursor: pointer; outline: none; background-color: #ececec; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec)); background-image: -moz-linear-gradient(#f4f4f4, #ececec); background-image: -o-linear-gradient(#f4f4f4, #ececec); background-image: linear-gradient(#f4f4f4, #ececec); -webkit-background-clip: padding; -moz-background-clip: padding; -o-background-clip: padding-box; /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */ /* IE hacks */ zoom: 1; *display: inline; }
     .button:hover,
     .button:focus,
@@ -22,7 +21,15 @@ div .validatebox-invalid { background-image: none; }
 .ManageOperateTitle { background-image: url('/images/Manage/tiaotiao.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 25px; width: auto; line-height: 30px; height: 30px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #0092DC; font-weight: bold; font-size: 14px; }
 .ManageListTitle { height: 20px; width: 100%; }
 .ManageSearch { border: 1px dashed #0092DC; padding: 5px; }
-    .ManageSearch legend { font-size: 14px; color: #0092DC; }
+    .ManageSearch legend {  color: #0092DC; }
 .ManageList { margin-top: 10px; overflow: hidden; }
 .ManageOperate { padding-top: 15px; }
 .ManageTitle { height: 30px; width: 100%; }
+
+
+    .btn-default { color: #333; border: 1px solid #ddd; background-color: #f7f7f7; }
+    .btn-default.active,.btn-default.focus,.btn-default:active,.btn-default:focus,.btn-default:hover,.open>.dropdown-toggle.btn-default{color:#333;background-color:#e6e6e6;border-color:#adadad}.btn-default.active,.btn-default:active,.open>.dropdown-toggle.btn-default{background-image:none}.btn-default.disabled,.btn-default.disabled.active,.btn-default.disabled.focus,.btn-default.disabled:active,.btn-default.disabled:focus,.btn-default.disabled:hover,.btn-default[disabled],.btn-default[disabled].active,.btn-default[disabled].focus,.btn-default[disabled]:active,.btn-default[disabled]:focus,.btn-default[disabled]:hover,fieldset[disabled] .btn-default,fieldset[disabled] .btn-default.active,fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:active,fieldset[disabled] .btn-default:focus,fieldset[disabled] .btn-default:hover{background-color:#fff;border-color:#ccc}.btn-default .badge{color:#fff;background-color:#333}
+    .btn { font-size: 12px;  padding: 4px 16px; height: 28px; line-height: 14px;cursor:pointer; }
+    label { display: inline-block; margin-bottom: 5px; font-weight: bold; }
+        label.control-label { font-weight: normal; font-size: 12px; color: #666; }
+    .form-control {padding: 4.5px; -webkit-transition: none; transition: none; font-size: 12px;  width: 100%; line-height: 1.428571429; color: #555555; vertical-align: middle; background-color: #ffffff; background-image: none; border: 1px solid #cccccc; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }

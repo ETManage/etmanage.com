@@ -8,6 +8,11 @@ namespace ET.Constant.DBConst
     {
         #region 系统框架模块
         /// <summary>
+        /// 访问量
+        /// </summary>
+        public const string SysPageAccess = "SysPageAccess";
+
+        /// <summary>
         /// 用户表
         /// </summary>
         public const string UserBase = "UserBase";

@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManagePartial.cshtml";
+}
+@section Title{
+    @ViewBag.PageTitle
+}
+@section Styles{
+    <link href="/content/manage/login.css" rel="stylesheet" type="text/css" />
+}
+
+@section Header{
+    <script src="/scripts/manage/login.js" type="text/javascript"></script>
+}
+
+<div class="logintop">
+    <span>欢迎访问 @ViewBag.CompanyName 后台管理界面平台</span>
+    <ul>
+        <li><a href="/">回首页</a></li>
+        <li><a href="@ViewBag.CompanyUrl">帮助</a></li>
+        <li><a href="@ViewBag.CompanyUrl">关于</a></li>
+    </ul>
+</div>
+<div class="loginbody">
+    <div id="loginmain">
+        <div id="loginbox">
+            <div id="loginbox2">
+                <table class="Logintable">
+                    <tr>
+                        <td>
+                            <div class="loginspan">
+                                账&nbsp; 户:
+                            </div>
+                        </td>
+                        <td>
+                            <input id="txt_UserName" class="txt_UserName" type="text" value="" width="148px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="loginspan">
+                                密&nbsp; 码:
+                            </div>
+                        </td>
+                        <td>
+                            <input id="txt_Password" class="txt_Password" type="password" value="" width="148px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                </table>
+               
+                <div class="logintoolkit">
+                    
+                </div>
+
+                <div id="btlogin" class="btlogin">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loginbm">
+    @ViewBag.CompanyName 版权所有 @ViewBag.PageVer
+</div>

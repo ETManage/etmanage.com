@@ -29,14 +29,15 @@ namespace System.Web.Mvc
     /// </summary>
     public class WebControllerBase : Controller
     {
+        public string ErrorPage404Url = "/PageError/Error404";
 
         public void getSystemConfig()
         {
             string xmlpath = Server.MapPath(SystemConfigConst.WebSiteDir + SystemConfigConst.SystemConfigFile);
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.Load(xmlpath);
-            ViewBag.PageTitleImg = xmldoc.SelectSingleNode("/Condition/System/TitleImg").InnerText;
-            ViewBag.PageTitle = xmldoc.SelectSingleNode("Condition/System/PageTitle").InnerText;
+            ViewBag.ApplicationImg = xmldoc.SelectSingleNode("/Condition/System/ApplicationImg").InnerText;
+            ViewBag.ApplicationName = xmldoc.SelectSingleNode("Condition/System/ApplicationName").InnerText;
             ViewBag.PageLogo = xmldoc.SelectSingleNode("Condition/System/CompanyLogo").InnerText;
             ViewBag.CompanyName = xmldoc.SelectSingleNode("Condition/System/CompanyName").InnerText;
             ViewBag.CompanyUrl = xmldoc.SelectSingleNode("Condition/System/CompanyUrl").InnerText;
@@ -48,9 +49,12 @@ namespace System.Web.Mvc
         {
             ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
             return recorder != null ? recorder.GetUserCount() : 0;
-
         }
-
+        public IList<ET.Sys_Base.OnlineUser.OnlineUser> GetListOnlineUser()
+        {
+            ET.Sys_Base.OnlineUser.OnlineUserRecorder recorder = System.Web.HttpContext.Current.Cache[ET.Sys_Base.OnlineUser.OnlineHttpModule.g_onlineUserRecorderCacheKey] as ET.Sys_Base.OnlineUser.OnlineUserRecorder;
+            return recorder != null ? recorder.GetUserList() : null;
+        }
         #region 共用方法
         /// <summary>
         /// 分页查询，返回ViewBag.listPager
@@ -91,6 +95,10 @@ namespace System.Web.Mvc
             ViewBag.listPager = strPagerText;
         }
 
+        public RedirectResult Goto404PageError()
+        {
+            return Redirect(this.ErrorPage404Url);
+        }
 
         #region 参数验证
 
@@ -101,6 +109,8 @@ namespace System.Web.Mvc
         /// <returns></returns>
         protected bool IsNumeric(string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return false;
             System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex(@"^[0123456789]+$");
             return rx.IsMatch(str);
         }

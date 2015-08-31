@@ -1,16 +1,7 @@
 ﻿
 var _menus;
 $(function () {
-    $('#loginOut').click(function () {
-        $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function (r) {
 
-            if (r) {
-                $.get("/mAccount/AjaxLogout", {}, function (data, textStatus) { location.href = '/manage/login'; }, 'html');
-
-            }
-
-        });
-    })
 
     $.post("/System/AjaxQueryMenusList", {}, function (data, textStatus) {
         _menus = JSON.parse(data);
@@ -28,60 +19,17 @@ $(function () {
 });
 
 
+function IndexOut()
+{
+    $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function (r) {
 
+        if (r) {
+            $.get("/mAccount/AjaxLogout", {}, function (data, textStatus) { location.href = '/manage/login'; }, 'html');
 
-
-
-
-/*
-创建人：West
-时间：2015/3/2
-作用：云朵浮动效果
-*/
-var $main = $cloud = mainwidth = null;
-var offset1 = 450;
-var offset2 = 0;
-
-var offsetbg = 0;
-
-function startFloatBG() {
-    $main = $("#mainBody");
-    $body = $("body");
-    $cloud1 = $("#cloud1");
-    $cloud2 = $("#cloud2");
-    mainwidth = $main.outerWidth();
-    /// 飘动
-    setInterval(function flutter() {
-        if (offset1 >= mainwidth) {
-            offset1 = -580;
         }
 
-        if (offset2 >= mainwidth) {
-            offset2 = -580;
-        }
-
-        offset1 += 1.1;
-        offset2 += 1;
-        $cloud1.css("background-position", offset1 + "px -100px")
-
-        $cloud2.css("background-position", offset2 + "px 0px")
-    }, 70);
-
-
-    setInterval(function bg() {
-        if (offsetbg >= mainwidth) {
-            offsetbg = -580;
-        }
-
-        offsetbg += 0.9;
-        $body.css("background-position", -offsetbg + "px 0")
-    }, 90);
+    });
 }
-
-
-
-
-
 
 
 
@@ -134,10 +82,10 @@ function GetMenuList(data, menulist) {
     else {
         menulist += '<ul>';
         $.each(data.menus, function (i, sm) {
-            if (sm.menus.length==0&&sm.url != null && sm.url != "") {
+            if (sm.menus.length == 0 && sm.url != null && sm.url != "") {
                 menulist += '<li ><a ref="' + sm.menuid + '" href="#" rel="'
-					+ sm.url + '" ><span class="nav">' + sm.menuname
-					+ '</span></a>'
+					+ sm.url + '" ><div class="nav">' + sm.menuname
+					+ '</div></a>'
             }
             else {
                 menulist += '<li state="closed"><span class="nav">' + sm.menuname + '</span>'
@@ -159,7 +107,7 @@ function addNav(data) {
         var menulist1 = "";
         //sm 常用菜单  邮件 列表
         menulist1 = GetMenuList(sm, menulist1);
-        menulist1 = "<ul  class='easyui-tree' animate='false' dnd='false' data-options='onSelect:function(node){  SelectTextExpand(this,node)  }'>" + menulist1.substring(4);
+        menulist1 = "<ul  class='easyui-tree ' animate='false' dnd='false' data-options='onSelect:function(node){  SelectTextExpand(this,node)  }'>" + menulist1.substring(4);
         $('#wnav').accordion('add', {
             title: sm.menuname,
             content: menulist1,
@@ -249,6 +197,7 @@ function tabClose() {
         $('#tabs').tabs('close', subtitle);
     })
     /*为选项卡绑定右键*/
+
     $(".tabs-inner").bind('contextmenu', function (e) {
         $('#TabMenuStrip').menu('show', {
             left: e.pageX,
@@ -260,6 +209,12 @@ function tabClose() {
         $('#TabMenuStrip').data("currtab", subtitle);
         $('#tabs').tabs('select', subtitle);
         return false;
+    });
+    $(".icon-tabs").click(function (e) {
+        $('#TabMenuStrip').menu('show', {
+            left: e.pageX,
+            top: e.pageY
+        });
     });
 }
 //绑定右键菜单事件

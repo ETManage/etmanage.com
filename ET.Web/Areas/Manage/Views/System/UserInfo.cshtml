@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Areas/Manage/Views/Shared/_ManageLayout.cshtml";
+}
+@section Title{
+    修改密码
+}
+@section Header{
+}
+<div class="ManageBody">
+    <div class="ManageOperateTitle">
+        我的账户
+    </div>
+    <div class="ManageOperate">
+        <form id="form1" action="/" method="post">
+            <table class="datatable">
+                <tr>
+                    <th>
+                        原始密码：
+                    </th>
+                    <td>
+                        <input name="OldUserPwd" type="password" class="easyui-textbox" style="width: 300px" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        新密码：
+                    </th>
+                    <td>
+                        <input name="UserPwd" type="password" class="easyui-textbox" style="width:300px" data-options="required:true" id="inewUserPwd" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        重复密码：
+                    </th>
+                    <td>
+                        <input type="password" class="easyui-textbox" style="width:300px" data-options="required:true" id="inewUserPwd2" />
+                    </td>
+                </tr>
+
+                <tr><td></td><td ><a class="easyui-linkbutton" data-icon="icon-ok" onclick="BtnSaveOrUpdate()">保存</a></td></tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+    });
+    function BtnSaveOrUpdate() {
+        if ($("#form1").form("validate")) {
+            if ($("#inewUserPwd").val() != $("#inewUserPwd2").val()) {
+                TopNotify("两次密码不匹配！", 'error');
+                return;
+            }
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: './AjaxUpdatePwd',
+                data: $('#form1').serialize(),
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    TopNotify(errorThrown, 'error');
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        TopNotify("保存成功", 'info');
+                        $("#form1").form("reset");
+                    }
+                    else
+                        TopNotify(data, 'error');
+                }
+            });
+        }
+    }
+</script>

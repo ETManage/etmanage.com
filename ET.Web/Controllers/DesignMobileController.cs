@@ -24,7 +24,7 @@ namespace ET.Web.Controllers
         public ActionResult Detail(string id)
         {
             if (string.IsNullOrEmpty(id))
-                return Redirect("/pageerror/error404.html");
+                return this.Goto404PageError();
             id = ET.ToolKit.Common.StringHelper.ClearSqlDangerous(id);
             DesignGoodInfo info = new ET.Sys_BLL.DesignBLL().Get_DesignGoodInfoByID(id);
             if (info != null)
@@ -49,7 +49,7 @@ namespace ET.Web.Controllers
                 ViewBag.listArticleComment = GetCommentList(info.GoodID.ToString());
             }
             else
-                return Redirect("/pageerror/error404.html");
+                return this.Goto404PageError();
             return View(info);
         }
 

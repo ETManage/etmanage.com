@@ -1,36 +1,38 @@
 ﻿$(document).ready(function () {
-    $("#btlogin").click(function () { return CheckForm(); });
-    $(document).keydown(function () { if (event.keyCode == 13) $("#btlogin").click(); });
-    $("#txt_UserName").focus();
-
-    $('.loginbox').css({ 'position': 'absolute', 'left': ($(window).width() - 692) / 2 });
-    $(window).resize(function () {
-        $('.loginbox').css({ 'position': 'absolute', 'left': ($(window).width() - 692) / 2 });
-    })
+    $("#btnlogin").click(function () { return CheckForm(); });
+    $(document).keydown(function () { if (event.keyCode == 13) $("#btnlogin").click(); });
+    $("#txtUserName").focus();
+    //$("#txt_UserName,#txt_Password").focus(function () { $(".logintoolkit").html(""); });
 });
 
 function reset() {
-    $("#txt_UserName").val("");
-    $("#txt_Password").val("");
+    $("#txtUserName").val("");
+    $("#txtPassword").val("");
 }
 //校验页面
 function CheckForm() {
+    setButtonStyle(1);
     var str = "";
-    if ($("#txt_UserName").val() == "") str += "“用户名”不能为空！<BR>";
-    if ($("#txt_Password").val() == "") str += "“密码”不能为空！<BR>";
+    if ($("#txtUserName").val() == "") str += "“用户名”不能为空！<BR>";
+    if ($("#txtPassword").val() == "") str += "“密码”不能为空！<BR>";
 
-    if (str != "") { $.messager.alert('提示', str); return false; }
+    if (str != "") {
+        $("#ilogintoolkit").removeClass("hidden");
+        $("#ilogintoolkittxt").removeClass("hidden");
+        $("#ilogintoolkittxt").html(str);
+        return false;
+    }
     else
-        login($("#txt_UserName").val(), $("#txt_Password").val())
+        login($("#txtUserName").val(), $("#txtPassword").val(), $("#ckRemember").is(':checked'))
 
 }
 
-function login(Cuser, Cpwd) {
+function login(Cuser, Cpwd, isremember) {
 
     $.ajax({
         type: "POST", dataType: "html",
         url: "/maccount/ajaxlogin",
-        data: { strUserName: Cuser, strUserPass: Cpwd, strRememberMe: '1' },
+        data: { strUserName: Cuser, strUserPass: Cpwd, remember: isremember },
         success: function (data, textStatus) {
             if (data == 'true') {
                 if (getRequest("oldurl") != "") {
@@ -46,16 +48,20 @@ function login(Cuser, Cpwd) {
                     }
                 }
                 else
-                    parent.location.href = '/manage/default';
+                    parent.location.href = '/manage/';
 
             }
             else if (data == 'false') {
-                $.messager.alert('提示', "用户名或密码错误");
+                $("#ilogintoolkit").removeClass("hidden");
+                $("#ilogintoolkittxt").removeClass("hidden");
+                $("#ilogintoolkittxt").html("用户名或密码错误");
                 setButtonStyle(2);
                 return false;
             }
             else {
-                $.messager.alert('提示', data);
+                $("#ilogintoolkit").removeClass("hidden");
+                $("#ilogintoolkittxt").removeClass("hidden");
+                $("#ilogintoolkittxt").html(data);
                 setButtonStyle(2);
                 return false;
             }
@@ -74,59 +80,11 @@ function getRequest(val) {
 
 function setButtonStyle(type) {
     if (type == 1) {
-        $('#hbtnLogin').unbind("click");
-        $('#hbtnLogin').val('登录中...');
+        $('#btnlogin').unbind("click");
+        $('#btnlogin').text('登录中...');
     }
     else if (type == 2) {
-        $('#hbtnLogin').bind("click", function () { CheckForm(); });
-        $('#hbtnLogin').val('用户登录');
+        $('#btnlogin').bind("click", function () { CheckForm(); });
+        $('#btnlogin').val('登录');
     }
 }
-
-
-// 云朵浮动...
-var $main = $cloud = mainwidth = null;
-var offset1 = 450;
-var offset2 = 0;
-
-var offsetbg = 0;
-
-$(document).ready(
-        function () {
-            $main = $("#mainBody");
-            $body = $("body");
-            $cloud1 = $("#cloud1");
-            $cloud2 = $("#cloud2");
-
-            mainwidth = $main.outerWidth();
-
-        }
-    );
-
-/// 飘动
-setInterval(function flutter() {
-    if (offset1 >= mainwidth) {
-        offset1 = -580;
-    }
-
-    if (offset2 >= mainwidth) {
-        offset2 = -580;
-    }
-
-    offset1 += 1.1;
-    offset2 += 1;
-    $cloud1.css("background-position", offset1 + "px 100px")
-
-    $cloud2.css("background-position", offset2 + "px 460px")
-}, 70);
-
-
-setInterval(function bg() {
-    if (offsetbg >= mainwidth) {
-        offsetbg = -580;
-    }
-
-    offsetbg += 0.9;
-    $body.css("background-position", -offsetbg + "px 0")
-}, 90);
-	

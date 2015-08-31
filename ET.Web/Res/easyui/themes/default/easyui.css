@@ -255,13 +255,21 @@
   border-color: #D3D3D3;
 }
 .window {
-  background-color: #f3f3f3;
+      background-color: #fff;
+  background: -webkit-linear-gradient(top,#F8F8F8 0,#fff 20%);
+  background: -moz-linear-gradient(top,#F8F8F8 0,#fff 20%);
+  background: -o-linear-gradient(top,#F8F8F8 0,#fff 20%);
+  background: linear-gradient(to bottom,#F8F8F8 0,#fff 20%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#fff,GradientType=0);
+  /*West 20150831
+      background-color: #f3f3f3;
   background: -webkit-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
   background: -moz-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
   background: -o-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
   background: linear-gradient(to bottom,#F8F8F8 0,#eeeeee 20%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#eeeeee,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#eeeeee,GradientType=0);*/
 }
 .window-proxy {
   border: 1px dashed #D3D3D3;
@@ -514,9 +522,9 @@
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  -moz-border-radius: 5px 5px 5px 5px;
+  /*West-moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;*/
 }
 .textbox .textbox-text {
   font-size: 12px;
@@ -1317,11 +1325,11 @@
   border-radius: 0 0 0 0;
 }
 .datagrid-sort-desc .datagrid-sort-icon {
-  padding: 0 13px 0 0;
+  /*padding: 0 13px 0 0;*/
   background: url('images/datagrid_icons.png') no-repeat -16px center;
 }
 .datagrid-sort-asc .datagrid-sort-icon {
-  padding: 0 13px 0 0;
+  /*padding: 0 13px 0 0;*/
   background: url('images/datagrid_icons.png') no-repeat 0px center;
 }
 .datagrid-row-collapse {

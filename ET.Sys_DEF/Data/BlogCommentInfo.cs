@@ -20,6 +20,7 @@ namespace ET.Sys_DEF
          public DateTime? CreateTime { get; set; }
          
          public String Creator { get; set; }
+         public String CreatorID { get; set; }
          public String CreatorEmail { get; set; }
          public String CreatorUrl { get; set; }
 

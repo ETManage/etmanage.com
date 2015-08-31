@@ -13,9 +13,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogTypeInfo(BlogTypeInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogTypeInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogTypeInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogTypeInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogTypeInfo>().Update(info);
         }
 
         public bool Delete_BlogTypeInfo(string condition)
@@ -45,9 +45,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogArticleInfo(BlogArticleInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogArticleInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogArticleInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogArticleInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogArticleInfo>().Update(info);
         }
         /// <summary>
         /// ½ûÓÃ×´Ì¬
@@ -97,9 +97,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogCommentInfo(BlogCommentInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogCommentInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogCommentInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogCommentInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogCommentInfo>().Update(info);
         }
 
         public bool Delete_BlogCommentInfo(string condition)
@@ -123,9 +123,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogArticleFavorite(BlogArticleFavorite info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogArticleFavorite>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogArticleFavorite>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogArticleFavorite>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogArticleFavorite>().Update(info);
         }
 
         public bool Delete_BlogArticleFavorite(string condition)
@@ -158,9 +158,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogRollInfo(BlogRollInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogRollInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogRollInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogRollInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogRollInfo>().Update(info);
         }
 
         public bool Delete_BlogRollInfo(string condition)
@@ -193,9 +193,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogViewRecord(BlogViewRecord info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogViewRecord>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogViewRecord>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogViewRecord>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogViewRecord>().Update(info);
         }
 
         public bool Delete_BlogViewRecord(string condition)
@@ -223,9 +223,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogMessageInfo(BlogMessageInfo info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogMessageInfo>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogMessageInfo>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogMessageInfo>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogMessageInfo>().Update(info);
         }
 
         public bool Delete_BlogMessageInfo(string condition)
@@ -258,9 +258,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogPublish(BlogPublish info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogPublish>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogPublish>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogPublish>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogPublish>().Update(info);
         }
 
         public bool Delete_BlogPublish(string condition)
@@ -293,9 +293,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogUserSignIn(BlogUserSignIn info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogUserSignIn>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogUserSignIn>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogUserSignIn>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogUserSignIn>().Update(info);
         }
 
         public bool Delete_BlogUserSignIn(string condition)
@@ -328,9 +328,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogUserLevel(BlogUserLevel info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogUserLevel>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevel>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogUserLevel>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevel>().Update(info);
         }
 
         public bool Delete_BlogUserLevel(string condition)
@@ -363,9 +363,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogUserLevelLink(BlogUserLevelLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogUserLevelLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevelLink>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogUserLevelLink>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogUserLevelLink>().Update(info);
         }
 
         public bool Delete_BlogUserLevelLink(string condition)
@@ -398,9 +398,9 @@ namespace ET.Sys_BLL
         public bool Update_BlogUserRequest(BlogUserRequest info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<BlogUserRequest>().Insert(info) > 0;
+                return new TSqlBaseDAL<BlogUserRequest>().Insert(info);
             else
-                return new TSqlBaseDAL<BlogUserRequest>().Update(info) > 0;
+                return new TSqlBaseDAL<BlogUserRequest>().Update(info);
         }
 
         public bool Delete_BlogUserRequest(string condition)

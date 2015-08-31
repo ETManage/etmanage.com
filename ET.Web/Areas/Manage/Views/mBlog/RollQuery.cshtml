@@ -12,21 +12,19 @@
     <script src="/Res/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
 }
 <div class="ManageBody">
-    <div class="ManageListTitle"></div>
-    <fieldset class="ManageSearch" style="">
-        <legend>信息查询</legend>
-        <table class="datatable">
+    <fieldset class="ManageSearch">
+        <legend>查询条件</legend>
+        <table>
             <tr>
-                <th style="width:80px;">
-                    链接名称：
-                </th>
                 <td>
-                    <input id="txtSearch" style="width: 175px" type="text" data-options="prompt:'请输入查询内容'"
-                           class="search input" />
+                    <label class="control-label" style="margin-left:10px;">链接名称：</label>
+                    <input id="txtSearch" class="form-control" style="width: 175px" type="text" placeholder="输入关键字进行搜索" />
 
-                    <a href='javascript:queryClick()' class='easyui-linkbutton' data-options='iconCls:"icon-search"'>
+                </td>
+                <td>
+                    <button id="btnSearch" class='btn btn-default'>
                         查询
-                    </a>
+                    </button>
                 </td>
             </tr>
         </table>
@@ -38,8 +36,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#ManageMain").css("width", $(document).width() - 10)
-
+        $("#btnSearch").click(queryClick);
 
         //操作按钮，此处需要添加操作权限控制
         var toolbarnode = [

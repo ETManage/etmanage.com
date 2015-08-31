@@ -1,0 +1,20 @@
+﻿@model ET.Sys_DEF.SysNotice
+@{
+    ViewBag.Title = "NoticeView";
+    Layout = "~/Areas/Manage/Views/Shared/_ManageLayout.cshtml";
+}
+
+@section Title{
+    
+}
+@Html.Partial("_HeadStylesAndScripts")
+<div class="widget-container fluid-height clearfix">
+    <div class="col-md-4">
+        <div class="heading">
+            <i class="icon-book"></i>@Model.NoticeTitle <i class="icon-user pull-right">@Model.CreatorName</i><i class="icon-time pull-right">@Model.CreateTime.Value.ToString("yyyy-MM-dd HH:mm")</i>
+        </div>
+        <div class="widget-content padded">
+          @Html.Raw(Model.NoticeContent)
+        </div>
+    </div>
+</div>

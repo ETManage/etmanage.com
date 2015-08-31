@@ -11,3 +11,9 @@ D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.AssemblyLibrary\bin\
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.AssemblyLibrary\bin\Debug\ET.AssemblyLibrary.pdb
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.dll
 D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.pdb
+D:\个人中心\私人开发\ETManage框架\etmanage.com\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.csprojResolveAssemblyReference.cache
+D:\个人中心\私人开发\ETManage框架\etmanage.comEasyUI改版\ET.AssemblyLibrary\bin\Debug\ET.AssemblyLibrary.dll
+D:\个人中心\私人开发\ETManage框架\etmanage.comEasyUI改版\ET.AssemblyLibrary\bin\Debug\ET.AssemblyLibrary.pdb
+D:\个人中心\私人开发\ETManage框架\etmanage.comEasyUI改版\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.csprojResolveAssemblyReference.cache
+D:\个人中心\私人开发\ETManage框架\etmanage.comEasyUI改版\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.dll
+D:\个人中心\私人开发\ETManage框架\etmanage.comEasyUI改版\ET.AssemblyLibrary\obj\Debug\ET.AssemblyLibrary.pdb

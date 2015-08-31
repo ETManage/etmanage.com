@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data;
 using ET.Sys_DEF;
 using ET.ToolKit.Common;
+using ET.Constant.DBConst;
 
 namespace ET.Web.Areas.Manage.Controllers
 {
@@ -14,15 +15,58 @@ namespace ET.Web.Areas.Manage.Controllers
     {
         //
         // GET: /System/
+        public ActionResult Index()
+        {
+            getSystemConfig();
+            ViewBag.OnlineUserCount = this.GetOnlineUser();
+            ViewBag.List_ChatMessage = new ET.Sys_BLL.SystemBLL().List_ChatMessage("[MsgID],[MsgTitle],[MsgContent],[CreateTime],[Sender],[Receiver],[ReceiveTime],[Status],(SELECT TOP 1 PHOTO FROM UserProperty WHERE USERID=ChatMessage.SENDER ) Reserve1,(SELECT TOP 1 CNNAME FROM UserProperty WHERE USERID=ChatMessage.SENDER ) Reserve2", "AND STATUS=0 AND Receiver='" + this.UserID + "'", "CreateTime DESC");
+
+
+            ViewBag.AccessCount = new ET.Sys_BLL.PublicBLL().GetRecordCount(ET.Constant.DBConst.TableNames.SysPageAccess, null);
+            ViewBag.BlogCommentCount = new ET.Sys_BLL.PublicBLL().GetRecordCount(ET.Constant.DBConst.TableNames.BlogCommentInfo, null);
+            ViewBag.SystemUserCount = new ET.Sys_BLL.PublicBLL().GetRecordCount(ET.Constant.DBConst.TableNames.UserBase, null);
+            ViewBag.List_SysNotice = new ET.Sys_BLL.SystemBLL().List_SysNotice(null, "AND STATUS=0", "CreateTime DESC");
+            ViewBag.List_NewUser = new ET.Sys_BLL.PublicBLL().GetListByCondition<UserProperty>("TOP 14 USERID,PHOTO,CNNAME,CREATETIME,STATUS Age", ET.Constant.DBConst.ViewNames.V_USERFULL, null, "CreateTime DESC");
+            ViewBag.List_BlogComment = new ET.Sys_BLL.BlogBLL().List_BlogCommentInfo("Top 4 CommentID,[CreateTime],[Creator],[IsAnonymity],[CreatorID],(select photo from UserProperty where userid=BlogCommentInfo.CreatorID) CreatorUrl", "AND STATUS=1", "CreateTime DESC");
+
+
+
+
+
+
+            IList<ET.Sys_Base.OnlineUser.OnlineUser> listOnlineUser = this.GetListOnlineUser();
+            string ids = "";
+            if (listOnlineUser != null && listOnlineUser.Count > 0)
+            {
+                ids = string.Join(",", listOnlineUser.Select(o => "'" + o.UserName + "'"));
+            }
+            ViewBag.List_OnlineUser = new ET.Sys_BLL.OrganizationBLL().List_UserProperty(null, !string.IsNullOrEmpty(ids) && ids != "''" ? "AND USERID IN (" + ids + ")" : null, "CreateTime DESC");
+            return View(this.CurrentUserInfo);
+        }
+
+        [HttpGet]
+        public JsonResult AjaxSearchModule(string query)
+        {
+            string currdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            List<SysFunction> list = new ET.Sys_BLL.PublicBLL().GetListByCondition<SysFunction>("distinct FuncID,FuncName,FuncSort", ViewNames.V_ALLUSERLIMIT, " AND  CHARINDEX('" + query + "', FuncName)>0  and not EXISTS(select 1 from sysfunction where funcpid=cast(V_ALLUSERLIMIT.funcid as varchar(50))) and Functype=0 and (Status=1 OR (Status=0 AND StartTime<='" + currdate + "' AND EndTime>'" + currdate + "')) " + (this.UserID == "a50ca689-1748-455d-b4b4-2c9303e186be" ? "" : " AND cast(userid as varchar(50))='" + this.UserID + "'"), "FuncSort DESC");
+            var arrData = list.Select(c => c.FuncName);
+            return Json(new { query = query, suggestions = arrData, data = list }, JsonRequestBehavior.AllowGet);
+
+        }
+
         #region Default
         public ActionResult Default()
         {
             getSystemConfig();
-            ViewBag.STU_CNNAME = this.CurrentUserInfo.UserCNName;
-            ViewBag.ONLINE_USER_COUNT = GetOnlineUser();
+            ViewBag.CurrentUserInfo = this.CurrentUserInfo;
+            ViewBag.OnlineUserCount = this.GetOnlineUser();
+            //ViewBag.List_SysNotice = new ET.Sys_BLL.SystemBLL().List_SysNotice(null, "AND STATUS=0", "CreateTime DESC");
+            //ViewBag.List_ChatMessage = new ET.Sys_BLL.SystemBLL().List_ChatMessage("[MsgID],[MsgTitle],[MsgContent],[CreateTime],[Sender],[Receiver],[ReceiveTime],[Status],(SELECT TOP 1 PHOTO FROM UserProperty WHERE USERID=ChatMessage.SENDER ) Reserve1", "AND STATUS=0 AND Receiver='" + this.UserID + "'", "CreateTime DESC");
+
             return View();
         }
         
+
         [HttpPost]
         public JsonResult AjaxQueryMenusList()
         {
@@ -126,30 +170,35 @@ namespace ET.Web.Areas.Manage.Controllers
         #endregion
         #endregion
 
-        #region 我的信息
-        public ActionResult EditUserPwd()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AjaxUpdatePwd(FormCollection collection)
-        {
-            UserBase uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND USERID='" + this.UserID.ToString() + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["OldUserPwd"])) + "'");
-            if (uinfo != null)
-            {
-                uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
-                if (new ET.Sys_BLL.OrganizationBLL().Update_UserBase(uinfo))
-                {
-                    return Content("true");
-                }
-                else
-                    return Content("error");
-            }
-            else
+       #region 我的信息
+       public ActionResult EditUserPwd()
+       {
+           return View();
+       }
+       public ActionResult UserInfo()
+       {
+           return View();
+       }
 
-                return Content("原始密码不匹配");
-        }
-        #endregion
+       [HttpPost]
+       public ActionResult AjaxUpdatePwd(FormCollection collection)
+       {
+           UserBase uinfo = new ET.Sys_BLL.OrganizationBLL().Get_UserBase(" AND USERID='" + this.UserID + "' AND UserPwd='" + ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(ET.ToolKit.Common.StringHelper.ClearSqlDangerous(collection["OldUserPwd"])) + "'");
+           if (uinfo != null)
+           {
+               uinfo.UserPwd = ET.ToolKit.Encrypt.EncrypeHelper.EncryptMD5(collection["UserPwd"]);
+               if (new ET.Sys_BLL.OrganizationBLL().Update_UserBase(uinfo))
+               {
+                   return Content("true");
+               }
+               else
+                   return Content("error");
+           }
+           else
+
+               return Content("原始密码不匹配");
+       }
+       #endregion
 
         #region 权限管理
 
@@ -358,6 +407,16 @@ namespace ET.Web.Areas.Manage.Controllers
             return Content("true");
         }
 
+        #endregion
+
+        #region 系统提醒管理
+        public ActionResult NoticeView(string id)
+        {
+            SysNotice info = new ET.Sys_BLL.SystemBLL().Get_SysNotice(" AND NOTICEID='" + id + "'");
+            if (info == null)
+                return this.Goto404PageError();
+            return View(info);
+        }
         #endregion
     }
 

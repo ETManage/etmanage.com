@@ -1,0 +1,669 @@
+﻿@model ET.Sys_DEF.CurrentUserInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.CompanyName -@ViewBag.ApplicationName</title>
+    @Html.Partial("_HeadStylesAndScripts")
+    <link href="/res/autocomplete/autocomplete.css" rel="stylesheet" type="text/css" />
+    <script src="/res/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
+    <style>
+        .refresh-tab { font-size: 5px; position: absolute; right: 20px;top:10px; z-index: 100; cursor: hand; cursor: pointer; color: #94A6B0; }
+        .close-tab { font-size: 5px; position: absolute; right: 5px; top: 10px; z-index: 100; cursor: hand; cursor: pointer; color: #94A6B0; }
+            .refresh-tab:hover, .close-tab:hover { color: #438eb9; }
+             .topbar-collapse { float: right; }
+        .tab-content { border: none; padding: 12px; }
+        .menu-search-input { border: 1px solid #6fb3e0; width: 162px; height: 28px !important; line-height: 28px; border-radius: 4px !important; font-size: 12px; color: #666 !important; z-index: 11; -webkit-transition: width ease .15s; transition: width ease .15s; }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <img alt="" src="/Images/Manage/logo.png" width="50" height="30" />
+                        @ViewBag.CompanyName -@ViewBag.ApplicationName
+                    </small>
+                </a><!-- /.brand -->
+            </div><!-- /.navbar-header -->
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="grey">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-tasks"></i>
+                            <span class="badge badge-grey">@ViewBag.OnlineUserCount</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-ok"></i>
+                                当前有 @ViewBag.OnlineUserCount 人在线
+                            </li>
+                            @foreach (ET.Sys_DEF.UserProperty item in ViewBag.List_OnlineUser)
+                            {
+                                <li>
+                                    <div class="clearfix">
+                                        <span class="pull-left">@item.CNName</span>
+
+                                    </div>
+
+                                </li>
+                            }
+                            <li>
+                                <a href="../System/NoticeQuery">
+                                    查看所有用户
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="purple">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-alt icon-animated-bell"></i>
+                            <span class="badge badge-important">@ViewBag.List_SysNotice.Count</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-warning-sign"></i>
+                                @ViewBag.List_SysNotice.Count 条通知
+                            </li>
+                            @foreach (ET.Sys_DEF.SysNotice item in ViewBag.List_SysNotice)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                                                @item.NoticeTitle
+                                            </span>
+                                            <span class="pull-right badge badge-info">@item.CreateTime.Value.ToString("MM-dd HH:mm")</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            }
+
+                            <li>
+                                <a href="../System/NoticeQuery">
+                                    查看所有通知
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="green">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-envelope icon-animated-vertical"></i>
+                            <span class="badge badge-success">@ViewBag.List_ChatMessage.Count</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-envelope-alt"></i>
+                                @ViewBag.List_ChatMessage.Count 条消息
+                            </li>
+                            @foreach (ET.Sys_DEF.ChatMessage item in ViewBag.List_ChatMessage)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <img src="@item.Reserve1" class="msg-photo" alt="@item.Reserve2" onerror="this.src = '/Images/Public/userdefault.png'" />
+                                        <span class="msg-body">
+                                            <span class="msg-title">
+                                                <span class="blue">@item.Reserve2:</span>
+                                                @ET.ToolKit.Common.StringHelper.BindDataFromString(item.MsgContent, 30)
+                                            </span>
+
+                                            <span class="msg-time">
+                                                <i class="icon-time"></i>
+                                                <span><span class="time timeago" title="@item.CreateTime"></span></span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+
+                            <li>
+                                <a href="inbox.html">
+                                    查看所有消息
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            @if (string.IsNullOrEmpty(Model.Photo))
+                            {
+                                <img class="nav-user-photo" src="/Images/Public/userdefault.png" onerror="this.src='/Images/Public/userdefault.png'" alt="@Model.CNName" />
+                            }
+                            else
+                            {
+                                <img class="nav-user-photo" src="@Model.Photo" onerror="this.src='/Images/Public/userdefault.png'" alt="@Model.CNName" />
+                            }
+                            <span class="user-info">
+                                <small>欢迎光临,</small>
+                                @Model.CNName
+                            </span>
+
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="../System/EditUserPwd">
+                                    <i class="icon-cog"></i>
+                                    设置
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="../System/UserInfo">
+                                    <i class="icon-user"></i>
+                                    个人资料
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="#" id="iuserlogout">
+                                    <i class="icon-off"></i>
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><!-- /.ace-nav -->
+            </div><!-- /.navbar-header -->
+        </div><!-- /.container -->
+    </div>
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+
+            <div class="sidebar" id="sidebar">
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+                </script>
+
+                <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                        <form class="form-search">
+                            <span class="input-icon">
+                                <input type="text" placeholder="搜索目录" class="menu-search-input" id="menu-search-input" autocomplete="off" />
+                                <i class="icon-search nav-search-icon" style="top:5px;"></i>
+                            </span>
+                        </form>
+
+                    </div>
+
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                        <div class="sidebar-collapse" style="  padding:8px 0;">
+                            <i class="icon-search nav-search-icon"></i>
+                        </div>
+                        @*<span class="btn btn-success"></span>*@
+
+                        @*<span class="btn btn-info"></span>
+
+                            <span class="btn btn-warning"></span>
+
+                            <span class="btn btn-danger"></span>*@
+                    </div>
+                </div><!-- #sidebar-shortcuts -->
+
+                <ul class="nav nav-list" id="imanagemenu"></ul><!-- /.nav-list -->
+
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                </div>
+
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+                </script>
+            </div>
+            <div class="main-content">
+                <div id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!-- Nav tabs -->
+                    <ul class="main-tab nav nav-tabs  padding-12 tab-color-blue background-blue" style="height:41px;" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">控制台</a></li>
+                    </ul>
+                    @*<ul class="breadcrumb">
+                            <li>
+                                <i class="icon-home home-icon"></i>
+                                <a href="#">首页</a>
+                            </li>
+                            <li class="active">控制台</li>
+                        </ul>*@
+                    <!-- .breadcrumb -->
+                    @*<div class="nav-search" id="nav-search">
+                            <form class="form-search">
+                                <span class="input-icon">
+                                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                                    <i class="icon-search nav-search-icon"></i>
+                                </span>
+                            </form>
+                        </div>*@
+                </div>
+
+                <div class="page-content">
+
+
+                    <!-- Tab panes -->
+                    <div class="main-tab tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-block alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            <i class="icon-remove"></i>
+                                        </button>
+
+                                        <i class="icon-ok green"></i>
+                                        欢迎使用<strong class="green">
+                                            @ViewBag.CompanyName@ViewBag.ApplicationName
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="space-6"></div>
+
+                                <div class="col-sm-12 infobox-container">
+
+                                    <div class="infobox infobox-orange2  ">
+                                        <div class="infobox-icon">
+                                            <i class="icon-eye-open"></i>
+                                        </div>
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">@ViewBag.AccessCount</span>
+                                            <div class="infobox-content">页面查看次数</div>
+                                        </div>
+
+                                        @*<div class="badge badge-success">
+                                                7.2%
+                                                <i class="icon-arrow-up"></i>
+                                            </div>*@
+                                    </div>
+
+                                    <div class="infobox infobox-green  ">
+                                        <div class="infobox-icon">
+                                            <i class="icon-comments"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">@ViewBag.BlogCommentCount</span>
+                                            <div class="infobox-content">评论数量</div>
+                                        </div>
+                                        @*<div class="stat stat-success">8%</div>*@
+                                    </div>
+
+                                    <div class="infobox infobox-blue  ">
+                                        <div class="infobox-icon">
+                                            <i class="icon-twitter"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">@ViewBag.SystemUserCount</span>
+                                            <div class="infobox-content">会员数量</div>
+                                        </div>
+
+                                        @*<div class="badge badge-success">
+                                                +32%
+                                                <i class="icon-arrow-up"></i>
+                                            </div>*@
+                                    </div>
+
+                                    <div class="infobox infobox-pink  ">
+                                        <div class="infobox-icon">
+                                            <i class="icon-flag"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">1</span>
+                                            <div class="infobox-content">进行中项目</div>
+                                        </div>
+                                    </div>
+                                    <div class="infobox infobox-red  ">
+                                        <div class="infobox-icon">
+                                            <i class="icon-fire"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">1</span>
+                                            <div class="infobox-content">已完成项目</div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                            </div><!-- /row -->
+
+                            <div class="hr hr32 hr-dotted"></div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="widget-box transparent" id="recent-box">
+                                        <div class="widget-header">
+                                            <h4 class="lighter smaller">
+                                                <i class="icon-rss orange"></i>
+                                                最近
+                                            </h4>
+
+                                            <div class="widget-toolbar no-border">
+                                                <ul class="nav nav-tabs" id="recent-tab">
+                                                    <li class="active">
+                                                        <a data-toggle="tab" href="#task-tab">提醒</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#member-tab">会员</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">评论</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-4">
+                                                <div class="tab-content padding-8 overflow-visible">
+                                                    <div id="task-tab" class="tab-pane active">
+                                                        <h4 class="smaller lighter green">
+                                                            <i class="icon-list"></i>
+                                                            可拖拽排序列表
+                                                        </h4>
+
+                                                        <ul id="tasks" class="item-list">
+                                                            @foreach (ET.Sys_DEF.SysNotice item in ViewBag.List_SysNotice)
+                                                            {
+                                                                <li class="item-default clearfix">
+                                                                    <label class="inline">
+                                                                        @*<input type="checkbox" class="ace" />*@
+                                                                        <span class="lbl">[@item.CreateTime.Value.ToString("MM-dd HH:mm")] @item.NoticeTitle</span>
+                                                                    </label>
+
+                                                                    <div class="pull-right action-buttons">
+                                                                        <a href="#" class="blue" title="查看详细">
+                                                                            <i class="icon-eye-open bigger-130"></i>
+                                                                        </a>
+                                                                        <a href="#" class="blue" title="标记为已查看">
+                                                                            <i class="icon-ok bigger-130"></i>
+                                                                        </a>
+
+
+                                                                        <span class="vbar"></span>
+
+                                                                        <a href="#" class="blue" title="钉一下">
+                                                                            <i class="icon-flag bigger-130"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                        <div class="hr hr8"></div>
+
+                                                        <div class="center">
+                                                            <i class="icon-bell-alt icon-2x green"></i>
+
+                                                            &nbsp;
+                                                            <a href="./NoticeQuery">
+                                                                查看所有提醒 &nbsp;
+                                                                <i class="icon-arrow-right"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="hr hr-double hr8"></div>
+                                                    </div>
+
+                                                    <div id="member-tab" class="tab-pane">
+                                                        <div class="clearfix">
+                                                            @foreach (ET.Sys_DEF.UserProperty item in ViewBag.List_NewUser)
+                                                            {
+                                                                <div class="itemdiv memberdiv">
+                                                                    <div class="user">
+                                                                        <img alt="@item.CNName" src="@item.Photo" />
+                                                                    </div>
+
+                                                                    <div class="body">
+                                                                        <div class="name">
+                                                                            <a href="#">@item.CNName</a>
+                                                                        </div>
+
+                                                                        <div class="time">
+                                                                            <i class="icon-time"></i>
+                                                                            <span class="green"><span class="time timeago" title="@item.CreateTime"></span></span>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <span class="label label-warning label-sm">正常使用</span>
+
+                                                                            <div class="inline position-relative">
+                                                                                <button class="btn btn-minier bigger btn-yellow btn-no-border dropdown-toggle" data-toggle="dropdown">
+                                                                                    <i class="icon-angle-down icon-only bigger-120"></i>
+                                                                                </button>
+
+                                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                                    <li>
+                                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="启用">
+                                                                                            <span class="green">
+                                                                                                <i class="icon-ok bigger-110"></i>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </li>
+
+                                                                                    <li>
+                                                                                        <a href="#" class="tooltip-warning" data-rel="tooltip" title="禁用">
+                                                                                            <span class="orange">
+                                                                                                <i class="icon-remove bigger-110"></i>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </li>
+
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+
+                                                        </div>
+
+                                                        <div class="center">
+                                                            <i class="icon-group icon-2x green"></i>
+
+                                                            &nbsp;
+                                                            <a href="#">
+                                                                查看所有会员 &nbsp;
+                                                                <i class="icon-arrow-right"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="hr hr-double hr8"></div>
+                                                    </div><!-- member-tab -->
+
+                                                    <div id="comment-tab" class="tab-pane">
+                                                        <div class="comments">
+                                                            @foreach (ET.Sys_DEF.BlogCommentInfo item in ViewBag.List_BlogComment)
+                                                            {
+                                                                <div class="itemdiv commentdiv">
+                                                                    <div class="user">
+                                                                        @if (string.IsNullOrEmpty(item.CreatorUrl))
+                                                                        {
+                                                                            <img alt="@item.Creator" src="/images/public/userdefault.png" />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <img alt="@item.Creator" src="@item.CreatorUrl" />
+                                                                        }
+                                                                    </div>
+
+                                                                    <div class="body">
+                                                                        <div class="name">
+                                                                            <a href="#">@item.Creator</a>
+                                                                        </div>
+
+                                                                        <div class="time">
+                                                                            <i class="icon-time"></i>
+                                                                            <span class="green"><span class="time timeago" title="@item.CreateTime.Value"></span></span>
+                                                                        </div>
+
+                                                                        <div class="text">
+                                                                            <i class="icon-quote-left"></i>
+                                                                            @ET.ToolKit.Common.StringHelper.BindDataFromString(item.CommentContent, 100)
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="tools">
+                                                                        <div class="inline position-relative">
+                                                                            <button class="btn btn-minier bigger btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                                <i class="icon-angle-down icon-only bigger-120"></i>
+                                                                            </button>
+
+                                                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="审核通过">
+                                                                                        <span class="green">
+                                                                                            <i class="icon-ok bigger-110"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-warning" data-rel="tooltip" title="审核禁用">
+                                                                                        <span class="orange">
+                                                                                            <i class="icon-remove bigger-110"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="删除">
+                                                                                        <span class="red">
+                                                                                            <i class="icon-trash bigger-110"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+
+                                                        <div class="hr hr8"></div>
+
+                                                        <div class="center">
+                                                            <i class="icon-comments-alt icon-2x green"></i>
+
+                                                            &nbsp;
+                                                            <a href="../mBlog/MessageQuery">
+                                                                查看所有评论 &nbsp;
+                                                                <i class="icon-arrow-right"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="hr hr-double hr8"></div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /widget-main -->
+                                        </div><!-- /widget-body -->
+                                    </div><!-- /widget-box -->
+                                </div><!-- /span -->
+                            </div><!-- /row -->
+                        </div>
+                    </div>
+                </div><!-- /.page-content -->
+            </div><!-- /.main-content -->
+
+            <div class="ace-settings-container" id="ace-settings-container">
+                <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                    <i class="icon-cog bigger-150"></i>
+                </div>
+
+                <div class="ace-settings-box" id="ace-settings-box">
+                    <div>
+                        <div class="pull-left">
+                            <select id="skin-colorpicker" class="hide">
+                                <option data-skin="default" value="#438EB9">#438EB9</option>
+                                <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                                <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                                <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                            </select>
+                        </div>
+                        <span>&nbsp; 选择皮肤</span>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+                        <label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+                        <label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+                        <label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+                        <label class="lbl" for="ace-settings-rtl">切换到左边</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+                        <label class="lbl" for="ace-settings-add-container">
+                            切换窄屏
+                            <b></b>
+                        </label>
+                    </div>
+                </div>
+            </div><!-- /#ace-settings-container -->
+        </div><!-- /.main-container-inner -->
+    </div><!-- /.main-container -->
+    @Html.Partial("_FooterScripts")
+    <script src="/scripts/manage/index.js" type="text/javascript"></script>
+    <script src="~/Scripts/lib/timeago.js"></script>
+    <script>
+        $(function () {
+            jQuery("span.timeago").timeago();
+        })
+
+    </script>
+</body>
+</html>

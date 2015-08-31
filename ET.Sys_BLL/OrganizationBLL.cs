@@ -16,9 +16,9 @@ namespace ET.Sys_BLL
         public bool Update_UserCompany(UserCompany info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserCompany>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserCompany>().Insert(info);
             else
-                return new TSqlBaseDAL<UserCompany>().Update(info) > 0;
+                return new TSqlBaseDAL<UserCompany>().Update(info);
         }
 
         public bool Delete_UserCompany(string condition)
@@ -44,9 +44,9 @@ namespace ET.Sys_BLL
         public bool Update_UserDepartment(UserDepartment info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserDepartment>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserDepartment>().Insert(info);
             else
-                return new TSqlBaseDAL<UserDepartment>().Update(info) > 0;
+                return new TSqlBaseDAL<UserDepartment>().Update(info);
         }
 
         public bool Delete_UserDepartment(string condition)
@@ -73,9 +73,9 @@ namespace ET.Sys_BLL
         public bool Update_UserPosition(UserPosition info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserPosition>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserPosition>().Insert(info);
             else
-                return new TSqlBaseDAL<UserPosition>().Update(info) > 0;
+                return new TSqlBaseDAL<UserPosition>().Update(info);
         }
 
         public bool Delete_UserPosition(string condition)
@@ -106,7 +106,7 @@ namespace ET.Sys_BLL
             {
                 return false;
             }
-            return new TSqlBaseDAL<UserProperty>().Update(info) > 0;
+            return new TSqlBaseDAL<UserProperty>().Update(info);
         }
 
         public UserProperty Get_UserProperty(string condition)
@@ -154,7 +154,7 @@ namespace ET.Sys_BLL
             {
                 return false;
             }
-            return new TSqlBaseDAL<UserBase>().Update(info) > 0;
+            return new TSqlBaseDAL<UserBase>().Update(info);
         }
 
         public UserBase Get_UserBase(string condition)
@@ -270,9 +270,9 @@ namespace ET.Sys_BLL
         public bool Update_UserRoleLink(UserRoleLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserRoleLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserRoleLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserRoleLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserRoleLink>().Update(info);
         }
 
         public bool Delete_UserRoleLink(string condition)
@@ -293,9 +293,9 @@ namespace ET.Sys_BLL
         public bool Update_UserOrgLink(UserOrgLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserOrgLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserOrgLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserOrgLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserOrgLink>().Update(info);
         }
 
         public bool Delete_UserOrgLink(string condition)
@@ -322,9 +322,9 @@ namespace ET.Sys_BLL
         public bool Update_UserPositionOrgLink(UserPositionOrgLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserPositionOrgLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserPositionOrgLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserPositionOrgLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserPositionOrgLink>().Update(info);
         }
 
         public bool Delete_UserPositionOrgLink(string condition)
@@ -351,9 +351,9 @@ namespace ET.Sys_BLL
         public bool Update_UserDeptFuncLink(UserDeptFuncLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserDeptFuncLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserDeptFuncLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserDeptFuncLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserDeptFuncLink>().Update(info);
         }
 
         public bool Delete_UserDeptFuncLink(string condition)
@@ -380,9 +380,9 @@ namespace ET.Sys_BLL
         public bool Update_UserPostFuncLink(UserPostFuncLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserPostFuncLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserPostFuncLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserPostFuncLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserPostFuncLink>().Update(info);
         }
 
         public bool Delete_UserPostFuncLink(string condition)
@@ -409,9 +409,9 @@ namespace ET.Sys_BLL
         public bool Update_UserFuncLink(UserFuncLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<UserFuncLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<UserFuncLink>().Insert(info);
             else
-                return new TSqlBaseDAL<UserFuncLink>().Update(info) > 0;
+                return new TSqlBaseDAL<UserFuncLink>().Update(info);
         }
 
         public bool Delete_UserFuncLink(string condition)

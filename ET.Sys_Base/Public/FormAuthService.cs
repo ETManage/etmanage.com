@@ -22,8 +22,9 @@ namespace ET.Sys_Base
                 userData,
                 "/");
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-         
-            if (authTicket.IsPersistent){
+
+            if (authTicket.IsPersistent)
+            {
                 cookie.Expires = authTicket.Expiration;
             }
             //FormsAuthentication.SetAuthCookie(userID, createPersistentCookie);
@@ -34,5 +35,25 @@ namespace ET.Sys_Base
         {
             FormsAuthentication.SignOut();
         }
+
+        public static void RememberLoginName(string name)
+        {
+            var cookie = new HttpCookie(System.Web.HttpContext.Current.Request.Url.Authority + "_loginname", name);
+            cookie.Expires = DateTime.MaxValue;
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+        public static void RemoveRememberLoginName()
+        {
+
+            string strCookieName = System.Web.HttpContext.Current.Request.Url.Authority + "_loginname";
+            HttpCookie cook = HttpContext.Current.Request.Cookies[strCookieName];
+            if (cook != null)
+            {
+                TimeSpan ts = new TimeSpan(-1, 0, 0, 0);
+                cook.Expires = DateTime.Now.Add(ts);//删除整个Cookie，只要把过期时间设置为现在
+                HttpContext.Current.Response.AppendCookie(cook);
+            }
+        }
+
     }
 }

@@ -91,13 +91,13 @@ namespace ET.Sys_BLL
         {
             return new TSqlBaseDAL<SysRole>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
         }
-        
+
         public bool Update_SysRoleFuncLink(SysRoleFuncLink info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<SysRoleFuncLink>().Insert(info) > 0;
+                return new TSqlBaseDAL<SysRoleFuncLink>().Insert(info);
             else
-                return new TSqlBaseDAL<SysRoleFuncLink>().Update(info) > 0;
+                return new TSqlBaseDAL<SysRoleFuncLink>().Update(info);
 
         }
 
@@ -126,9 +126,9 @@ namespace ET.Sys_BLL
         public bool Update_SysFunction(SysFunction info, bool isinsert)
         {
             if (isinsert)
-                return new TSqlBaseDAL<SysFunction>().Insert(info) > 0;
+                return new TSqlBaseDAL<SysFunction>().Insert(info);
             else
-                return new TSqlBaseDAL<SysFunction>().Update(info) > 0;
+                return new TSqlBaseDAL<SysFunction>().Update(info);
         }
 
         public bool Delete_SysFunction(string condition)
@@ -210,7 +210,6 @@ namespace ET.Sys_BLL
         {
             string currdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             List<SysFunction> listModules = new SqlBaseDAL().GetListByCondition<SysFunction>("distinct FuncID,FuncName,FuncKey,IconPath,FUNCTYPE,Source,FuncPID,FuncSort", ViewNames.V_ALLUSERLIMIT, "  and Functype=0 and (Status=1 OR (Status=0 AND StartTime<='" + currdate + "' AND EndTime>'" + currdate + "')) " + (userid == "a50ca689-1748-455d-b4b4-2c9303e186be" ? "" : " AND cast(userid as varchar(50))='" + userid + "'"), "FuncSort DESC");
-            MenuModuleInfo menu = new MenuModuleInfo();
             List<MenuModuleInfo> modulelimitGroup = new List<MenuModuleInfo>();
             RecurseModule(listModules, "9c54e604-023a-4ccf-93bb-e25ce40f02ad", ref modulelimitGroup);
             return modulelimitGroup;
@@ -234,6 +233,96 @@ namespace ET.Sys_BLL
             }
         }
 
+        #endregion
+
+        #region 系统通知
+        public bool Update_SysNotice(SysNotice info, bool isinsert)
+        {
+            if (isinsert)
+            {
+              return  new TSqlBaseDAL<SysNotice>().Insert(info);
+            }
+            else
+            {
+                return new TSqlBaseDAL<SysNotice>().Update(info);
+            }
+
+        }
+
+        public bool Delete_SysNotice(string condition)
+        {
+            return new TSqlBaseDAL<SysNotice>().Delete(condition) > 0;
+        }
+
+        /// <summary>
+        /// 根据ID删除,如果只有一个ID则不用带""，如果有多个则需要每个值带""
+        /// </summary>
+        /// <param name="condition"></param>
+        public bool Delete_SysNoticeByID(string ids)
+        {
+            return new TSqlBaseDAL<SysNotice>().DeleteByID(ids) > 0;
+        }
+
+        public SysNotice Get_SysNotice(string condition)
+        {
+            SysNotice info = new TSqlBaseDAL<SysNotice>().GetByCondition(condition);
+            return info;
+        }
+
+        public List<SysNotice> List_SysNotice(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<SysNotice>().GetListByCondition(fields, condition, orderby);
+        }
+
+        public List<SysNotice> Pagination_SysNotice(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new TSqlBaseDAL<SysNotice>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
+        #endregion
+
+        #region 聊天消息
+        public bool Update_ChatMessage(ChatMessage info, bool isinsert)
+        {
+            if (isinsert)
+            {
+                return new TSqlBaseDAL<ChatMessage>().Insert(info);
+            }
+            else
+            {
+                return new TSqlBaseDAL<ChatMessage>().Update(info);
+            }
+
+        }
+
+        public bool Delete_ChatMessage(string condition)
+        {
+            return new TSqlBaseDAL<ChatMessage>().Delete(condition) > 0;
+        }
+
+        /// <summary>
+        /// 根据ID删除,如果只有一个ID则不用带""，如果有多个则需要每个值带""
+        /// </summary>
+        /// <param name="condition"></param>
+        public bool Delete_ChatMessageByID(string ids)
+        {
+            return new TSqlBaseDAL<ChatMessage>().DeleteByID(ids) > 0;
+        }
+
+        public ChatMessage Get_ChatMessage(string condition)
+        {
+            ChatMessage info = new TSqlBaseDAL<ChatMessage>().GetByCondition(condition);
+            return info;
+        }
+
+        public List<ChatMessage> List_ChatMessage(string fields, string condition, string orderby)
+        {
+            return new TSqlBaseDAL<ChatMessage>().GetListByCondition(fields, condition, orderby);
+        }
+
+        public List<ChatMessage> Pagination_ChatMessage(string fields, string condition, string orderby, int pagesize, int pageindex, ref long totalcount)
+        {
+            return new TSqlBaseDAL<ChatMessage>().GetListByPager(fields, condition, orderby, pagesize, pageindex, ref  totalcount);
+        }
         #endregion
 
     }
